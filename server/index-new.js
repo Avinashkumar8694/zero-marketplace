@@ -1,13 +1,13 @@
 /**
- * Main server configuration and setup
+ * Modular Express server for Zero Components marketplace
  */
 import express from 'express';
+import fs from 'fs';
 import path from 'path';
 import { env } from 'node:process';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import fs from 'fs/promises';
 
 // Import route modules
 import { setupFileRoutes } from './src/utils/file-utils.js';
@@ -18,12 +18,11 @@ import { setupUploadRoutes } from './src/routes/upload.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Create Express app
 const app = express();
 const port = env.PORT || 9000;
 const basePath = env.BASE_PATH || '';
 
-// Setup middleware
+// Middleware setup
 app.use(express.json());
 app.use(cors({
     origin: '*',
@@ -31,26 +30,18 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Setup base folders
-const setupFolders = async () => {
-    const folders = [
-        'plugins',
-        'plugins-build',
-        'uploads',
-        'temp'
-    ];
-    
-    for (const folder of folders) {
-        const folderPath = path.join(__dirname, folder);
-        try {
-            await fs.access(folderPath);
-        } catch {
-            await fs.mkdir(folderPath, { recursive: true });
-        }
-    }
+// Create the application and setup routes
+const createApp = () => {
+    setupRoutes(app, basePath);
+
+    app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}${basePath}`);
+    });
+
+    return app;
 };
 
-// Setup application routes
+// Setup application routes and middleware
 const setupRoutes = (app, basePath) => {
     const router = express.Router();
 
@@ -64,18 +55,25 @@ const setupRoutes = (app, basePath) => {
         res.redirect('/marketplace');
     });
 
-    // Setup routes
+    // Setup file management routes
     setupFileRoutes(router);
+
+    // Setup marketplace API routes
     setupMarketplaceRoutes(router);
+
+    // Setup legacy API routes
     setupLegacyRoutes(router);
+
+    // Setup upload routes
     setupUploadRoutes(router);
 
-    // Serve static files
-    router.use('/plugins', express.static(path.join(__dirname, 'plugins')));
-    router.use('/plugins-build', express.static(path.join(__dirname, 'plugins-build')));
-    router.use('/marketplace', express.static(path.join(__dirname, 'marketplace')));
+    // Serve static files from 'plugins' directory
+    router.use('/plugins', express.static('plugins'));
 
-    // Mount router with optional base path
+    // Serve marketplace UI
+    router.use('/marketplace', express.static(path.resolve(__dirname, 'marketplace')));
+
+    // Mount the router
     if (basePath) {
         app.use(basePath, router);
     } else {
@@ -83,23 +81,7 @@ const setupRoutes = (app, basePath) => {
     }
 };
 
-// Initialize application
-const init = async () => {
-    await setupFolders();
-    setupRoutes(app, basePath);
-
-    app.listen(port, () => {
-        console.log(`Server running at http://localhost:${port}${basePath}`);
-        console.log(`Marketplace available at http://localhost:${port}${basePath}/marketplace`);
-    });
-};
-
 // Start the server
-try {
-    await init();
-} catch (error) {
-    console.error('Failed to start server:', error);
-    process.exit(1);
-}
+createApp();
 
 export default app;

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Plugin - Zero Components Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .upload-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .upload-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .upload-header h1 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .file-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--bg-secondary);
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background: var(--bg-hover);
+        }
+
+        .file-upload-area.dragover {
+            border-color: var(--primary-color);
+            background: var(--primary-bg);
+        }
+
+        .file-upload-icon {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .file-upload-text {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .file-upload-subtext {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .selected-file {
+            background: var(--success-bg);
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .selected-file-name {
+            font-weight: 600;
+        }
+
+        .selected-file-size {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .remove-file {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: var(--error-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .metadata-section {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+        }
+
+        .metadata-section h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .input-field, .textarea-field, .select-field {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .input-field:focus, .textarea-field:focus, .select-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-bg);
+        }
+
+        .textarea-field {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .upload-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .upload-status {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .upload-status.success {
+            background: var(--success-bg);
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+        }
+
+        .upload-status.error {
+            background: var(--error-bg);
+            border: 1px solid var(--error-color);
+            color: var(--error-color);
+        }
+
+        .upload-status.loading {
+            background: var(--warning-bg);
+            border: 1px solid var(--warning-color);
+            color: var(--warning-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .requirements {
+            background: var(--info-bg);
+            border: 1px solid var(--info-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .requirements h3 {
+            color: var(--info-color);
+            margin-bottom: 1rem;
+        }
+
+        .requirements ul {
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+        }
+
+        .requirements li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .upload-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .upload-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>🔧 Zero Components</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <span class="nav-icon">🏠</span>
+                    Home
+                </a>
+                <a href="upload.html" class="nav-link active">
+                    <span class="nav-icon">📤</span>
+                    Upload Plugin
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="upload-container">
+            <div class="upload-header">
+                <h1>📤 Upload Your Plugin</h1>
+                <p>Share your component with the Zero Components community</p>
+            </div>
+
+            <!-- Requirements Section -->
+            <div class="requirements">
+                <h3>📋 Plugin Requirements</h3>
+                <ul>
+                    <li>Plugin must be in ZIP format</li>
+                    <li>Must contain a valid <code>package.json</code> file</li>
+                    <li>Must have a main component file (TypeScript or JavaScript)</li>
+                    <li>File size should not exceed 10MB</li>
+                    <li>Follow the standard component structure</li>
+                </ul>
+            </div>
+
+            <!-- Upload Status -->
+            <div class="upload-status" id="uploadStatus">
+                <div class="status-message"></div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Upload Form -->
+            <form class="upload-form" id="uploadForm">
+                <!-- File Upload -->
+                <div class="form-group">
+                    <label for="pluginFile">Plugin File (ZIP)</label>
+                    <div class="file-upload-area" id="fileUploadArea">
+                        <div class="file-upload-icon">📁</div>
+                        <div class="file-upload-text">
+                            <strong>Click to browse</strong> or drag and drop your ZIP file here
+                        </div>
+                        <div class="file-upload-subtext">
+                            Maximum file size: 10MB
+                        </div>
+                        <input type="file" id="pluginFile" class="file-input" accept=".zip" required>
+                    </div>
+                    <div class="selected-file" id="selectedFile" style="display: none;">
+                        <span class="selected-file-name"></span>
+                        <span class="selected-file-size"></span>
+                        <button type="button" class="remove-file" id="removeFile">×</button>
+                    </div>
+                </div>
+
+                <!-- Plugin Metadata -->
+                <div class="metadata-section">
+                    <h3>Plugin Information</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pluginName">Plugin Name</label>
+                            <input type="text" id="pluginName" class="input-field" placeholder="e.g., zero-button">
+                        </div>
+                        <div class="form-group">
+                            <label for="pluginVersion">Version</label>
+                            <input type="text" id="pluginVersion" class="input-field" placeholder="e.g., 1.0.0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pluginDescription">Description</label>
+                        <textarea id="pluginDescription" class="textarea-field" placeholder="Describe what your plugin does..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pluginAuthor">Author</label>
+                            <input type="text" id="pluginAuthor" class="input-field" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="pluginLicense">License</label>
+                            <select id="pluginLicense" class="select-field">
+                                <option value="MIT">MIT</option>
+                                <option value="Apache-2.0">Apache 2.0</option>
+                                <option value="GPL-3.0">GPL 3.0</option>
+                                <option value="BSD-3-Clause">BSD 3-Clause</option>
+                                <option value="ISC">ISC</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pluginKeywords">Keywords (comma-separated)</label>
+                        <input type="text" id="pluginKeywords" class="input-field" placeholder="e.g., button, ui, component">
+                    </div>
+                </div>
+
+                <!-- Upload Actions -->
+                <div class="upload-actions">
+                    <a href="index.html" class="btn btn-secondary">
+                        ← Back to Marketplace
+                    </a>
+                    <button type="button" id="validateBtn" class="btn btn-secondary">
+                        🔍 Validate Plugin
+                    </button>
+                    <button type="submit" id="uploadBtn" class="btn btn-primary" disabled>
+                        📤 Upload Plugin
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="upload.js"></script>
+</body>
+</html>
