@@ -7,16 +7,20 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 import AdmZip from 'adm-zip';
-// import * as fse from 'fs-extra';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Configure paths from environment variables
+const UPLOAD_DIR = process.env.UPLOAD_DIR || 'server/uploads';
+const TEMP_DIR = process.env.TEMP_DIR || 'server/temp';
+const COMPONENTS_DIR = process.env.COMPONENTS_DIR || 'packages';
 
 // File management routes
 const setupFileRoutes = (router) => {
     // List files in the 'plugins' directory
     router.get('/files', (req, res) => {
-        const pluginsDir = path.resolve('plugins');
+        const pluginsDir = path.resolve(COMPONENTS_DIR);
         fs.readdir(pluginsDir, (err, files) => {
             if (err) {
                 return res.status(500).json({ error: 'Failed to list files' });
@@ -57,11 +61,55 @@ const setupFileRoutes = (router) => {
     return router;
 };
 
+// Process and build plugin
+const processPlugin = async (pluginDir, metadata) => {
+    try {
+        const { packageJson, componentName } = metadata;
+        const version = packageJson.version || '1.0.0';
+        
+        // Create package structure using env vars
+        const packagesDir = path.resolve(__dirname, `../../../${COMPONENTS_DIR}`);
+        const targetDir = path.join(packagesDir, componentName);
+        const versionDir = path.join(targetDir, `v${version}`);
+        
+        // Ensure target directory exists
+        if (!fs.existsSync(versionDir)) {
+            fs.mkdirSync(versionDir, { recursive: true });
+        }
+        
+        // Copy plugin files to packages directory
+        await copyDirectory(pluginDir, versionDir);
+        
+        // Install dependencies if needed
+        if (fs.existsSync(path.join(versionDir, 'package.json'))) {
+            try {
+                execSync('npm install', { cwd: versionDir, stdio: 'pipe' });
+            } catch (error) {
+                console.warn('Failed to install dependencies:', error.message);
+            }
+        }
+        
+        // Build the plugin
+        const buildResult = await buildPlugin(versionDir, componentName, version);
+        
+        return {
+            success: true,
+            componentName,
+            version,
+            targetDir: versionDir,
+            buildResult
+        };
+    } catch (error) {
+        console.error('Error processing plugin:', error);
+        throw error;
+    }
+};
+
 // Process uploaded zip file
 export const processPluginUpload = async (zipBuffer, originalName) => {
     try {
-        const tempDir = path.resolve(__dirname, '../../temp');
-        const uploadsDir = path.resolve(__dirname, '../../uploads');
+        const tempDir = path.resolve(__dirname, `../../${TEMP_DIR}`);
+        const uploadsDir = path.resolve(__dirname, `../../${UPLOAD_DIR}`);
         
         // Ensure directories exist
         if (!fs.existsSync(tempDir)) {
@@ -152,50 +200,6 @@ const validatePluginStructure = (pluginDir) => {
         };
     } catch (error) {
         return { valid: false, error: error.message };
-    }
-};
-
-// Process and build plugin
-const processPlugin = async (pluginDir, metadata) => {
-    try {
-        const { packageJson, componentName } = metadata;
-        const version = packageJson.version || '1.0.0';
-        
-        // Create package structure
-        const packagesDir = path.resolve(__dirname, '../../../packages');
-        const targetDir = path.join(packagesDir, componentName);
-        const versionDir = path.join(targetDir, `v${version}`);
-        
-        // Ensure target directory exists
-        if (!fs.existsSync(versionDir)) {
-            fs.mkdirSync(versionDir, { recursive: true });
-        }
-        
-        // Copy plugin files to packages directory
-        await copyDirectory(pluginDir, versionDir);
-        
-        // Install dependencies if needed
-        if (fs.existsSync(path.join(versionDir, 'package.json'))) {
-            try {
-                execSync('npm install', { cwd: versionDir, stdio: 'pipe' });
-            } catch (error) {
-                console.warn('Failed to install dependencies:', error.message);
-            }
-        }
-        
-        // Build the plugin
-        const buildResult = await buildPlugin(versionDir, componentName, version);
-        
-        return {
-            success: true,
-            componentName,
-            version,
-            targetDir: versionDir,
-            buildResult
-        };
-    } catch (error) {
-        console.error('Error processing plugin:', error);
-        throw error;
     }
 };
 
@@ -299,5 +303,58 @@ const copyDirectory = async (src, dest) => {
         }
     }
 };
+
+// Function to find the main JavaScript file in a directory
+export const findMainJsFile = async (dirPath) => {
+    try {
+        // Read all files in the directory
+        const files = await fs.readdir(dirPath);
+        
+        // Look for potential main JS files in this priority:
+        // 1. File matching directory name
+        // 2. index.js
+        // 3. main.js
+        // 4. Any .js file
+        const dirName = path.basename(dirPath);
+        
+        // Priority 1: Check for matching name
+        const matchingFile = files.find(f => 
+            f.toLowerCase() === `${dirName.toLowerCase()}.js` ||
+            f.toLowerCase() === `${dirName.toLowerCase()}.mjs`
+        );
+        if (matchingFile) {
+            return [path.join(dirPath, matchingFile)];
+        }
+        
+        // Priority 2: Check for index.js
+        const indexFile = files.find(f => 
+            f.toLowerCase() === 'index.js' ||
+            f.toLowerCase() === 'index.mjs'
+        );
+        if (indexFile) {
+            return [path.join(dirPath, indexFile)];
+        }
+        
+        // Priority 3: Check for main.js
+        const mainFile = files.find(f => 
+            f.toLowerCase() === 'main.js' ||
+            f.toLowerCase() === 'main.mjs'
+        );
+        if (mainFile) {
+            return [path.join(dirPath, mainFile)];
+        }
+        
+        // Priority 4: Return all .js files
+        const jsFiles = files.filter(f => f.endsWith('.js') || f.endsWith('.mjs'));
+        if (jsFiles.length > 0) {
+            return jsFiles.map(f => path.join(dirPath, f));
+        }
+        
+        return null;
+    } catch (error) {
+        console.error('Error finding main JS file:', error);
+        return null;
+    }
+}
 
 export { setupFileRoutes };

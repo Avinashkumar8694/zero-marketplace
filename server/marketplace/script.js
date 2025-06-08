@@ -1,5 +1,5 @@
-// API base URL
-const API_BASE = 'http://localhost:9000';
+// API base URL from environment
+const API_BASE = window.ENV?.API_BASE_URL || 'http://localhost:9000';
 
 // Global state
 let allPlugins = [];
@@ -159,11 +159,9 @@ function renderPlugins() {
                     </span>
                 ` : ''}
             </div>
-            
-            <div class="actions">
-                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); copyInstallCommand('${plugin.id}')">
-                    <i class="fas fa-download"></i>
-                    Install
+              <div class="actions">                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); copyPackagePath('${plugin.id}')">
+                    <i class="fas fa-copy"></i>
+                    Copy Code
                 </button>
                 <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); openPluginModal('${plugin.id}')">
                     <i class="fas fa-info-circle"></i>
@@ -588,8 +586,31 @@ function copyInstallCommand(pluginId = null) {
     });
 }
 
+// Copy package.js path
+async function copyPackagePath(pluginId) {
+    const plugin = allPlugins.find(p => p.id === pluginId);
+    if (!plugin) return;
+
+    try {        // Get the JavaScript file content from the API
+const url = `${API_BASE}/marketplace/components/${plugin.family}/${plugin.version}/js`;
+        
+        // Create the script tag
+        const scriptTag = `<script src="${url}" type="module"></script>`;
+
+        // Copy to clipboard
+        await navigator.clipboard.writeText(scriptTag);
+        showNotification('Script tag copied to clipboard!');
+    } catch (err) {
+        console.error('Failed to copy package path:', err);
+        showError('Failed to get package path. Please try again.');
+    }
+}
+
 // Show notification
-function showNotification() {
+function showNotification(message = 'Package path ready to be pasted!') {
+    const notification = document.getElementById('notification');
+    const notificationText = notification.querySelector('span');
+    notificationText.textContent = message;
     notification.style.display = 'flex';
     setTimeout(() => {
         hideNotification();

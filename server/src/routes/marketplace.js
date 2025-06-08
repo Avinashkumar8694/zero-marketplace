@@ -6,15 +6,21 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { scanComponentStructure, extractComponentMetadata } from '../utils/component-utils.js';
 import { parseVersion, isStableVersion, findLatestVersion, findLatestStableVersion } from '../utils/version-utils.js';
+import { findMainJsFile } from '../utils/file-utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Configure marketplace settings from environment variables
+const DEFAULT_GROUP = process.env.DEFAULT_GROUP || 'Components';
+const DEFAULT_LICENSE = process.env.DEFAULT_LICENSE || 'MIT';
+const COMPONENTS_DIR = process.env.COMPONENTS_DIR || 'packages';
 
 const setupMarketplaceRoutes = (router) => {
     // Get all component families with their versions
     router.get('/marketplace/components', async (req, res) => {
         try {
-            const packagesDir = path.resolve(__dirname, '../../../packages');
+            const packagesDir = path.resolve(__dirname, `../../../${COMPONENTS_DIR}`);
             const components = scanComponentStructure(packagesDir);
             const componentFamilies = {};
 
@@ -70,7 +76,7 @@ const setupMarketplaceRoutes = (router) => {
     router.get('/marketplace/components/:family/:version', async (req, res) => {
         try {
             const { family, version } = req.params;
-            const packagesDir = path.resolve(__dirname, '../../../packages');
+            const packagesDir = path.resolve(__dirname, `../../../${COMPONENTS_DIR}`);
             const components = scanComponentStructure(packagesDir);
             
             if (!components.has(family) || !components.get(family).has(version)) {
@@ -98,10 +104,10 @@ const setupMarketplaceRoutes = (router) => {
                 name: packageJson.name || family,
                 title: componentMetadata.title || packageJson.name || family,
                 description: packageJson.description || 'No description available',
-                group: componentMetadata.group || 'Components',
+                group: componentMetadata.group || DEFAULT_GROUP,
                 keywords: packageJson.keywords || [],
                 author: packageJson.author || 'Unknown',
-                license: packageJson.license || 'MIT',
+                license: packageJson.license || DEFAULT_LICENSE,
                 elementSelector: componentMetadata.elementSelector || `zero-${family}`,
                 isStable: isStableVersion(version),
                 structure: componentData.structure,
@@ -126,7 +132,7 @@ const setupMarketplaceRoutes = (router) => {
     router.get('/marketplace/components/:family/compare/:version1/:version2', async (req, res) => {
         try {
             const { family, version1, version2 } = req.params;
-            const packagesDir = path.resolve(__dirname, '../../../packages');
+            const packagesDir = path.resolve(__dirname, `../../../${COMPONENTS_DIR}`);
             const components = scanComponentStructure(packagesDir);
             
             if (!components.has(family)) {
@@ -172,6 +178,13 @@ const setupMarketplaceRoutes = (router) => {
         }
     });
 
+    // Upload plugin page
+    router.get('/marketplace/upload', (req, res) => {
+        res.render(path.resolve(__dirname, '../../marketplace/upload-plugin.ejs'), {
+            title: 'Upload Plugin - Zero Components Market'
+        });
+    });
+
     // Marketplace UI route (EJS)
     router.get('/marketplace', async (req, res) => {
         // Optionally, fetch plugin/component data here if you want to render server-side
@@ -179,6 +192,35 @@ const setupMarketplaceRoutes = (router) => {
         res.render(path.resolve(__dirname, '../../marketplace/marketplace-plugins.ejs'), {
             title: 'Zero Components Market',
         });
+    });    // Get component's main JS file
+    router.get('/marketplace/components/:family/:version/js', async (req, res) => {
+        try {
+            const { family, version } = req.params;
+            const packagesDir = path.resolve(__dirname, `../../../${COMPONENTS_DIR}`);
+            const components = scanComponentStructure(packagesDir);
+            
+            if (!components.has(family) || !components.get(family).has(version)) {
+                return res.status(404).json({ error: 'Component version not found' });
+            }
+            
+            const componentData = components.get(family).get(version);
+            const jsFiles = await findMainJsFile(componentData.path);
+            
+            if (!jsFiles || jsFiles.length === 0) {
+                return res.status(404).json({ error: 'No JavaScript file found for component' });
+            }
+
+            // Read the file content
+            const fs = await import('fs');
+            const fileContent = fs.readFileSync(jsFiles[0], 'utf8');
+
+            // Return the file content
+            res.setHeader('Content-Type', 'application/javascript');
+            res.send(fileContent);
+        } catch (error) {
+            console.error('Error getting component file:', error);
+            res.status(500).json({ error: 'Failed to get component file' });
+        }
     });
 
     return router;

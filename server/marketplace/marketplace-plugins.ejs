@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="marketplace/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <script>
+        // Inject environment variables
+        window.ENV = {
+            API_BASE_URL: '<%= process.env.API_BASE_URL || "http://localhost:9000" %>'
+        };
+    </script>
+</head>
+<body>
 <%- include('baselayout', { body: `
 <div class="notification success" id="notification" style="display: none;">
     <i class="fas fa-check-circle"></i>
@@ -146,3 +163,5 @@
     }
 </script>
 ` }) %>
+</body>
+</html>
