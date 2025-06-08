@@ -5,10 +5,14 @@ export * from './packages/popup-dialog/popup-dialog';
 export * from './packages/open-popup-directive/open-popup-directive';
 export * from './packages/popup-dropdown-directive/popup-dropdown-directive';
 export * from './packages/nrenderer/nrenderer';
-export * from './packages/code-editor/code-editor';
 export * from './packages/zero-checkbox/zero-checkbox';
+export * from './packages/zero-color-picker/zero-color-picker';
+export * from './packages/zero-date-picker/zero-date-picker';
 export * from './packages/zero-dropdown/zero-dropdown';
-// export * from './packages/zero-file-input/zero-file-input';
+
+export * from './packages/code-editor/code-editor';
+export * from './packages/zero-file-input/zero-file-input';
+export * from './packages/zero-number-input/zero-number-input';
 export * from './packages/zero-range-slider/zero-range-slider';
 export * from './packages/zero-password-input/zero-password-input';
 export * from './packages/zero-input-widgets/zero-input-widgets';

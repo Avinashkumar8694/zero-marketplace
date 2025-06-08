@@ -228,39 +228,33 @@ export class ZeroFileInput extends LitElement {  // Basic Properties
     .form-field {
       position: relative;
       margin-bottom: 16px;
-    }
-
-    .form-field-label {
+    }    .form-field-label {
       display: block;
-      font-size: 14px;
+      font-size: var(--font-size-base, 14px);
       font-weight: 500;
       margin-bottom: 8px;
-      color: rgba(0, 0, 0, 0.87);
+      color: var(--text-primary, rgba(0, 0, 0, 0.87));
     }
 
     .form-field-label.required::after {
       content: ' *';
       color: var(--error-color, #f44336);
-    }
-
-    .file-input-container {
+    }    .file-input-container {
       position: relative;
       border: 2px dashed var(--border-color, #e0e0e0);
       border-radius: var(--border-radius, 4px);
-      background: var(--background-color, #fafafa);
+      background: var(--background-color, #ffffff);
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
     .file-input-container:hover {
       border-color: var(--primary-color, #1976d2);
-      background: var(--hover-background, #f5f5f5);
-    }
-
-    .file-input-container.drag-over {
+      background: var(--hover-background, #f8f9fa);
+    }    .file-input-container.drag-over {
       border-color: var(--primary-color, #1976d2);
-      background: var(--primary-color, #1976d2);
-      background: color-mix(in srgb, var(--primary-color, #1976d2) 10%, transparent);
+      background: color-mix(in srgb, var(--primary-color, #1976d2) 5%, #ffffff);
+      border-style: solid;
     }
 
     .file-input-container.disabled {
@@ -277,88 +271,85 @@ export class ZeroFileInput extends LitElement {  // Basic Properties
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 24px;
+      justify-content: center;      padding: var(--spacing-lg, 24px);
       min-height: var(--drop-zone-height, 120px);
       text-align: center;
-    }
-
-    .file-input {
+    }    .file-input {
       position: absolute;
       opacity: 0;
       width: 100%;
       height: 100%;
       cursor: pointer;
-    }
-
-    .upload-icon {
-      width: 32px;
-      height: 32px;
+      pointer-events: none;
+    }.upload-icon {
+      width: var(--icon-size-xl, 32px);
+      height: var(--icon-size-xl, 32px);
       margin-bottom: 12px;
       opacity: 0.6;
-    }
-
-    .upload-text {
-      font-size: 16px;
-      color: rgba(0, 0, 0, 0.87);
+    }.upload-text {
+      font-size: var(--font-size-lg, 16px);
+      color: var(--text-primary, rgba(0, 0, 0, 0.87));
       margin-bottom: 4px;
     }
 
     .upload-subtext {
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.6);
+      font-size: var(--font-size-base, 14px);
+      color: var(--text-secondary, rgba(0, 0, 0, 0.6));
     }
 
     .file-list {
       margin-top: 16px;
-    }
-
-    .file-item {
+    }    .file-item {
       display: flex;
       align-items: center;
-      padding: 12px;
+      padding: var(--spacing-md, 12px);
       border: 1px solid #e0e0e0;
-      border-radius: 4px;
+      border-radius: var(--border-radius-sm, 4px);
       margin-bottom: 8px;
       background: white;
-    }
-
-    .file-preview {
-      width: 40px;
-      height: 40px;
-      border-radius: 4px;
+    }    .file-preview {
+      width: var(--icon-size-xl, 40px);
+      height: var(--icon-size-xl, 40px);
+      border-radius: var(--border-radius-sm, 4px);
       margin-right: 12px;
       object-fit: cover;
       background: #f5f5f5;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
-      color: #666;
+      font-size: var(--font-size-xs, 12px);
+      color: var(--text-secondary, #666);
       text-transform: uppercase;
+      font-weight: bold;
+      border: 1px solid #e0e0e0;
+      overflow: hidden;
+    }
+
+    .file-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
     }
 
     .file-info {
       flex: 1;
-    }
-
-    .file-name {
-      font-size: 14px;
+    }    .file-name {
+      font-size: var(--font-size-base, 14px);
       font-weight: 500;
-      color: rgba(0, 0, 0, 0.87);
+      color: var(--text-primary, rgba(0, 0, 0, 0.87));
       margin-bottom: 2px;
     }
 
     .file-size {
-      font-size: 12px;
-      color: rgba(0, 0, 0, 0.6);
+      font-size: var(--font-size-xs, 12px);
+      color: var(--text-secondary, rgba(0, 0, 0, 0.6));
     }
 
     .file-progress {
       width: 100%;
-      height: 4px;
-      background: #e0e0e0;
-      border-radius: 2px;
+      height: 4px;      background: var(--background-secondary, #e0e0e0);
+      border-radius: var(--border-radius-xs, 2px);
       margin-top: 4px;
       overflow: hidden;
     }
@@ -367,26 +358,22 @@ export class ZeroFileInput extends LitElement {  // Basic Properties
       height: 100%;
       background: var(--success-color, #4caf50);
       transition: width 0.3s ease;
-    }
-
-    .file-error {
-      font-size: 12px;
+    }    .file-error {
+      font-size: var(--font-size-xs, 12px);
       color: var(--error-color, #f44336);
       margin-top: 2px;
-    }
-
-    .file-actions {
+    }.file-actions {
       display: flex;
-      gap: 8px;
+      gap: var(--spacing-sm, 8px);
     }
 
     .file-action-btn {
-      padding: 4px 8px;
+      padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
       border: none;
-      border-radius: 4px;
-      font-size: 12px;
+      border-radius: var(--border-radius-sm, 4px);
+      font-size: var(--font-size-xs, 12px);
       cursor: pointer;
-      transition: background 0.2s ease;
+      transition: var(--transition-fast, background 0.2s ease);
     }
 
     .remove-btn {
@@ -396,32 +383,27 @@ export class ZeroFileInput extends LitElement {  // Basic Properties
 
     .remove-btn:hover {
       background: #ffcdd2;
-    }
-
-    .form-field-hint {
-      font-size: 12px;
-      color: rgba(0, 0, 0, 0.6);
+    }    .form-field-hint {
+      font-size: var(--font-size-xs, 12px);
+      color: var(--text-secondary, rgba(0, 0, 0, 0.6));
       margin-top: 4px;
     }
 
-    .form-field-error {
-      font-size: 12px;
+    .form-field-error {      font-size: var(--font-size-xs, 12px);
       color: var(--error-color, #f44336);
       margin-top: 4px;
-    }
-
-    .browse-button {
+    }    .browse-button {
       display: inline-flex;
       align-items: center;
-      padding: 8px 16px;
+      padding: var(--spacing-sm, 8px) var(--spacing-lg, 16px);
       background: var(--primary-color, #1976d2);
       color: white;
       border: none;
-      border-radius: 4px;
-      font-size: 14px;
+      border-radius: var(--border-radius-sm, 4px);
+      font-size: var(--font-size-base, 14px);
       cursor: pointer;
-      transition: background 0.2s ease;
-      margin-top: 12px;
+      transition: var(--transition-fast, background 0.2s ease);
+      margin-top: var(--spacing-md, 12px);
     }
 
     .browse-button:hover {
@@ -433,9 +415,8 @@ export class ZeroFileInput extends LitElement {  // Basic Properties
         padding: 16px;
         min-height: 80px;
       }
-      
-      .upload-text {
-        font-size: 14px;
+        .upload-text {
+        font-size: var(--font-size-base, 14px);
       }
     }
   `;
@@ -447,9 +428,7 @@ export class ZeroFileInput extends LitElement {  // Basic Properties
           <label class="form-field-label ${this.required ? 'required' : ''}">
             ${this.label}
           </label>
-        ` : ''}
-        
-        <div 
+        ` : ''}        <div 
           class="file-input-container ${this.isDragOver ? 'drag-over' : ''} ${this.disabled ? 'disabled' : ''} ${this.hasError ? 'error' : ''}"
           @dragover=${this.handleDragOver}
           @dragleave=${this.handleDragLeave}
@@ -470,6 +449,7 @@ export class ZeroFileInput extends LitElement {  // Basic Properties
             ?disabled=${this.disabled}
             accept=${this.accept}
             @change=${this.handleFileSelect}
+            @click=${this.handleInputStopPropagation}
           />
           
           <div class="drop-zone">
@@ -563,23 +543,39 @@ export class ZeroFileInput extends LitElement {  // Basic Properties
     const files = Array.from(event.dataTransfer?.files || []);
     this.processFiles(files);
   }
-
-  private handleClick(): void {
+  private handleClick(event: Event): void {
     if (this.disabled) return;
     
+    // Prevent event from bubbling to avoid double trigger
+    event.preventDefault();
+    event.stopPropagation();
+    
     const input = this.shadowRoot?.querySelector('.file-input') as HTMLInputElement;
-    input?.click();
+    if (input) {
+      input.click();
+    }
   }
 
   private handleBrowseClick(event: Event): void {
+    event.preventDefault();
     event.stopPropagation();
-    this.handleClick();
+    this.handleClick(event);
+  }
+  private handleInputStopPropagation(event: Event): void {
+    // Prevent click event from bubbling up to container
+    event.stopPropagation();
   }
 
   private handleFileSelect(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    
     const input = event.target as HTMLInputElement;
     const files = Array.from(input.files || []);
     this.processFiles(files);
+    
+    // Clear the input value to allow selecting the same file again
+    input.value = '';
   }
 
   private processFiles(files: File[]): void {

@@ -19,18 +19,16 @@ import { property } from 'lit/decorators.js';
     iconName: 'code-icon.png',
 })
 @applyGlobalStyles()
-export class CodeEditor extends LitElement {
-
-    static styles = css`
+export class CodeEditor extends LitElement {    static styles = css`
         :host {
             display: block;
             width: 100%;
             height: 400px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
+            border: 1px solid var(--border-color, #d1d5db);
+            border-radius: var(--border-radius-lg, 8px);
             overflow: hidden;
-            font-family: 'Courier New', monospace;
-            background: #1e1e1e;
+            font-family: var(--font-family-mono, 'Courier New', monospace);
+            background: var(--editor-background, #1e1e1e);
             position: relative;
         }
 
@@ -38,57 +36,51 @@ export class CodeEditor extends LitElement {
             display: flex;
             flex-direction: column;
             height: 100%;
-        }
-
-        .editor-header {
-            background: #2d2d30;
-            border-bottom: 1px solid #3e3e42;
-            padding: 8px 12px;
+        }        .editor-header {
+            background: var(--editor-header-background, #2d2d30);
+            border-bottom: 1px solid var(--editor-border-color, #3e3e42);
+            padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            color: #cccccc;
-            font-size: 12px;
+            color: var(--editor-text-secondary, #cccccc);
+            font-size: var(--font-size-xs, 12px);
         }
 
         .editor-tabs {
             display: flex;
             gap: 1px;
-        }
-
-        .editor-tab {
-            background: #2d2d30;
+        }        .editor-tab {
+            background: var(--editor-header-background, #2d2d30);
             border: none;
-            color: #cccccc;
-            padding: 6px 12px;
+            color: var(--editor-text-secondary, #cccccc);
+            padding: var(--spacing-xs, 6px) var(--spacing-md, 12px);
             cursor: pointer;
-            border-radius: 4px 4px 0 0;
-            font-size: 12px;
+            border-radius: var(--border-radius-sm, 4px) var(--border-radius-sm, 4px) 0 0;
+            font-size: var(--font-size-xs, 12px);
             position: relative;
         }
 
         .editor-tab.active {
-            background: #1e1e1e;
-            color: #ffffff;
+            background: var(--editor-background, #1e1e1e);
+            color: var(--editor-text-primary, #ffffff);
         }
 
         .editor-tab:hover {
-            background: #3e3e42;
+            background: var(--editor-hover-background, #3e3e42);
         }
 
         .editor-controls {
             display: flex;
             gap: 8px;
             align-items: center;
-        }
-
-        .language-selector {
-            background: #3c3c3c;
-            border: 1px solid #464647;
-            color: #cccccc;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
+        }        .language-selector {
+            background: var(--editor-select-background, #3c3c3c);
+            border: 1px solid var(--editor-select-border, #464647);
+            color: var(--editor-text-secondary, #cccccc);
+            padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
+            border-radius: var(--border-radius-sm, 4px);
+            font-size: var(--font-size-xs, 11px);
         }
 
         .editor-main {
@@ -96,74 +88,68 @@ export class CodeEditor extends LitElement {
             flex: 1;
             overflow: hidden;
         }        .line-numbers {
-            background: #252526;
-            color: #6e7681;
-            padding: 12px 8px;
-            font-size: 13px;
+            background: var(--editor-sidebar-background, #252526);
+            color: var(--editor-text-muted, #6e7681);
+            padding: var(--spacing-md, 12px) var(--spacing-sm, 8px);
+            font-size: var(--font-size-sm, 13px);
             line-height: 1.4;
             text-align: right;
             min-width: 50px;
-            border-right: 1px solid #3e3e42;
+            border-right: 1px solid var(--editor-border-color, #3e3e42);
             user-select: none;
             overflow: hidden;
             white-space: pre-line;
-            font-family: 'Consolas', 'Courier New', monospace;
+            font-family: var(--font-family-mono, 'Consolas', 'Courier New', monospace);
         }
 
         .editor-content {
             flex: 1;
             position: relative;
             overflow: auto;
-        }
-
-        .code-input {
+        }        .code-input {
             width: 100%;
             height: 100%;
             background: transparent;
-            color: #d4d4d4;
+            color: var(--editor-text-primary, #d4d4d4);
             border: none;
             outline: none;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: var(--font-family-mono, 'Consolas', 'Courier New', monospace);
+            font-size: var(--font-size-sm, 13px);
             line-height: 1.4;
-            padding: 12px;
+            padding: var(--spacing-md, 12px);
             resize: none;
             white-space: pre;
             overflow-wrap: normal;
             overflow-x: auto;
             tab-size: 4;
-        }
-
-        .code-highlight {
+        }        .code-highlight {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: var(--font-family-mono, 'Consolas', 'Courier New', monospace);
+            font-size: var(--font-size-sm, 13px);
             line-height: 1.4;
-            padding: 12px;
+            padding: var(--spacing-md, 12px);
             white-space: pre;
             overflow: hidden;
             color: transparent;
         }
 
-        .keyword { color: #569cd6; }
-        .string { color: #ce9178; }
-        .comment { color: #6a9955; font-style: italic; }
-        .number { color: #b5cea8; }
-        .operator { color: #d4d4d4; }
-        .function { color: #dcdcaa; }
-        .variable { color: #9cdcfe; }
-        .type { color: #4ec9b0; }
-
-        .editor-footer {
-            background: #007acc;
+        .keyword { color: var(--syntax-keyword, #569cd6); }
+        .string { color: var(--syntax-string, #ce9178); }
+        .comment { color: var(--syntax-comment, #6a9955); font-style: italic; }
+        .number { color: var(--syntax-number, #b5cea8); }
+        .operator { color: var(--syntax-operator, #d4d4d4); }
+        .function { color: var(--syntax-function, #dcdcaa); }
+        .variable { color: var(--syntax-variable, #9cdcfe); }
+        .type { color: var(--syntax-type, #4ec9b0); }        .editor-footer {
+            background: var(--primary-color, #007acc);
             color: white;
-            padding: 4px 12px;
-            font-size: 11px;
+            padding: var(--spacing-xs, 4px) var(--spacing-md, 12px);
+            font-size: var(--font-size-xs, 11px);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -177,91 +163,81 @@ export class CodeEditor extends LitElement {
         .cursor-position {
             display: flex;
             gap: 8px;
-        }
-
-        .minimap {
+        }        .minimap {
             width: 100px;
-            background: #252526;
-            border-left: 1px solid #3e3e42;
+            background: var(--editor-minimap-background, #252526);
+            border-left: 1px solid var(--editor-border, #3e3e42);
             overflow: hidden;
             position: relative;
         }
 
         .minimap-content {
-            font-size: 2px;
+            font-size: var(--editor-minimap-font-size, 2px);
             line-height: 2px;
-            color: #d4d4d4;
-            padding: 2px;
+            color: var(--editor-text, #d4d4d4);
+            padding: var(--spacing-xs, 2px);
             white-space: pre;
         }
 
         .search-box {
             position: absolute;
             top: 50px;
-            right: 20px;
-            background: #2d2d30;
-            border: 1px solid #3e3e42;
-            border-radius: 4px;
-            padding: 8px;
-            color: #cccccc;
+            right: 20px;            background: var(--editor-search-background, #2d2d30);
+            border: 1px solid var(--editor-border, #3e3e42);
+            border-radius: var(--border-radius-sm, 4px);
+            padding: var(--spacing-sm, 8px);
+            color: var(--editor-text-secondary, #cccccc);
             z-index: 10;
             display: none;
         }
 
         .search-box.visible {
             display: block;
-        }
-
-        .search-input {
-            background: #3c3c3c;
-            border: 1px solid #464647;
-            color: #cccccc;
-            padding: 4px 8px;
-            border-radius: 2px;
-            font-size: 11px;
+        }        .search-input {
+            background: var(--editor-select-background, #3c3c3c);
+            border: 1px solid var(--editor-select-border, #464647);
+            color: var(--editor-text-secondary, #cccccc);
+            padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
+            border-radius: var(--border-radius-xs, 2px);
+            font-size: var(--font-size-xs, 11px);
             width: 200px;
         }
 
         .icon-button {
             background: none;
             border: none;
-            color: #cccccc;
+            color: var(--editor-text-secondary, #cccccc);
             cursor: pointer;
-            padding: 4px;
-            border-radius: 2px;
-            font-size: 12px;
-        }
-
-        .icon-button:hover {
-            background: #3e3e42;
+            padding: var(--spacing-xs, 4px);
+            border-radius: var(--border-radius-xs, 2px);
+            font-size: var(--font-size-xs, 12px);
+        }        .icon-button:hover {
+            background: var(--editor-button-hover, #3e3e42);
         }
 
         .toolbar {
             display: flex;
             gap: 4px;
             align-items: center;
-        }
-
-        .theme-dark {
-            background: #1e1e1e;
+        }        .theme-dark {
+            background: var(--editor-background-dark, #1e1e1e);
         }
 
         .theme-light {
-            background: #ffffff;
+            background: var(--editor-background-light, #ffffff);
         }
 
-        .theme-light .editor-header {
-            background: #f3f3f3;
-            color: #333333;
-            border-bottom-color: #e1e4e8;
+        .theme-light .editor-header {            background: var(--editor-light-background, #f3f3f3);
+            color: var(--editor-light-text, #333333);
+            border-bottom-color: var(--editor-light-border, #e1e4e8);
+        }        .theme-light .code-input {
+            color: var(--editor-light-text-primary, #24292e);
         }
 
-        .theme-light .code-input {
-            color: #24292e;
-        }        .theme-light .line-numbers {
-            background: #fafbfc;
-            color: #6a737d;
-            border-right-color: #e1e4e8;
+        .theme-light .line-numbers {
+            background: var(--editor-light-line-background, #fafbfc);
+            color: var(--editor-light-line-text, #6a737d);
+            border-right-color: var(--editor-light-border, #e1e4e8);
         }
 
         .line-numbers-container {

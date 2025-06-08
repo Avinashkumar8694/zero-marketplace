@@ -117,12 +117,10 @@ export class PopupDropdownDirective extends LitElement {
 
     .dropdown-menu li.selected {
       background-color: var(--selected-item-bg); /* Highlight selected item */
-    }
-
-    .error-message {
+    }    .error-message {
       color: var(--error-border-color);
-      font-size: 0.9em;
-      margin-top: 5px;
+      font-size: var(--font-size-sm, 0.9em);
+      margin-top: var(--spacing-xs, 5px);
     }
   `;
 

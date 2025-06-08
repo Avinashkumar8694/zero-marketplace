@@ -60,11 +60,9 @@ export class ZeroTextarea extends LitElement {
 
         textarea.mat-mdc-input-element::placeholder {
             color: var(--text-secondary, #666);
-        }
-
-        textarea.mat-mdc-input-element:hover {
+        }        textarea.mat-mdc-input-element:hover {
             border-color: var(--primary-light, #6c63ff);
-            background: rgba(108, 99, 255, 0.02);
+            background: var(--primary-background-hover, rgba(108, 99, 255, 0.02));
         }
 
         textarea.mat-mdc-input-element:focus {

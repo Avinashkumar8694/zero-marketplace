@@ -57,18 +57,16 @@ export class ZeroRangeSlider extends LitElement {
         }
 
         .slider-track {
-            position: relative;
-            height: 6px;
+            position: relative;            height: 6px;
             background: var(--background-secondary, #f5f5f5);
-            border-radius: 3px;
+            border-radius: var(--border-radius-xs, 3px);
             margin: var(--spacing-md, 12px) 0;
         }
 
         .slider-progress {
             position: absolute;
-            height: 100%;
-            background: var(--primary-color, #6c63ff);
-            border-radius: 3px;
+            height: 100%;            background: var(--primary-color, #6c63ff);
+            border-radius: var(--border-radius-xs, 3px);
             transition: all 0.2s;
         }
 
@@ -85,13 +83,11 @@ export class ZeroRangeSlider extends LitElement {
             outline: none;
             cursor: pointer;
             pointer-events: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
+        }        input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: var(--icon-size-md, 20px);
+            height: var(--icon-size-md, 20px);
             border-radius: 50%;
             background: var(--primary-color, #6c63ff);
             border: 2px solid white;
@@ -104,11 +100,9 @@ export class ZeroRangeSlider extends LitElement {
         input[type="range"]::-webkit-slider-thumb:hover {
             transform: scale(1.1);
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
+        }        input[type="range"]::-moz-range-thumb {
+            width: var(--icon-size-md, 20px);
+            height: var(--icon-size-md, 20px);
             border-radius: 50%;
             background: var(--primary-color, #6c63ff);
             border: 2px solid white;
@@ -175,11 +169,9 @@ export class ZeroRangeSlider extends LitElement {
             display: flex;
             align-items: center;
             gap: var(--spacing-xs, 4px);
-        }
-
-        .value-input input {
+        }        .value-input input {
             width: 60px;
-            padding: 2px 6px;
+            padding: var(--spacing-xs, 2px) var(--spacing-xs, 6px);
             border: 1px solid var(--border-color, #ddd);
             border-radius: var(--border-radius-xs, 3px);
             font-size: var(--font-size-sm, 12px);
@@ -191,17 +183,15 @@ export class ZeroRangeSlider extends LitElement {
             justify-content: space-between;
             align-items: center;
             margin-top: var(--spacing-sm, 8px);
-        }
-
-        .step-button {
+        }        .step-button {
             background: var(--background-secondary, #f5f5f5);
             border: 1px solid var(--border-color, #ddd);
             color: var(--text-primary, #333);
             cursor: pointer;
             font-size: var(--font-size-sm, 12px);
-            padding: 4px 8px;
+            padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
             border-radius: var(--border-radius-xs, 3px);
-            transition: all 0.2s;
+            transition: var(--transition-fast, all 0.2s);
         }
 
         .step-button:hover:not(:disabled) {
@@ -213,20 +203,18 @@ export class ZeroRangeSlider extends LitElement {
             background: var(--background-disabled, #f5f5f5);
             color: var(--text-disabled, #ccc);
             cursor: not-allowed;
-        }
-
-        .tooltip {
+        }        .tooltip {
             position: absolute;
             background: var(--text-primary, #333);
             color: white;
-            padding: 4px 8px;
+            padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
             border-radius: var(--border-radius-xs, 3px);
             font-size: var(--font-size-sm, 12px);
             white-space: nowrap;
             transform: translateX(-50%);
             top: -35px;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: var(--transition-fast, opacity 0.2s);
             pointer-events: none;
             z-index: 10;
         }

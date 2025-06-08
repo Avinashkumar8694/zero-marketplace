@@ -48,23 +48,20 @@ export class ZeroPasswordInput extends LitElement {
             padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
             padding-right: 40px;
             border: 1px solid var(--border-color, #ddd);
-            border-radius: var(--border-radius-sm, 4px);
-            font-size: var(--font-size-base, 14px);
+            border-radius: var(--border-radius-sm, 4px);            font-size: var(--font-size-base, 14px);
             background-color: var(--background-primary, #fff);
             color: var(--text-primary, #333);
             transition: border-color 0.2s, box-shadow 0.2s;
-            min-height: 36px;
+            min-height: var(--input-height, 36px);
             box-sizing: border-box;
             font-family: var(--font-family, 'Roboto', sans-serif);
         }
 
         input.mat-mdc-input-element::placeholder {
             color: var(--text-secondary, #666);
-        }
-
-        input.mat-mdc-input-element:hover {
+        }        input.mat-mdc-input-element:hover {
             border-color: var(--primary-light, #6c63ff);
-            background: rgba(108, 99, 255, 0.02);
+            background: var(--primary-background-hover, rgba(108, 99, 255, 0.02));
         }
 
         input.mat-mdc-input-element:focus {
@@ -85,11 +82,10 @@ export class ZeroPasswordInput extends LitElement {
             right: 8px;
             background: none;
             border: none;
-            cursor: pointer;
-            color: var(--text-secondary, #666);
-            font-size: 16px;
-            padding: 4px;
-            border-radius: 2px;
+            cursor: pointer;            color: var(--text-secondary, #666);
+            font-size: var(--icon-size-sm, 16px);
+            padding: var(--spacing-xs, 4px);
+            border-radius: var(--border-radius-xs, 2px);
             transition: color 0.2s;
         }
 
@@ -119,25 +115,23 @@ export class ZeroPasswordInput extends LitElement {
 
         input.mat-mdc-input-element.error:focus {
             box-shadow: 0 0 0 2px var(--error-light, rgba(244, 67, 54, 0.2));
-        }
-
-        .strength-meter {
+        }        .strength-meter {
             margin-top: var(--spacing-xs, 4px);
             height: 4px;
             background-color: var(--background-secondary, #f5f5f5);
-            border-radius: 2px;
+            border-radius: var(--border-radius-xs, 2px);
             overflow: hidden;
         }
 
         .strength-bar {
             height: 100%;
             transition: width 0.3s, background-color 0.3s;
-            border-radius: 2px;
+            border-radius: var(--border-radius-xs, 2px);
         }
 
-        .strength-weak { background-color: #f44336; }
-        .strength-medium { background-color: #ff9800; }
-        .strength-strong { background-color: #4caf50; }
+        .strength-weak { background-color: var(--error-color, #f44336); }
+        .strength-medium { background-color: var(--warning-color, #ff9800); }
+        .strength-strong { background-color: var(--success-color, #4caf50); }
     `;
 
     @property({ type: String })

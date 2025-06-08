@@ -47,14 +47,13 @@ export class RichTextEditor extends LitElement {
   isWrapped = false
 
   private selectionRange: Range | null = null;
-
   static styles = css`
     :host {
       display: block;
       width: 100%;
       margin: auto;
-      /* border: 1px solid #ddd; */
-      border-radius: 8px;
+      /* border: 1px solid var(--border-color, #ddd); */
+      border-radius: var(--border-radius-lg, 8px);
       overflow: visible;
       position: relative;
     }
@@ -63,25 +62,25 @@ export class RichTextEditor extends LitElement {
       position: relative;
     }
     :host([editorMode]) .editor:hover {
-      border: 1px solid #ddd; /* Change this to your desired border color */
+      border: 1px solid var(--border-color, #ddd); /* Change this to your desired border color */
       box-sizing: border-box;
     }
     .toolbar {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
-      padding: 8px;
-      color: #5b5f61;
-      background-color: #f5f5f5;
-      border-bottom: 1px solid #ddd;
+      padding: var(--spacing-sm, 8px);
+      color: var(--text-secondary, #5b5f61);
+      background-color: var(--background-secondary, #f5f5f5);
+      border-bottom: 1px solid var(--border-color, #ddd);
       position: absolute;
       top: 40px;
       left: 0;
       right: 0;
       z-index: 10;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      box-shadow: var(--shadow-md, 0 2px 5px rgba(0, 0, 0, 0.1));
+      border-radius: var(--border-radius-lg, 8px);
+      transition: var(--transition-normal, opacity 0.3s ease, transform 0.3s ease);
       opacity: 0;
       transform: translateY(-10px);
       pointer-events: none;
@@ -90,19 +89,18 @@ export class RichTextEditor extends LitElement {
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
-    }
-    .toolbar button, .toolbar select, .toolbar input[type="color"] {
+    }    .toolbar button, .toolbar select, .toolbar input[type="color"] {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 16px;
-      padding: 6px;
-      transition: background-color 0.3s ease;
+      font-size: var(--font-size-md, 16px);
+      padding: var(--spacing-xs, 6px);
+      transition: var(--transition-fast, background-color 0.3s ease);
       position: relative;
     }
     .toolbar button:hover, .toolbar select:hover, .toolbar input[type="color"]:hover {
-      background-color: #e0e0e0;
-      border-radius: 4px;
+      background-color: var(--background-hover, #e0e0e0);
+      border-radius: var(--border-radius-sm, 4px);
     }
     .toolbar button::after {
       content: attr(title);
@@ -110,21 +108,20 @@ export class RichTextEditor extends LitElement {
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      background-color: #333;
-      color: #fff;
-      padding: 4px;
-      border-radius: 4px;
+      background-color: var(--tooltip-background, #333);
+      color: var(--tooltip-text, #fff);
+      padding: var(--spacing-xs, 4px);
+      border-radius: var(--border-radius-sm, 4px);
       white-space: nowrap;
-      font-size: 12px;
+      font-size: var(--font-size-xs, 12px);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: var(--transition-fast, opacity 0.3s ease);
     }
     .toolbar button:hover::after {
       opacity: 1;
-    }
-    .editor, .preview {
+    }    .editor, .preview {
       height: 100%;
-      padding: 10px;
+      padding: var(--spacing-sm, 10px);
       outline: none;
       position: relative;
       z-index: 1;
@@ -134,19 +131,19 @@ export class RichTextEditor extends LitElement {
       border: none;
       cursor: pointer;
       position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 18px;
-      transition: background-color 0.3s ease;
+      top: var(--spacing-sm, 10px);
+      right: var(--spacing-sm, 10px);
+      font-size: var(--font-size-lg, 18px);
+      transition: var(--transition-fast, background-color 0.3s ease);
       z-index: 20;
     }
     .toolbar-toggle:hover {
-      background-color: #e0e0e0;
+      background-color: var(--background-hover, #e0e0e0);
       border-radius: 50%;
     }
     .toolbar input[type="color"] {
-      width: 24px;
-      height: 24px;
+      width: var(--icon-size-sm, 24px);
+      height: var(--icon-size-sm, 24px);
       padding: 0;
       border-radius: 50%;
     }
@@ -157,21 +154,20 @@ export class RichTextEditor extends LitElement {
     .toolbar .bold::before { content: 'B'; font-weight: bold; }
     .toolbar .italic::before { content: 'I'; font-style: italic; }
     .toolbar .underline::before { content: 'U'; text-decoration: underline; }
-    .toolbar .strikethrough::before { content: 'S'; text-decoration: line-through; }
-    .toolbar select {
-      font-size: 14px;
+    .toolbar .strikethrough::before { content: 'S'; text-decoration: line-through; }    .toolbar select {
+      font-size: var(--font-size-base, 14px);
     }
     .image-container {
       position: relative;
       display: inline-block;
-      /* border: 1px solid #ddd; */
+      /* border: 1px solid var(--border-color, #ddd); */
     }
     .resize-icon {
       position: absolute;
       right: 0;
       bottom: 0;
-      width: 24px;
-      height: 24px;
+      width: var(--icon-size-sm, 24px);
+      height: var(--icon-size-sm, 24px);
       /* background: url('resize-icon.png') no-repeat center center; */
       /* background-color: red; */
       background-size: contain;

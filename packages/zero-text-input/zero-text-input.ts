@@ -35,9 +35,7 @@ export class ZeroTextInput extends LitElement {
             font-size: var(--font-size-base, 14px);
             color: var(--text-primary, #333);
             font-weight: 500;
-        }
-
-        input.mat-mdc-input-element {
+        }        input.mat-mdc-input-element {
             width: 100%;
             padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
             border: 1px solid var(--border-color, #ddd);
@@ -46,18 +44,16 @@ export class ZeroTextInput extends LitElement {
             background-color: var(--background-primary, #fff);
             color: var(--text-primary, #333);
             transition: border-color 0.2s, box-shadow 0.2s;
-            min-height: 36px;
+            min-height: var(--input-height, 36px);
             box-sizing: border-box;
             font-family: var(--font-family, 'Roboto', sans-serif);
         }
 
         input.mat-mdc-input-element::placeholder {
             color: var(--text-secondary, #666);
-        }
-
-        input.mat-mdc-input-element:hover {
+        }        input.mat-mdc-input-element:hover {
             border-color: var(--primary-light, #6c63ff);
-            background: rgba(108, 99, 255, 0.02);
+            background: var(--primary-background-hover, rgba(108, 99, 255, 0.02));
         }
 
         input.mat-mdc-input-element:focus {

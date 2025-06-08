@@ -45,10 +45,8 @@ export class ZeroCheckbox extends LitElement {
             padding: var(--spacing-xs, 4px);
             border-radius: var(--border-radius-sm, 4px);
             transition: background-color 0.2s;
-        }
-
-        .checkbox-field:hover:not(.disabled) {
-            background-color: rgba(108, 99, 255, 0.05);
+        }        .checkbox-field:hover:not(.disabled) {
+            background-color: var(--primary-background-hover, rgba(108, 99, 255, 0.05));
         }
 
         .checkbox-field.disabled {
@@ -59,11 +57,9 @@ export class ZeroCheckbox extends LitElement {
         .checkbox-container {
             position: relative;
             display: inline-block;
-        }
-
-        input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+        }        input[type="checkbox"] {
+            width: var(--icon-size-sm, 18px);
+            height: var(--icon-size-sm, 18px);
             margin: 0;
             cursor: pointer;
             appearance: none;
@@ -90,9 +86,8 @@ export class ZeroCheckbox extends LitElement {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 12px;
+            transform: translate(-50%, -50%);            color: white;
+            font-size: var(--font-size-xs, 12px);
             font-weight: bold;
         }
 
@@ -106,9 +101,8 @@ export class ZeroCheckbox extends LitElement {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 14px;
+            transform: translate(-50%, -50%);            color: white;
+            font-size: var(--font-size-base, 14px);
             font-weight: bold;
         }
 
@@ -177,12 +171,10 @@ export class ZeroCheckbox extends LitElement {
 
         .checkbox-field.switch-style {
             gap: var(--spacing-md, 12px);
-        }
-
-        .checkbox-field.switch-style input[type="checkbox"] {
-            width: 36px;
-            height: 20px;
-            border-radius: 10px;
+        }        .checkbox-field.switch-style input[type="checkbox"] {
+            width: var(--icon-size-xl, 36px);
+            height: var(--icon-size-md, 20px);
+            border-radius: var(--border-radius-xl, 10px);
             background-color: var(--background-secondary, #f5f5f5);
             border: 1px solid var(--border-color, #ddd);
             position: relative;
@@ -193,9 +185,8 @@ export class ZeroCheckbox extends LitElement {
             content: '';
             position: absolute;
             top: 1px;
-            left: 1px;
-            width: 16px;
-            height: 16px;
+            left: 1px;            width: var(--icon-size-sm, 16px);
+            height: var(--icon-size-sm, 16px);
             background-color: white;
             border-radius: 50%;
             transition: all 0.3s;

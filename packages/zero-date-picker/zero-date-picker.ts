@@ -203,17 +203,15 @@ export class ZeroDatePicker extends LitElement {
     placeholderText: 'Enter width',
     fieldMappings: 'width',
   })
-  width: string = '100%';
-
-  @property({ type: String })
-  @RendererAttribute({
-    attributeType: AttributeType.PROPERTY,
-    uiComponentType: UserInterfaceType.TEXT_INPUT,
-    displayLabel: 'Height',
-    placeholderText: 'Enter height',
-    fieldMappings: 'height',
-  })
-  height: string = '40px';
+  width: string = '100%';    @property({ type: String })
+    @RendererAttribute({
+        attributeType: AttributeType.PROPERTY,
+        uiComponentType: UserInterfaceType.TEXT_INPUT,
+        displayLabel: 'Height',
+        placeholderText: 'Enter height',
+        fieldMappings: 'height',
+    })
+    height: string = 'var(--input-height, 36px)';
 
   @property({ type: String })
   @RendererAttribute({
@@ -297,14 +295,12 @@ export class ZeroDatePicker extends LitElement {
     .form-field {
       position: relative;
       margin-bottom: 16px;
-    }
-
-    .form-field-label {
+    }    .form-field-label {
       display: block;
-      font-size: 14px;
+      font-size: var(--font-size-base, 14px);
       font-weight: 500;
       margin-bottom: 8px;
-      color: rgba(0, 0, 0, 0.87);
+      color: var(--text-primary, rgba(0, 0, 0, 0.87));
     }
 
     .form-field-label.required::after {
@@ -316,17 +312,15 @@ export class ZeroDatePicker extends LitElement {
       position: relative;
       display: flex;
       align-items: center;
-    }
-
-    .mat-mdc-input-element {
+    }    .mat-mdc-input-element {
       width: 100%;
-      padding: 12px 16px;
+      min-height: var(--input-height, 36px);
       border: 1px solid #e0e0e0;
       border-radius: var(--border-radius, 4px);
-      font-size: 16px;
+      font-size: var(--font-size-lg, 16px);
       line-height: 1.5;
       background: var(--background-color, #ffffff);
-      color: rgba(0, 0, 0, 0.87);
+      color: var(--text-primary, rgba(0, 0, 0, 0.87));
       transition: all 0.2s ease;
       cursor: pointer;
     }
@@ -349,13 +343,11 @@ export class ZeroDatePicker extends LitElement {
 
     .mat-mdc-input-element.error {
       border-color: var(--error-color, #f44336);
-    }
-
-    .calendar-icon {
+    }    .calendar-icon {
       position: absolute;
       right: 12px;
-      width: 20px;
-      height: 20px;
+      width: var(--icon-size-md, 20px);
+      height: var(--icon-size-md, 20px);
       color: rgba(0, 0, 0, 0.6);
       pointer-events: none;
     }
@@ -395,10 +387,9 @@ export class ZeroDatePicker extends LitElement {
       background: #f5f5f5;
     }
 
-    .month-year {
-      font-weight: 500;
-      font-size: 16px;
-      color: rgba(0, 0, 0, 0.87);
+    .month-year {      font-weight: 500;
+      font-size: var(--font-size-lg, 16px);
+      color: var(--text-primary, rgba(0, 0, 0, 0.87));
     }
 
     .calendar-grid {
@@ -416,18 +407,17 @@ export class ZeroDatePicker extends LitElement {
       grid-template-columns: 30px repeat(7, 1fr);
     }
 
-    .weekday {
-      text-align: center;
-      font-size: 12px;
+    .weekday {      text-align: center;
+      font-size: var(--font-size-xs, 12px);
       font-weight: 500;
-      color: rgba(0, 0, 0, 0.6);
+      color: var(--text-secondary, rgba(0, 0, 0, 0.6));
       padding: 8px 4px;
     }
 
     .week-number {
       text-align: center;
-      font-size: 12px;
-      color: rgba(0, 0, 0, 0.4);
+      font-size: var(--font-size-xs, 12px);
+      color: var(--text-muted, rgba(0, 0, 0, 0.4));
       padding: 8px 4px;
     }
 
@@ -447,10 +437,9 @@ export class ZeroDatePicker extends LitElement {
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      cursor: pointer;
-      font-size: 14px;
+      cursor: pointer;      font-size: var(--font-size-base, 14px);
       transition: all 0.2s ease;
-      color: rgba(0, 0, 0, 0.87);
+      color: var(--text-primary, rgba(0, 0, 0, 0.87));
     }
 
     .day:hover {
@@ -509,10 +498,9 @@ export class ZeroDatePicker extends LitElement {
     }
 
     .action-button {
-      padding: 8px 16px;
-      border: none;
+      padding: 8px 16px;      border: none;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: var(--font-size-base, 14px);
       cursor: pointer;
       transition: background 0.2s ease;
     }
@@ -539,10 +527,8 @@ export class ZeroDatePicker extends LitElement {
       font-size: 12px;
       color: rgba(0, 0, 0, 0.6);
       margin-top: 4px;
-    }
-
-    .form-field-error {
-      font-size: 12px;
+    }    .form-field-error {
+      font-size: var(--font-size-xs, 12px);
       color: var(--error-color, #f44336);
       margin-top: 4px;
     }

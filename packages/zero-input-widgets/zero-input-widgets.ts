@@ -56,10 +56,9 @@ export class ZeroInputWidgets extends LitElement {    static styles = css`
             border: 1px solid var(--border-color, #ddd);
             border-radius: var(--border-radius-sm, 4px);
             font-size: var(--font-size-base, 14px);
-            background-color: var(--background-primary, #fff);
-            color: var(--text-primary, #333);
+            background-color: var(--background-primary, #fff);            color: var(--text-primary, #333);
             transition: border-color 0.2s, box-shadow 0.2s;
-            min-height: 36px;
+            min-height: var(--input-height, 36px);
             box-sizing: border-box;
             font-family: var(--font-family, 'Roboto', sans-serif);
         }
@@ -67,13 +66,11 @@ export class ZeroInputWidgets extends LitElement {    static styles = css`
         input.mat-mdc-input-element::placeholder,
         textarea.mat-mdc-input-element::placeholder {
             color: var(--text-secondary, #666);
-        }
-
-        input.mat-mdc-input-element:hover,
+        }        input.mat-mdc-input-element:hover,
         textarea.mat-mdc-input-element:hover,
         select.mat-mdc-input-element:hover {
             border-color: var(--primary-light, #6c63ff);
-            background: rgba(108, 99, 255, 0.02);
+            background: var(--primary-background-hover, rgba(108, 99, 255, 0.02));
         }
 
         input.mat-mdc-input-element:focus,
@@ -95,11 +92,9 @@ export class ZeroInputWidgets extends LitElement {    static styles = css`
             display: flex;
             align-items: center;
             gap: var(--spacing-sm, 8px);
-        }
-
-        .checkbox-field input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+        }        .checkbox-field input[type="checkbox"] {
+            width: var(--icon-size-sm, 18px);
+            height: var(--icon-size-sm, 18px);
             margin: 0;
             cursor: pointer;
         }
@@ -128,12 +123,10 @@ export class ZeroInputWidgets extends LitElement {    static styles = css`
         .range-value {
             font-weight: 500;
             color: var(--primary-color, #6c63ff);
-        }
-
-        input[type="range"] {
+        }        input[type="range"] {
             width: 100%;
             height: 6px;
-            border-radius: 3px;
+            border-radius: var(--border-radius-xs, 3px);
             background: var(--background-secondary, #f5f5f5);
             outline: none;
             cursor: pointer;
@@ -154,9 +147,8 @@ export class ZeroInputWidgets extends LitElement {    static styles = css`
         }
 
         /* Color picker styling */
-        input[type="color"] {
-            width: 50px;
-            height: 36px;
+        input[type="color"] {            width: 50px;
+            height: var(--input-height, 36px);
             border: 1px solid var(--border-color, #ddd);
             border-radius: var(--border-radius-sm, 4px);
             cursor: pointer;

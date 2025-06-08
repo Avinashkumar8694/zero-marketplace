@@ -40,25 +40,23 @@ export class AttributeWindow extends LitElement {
             font-family: var(--font-family);
             color: var(--text-color);
             background-color: var(--background-color);
-        }
-
-        .header {
+        }        .header {
             background-color: var(--primary-color);
             color: var(--text-color);
             text-align: center;
-            padding: 10px;
+            padding: var(--spacing-sm, 10px);
             height: var(--header-height);
             line-height: var(--header-height);
             position: relative;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
+            box-shadow: var(--shadow-md, 0 2px 5px rgba(0, 0, 0, 0.5)); 
         }
 
         .header .toggle-btn {
             position: absolute;
-            left: 15px;
+            left: var(--spacing-md, 15px);
             top: 50%;
             transform: translateY(-50%);
-            font-size: 22px;
+            font-size: var(--font-size-lg, 22px);
             cursor: pointer;
             background: none;
             border: none;
@@ -82,20 +80,18 @@ export class AttributeWindow extends LitElement {
             transition: width var(--transition-speed);
             padding-top: var(--header-height);
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.7); 
-        }
-
-        .sidenav a {
-            padding: 15px 20px;
+        }        .sidenav a {
+            padding: var(--spacing-md, 15px) var(--spacing-lg, 20px);
             text-decoration: none;
-            font-size: 18px;
+            font-size: var(--font-size-lg, 18px);
             color: var(--text-color);
             display: block;
-            transition: background-color var(--transition-speed), padding-left var(--transition-speed);
+            transition: var(--transition-speed, background-color), var(--transition-speed, padding-left);
         }
 
         .sidenav a:hover {
             background-color: var(--hover-color);
-            padding-left: 30px; 
+            padding-left: var(--spacing-xl, 30px);
         }
 
         .main {

@@ -163,16 +163,15 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
     fieldMappings: 'width',
   })
   width: string = '100%';
-
   @property({ type: String })
   @RendererAttribute({
     attributeType: AttributeType.PROPERTY,
     uiComponentType: UserInterfaceType.TEXT_INPUT,
     displayLabel: 'Height',
-    placeholderText: 'Enter height (e.g., 40px)',
+    placeholderText: 'Enter height (e.g., 36px)',
     fieldMappings: 'height',
   })
-  height: string = '40px';
+  height: string = '36px';
 
   @property({ type: String })
   @RendererAttribute({
@@ -263,14 +262,12 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
     .form-field {
       position: relative;
       margin-bottom: 16px;
-    }
-
-    .form-field-label {
+    }    .form-field-label {
       display: block;
-      font-size: 14px;
+      font-size: var(--font-size-base, 14px);
       font-weight: 500;
       margin-bottom: 8px;
-      color: rgba(0, 0, 0, 0.87);
+      color: var(--text-primary, rgba(0, 0, 0, 0.87));
     }
 
     .form-field-label.required::after {
@@ -284,17 +281,20 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
       align-items: center;
     }
 
-    .mat-mdc-input-element {
+  .mat-mdc-input-element {
       width: 100%;
-      padding: 12px 50px 12px 16px;
+      height: var(--input-height, 36px);
+      min-height: var(--input-height, 36px);
+      padding: 0 40px 0 12px;
       border: 1px solid #e0e0e0;
       border-radius: var(--border-radius, 4px);
-      font-size: 16px;
+      font-size: var(--font-size-lg, 16px);
       line-height: 1.5;
       background: var(--background-color, #ffffff);
-      color: rgba(0, 0, 0, 0.87);
+      color: var(--text-primary, rgba(0, 0, 0, 0.87));
       transition: all 0.2s ease;
       cursor: pointer;
+      box-sizing: border-box;
     }
 
     .mat-mdc-input-element:hover {
@@ -315,13 +315,11 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
 
     .mat-mdc-input-element.error {
       border-color: var(--error-color, #f44336);
-    }
-
-    .color-preview {
+    }    .color-preview {
       position: absolute;
       right: 8px;
-      width: 32px;
-      height: 24px;
+      width: var(--icon-size-xl, 32px);
+      height: var(--icon-size-lg, 24px);
       border-radius: 4px;
       border: 1px solid #e0e0e0;
       cursor: pointer;
@@ -332,44 +330,58 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
       width: 100%;
       height: 100%;
       border-radius: 3px;
-    }
-
-    .dropdown {
+    }    .dropdown {
       position: absolute;
       top: 100%;
       left: 0;
       background: white;
       border: 1px solid #e0e0e0;
       border-radius: var(--border-radius, 4px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
       z-index: 1000;
       margin-top: 4px;
       width: var(--picker-width, 280px);
+      max-height: 400px;
+      overflow: hidden;
     }
 
     .picker-tabs {
       display: flex;
       border-bottom: 1px solid #e0e0e0;
-    }
-
-    .tab-button {
+    }    .tab-button {
       flex: 1;
-      padding: 12px;
+      padding: 12px 16px;
       border: none;
       background: none;
       cursor: pointer;
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.6);
+      font-size: var(--font-size-base, 14px);
+      color: var(--text-secondary, rgba(0, 0, 0, 0.6));
       transition: all 0.2s ease;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .tab-button:hover {
+      color: var(--primary-color, #1976d2);
+      background: color-mix(in srgb, var(--primary-color, #1976d2) 5%, transparent);
     }
 
     .tab-button.active {
       color: var(--primary-color, #1976d2);
-      border-bottom: 2px solid var(--primary-color, #1976d2);
+      background: color-mix(in srgb, var(--primary-color, #1976d2) 8%, transparent);
     }
 
-    .picker-content {
-      padding: 16px;
+    .tab-button.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--primary-color, #1976d2);
+    }    .picker-content {
+      padding: 20px;
+      background: #fafafa;
     }
 
     .color-picker-area {
@@ -393,12 +405,10 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
       transform: translate(-50%, -50%);
       pointer-events: none;
-    }
-
-    .hue-slider {
+    }    .hue-slider {
       position: relative;
       width: 100%;
-      height: 16px;
+      height: var(--icon-size-sm, 16px);
       border-radius: 8px;
       margin-bottom: 16px;
       background: linear-gradient(to right, 
@@ -414,9 +424,8 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
     }
 
     .alpha-slider {
-      position: relative;
-      width: 100%;
-      height: 16px;
+      position: relative;      width: 100%;
+      height: var(--icon-size-sm, 16px);
       border-radius: 8px;
       margin-bottom: 16px;
       background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="10" height="10" fill="%23f0f0f0"/><rect x="10" y="10" width="10" height="10" fill="%23f0f0f0"/><rect x="10" width="10" height="10" fill="white"/><rect y="10" width="10" height="10" fill="white"/></svg>');
@@ -432,9 +441,8 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
 
     .slider-handle {
       position: absolute;
-      top: 50%;
-      width: 20px;
-      height: 20px;
+      top: 50%;      width: var(--icon-size-md, 20px);
+      height: var(--icon-size-md, 20px);
       border: 2px solid white;
       border-radius: 50%;
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
@@ -456,11 +464,9 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
     .input-group {
       display: flex;
       flex-direction: column;
-    }
-
-    .input-label {
-      font-size: 12px;
-      color: rgba(0, 0, 0, 0.6);
+    }    .input-label {
+      font-size: var(--font-size-xs, 12px);
+      color: var(--text-secondary, rgba(0, 0, 0, 0.6));
       margin-bottom: 4px;
     }
 
@@ -468,7 +474,7 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
       padding: 6px 8px;
       border: 1px solid #e0e0e0;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: var(--font-size-base, 14px);
       text-align: center;
     }
 
@@ -498,56 +504,64 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
 
     .preset-color.selected {
       border-color: var(--primary-color, #1976d2);
-    }
-
-    .picker-actions {
+    }    .picker-actions {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px;
+      padding: 12px 16px;
       border-top: 1px solid #e0e0e0;
+      background: #fafafa;
+      gap: 12px;
     }
 
     .action-button {
-      padding: 8px 16px;
+      padding: 8px 12px;
       border: none;
-      border-radius: 4px;
-      font-size: 14px;
+      border-radius: 6px;
+      font-size: var(--font-size-sm, 13px);
+      font-weight: 500;
       cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    .eyedropper-button {
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 80px;
+      height: 32px;
+      white-space: nowrap;
+    }    .eyedropper-button {
       background: #f5f5f5;
       color: var(--primary-color, #1976d2);
+      border: 1px solid transparent;
     }
 
     .eyedropper-button:hover {
-      background: #e0e0e0;
+      background: var(--primary-color, #1976d2);
+      color: white;
+      border-color: var(--primary-color, #1976d2);
     }
 
     .clear-button {
-      background: #ffebee;
+      background: #ffffff;
       color: var(--error-color, #f44336);
+      border: 1px solid #e0e0e0;
     }
 
     .clear-button:hover {
-      background: #ffcdd2;
+      background: var(--error-color, #f44336);
+      color: white;
+      border-color: var(--error-color, #f44336);
     }
 
     .form-field-hint {
       font-size: 12px;
       color: rgba(0, 0, 0, 0.6);
       margin-top: 4px;
-    }
-
-    .form-field-error {
-      font-size: 12px;
+    }    .form-field-error {
+      font-size: var(--font-size-xs, 12px);
       color: var(--error-color, #f44336);
       margin-top: 4px;
-    }
-
-    @media (max-width: 768px) {
+    }    @media (max-width: 768px) {
       .dropdown {
         position: fixed;
         top: 50%;
@@ -555,6 +569,23 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
         transform: translate(-50%, -50%);
         width: 320px;
         max-width: 90vw;
+        max-height: 80vh;
+        z-index: 10000;
+      }
+
+      .picker-content {
+        max-height: 60vh;
+        overflow-y: auto;
+      }
+
+      .picker-actions {
+        padding: 12px;
+        gap: 8px;
+      }
+
+      .action-button {
+        flex: 1;
+        min-width: auto;
       }
     }
   `;
@@ -635,25 +666,19 @@ export class ZeroColorPicker extends LitElement {  // Basic Properties
               ${this.activeTab === 'picker' ? this.renderColorPicker() : ''}
               ${this.activeTab === 'presets' ? this.renderPresets() : ''}
               ${this.activeTab === 'inputs' ? this.renderInputs() : ''}
-            </div>
-
-            ${this.showEyeDropper || this.showAlpha ? html`
+            </div>            ${this.showEyeDropper || this.showAlpha ? html`
               <div class="picker-actions">
-                <div>
-                  ${this.showEyeDropper && 'EyeDropper' in window ? html`
-                    <button type="button" class="action-button eyedropper-button" @click=${this.openEyeDropper}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63M14.41,6.84L8.98,12.27L11.73,15L17.16,9.57L14.41,6.84M8.27,13L8.98,13.27L10.73,15L11,15.73L8.27,13M7.96,14.44L6.8,17.2L9.56,16.04L7.96,14.44Z" />
-                      </svg>
-                      Pick Color
-                    </button>
-                  ` : ''}
-                </div>
-                <div>
-                  <button type="button" class="action-button clear-button" @click=${this.clearColor}>
-                    Clear
+                ${this.showEyeDropper && 'EyeDropper' in window ? html`
+                  <button type="button" class="action-button eyedropper-button" @click=${this.openEyeDropper}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63M14.41,6.84L8.98,12.27L11.73,15L17.16,9.57L14.41,6.84M8.27,13L8.98,13.27L10.73,15L11,15.73L8.27,13M7.96,14.44L6.8,17.2L9.56,16.04L7.96,14.44Z" />
+                    </svg>
+                    Pick
                   </button>
-                </div>
+                ` : ''}
+                <button type="button" class="action-button clear-button" @click=${this.clearColor}>
+                  Clear
+                </button>
               </div>
             ` : ''}
           </div>

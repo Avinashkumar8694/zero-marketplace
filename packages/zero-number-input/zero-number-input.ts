@@ -52,18 +52,16 @@ export class ZeroNumberInput extends LitElement {
             background-color: var(--background-primary, #fff);
             color: var(--text-primary, #333);
             transition: border-color 0.2s, box-shadow 0.2s;
-            min-height: 36px;
+            min-height: var(--input-height, 36px);
             box-sizing: border-box;
             font-family: var(--font-family, 'Roboto', sans-serif);
         }
 
         input.mat-mdc-input-element::placeholder {
             color: var(--text-secondary, #666);
-        }
-
-        input.mat-mdc-input-element:hover {
+        }        input.mat-mdc-input-element:hover {
             border-color: var(--primary-light, #6c63ff);
-            background: rgba(108, 99, 255, 0.02);
+            background: var(--primary-background-hover, rgba(108, 99, 255, 0.02));
         }
 
         input.mat-mdc-input-element:focus {
@@ -83,21 +81,19 @@ export class ZeroNumberInput extends LitElement {
             display: flex;
             flex-direction: column;
             margin-left: var(--spacing-xs, 4px);
-        }
-
-        .step-button {
+        }        .step-button {
             background: var(--background-secondary, #f5f5f5);
             border: 1px solid var(--border-color, #ddd);
             color: var(--text-primary, #333);
             cursor: pointer;
-            font-size: 12px;
-            padding: 2px 6px;
-            min-width: 24px;
-            height: 18px;
+            font-size: var(--font-size-xs, 12px);
+            padding: var(--spacing-xs, 2px) var(--spacing-xs, 6px);
+            min-width: var(--icon-size-sm, 24px);
+            height: var(--input-step-height, 18px);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.2s, border-color 0.2s;
+            transition: var(--transition-fast, background-color 0.2s, border-color 0.2s);
         }
 
         .step-button:first-child {

@@ -60,7 +60,7 @@ export class PopupDropdown extends LitElement {
             --dropdown-icon-color: #666;
             --option-hover-bg-color: #f0f0f0;
             --dropdown-border-radius: 6px;
-            --dropdown-height: 30px; /* Adjust height of dropdown box */
+            --dropdown-height: var(--input-height, 36px); /* Use standardized input height */
             --dropdown-font-size: 12px; /* Match font size of options */
         }
         
@@ -76,23 +76,21 @@ export class PopupDropdown extends LitElement {
             margin-bottom: 8px;
             display: block;
         }
-        
-        .dropdown-container {
+          .dropdown-container {
             position: relative;
             border: 1px solid var(--dropdown-border-color);
             border-radius: var(--dropdown-border-radius);
             background-color: var(--dropdown-bg-color);
-            padding: 0 8px; /* Adjusted padding to fit the height */
+            padding: 0 var(--spacing-sm, 8px); /* Adjusted padding to fit the height */
             height: var(--dropdown-height);
             display: flex;
             align-items: center;
             font-size: var(--dropdown-font-size); /* Adjusted font size */
             cursor: pointer;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+            transition: var(--transition-fast, box-shadow 0.2s ease, border-color 0.2s ease);
         }
-        
-        .dropdown-container:hover {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          .dropdown-container:hover {
+            box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.1));
             border-color: var(--dropdown-hover-border-color);
         }
         
@@ -103,27 +101,26 @@ export class PopupDropdown extends LitElement {
         }
         
         .dropdown-icon {
-            font-size: 12px; /* Reduced icon size */
+            font-size: var(--icon-size-sm, 12px); /* Use standardized icon size */
             color: var(--dropdown-icon-color);
-            transition: transform 0.2s ease;
-            margin-left: 8px; /* Space between text and icon */
+            transition: var(--transition-fast, transform 0.2s ease);
+            margin-left: var(--spacing-sm, 8px); /* Space between text and icon */
         }
-        
-        .dropdown-options {
+          .dropdown-options {
             display: none;
             position: absolute;
-            top: calc(100% + 10px);
+            top: calc(100% + var(--spacing-sm, 10px));
             left: 0;
             width: 100%;
             border: 1px solid var(--dropdown-border-color);
             border-radius: var(--dropdown-border-radius);
             background-color: var(--dropdown-bg-color);
-            padding: 8px 5px;
+            padding: var(--spacing-sm, 8px) var(--spacing-xs, 5px);
             z-index: 10;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: opacity 0.2s ease, transform 0.2s ease;
+            box-shadow: var(--shadow-lg, 0 4px 12px rgba(0, 0, 0, 0.1));
+            transition: var(--transition-fast, opacity 0.2s ease, transform 0.2s ease);
             opacity: 0;
-            transform: translateY(-10px);
+            transform: translateY(-var(--spacing-sm, 10px));
         }
         
         .dropdown-options.open {
@@ -135,18 +132,17 @@ export class PopupDropdown extends LitElement {
             max-height: 10rem; 
             overflow-y: auto;
         }
-        
-        .option {
-            padding: 4px 12px; /* Adjusted padding for options */
+          .option {
+            padding: var(--spacing-xs, 4px) var(--spacing-md, 12px); /* Adjusted padding for options */
             cursor: pointer;
             font-size: var(--dropdown-font-size); /* Match font size */
-            transition: background-color 0.2s ease, box-shadow 0.2s ease;
-            border-radius: 4px;
+            transition: var(--transition-fast, background-color 0.2s ease, box-shadow 0.2s ease);
+            border-radius: var(--border-radius-sm, 4px);
         }
         
         .option:hover {
             border: 1px solid var(--dropdown-border-color);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.15));
         }
         
         .option.selected {
