@@ -27,12 +27,10 @@
                 <nav class="main-nav">
                     <a href="/" class="nav-link">Home</a>
                     <a href="/marketplace" class="nav-link">Marketplace</a>
-                    <a href="/marketplace/upload" class="nav-link">Upload Your Plugins</a>
-                </nav>
+                    <a href="/marketplace/upload" class="nav-link">Upload Your Plugins</a>                </nav>
                 <div class="header-actions">
-                    <a href="/marketplace/upload" class="btn btn-primary">
-                        <i class="fas fa-plus"></i>
-                        Submit your plugin
+                    <a href="#" class="profile-btn">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Profile" class="profile-image">
                     </a>
                 </div>
             </div>
@@ -140,11 +138,35 @@
             background: #4f46e5;
             border-radius: 1px;
         }
-        
-        .header-actions {
+          .header-actions {
             display: flex;
             align-items: center;
             gap: 1rem;
+        }
+        
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        
+        .profile-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-image {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e5e7eb;
+            transition: border-color 0.2s ease;
+        }
+        
+        .profile-btn:hover .profile-image {
+            border-color: #4f46e5;
         }
         
         .btn {
@@ -172,8 +194,7 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             transform: translateY(-1px);
         }
-        
-        /* Mobile responsive */
+          /* Mobile responsive */
         @media (max-width: 768px) {
             .header-content {
                 padding: 0 1rem;
@@ -192,17 +213,12 @@
                 display: none;
             }
             
-            .btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
-            
-            .btn-primary i {
-                display: none;
+            .profile-image {
+                width: 32px;
+                height: 32px;
             }
         }
-        
-        @media (max-width: 480px) {
+          @media (max-width: 480px) {
             .header-content {
                 gap: 1rem;
             }
@@ -215,6 +231,11 @@
             
             .logo-text h1 {
                 font-size: 1rem;
+            }
+            
+            .profile-image {
+                width: 30px;
+                height: 30px;
             }
         }
         
