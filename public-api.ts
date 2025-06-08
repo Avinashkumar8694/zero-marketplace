@@ -5,3 +5,4 @@ export * from './packages/popup-dialog/popup-dialog';
 export * from './packages/open-popup-directive/open-popup-directive';
 export * from './packages/popup-dropdown-directive/popup-dropdown-directive';
 export * from './packages/nrenderer/nrenderer';
+export * from './packages/code-editor/code-editor';
