@@ -7,6 +7,8 @@ let filteredPlugins = [];
 let currentPage = 1;
 let itemsPerPage = 10;
 let currentPlugin = null;
+let currentSelectedVersion = null;
+let allVersionData = {}; // Cache for version data
 
 // DOM elements
 const pluginGrid = document.getElementById('pluginGrid');
@@ -22,14 +24,64 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSearchFilter();
 });
 
-// Load all plugins from API
+// Load all plugins from API - now using multi-version endpoint
 async function loadPlugins() {
     try {
         showLoading(true);
-        const response = await fetch(`${API_BASE}/marketplace/plugins`);
-        const data = await response.json();
         
-        allPlugins = data.plugins || [];
+        // Use the new multi-version API to get component families
+        const response = await fetch(`${API_BASE}/marketplace/components`);
+        const componentFamilies = await response.json();
+        
+        // Convert component families to plugin format for display (latest versions only)
+        allPlugins = await Promise.all(
+            Object.entries(componentFamilies).map(async ([family, familyData]) => {
+                try {
+                    // Get the latest stable version details
+                    const latestVersion = familyData.latestStable || familyData.latest;
+                    const detailsResponse = await fetch(`${API_BASE}/marketplace/components/${family}/${latestVersion}`);
+                    const details = await detailsResponse.json();
+                    
+                    return {
+                        id: family,
+                        name: family,
+                        family: family,
+                        title: details.title || details.name,
+                        description: details.description,
+                        version: latestVersion,
+                        allVersions: familyData.versions,
+                        latestStable: familyData.latestStable,
+                        latest: familyData.latest,
+                        author: details.author,
+                        license: details.license,
+                        elementSelector: details.elementSelector,
+                        group: details.group,
+                        keywords: details.keywords,
+                        main: details.main,
+                        verified: details.verified,
+                        installed: details.installed,
+                        hasReadme: details.hasReadme,
+                        readmeContent: details.readmeContent
+                    };
+                } catch (error) {
+                    console.warn(`Failed to load details for ${family}:`, error);
+                    return {
+                        id: family,
+                        name: family,
+                        family: family,
+                        title: family,
+                        description: 'Component description not available',
+                        version: familyData.latest,
+                        allVersions: familyData.versions,
+                        latestStable: familyData.latestStable,
+                        latest: familyData.latest,
+                        verified: false,
+                        installed: false
+                    };
+                }
+            })
+        );
+        
         filteredPlugins = [...allPlugins];
         
         renderPlugins();
@@ -165,42 +217,174 @@ async function openPluginModal(pluginId) {
         pluginModal.style.display = 'flex';
         showTabContent('overview');
         
-        // Load plugin details
-        const response = await fetch(`${API_BASE}/marketplace/plugins/${pluginId}`);
-        const plugin = await response.json();
+        // Find the plugin family data
+        const pluginFamily = allPlugins.find(p => p.id === pluginId);
+        if (!pluginFamily) {
+            throw new Error('Plugin not found');
+        }
         
-        currentPlugin = plugin;
+        currentPlugin = pluginFamily;
+        currentSelectedVersion = pluginFamily.version;
         
-        // Update modal content
-        document.getElementById('modalTitle').textContent = plugin.title || plugin.name;
-        document.getElementById('modalDescription').textContent = plugin.description;
-        document.getElementById('modalVersion').textContent = `v${plugin.version}`;
-        document.getElementById('modalAuthor').textContent = plugin.author;
+        // Load the current version details (already loaded in loadPlugins)
+        await updateModalContent(pluginFamily.family, pluginFamily.version, pluginFamily);
         
-        // Show/hide verified badge
-        const verifiedBadge = document.getElementById('modalVerified');
-        verifiedBadge.style.display = plugin.verified ? 'flex' : 'none';
-        
-        // Update install button
-        const installBtn = document.getElementById('modalInstallBtn');
-        installBtn.innerHTML = plugin.installed ? 
-            '<i class="fas fa-check"></i> Installed' : 
-            '<i class="fas fa-download"></i> Copy install command';
-        installBtn.disabled = plugin.installed;
-        
-        // Update overview tab
-        updateOverviewTab(plugin);
-        
-        // Update details tab
-        updateDetailsTab(plugin);
-        
-        // Load README content
-        updateReadmeTab(plugin);
+        // Setup version selector
+        setupVersionSelector(pluginFamily);
         
     } catch (error) {
         console.error('Error loading plugin details:', error);
         showError('Failed to load plugin details.');
         closeModal();
+    }
+}
+
+// Update modal content with plugin details
+async function updateModalContent(family, version, pluginData = null) {
+    try {
+        // If pluginData is not provided, fetch it
+        if (!pluginData) {
+            const response = await fetch(`${API_BASE}/marketplace/components/${family}/${version}`);
+            pluginData = await response.json();
+            
+            // Cache the version data
+            if (!allVersionData[family]) allVersionData[family] = {};
+            allVersionData[family][version] = pluginData;
+        }
+        
+        // Update modal content
+        document.getElementById('modalTitle').textContent = pluginData.title || pluginData.name;
+        document.getElementById('modalDescription').textContent = pluginData.description;
+        document.getElementById('modalVersion').textContent = `v${version}`;
+        document.getElementById('modalAuthor').textContent = pluginData.author || 'Unknown';
+        
+        // Show/hide verified badge
+        const verifiedBadge = document.getElementById('modalVerified');
+        verifiedBadge.style.display = pluginData.verified ? 'flex' : 'none';
+        
+        // Update install button
+        const installBtn = document.getElementById('modalInstallBtn');
+        installBtn.innerHTML = pluginData.installed ? 
+            '<i class="fas fa-check"></i> Installed' : 
+            '<i class="fas fa-download"></i> Copy install command';
+        installBtn.disabled = pluginData.installed;
+        
+        // Update overview tab
+        updateOverviewTab(pluginData);
+        
+        // Update details tab
+        updateDetailsTab(pluginData);
+        
+        // Update README tab
+        updateReadmeTab(pluginData);
+        
+        // Update current selected version
+        currentSelectedVersion = version;
+        
+    } catch (error) {
+        console.error('Error updating modal content:', error);
+        showError('Failed to load version details.');
+    }
+}
+
+// Setup version selector dropdown
+function setupVersionSelector(pluginFamily) {
+    const versionDropdown = document.getElementById('versionDropdown');
+    const versionSelector = document.getElementById('versionSelector');
+    
+    // Clear existing options
+    versionDropdown.innerHTML = '';
+    
+    // Add all versions as options
+    if (pluginFamily.allVersions && pluginFamily.allVersions.length > 1) {
+        pluginFamily.allVersions.forEach(version => {
+            const option = document.createElement('option');
+            option.value = version;
+            option.textContent = `v${version}`;
+            
+            // Mark special versions
+            if (version === pluginFamily.latest) {
+                option.textContent += ' (Latest)';
+            } else if (version === pluginFamily.latestStable && version !== pluginFamily.latest) {
+                option.textContent += ' (Stable)';
+            }
+            
+            // Select current version
+            if (version === currentSelectedVersion) {
+                option.selected = true;
+            }
+            
+            versionDropdown.appendChild(option);
+        });
+        
+        // Show version selector button if multiple versions exist
+        document.getElementById('showVersionsBtn').style.display = 'inline-block';
+    } else {
+        // Hide version selector button if only one version
+        document.getElementById('showVersionsBtn').style.display = 'none';
+        versionSelector.style.display = 'none';
+    }
+}
+
+// Toggle version selector visibility
+function toggleVersionSelector() {
+    const versionSelector = document.getElementById('versionSelector');
+    const showVersionsBtn = document.getElementById('showVersionsBtn');
+    
+    if (versionSelector.style.display === 'none' || !versionSelector.style.display) {
+        versionSelector.style.display = 'block';
+        showVersionsBtn.innerHTML = '<i class="fas fa-code-branch"></i> Hide Versions';
+    } else {
+        versionSelector.style.display = 'none';
+        showVersionsBtn.innerHTML = '<i class="fas fa-code-branch"></i> Show All Versions';
+    }
+}
+
+// Switch to selected version
+async function switchVersion() {
+    const versionDropdown = document.getElementById('versionDropdown');
+    const selectedVersion = versionDropdown.value;
+    
+    if (selectedVersion === currentSelectedVersion) return;
+    
+    try {
+        // Show loading state
+        const modalBody = document.querySelector('.modal-body');
+        modalBody.style.opacity = '0.6';
+        
+        // Check if we have cached data for this version
+        const family = currentPlugin.family;
+        let versionData = null;
+        
+        if (allVersionData[family] && allVersionData[family][selectedVersion]) {
+            versionData = allVersionData[family][selectedVersion];
+        } else {
+            // Fetch version data
+            const response = await fetch(`${API_BASE}/marketplace/components/${family}/${selectedVersion}`);
+            versionData = await response.json();
+            
+            // Cache the data
+            if (!allVersionData[family]) allVersionData[family] = {};
+            allVersionData[family][selectedVersion] = versionData;
+        }
+        
+        // Update modal with new version data
+        await updateModalContent(family, selectedVersion, versionData);
+        
+        // Restore modal body opacity
+        modalBody.style.opacity = '1';
+        
+    } catch (error) {
+        console.error('Error switching version:', error);
+        showError('Failed to load version details.');
+        
+        // Reset dropdown to previous version
+        const versionDropdown = document.getElementById('versionDropdown');
+        versionDropdown.value = currentSelectedVersion;
+        
+        // Restore modal body opacity
+        const modalBody = document.querySelector('.modal-body');
+        modalBody.style.opacity = '1';
     }
 }
 
@@ -378,10 +562,21 @@ function closeModal() {
 
 // Copy install command
 function copyInstallCommand(pluginId = null) {
-    const plugin = pluginId ? allPlugins.find(p => p.id === pluginId) : currentPlugin;
+    let plugin, version;
+    
+    if (pluginId) {
+        // Called from plugin card - use default version
+        plugin = allPlugins.find(p => p.id === pluginId);
+        version = plugin?.version;
+    } else {
+        // Called from modal - use currently selected version
+        plugin = currentPlugin;
+        version = currentSelectedVersion || plugin?.version;
+    }
+    
     if (!plugin) return;
     
-    const command = `npm install @zero-components/${plugin.name}`;
+    const command = `npm install @zero-components/${plugin.family}@${version}`;
     
     // Copy to clipboard
     navigator.clipboard.writeText(command).then(() => {
@@ -449,3 +644,13 @@ document.addEventListener('keydown', (event) => {
         searchInput.focus();
     }
 });
+
+// Make functions globally available for inline event handlers
+window.openPluginModal = openPluginModal;
+window.closeModal = closeModal;
+window.copyInstallCommand = copyInstallCommand;
+window.showTab = showTab;
+window.changePage = changePage;
+window.hideNotification = hideNotification;
+window.toggleVersionSelector = toggleVersionSelector;
+window.switchVersion = switchVersion;

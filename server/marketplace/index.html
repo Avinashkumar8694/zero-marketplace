@@ -81,9 +81,14 @@
                     </div>
                     <div class="plugin-info">
                         <h2 id="modalTitle">Plugin Name</h2>
-                        <p id="modalDescription">Plugin description</p>
-                        <div class="plugin-meta">
+                        <p id="modalDescription">Plugin description</p>                        <div class="plugin-meta">
                             <span class="version" id="modalVersion">v1.0.0</span>
+                            <div class="version-selector" id="versionSelector" style="display: none;">
+                                <label for="versionDropdown">Version:</label>
+                                <select id="versionDropdown" onchange="switchVersion()">
+                                    <!-- Options populated dynamically -->
+                                </select>
+                            </div>
                             <span class="author" id="modalAuthor">Author</span>
                             <span class="verified" id="modalVerified">
                                 <i class="fas fa-check-circle"></i>
@@ -96,11 +101,14 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-              <div class="modal-body">
-                <div class="plugin-actions">
+              <div class="modal-body">                <div class="plugin-actions">
                     <button class="btn btn-primary" id="modalInstallBtn" onclick="copyInstallCommand()">
                         <i class="fas fa-download"></i>
                         Copy install command
+                    </button>
+                    <button class="btn btn-secondary" id="showVersionsBtn" onclick="toggleVersionSelector()">
+                        <i class="fas fa-code-branch"></i>
+                        Show All Versions
                     </button>
                 </div>
 
