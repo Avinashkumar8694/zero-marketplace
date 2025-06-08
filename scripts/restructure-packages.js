@@ -125,33 +125,14 @@ function parseVersion(versionString) {
 }
 
 /**
- * Create additional versions for demonstration (simplified)
+ * Use only the existing version from package.json (no additional versions)
  */
 function generateAdditionalVersions(baseVersion) {
     const parsed = parseVersion(baseVersion);
     if (!parsed) return [baseVersion];
     
-    const versions = [baseVersion]; // Always include the original version
-    
-    // Only add one additional patch version to keep it simple
-    versions.push(`${parsed.major}.${parsed.minor}.${parsed.patch + 1}`);
-    
-    return versions.sort((a, b) => {
-        const vA = parseVersion(a);
-        const vB = parseVersion(b);
-        if (!vA || !vB) return 0;
-        
-        if (vA.major !== vB.major) return vA.major - vB.major;
-        if (vA.minor !== vB.minor) return vA.minor - vB.minor;
-        if (vA.patch !== vB.patch) return vA.patch - vB.patch;
-        
-        // Handle prerelease versions
-        if (vA.prerelease && !vB.prerelease) return -1;
-        if (!vA.prerelease && vB.prerelease) return 1;
-        if (vA.prerelease && vB.prerelease) return vA.prerelease.localeCompare(vB.prerelease);
-        
-        return 0;
-    });
+    // Only return the original version, don't generate additional ones
+    return [baseVersion];
 }
 
 /**
@@ -160,14 +141,11 @@ function generateAdditionalVersions(baseVersion) {
 function updatePackageJsonForVersion(packageJsonContent, version, family) {
     const packageJson = JSON.parse(packageJsonContent);
     
-    // Update version
-    packageJson.version = version;
+    // Keep the original version from package.json (don't change it)
+    // packageJson.version = version; // Remove this line to preserve original version
     
-    // Update name to include family structure
-    const originalName = packageJson.name;
-    if (!originalName.includes(family)) {
-        packageJson.name = `@zero-components/${family}`;
-    }
+    // Keep the original name unchanged
+    // const originalName = packageJson.name; // Keep original name as-is
     
     // Add version-specific metadata
     if (!packageJson.zero) {

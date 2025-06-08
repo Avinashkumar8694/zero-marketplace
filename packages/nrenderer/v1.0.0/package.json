@@ -1,0 +1,21 @@
+{
+  "name": "nrenderer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "v1.0.0"
+  ],
+  "author": "",
+  "license": "ISC",
+  "zero": {
+    "component": true,
+    "version": "1.0.0",
+    "family": "nrenderer",
+    "structure": "versioned"
+  }
+}
