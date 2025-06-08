@@ -296,9 +296,87 @@ class CodeEditor {
     run() {
         helloWorld();
     }
-}`;
+}`;    @property({ type: Array })
+    @RendererAttribute({
+        attributeType: AttributeType.PROPERTY,
+        uiComponentType: UserInterfaceType.TEXTAREA,
+        displayLabel: 'Available Languages',
+        placeholderText: 'JSON array of language options or actual array',
+        fieldMappings: 'languages',
+        optionItems: {
+            type: 'Object'
+        }
+    })
+    get languages(): Array<{value: string, label: string}> {
+        return this._languages;
+    }    set languages(value: Array<{value: string, label: string}> | string) {
+        let parsedLanguages: Array<{value: string, label: string}>;
+          if (typeof value === 'string') {
+            try {
+                // Clean up common JSON formatting issues - convert single quotes to double quotes
+                let cleanedValue = value;
+                if (cleanedValue.includes("'")) {
+                    // Replace single quotes with double quotes, but be careful with escaped quotes
+                    cleanedValue = cleanedValue.replace(/'/g, '"');
+                }
+                
+                // Parse JSON string format
+                parsedLanguages = JSON.parse(cleanedValue);
+                // Validate that it's an array
+                if (!Array.isArray(parsedLanguages)) {
+                    throw new Error('Parsed value is not an array');
+                }
+            } catch (error) {
+                console.warn('Failed to parse languages string, using default languages:', error);
+                console.warn('Original value:', value);
+                parsedLanguages = this.getDefaultLanguages();
+            }
+        } else if (Array.isArray(value)) {
+            // Use the array directly
+            parsedLanguages = value;
+        } else {
+            // Fallback to default languages
+            parsedLanguages = this.getDefaultLanguages();
+        }
+        
+        // Validate array items have required properties
+        const validLanguages = parsedLanguages.filter(lang => 
+            lang && typeof lang === 'object' && 
+            typeof lang.value === 'string' && 
+            typeof lang.label === 'string'
+        );
+        
+        this._languages = validLanguages.length > 0 ? validLanguages : this.getDefaultLanguages();
+        
+        // Validate current language after updating the languages list
+        this.validateCurrentLanguage();
+        
+        this.requestUpdate();
+    }
 
-    @property({ type: String })
+    private _languages: Array<{value: string, label: string}> = this.getDefaultLanguages();    private getDefaultLanguages() {
+        return [
+            { value: 'javascript', label: 'JavaScript' },
+            { value: 'typescript', label: 'TypeScript' },
+            { value: 'python', label: 'Python' },
+            { value: 'java', label: 'Java' },
+            { value: 'csharp', label: 'C#' },
+            { value: 'html', label: 'HTML' },
+            { value: 'css', label: 'CSS' },
+            { value: 'json', label: 'JSON' }
+        ];
+    }
+
+    private validateCurrentLanguage() {
+        // Check if current language is still available in the languages list
+        const isCurrentLanguageAvailable = this._languages.some(lang => lang.value === this._language);
+        
+        if (!isCurrentLanguageAvailable && this._languages.length > 0) {
+            const oldLanguage = this._language;
+            this._language = this._languages[0].value;
+            console.warn(`Current language "${oldLanguage}" is not available in the updated languages list. Defaulting to "${this._language}".`);
+        }
+    }@property({ type: String })
     @RendererAttribute({
         attributeType: AttributeType.PROPERTY,
         uiComponentType: UserInterfaceType.DROPDOWN,
@@ -315,7 +393,30 @@ class CodeEditor {
         ],
         fieldMappings: 'language',
     })
-    language = 'javascript';
+    get language(): string {
+        return this._language;
+    }
+
+    set language(value: string) {
+        // Check if the selected language exists in the filtered languages list
+        const isLanguageAvailable = this.languages.some(lang => lang.value === value);
+        
+        if (isLanguageAvailable) {
+            this._language = value;
+        } else {
+            // If the language is not available, fallback to the first available language
+            // or keep the current language if no languages are available
+            if (this.languages.length > 0) {
+                this._language = this.languages[0].value;
+                console.warn(`Language "${value}" is not available in the filtered languages list. Defaulting to "${this._language}".`);
+            } else {
+                console.warn(`Language "${value}" is not available and no languages are configured. Keeping current language.`);
+            }
+        }
+        this.requestUpdate();
+    }
+
+    private _language = 'javascript';
 
     @property({ type: String })
     @RendererAttribute({
@@ -594,11 +695,9 @@ class CodeEditor {
             bubbles: true,
             composed: true
         }));
-    }
-
-    private handleLanguageChange(e: Event) {
+    }    private handleLanguageChange(e: Event) {
         const target = e.target as HTMLSelectElement;
-        this.language = target.value;
+        this.language = target.value; // This will now use the setter validation
     }
 
     private handleThemeChange(e: Event) {
@@ -610,6 +709,47 @@ class CodeEditor {
         const target = e.target as HTMLInputElement;
         this.searchTerm = target.value;
         // Implement search functionality here
+    }    /**
+     * Test method to validate the languages property setter works with JSON strings
+     * and that language validation works correctly
+     * This can be called from the browser console to test the functionality
+     */
+    testLanguagesSetter() {
+        console.log('Testing languages setter and language validation...');
+        
+        // Test with valid JSON string (double quotes)
+        const jsonString = '[{"value":"javascript","label":"JavaScript"},{"value":"python","label":"Python"}]';
+        console.log('Setting languages with valid JSON string:', jsonString);
+        this.languages = jsonString;
+        console.log('Current languages after valid JSON string:', this.languages);
+        
+        // Test with single quotes JSON (like user's example)
+        const singleQuoteJson = "[{'value':'javascript','label':'JavaScript'}]";
+        console.log('Setting languages with single quotes JSON:', singleQuoteJson);
+        this.languages = singleQuoteJson;
+        console.log('Current languages after single quotes JSON:', this.languages);
+        
+        // Test with array
+        const arrayValue = [{"value":"typescript","label":"TypeScript"},{"value":"html","label":"HTML"}];
+        console.log('Setting languages with array:', arrayValue);
+        this.languages = arrayValue;
+        console.log('Current languages after array:', this.languages);
+        
+        // Test language validation - try to set a language not in the current list
+        console.log('Testing language validation - trying to set "python" when not available...');
+        this.language = 'python'; // Should fallback to first available language
+        console.log('Current language after invalid selection:', this.language);
+        
+        // Test with invalid JSON
+        const invalidJson = '[{"value":"test"';
+        console.log('Setting languages with invalid JSON:', invalidJson);
+        this.languages = invalidJson;
+        console.log('Current languages after invalid JSON (should fallback to defaults):', this.languages);
+        
+        // Test setting a valid language
+        console.log('Testing setting valid language "javascript"...');
+        this.language = 'javascript';
+        console.log('Current language after valid selection:', this.language);
     }
 
     render() {
@@ -628,16 +768,10 @@ class CodeEditor {
                     </div>
                     <div class="editor-controls">
                         <div class="toolbar">
-                            <button class="icon-button" @click="${this.toggleSearch}" title="Search (Ctrl+F)">🔍</button>
-                            <select class="language-selector" .value="${this.language}" @change="${this.handleLanguageChange}">
-                                <option value="javascript">JavaScript</option>
-                                <option value="typescript">TypeScript</option>
-                                <option value="python">Python</option>
-                                <option value="java">Java</option>
-                                <option value="csharp">C#</option>
-                                <option value="html">HTML</option>
-                                <option value="css">CSS</option>
-                                <option value="json">JSON</option>
+                            <button class="icon-button" @click="${this.toggleSearch}" title="Search (Ctrl+F)">🔍</button>                            <select class="language-selector" .value="${this.language}" @change="${this.handleLanguageChange}">
+                                ${this.languages.map(lang => html`
+                                    <option value="${lang.value}">${lang.label}</option>
+                                `)}
                             </select>
                             <select class="language-selector" .value="${this.theme}" @change="${this.handleThemeChange}">
                                 <option value="dark">Dark</option>
