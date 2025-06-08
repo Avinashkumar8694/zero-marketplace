@@ -172,6 +172,15 @@ const setupMarketplaceRoutes = (router) => {
         }
     });
 
+    // Marketplace UI route (EJS)
+    router.get('/marketplace', async (req, res) => {
+        // Optionally, fetch plugin/component data here if you want to render server-side
+        // For now, just render the EJS template (client JS will fetch data from API)
+        res.render(path.resolve(__dirname, '../../marketplace/marketplace-plugins.ejs'), {
+            title: 'Zero Components Market',
+        });
+    });
+
     return router;
 };
 

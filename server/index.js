@@ -31,11 +31,17 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
+// Set EJS as the view engine
+import ejs from 'ejs';
+app.set('view engine', 'ejs');
+app.set('views', [
+    path.join(__dirname, 'marketplace'),
+    path.join(__dirname, 'views'),
+]);
+
 // Setup base folders
 const setupFolders = async () => {
     const folders = [
-        'plugins',
-        'plugins-build',
         'uploads',
         'temp'
     ];
@@ -57,6 +63,13 @@ const setupRoutes = (app, basePath) => {
     // Basic routes
     router.get('/ping', (req, res) => {
         res.json({ message: 'Hello World!' });
+    });
+
+    // Marketplace EJS UI route (should be before static)
+    router.get('/marketplace', (req, res) => {
+        res.render('marketplace-plugins', {
+            title: 'Zero Components Market',
+        });
     });
 
     // Redirect root to marketplace
