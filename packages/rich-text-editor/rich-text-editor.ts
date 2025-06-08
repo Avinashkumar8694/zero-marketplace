@@ -423,6 +423,16 @@ export class RichTextEditor extends LitElement {
     this.execCommand('fontName', select.value);
   }
 
+  @RendererAttribute({
+    attributeType: AttributeType.EVENT,
+    displayLabel: 'On Content Changed',
+    eventTrigger: 'content-changed',
+  })
+  handleContentChanged(_event: Event) {
+    // This method is triggered by the attribute system
+    this.updateContent();
+  }
+
   render() {
     return html`
       <div class="toolbar ${this.toolbarVisible ? 'visible' : ''}">

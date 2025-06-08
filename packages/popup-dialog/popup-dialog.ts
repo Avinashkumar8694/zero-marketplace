@@ -166,6 +166,16 @@ export class PopupDialog extends LitElement {
       }
     }
   
+    @RendererAttribute({
+      attributeType: AttributeType.EVENT,
+      displayLabel: 'On Popup Closed',
+      eventTrigger: 'popup-closed',
+    })
+    handlePopupClosed(_event: Event) {
+      // This method is triggered by the attribute system
+      this._close();
+    }
+  
     _close() {
       this.open = false;
       this.dispatchEvent(new CustomEvent('popup-closed', { detail: { open: this.open } }));

@@ -1,4 +1,4 @@
-import { RendererComponent, applyGlobalStyles } from 'zero-annotation';
+import { RendererComponent, RendererAttribute, applyGlobalStyles, AttributeType } from 'zero-annotation';
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
 
@@ -218,6 +218,16 @@ export class PopupDropdownDirective extends LitElement {
         // this.open = false; // Close after selection
         // this.toggleDropdown();
         
+    }
+
+    @RendererAttribute({
+        attributeType: AttributeType.EVENT,
+        displayLabel: 'On Option Selected',
+        eventTrigger: 'option-selected',
+    })
+    handleOptionSelected(_event: Event) {
+        // This method is triggered by the attribute system
+        // The actual option selection is handled by handleOptionClick
     }
 
     // Render the template
