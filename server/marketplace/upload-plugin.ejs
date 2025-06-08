@@ -1,0 +1,155 @@
+<%- include('baselayout', { body: `
+<main class="main">
+    <div class="upload-plugin-card">
+        <h2><i class="fas fa-upload"></i> Upload a New Plugin</h2>
+        <form id="pluginUploadForm" enctype="multipart/form-data">
+            <div class="form-row">
+                <label for="pluginZip"><i class="fas fa-file-archive"></i> Plugin ZIP File</label>
+                <input type="file" id="pluginZip" name="pluginZip" accept=".zip" required />
+            </div>
+            <div class="form-row">
+                <label for="notes"><i class="fas fa-sticky-note"></i> Notes (optional)</label>
+                <textarea id="notes" name="notes" placeholder="Any additional information..."></textarea>
+            </div>
+            <div class="form-row">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i> Upload Plugin</button>
+            </div>
+            <div id="uploadStatus" class="upload-status"></div>
+        </form>
+        <div class="upload-info">
+            <i class="fas fa-info-circle"></i> Please upload a valid plugin ZIP file. The ZIP should contain a <code>package.json</code> at its root.
+        </div>
+    </div>
+</main>
+<script>
+// Handle plugin upload form
+const form = document.getElementById('pluginUploadForm');
+const statusDiv = document.getElementById('uploadStatus');
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    statusDiv.textContent = '';
+    const formData = new FormData(form);
+    statusDiv.innerHTML = '<span style="color:gray">Uploading...</span>';
+    try {
+        const res = await fetch('/api/upload-plugin', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await res.json();
+        if (data.success) {
+            statusDiv.innerHTML = '<span style="color:green">' + data.message + '</span>';
+            form.reset();
+        } else {
+            statusDiv.innerHTML = '<span style="color:red">' + (data.error || 'Upload failed') + '</span>';
+        }
+    } catch (err) {
+        statusDiv.innerHTML = '<span style="color:red">Error: ' + err.message + '</span>';
+    }
+});
+</script>
+<style>
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #f9fafb;
+    --card-bg: #fff;
+    --border-radius: 0.75rem;
+    --box-shadow: 0 4px 16px 0 rgba(102,126,234,0.08);
+    --input-border: #e5e7eb;
+    --input-focus: #667eea33;
+    --success: #10b981;
+    --danger: #ef4444;
+}
+.upload-plugin-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 480px;
+    margin: 3rem auto 2rem auto;
+    padding: 2.5rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.upload-plugin-card h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+.form-row {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.form-row label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.form-row input[type="file"],
+.form-row textarea {
+    border: 1.5px solid var(--input-border);
+    border-radius: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 1rem;
+    background: var(--secondary-color);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-row input[type="file"]:focus,
+.form-row textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--input-focus);
+}
+.form-row textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+.btn.btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.9rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px 0 rgba(102,126,234,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.btn.btn-primary:hover {
+    background: #5a67d8;
+}
+.upload-status {
+    margin-top: 0.5rem;
+    min-height: 1.5rem;
+    font-size: 1rem;
+}
+.upload-info {
+    margin-top: 2rem;
+    color: #6b7280;
+    font-size: 0.95rem;
+    background: #f3f4f6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.upload-info code {
+    background: #f1f5f9;
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.3rem;
+    font-size: 0.95em;
+}
+</style>
+` }) %>

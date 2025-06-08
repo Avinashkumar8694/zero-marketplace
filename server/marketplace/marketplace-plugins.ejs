@@ -135,4 +135,14 @@
     </div>
 </div>
 <script src="/marketplace/script.js"></script>
+<script>
+    // Open upload page on button click
+    const submitBtn = document.querySelector('.header-actions .btn.btn-primary');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/marketplace/upload';
+        });
+    }
+</script>
 ` }) %>
