@@ -13,23 +13,217 @@
     <% if (typeof head !== 'undefined') { %><%- head %><% } %>
 </head>
 <body>
-    <div class="app">
-        <header class="header">
+    <div class="app">        <header class="header">
             <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-cube"></i>
-                    <h1>Zero Components Market</h1>
-                    <span class="tagline">Get more out of Zero Components</span>
+                    <div class="logo-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Zero Components Market</h1>
+                        <span class="tagline">Get more out of Zero Components</span>
+                    </div>
                 </div>
+                <nav class="main-nav">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/marketplace" class="nav-link">Marketplace</a>
+                    <a href="/marketplace/upload" class="nav-link">Upload Your Plugins</a>
+                </nav>
                 <div class="header-actions">
-                    <button class="btn btn-primary">
+                    <a href="/marketplace/upload" class="btn btn-primary">
                         <i class="fas fa-plus"></i>
                         Submit your plugin
-                    </button>
+                    </a>
                 </div>
             </div>
         </header>
         <%- body %>
-    </div>
+    </div>    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .header {
+            border-bottom: 1px solid #e1e5e9;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            height: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.825rem;
+            color: #6b7280;
+            display: block;
+            margin-top: -2px;
+        }
+        
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: #4f46e5;
+        }
+        
+        .nav-link.active {
+            color: #4f46e5;
+        }
+        
+        .nav-link.active::after,
+        .nav-link:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #4f46e5;
+            border-radius: 1px;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .btn-primary:hover {
+            background: #4338ca;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+                height: 60px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+            
+            .logo-text .tagline {
+                display: none;
+            }
+            
+            .main-nav {
+                display: none;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .btn-primary i {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                gap: 1rem;
+            }
+            
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1rem;
+            }
+        }
+        
+        /* App container */
+        .app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </body>
 </html>

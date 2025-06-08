@@ -10,7 +10,8 @@ const setupUploadRoutes = (router) => {
     const upload = multer({
         storage: multer.memoryStorage(),
         limits: {
-            fileSize: 10 * 1024 * 1024 // 10MB limit
+            fileSize: 150 * 1024 // 10MB KB
+            // fileSize: 10 * 1024 * 1024 // 10MB limit
         },
         fileFilter: (req, file, cb) => {
             if (file.mimetype === 'application/zip' || file.originalname.endsWith('.zip')) {
