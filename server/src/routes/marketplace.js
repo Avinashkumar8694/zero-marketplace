@@ -7,7 +7,6 @@ import { fileURLToPath } from 'url';
 import { scanComponentStructure, extractComponentMetadata } from '../utils/component-utils.js';
 import { parseVersion, isStableVersion, findLatestVersion, findLatestStableVersion } from '../utils/version-utils.js';
 import { findMainJsFile } from '../utils/file-utils.js';
-import { featureFlags, getAllFeatureFlags, isFeatureEnabled, isComingSoon } from '../config/features.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,7 +16,56 @@ const DEFAULT_GROUP = process.env.DEFAULT_GROUP || 'Components';
 const DEFAULT_LICENSE = process.env.DEFAULT_LICENSE || 'MIT';
 const COMPONENTS_DIR = process.env.COMPONENTS_DIR || 'packages';
 
-const setupMarketplaceRoutes = (router) => {
+/**
+ * Create standardized template data with feature flags
+ * @param {string} title - Page title
+ * @param {object} featureFlags - Feature flags object
+ * @param {object} additionalData - Additional template data
+ * @returns {object} - Standardized template data
+ */
+const createTemplateData = (title, featureFlags, additionalData = {}) => {
+    return {
+        title,
+        featureFlags,
+        uploadEnabled: featureFlags.UPLOAD_ENABLED,
+        plansEnabled: featureFlags.PLANS_ENABLED,
+          // Individual plan flags
+        freePlanEnabled: featureFlags.FREE_PLAN_ENABLED,
+        proPlanEnabled: featureFlags.PRO_PLAN_ENABLED,
+        enterprisePlanEnabled: featureFlags.ENTERPRISE_PLAN_ENABLED,
+        
+        // Plan-specific feature flags
+        planBadgesEnabled: featureFlags.PLAN_BADGES_ENABLED,
+        planBetaNoticesEnabled: featureFlags.PLAN_BETA_NOTICES_ENABLED,
+        planContactSalesEnabled: featureFlags.PLAN_CONTACT_SALES_ENABLED,        // Other feature flags
+        searchEnabled: featureFlags.SEARCH_ENABLED,
+        marketplaceEnabled: featureFlags.MARKETPLACE_ENABLED,
+        analyticsEnabled: featureFlags.ANALYTICS_ENABLED,
+        supportEnabled: featureFlags.SUPPORT_ENABLED,
+        authEnabled: featureFlags.AUTH_ENABLED,
+        profileEnabled: featureFlags.PROFILE_ENABLED,
+        adminEnabled: featureFlags.ADMIN_ENABLED,
+        betaFeaturesEnabled: featureFlags.BETA_FEATURES_ENABLED,
+        
+        // Coming soon flags
+        isUploadComingSoon: !featureFlags.UPLOAD_ENABLED,
+        isPlansComingSoon: !featureFlags.PLANS_ENABLED,
+        
+        // Individual plan coming soon flags
+        isFreePlanComingSoon: !featureFlags.FREE_PLAN_ENABLED,
+        isProPlanComingSoon: !featureFlags.PRO_PLAN_ENABLED,
+        isEnterprisePlanComingSoon: !featureFlags.ENTERPRISE_PLAN_ENABLED,        // Other coming soon flags
+        isSearchComingSoon: !featureFlags.SEARCH_ENABLED,
+        isAnalyticsComingSoon: !featureFlags.ANALYTICS_ENABLED,
+        isSupportComingSoon: !featureFlags.SUPPORT_ENABLED,
+        isAuthComingSoon: !featureFlags.AUTH_ENABLED,
+        isProfileComingSoon: !featureFlags.PROFILE_ENABLED,
+        isAdminComingSoon: !featureFlags.ADMIN_ENABLED,
+        ...additionalData
+    };
+};
+
+const setupMarketplaceRoutes = (router, featureFlags) => {
     // Get all component families with their versions
     router.get('/marketplace/components', async (req, res) => {
         try {
@@ -179,15 +227,18 @@ const setupMarketplaceRoutes = (router) => {
         }
     });    // Upload plugin page
     router.get('/marketplace/upload', (req, res) => {
-        res.render(path.resolve(__dirname, '../../marketplace/upload-plugin.ejs'), {
-            title: 'Upload Plugin - Zero Components Market',
-            featureFlags: getAllFeatureFlags(),
-            uploadEnabled: isFeatureEnabled('UPLOAD_ENABLED'),
-            isUploadComingSoon: isComingSoon('UPLOAD_ENABLED')
-        });
-    });      // Plans page
-    router.get('/marketplace/plans', (req, res) => {
-        // Define plans data structure
+        const templateData = createTemplateData('Upload Plugin - Zero Components Market', featureFlags);
+        
+        // Debug logging
+        console.log('🔍 Upload route debug:');
+        console.log('Environment FEATURE_UPLOAD_ENABLED:', process.env.FEATURE_UPLOAD_ENABLED);
+        console.log('uploadEnabled:', templateData.uploadEnabled);
+        console.log('isUploadComingSoon:', templateData.isUploadComingSoon);
+        console.log('featureFlags.UPLOAD_ENABLED:', templateData.featureFlags.UPLOAD_ENABLED);
+        
+        res.render(path.resolve(__dirname, '../../marketplace/upload-plugin.ejs'), templateData);
+    });// Plans page
+    router.get('/marketplace/plans', (req, res) => {        // Define plans data structure
         const plansData = [
             {
                 id: 'free',
@@ -199,27 +250,34 @@ const setupMarketplaceRoutes = (router) => {
                     period: '/month'
                 },
                 description: 'Perfect for developers getting started with Zero Components',
+                featureFlag: 'FREE_PLAN_ENABLED', // Add feature flag for Free plan
                 badge: {
                     icon: 'fas fa-flask',
                     text: 'Beta Version'
-                },
-                features: [
+                },                features: [
                     { icon: 'fas fa-check', text: 'Access to all components' },
                     { icon: 'fas fa-check', text: 'Unlimited downloads' },
-                    { icon: 'fas fa-check', text: 'Upload your own plugins' },
-                    { icon: 'fas fa-check', text: 'Community support' },
-                    { icon: 'fas fa-check', text: 'Regular updates' },
+                    { icon: 'fas fa-times', text: 'Upload your own plugins' },
+                    { icon: 'fas fa-times', text: 'Community support' },
+                    { icon: 'fas fa-times', text: 'Regular updates' },
                     { icon: 'fas fa-check', text: 'Commercial usage allowed' },
                     { icon: 'fas fa-check', text: 'No credit card required' },
                     { icon: 'fas fa-info', text: 'Beta access to new features' }
                 ],
                 action: {
-                    type: 'current',
-                    text: 'Current Plan',
-                    icon: 'fas fa-check-circle',
-                    note: 'You\'re already on this plan!'
+                    enabled: {
+                        type: 'current',
+                        text: 'Current Plan',
+                        icon: 'fas fa-check-circle',
+                        note: 'You\'re already on this plan!'
+                    },
+                    comingSoon: {
+                        type: 'coming-soon',
+                        text: 'Coming Soon',
+                        icon: 'fas fa-clock',
+                        note: 'Free plan will be available soon!'
+                    }
                 },
-                enabled: true,
                 showBetaNotice: true,
                 showBetaDisclaimer: true
             },
@@ -235,6 +293,9 @@ const setupMarketplaceRoutes = (router) => {
                 description: 'Enhanced features for professional developers',
                 featureFlag: 'PRO_PLAN_ENABLED',
                 features: [
+                    { icon: 'fas fa-plus', text: 'Upload your own plugins' },
+                    { icon: 'fas fa-plus', text: 'Community support' },
+                    { icon: 'fas fa-plus', text: 'Regular updates' },
                     { icon: 'fas fa-plus', text: 'Priority support' },
                     { icon: 'fas fa-plus', text: 'Advanced analytics' },
                     { icon: 'fas fa-plus', text: 'Custom themes' },
@@ -293,50 +354,17 @@ const setupMarketplaceRoutes = (router) => {
                 },
                 featuresPrefix: 'Everything in Pro, plus:'
             }
-        ];
-
-        req.app.render(
-            path.resolve(__dirname, '../../marketplace/plans.ejs'),
-            {
-                plans: plansData,
-                features: getAllFeatureFlags(),
-                featureFlags: getAllFeatureFlags(),
-                plansEnabled: isFeatureEnabled('PLANS_ENABLED'),
-                isPlansComingSoon: isComingSoon('PLANS_ENABLED')
-            },
-            (err, html) => {
-                if (err) {
-                    console.error('Error rendering plans.ejs:', err);
-                    return res.status(500).send('Error rendering plans page');
-                }
-                res.render(
-                    path.resolve(__dirname, '../../marketplace/baselayout.ejs'),
-                    {
-                        title: 'Plans - Zero Components Market',
-                        body: html,
-                        features: getAllFeatureFlags(),
-                        featureFlags: getAllFeatureFlags(),
-                        uploadEnabled: isFeatureEnabled('UPLOAD_ENABLED'),
-                        plansEnabled: isFeatureEnabled('PLANS_ENABLED'),
-                        isUploadComingSoon: isComingSoon('UPLOAD_ENABLED'),
-                        isPlansComingSoon: isComingSoon('PLANS_ENABLED')
-                    }
-                );
-            }
-        );
-    });// Marketplace UI route (EJS)
-    router.get('/marketplace', async (req, res) => {
-        // Optionally, fetch plugin/component data here if you want to render server-side
-        // For now, just render the EJS template (client JS will fetch data from API)
-        res.render(path.resolve(__dirname, '../../marketplace/marketplace-plugins.ejs'), {
-            title: 'Zero Components Market',
-            featureFlags: getAllFeatureFlags(),
-            uploadEnabled: isFeatureEnabled('UPLOAD_ENABLED'),
-            plansEnabled: isFeatureEnabled('PLANS_ENABLED'),
-            isUploadComingSoon: isComingSoon('UPLOAD_ENABLED'),
-            isPlansComingSoon: isComingSoon('PLANS_ENABLED')
+        ];        // Create comprehensive template data with feature flags
+        const templateData = createTemplateData('Plans - Zero Components Market', featureFlags, {
+            plans: plansData
         });
-    });    
+
+        res.render(path.resolve(__dirname, '../../marketplace/plans.ejs'), templateData);
+    });    // Marketplace UI route (EJS)
+    router.get('/marketplace', async (req, res) => {
+        const templateData = createTemplateData('Zero Components Market', featureFlags);
+        res.render(path.resolve(__dirname, '../../marketplace/marketplace-plugins.ejs'), templateData);
+    });
     // Get component's main JS file
     router.get('/marketplace/components/:family/:version/js', async (req, res) => {
         try {
@@ -366,15 +394,11 @@ const setupMarketplaceRoutes = (router) => {
             console.error('Error getting component file:', error);
             res.status(500).json({ error: 'Failed to get component file' });
         }
-    });
-    // Marketplace UI route (EJS)
+    });    // Marketplace UI route (EJS)
     router.get('/', async (req, res) => {
-        // Optionally, fetch plugin/component data here if you want to render server-side
-        // For now, just render the EJS template (client JS will fetch data from API)
-        res.render(path.resolve(__dirname, '../../marketplace/marketplace-plugins.ejs'), {
-            title: 'Zero Components Market',
-        });
-    });    
+        const templateData = createTemplateData('Zero Components Market', featureFlags);
+        res.render(path.resolve(__dirname, '../../marketplace/marketplace-plugins.ejs'), templateData);
+    });
       // Landing page (Home)
     // router.get('/', (req, res) => {
         //     req.app.render(
@@ -397,21 +421,25 @@ const setupMarketplaceRoutes = (router) => {
     // });    // Feature flags API endpoint
     router.get('/marketplace/api/features', (req, res) => {
         try {
-            // Return public feature flags for client-side use
-            res.json({
-                UPLOAD_ENABLED: isFeatureEnabled('UPLOAD_ENABLED'),
-                PLANS_ENABLED: isFeatureEnabled('PLANS_ENABLED'),
-                PRO_PLAN_ENABLED: isFeatureEnabled('PRO_PLAN_ENABLED'),
-                ENTERPRISE_PLAN_ENABLED: isFeatureEnabled('ENTERPRISE_PLAN_ENABLED'),
-                MARKETPLACE_ENABLED: isFeatureEnabled('MARKETPLACE_ENABLED'),
-                SEARCH_ENABLED: isFeatureEnabled('SEARCH_ENABLED'),
-                BETA_FEATURES_ENABLED: isFeatureEnabled('BETA_FEATURES_ENABLED'),
+            // Return comprehensive feature flags for client-side use
+            const publicFeatureFlags = {
+                // Feature flags
+                ...featureFlags,
                 // Helper methods for client-side checks
-                isUploadComingSoon: isComingSoon('UPLOAD_ENABLED'),
-                isPlansComingSoon: isComingSoon('PLANS_ENABLED'),
-                isProPlanComingSoon: isComingSoon('PRO_PLAN_ENABLED'),
-                isEnterprisePlanComingSoon: isComingSoon('ENTERPRISE_PLAN_ENABLED')
-            });
+                isUploadComingSoon: !featureFlags.UPLOAD_ENABLED,
+                isPlansComingSoon: !featureFlags.PLANS_ENABLED,
+                isProPlanComingSoon: !featureFlags.PRO_PLAN_ENABLED,
+                isEnterprisePlanComingSoon: !featureFlags.ENTERPRISE_PLAN_ENABLED,
+                isSearchComingSoon: !featureFlags.SEARCH_ENABLED,
+                isAnalyticsComingSoon: !featureFlags.ANALYTICS_ENABLED,
+                isAuthComingSoon: !featureFlags.AUTH_ENABLED,
+                isAdminComingSoon: !featureFlags.ADMIN_ENABLED,
+                // Additional metadata
+                lastUpdated: new Date().toISOString(),
+                environment: process.env.NODE_ENV || 'development'
+            };
+            
+            res.json(publicFeatureFlags);
         } catch (error) {
             console.error('Error getting feature flags:', error);
             res.status(500).json({ error: 'Failed to get feature flags' });

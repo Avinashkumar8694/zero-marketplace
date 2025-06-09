@@ -24,6 +24,10 @@ import { setupMarketplaceRoutes } from './src/routes/marketplace.js';
 import { setupLegacyRoutes } from './src/routes/legacy.js';
 import { setupUploadRoutes } from './src/routes/upload.js';
 
+// Initialize feature flags after environment variables are loaded
+import { initializeFeatureFlags, getAllFeatureFlags, isFeatureEnabled, isComingSoon } from './src/config/features.js';
+const featureFlags = initializeFeatureFlags();
+
 // Create Express app with environment variables
 const app = express();
 const port = process.env.PORT || 9000;
@@ -67,7 +71,7 @@ const setupFolders = async () => {
 };
 
 // Setup application routes
-const setupRoutes = (app, basePath) => {
+const setupRoutes = (app, basePath, featureFlags) => {
     const router = express.Router();
 
     // Basic routes
@@ -75,9 +79,9 @@ const setupRoutes = (app, basePath) => {
         res.json({ message: 'Hello World!' });
     });
 
-    // Setup routes with environment variables
+    // Setup routes with environment variables and feature flags
     setupFileRoutes(router);
-    setupMarketplaceRoutes(router);
+    setupMarketplaceRoutes(router, featureFlags);
     setupLegacyRoutes(router);
     setupUploadRoutes(router);
 
@@ -97,7 +101,7 @@ const setupRoutes = (app, basePath) => {
 // Initialize application
 const init = async () => {
     await setupFolders();
-    setupRoutes(app, basePath);
+    setupRoutes(app, basePath, featureFlags);
 
     app.listen(port, () => {
         console.log(`Server is running at http://localhost:${port}${basePath}`);

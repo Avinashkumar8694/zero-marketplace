@@ -1,4 +1,4 @@
-<% 
+<%
 var bodyContent = `
 <main class="main">
     <div class="upload-flex-container">
@@ -11,11 +11,12 @@ var bodyContent = `
                 <li><i class="fas fa-check-circle"></i> File size should not exceed 100KB</li>
                 <li><i class="fas fa-check-circle"></i> Follow the standard component structure</li>
             </ul>
-        </div>        <div class="upload-plugin-card card-style">
+        </div>
+        <div class="upload-plugin-card card-style">
             <div class="upload-header">
                 <h2><i class="fas fa-cloud-upload-alt"></i> Upload a New Plugin</h2>
                 <p>Share your component with the Zero Components community</p>
-                
+                ` + (!uploadEnabled || isUploadComingSoon ? `
                 <!-- Coming Soon Notice -->
                 <div class="coming-soon-notice">
                     <div class="coming-soon-badge">
@@ -28,8 +29,9 @@ var bodyContent = `
                         <strong>Stay tuned for updates on this exciting feature.</strong>
                     </p>
                 </div>
+                ` : '') + `
             </div>
-            <form id="pluginUploadForm" enctype="multipart/form-data" style="opacity: 0.6; pointer-events: none;">
+            <form id="pluginUploadForm" enctype="multipart/form-data"` + (!uploadEnabled || isUploadComingSoon ? ` style="opacity: 0.6; pointer-events: none;"` : '') + `>
                 <div class="upload-area" id="uploadArea">
                     <div class="upload-area-content" id="uploadAreaContent">
                         <i class="fas fa-cloud-upload-alt upload-icon"></i>
@@ -593,7 +595,7 @@ form[style*="pointer-events: none"] .btn.btn-primary {
         padding: 1.5rem;
     }
 }
-</style>
 `;
 %>
-<%- include('baselayout', { body: bodyContent }) %>
+
+<%- include('./baselayout', { body: bodyContent }) %>

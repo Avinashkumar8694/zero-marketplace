@@ -3,51 +3,74 @@
  * Controls which features are enabled or disabled
  */
 
-// Load environment variables
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Load environment variables from root directory
-dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+// Cache for feature flags to avoid re-evaluating
+let _featureFlags = null;
 
 /**
- * Feature flag configuration
- * Each feature can be controlled via environment variables or default values
+ * Initialize feature flags from environment variables
+ * This function should be called after dotenv has loaded the environment
  */
-export const featureFlags = {
-    // Upload functionality
-    UPLOAD_ENABLED: process.env.FEATURE_UPLOAD_ENABLED === 'true' || false,
+export function initializeFeatureFlags() {
+    // Debug: Log environment variable loading
+    console.log('🔍 Environment Variables Debug:');
+    console.log('FEATURE_UPLOAD_ENABLED:', process.env.FEATURE_UPLOAD_ENABLED);
     
-    // Plans/pricing functionality  
-    PLANS_ENABLED: process.env.FEATURE_PLANS_ENABLED === 'true' || false,
+    _featureFlags = {
+        // Upload functionality
+        UPLOAD_ENABLED: process.env.FEATURE_UPLOAD_ENABLED === 'true',
+        
+        // Plans/pricing functionality  
+        PLANS_ENABLED: process.env.FEATURE_PLANS_ENABLED === 'true',        // Individual plan availability
+        FREE_PLAN_ENABLED: process.env.FEATURE_FREE_PLAN_ENABLED === 'true',
+        PRO_PLAN_ENABLED: process.env.FEATURE_PRO_PLAN_ENABLED === 'true',
+        ENTERPRISE_PLAN_ENABLED: process.env.FEATURE_ENTERPRISE_PLAN_ENABLED === 'true',
+        
+        // Plan-specific features
+        PLAN_BADGES_ENABLED: process.env.FEATURE_PLAN_BADGES_ENABLED === 'true',
+        PLAN_BETA_NOTICES_ENABLED: process.env.FEATURE_PLAN_BETA_NOTICES_ENABLED === 'true',
+        PLAN_CONTACT_SALES_ENABLED: process.env.FEATURE_PLAN_CONTACT_SALES_ENABLED === 'true',
+        
+        // Marketplace browsing (always enabled for now)
+        MARKETPLACE_ENABLED: process.env.FEATURE_MARKETPLACE_ENABLED !== 'false',
+          // User authentication features
+        AUTH_ENABLED: process.env.FEATURE_AUTH_ENABLED === 'true',
+        
+        // Profile features
+        PROFILE_ENABLED: process.env.FEATURE_PROFILE_ENABLED === 'true',
+        
+        // Component search and filtering
+        SEARCH_ENABLED: process.env.FEATURE_SEARCH_ENABLED !== 'false',
+          // Component analytics and stats
+        ANALYTICS_ENABLED: process.env.FEATURE_ANALYTICS_ENABLED === 'true',
+        
+        // Support and help features
+        SUPPORT_ENABLED: process.env.FEATURE_SUPPORT_ENABLED === 'true',
+        
+        // Admin features
+        ADMIN_ENABLED: process.env.FEATURE_ADMIN_ENABLED === 'true',
+        
+        // Beta features flag
+        BETA_FEATURES_ENABLED: process.env.FEATURE_BETA_ENABLED === 'true'
+    };
     
-    // Individual plan availability
-    PRO_PLAN_ENABLED: process.env.FEATURE_PRO_PLAN_ENABLED === 'true' || false,
-    ENTERPRISE_PLAN_ENABLED: process.env.FEATURE_ENTERPRISE_PLAN_ENABLED === 'true' || false,
+    // Log current feature flag status (only in development)
+    if (process.env.NODE_ENV !== 'production') {
+        console.log('🏁 Feature Flags Status:', _featureFlags);
+    }
     
-    // Marketplace browsing (always enabled for now)
-    MARKETPLACE_ENABLED: process.env.FEATURE_MARKETPLACE_ENABLED !== 'false',
-    
-    // User authentication features
-    AUTH_ENABLED: process.env.FEATURE_AUTH_ENABLED === 'true' || false,
-    
-    // Component search and filtering
-    SEARCH_ENABLED: process.env.FEATURE_SEARCH_ENABLED !== 'false',
-    
-    // Component analytics and stats
-    ANALYTICS_ENABLED: process.env.FEATURE_ANALYTICS_ENABLED === 'true' || false,
-    
-    // Admin features
-    ADMIN_ENABLED: process.env.FEATURE_ADMIN_ENABLED === 'true' || false,
-    
-    // Beta features flag
-    BETA_FEATURES_ENABLED: process.env.FEATURE_BETA_ENABLED === 'true' || false
-};
+    return _featureFlags;
+}
+
+/**
+ * Get the feature flags object (lazy initialization)
+ * @returns {object} - Object containing all feature flags
+ */
+export function getFeatureFlags() {
+    if (!_featureFlags) {
+        initializeFeatureFlags();
+    }
+    return _featureFlags;
+}
 
 /**
  * Get the status of a specific feature flag
@@ -55,7 +78,8 @@ export const featureFlags = {
  * @returns {boolean} - Whether the feature is enabled
  */
 export function isFeatureEnabled(flagName) {
-    return featureFlags[flagName] || false;
+    const flags = getFeatureFlags();
+    return flags[flagName] || false;
 }
 
 /**
@@ -63,7 +87,7 @@ export function isFeatureEnabled(flagName) {
  * @returns {object} - Object containing all feature flags
  */
 export function getAllFeatureFlags() {
-    return { ...featureFlags };
+    return { ...getFeatureFlags() };
 }
 
 /**
@@ -81,32 +105,16 @@ export function isComingSoon(flagName) {
  * @returns {object} - Public feature flags
  */
 export function getPublicFeatureFlags() {
+    const flags = getFeatureFlags();
     return {
-        UPLOAD_ENABLED: featureFlags.UPLOAD_ENABLED,
-        PLANS_ENABLED: featureFlags.PLANS_ENABLED,
-        PRO_PLAN_ENABLED: featureFlags.PRO_PLAN_ENABLED,
-        ENTERPRISE_PLAN_ENABLED: featureFlags.ENTERPRISE_PLAN_ENABLED,
-        MARKETPLACE_ENABLED: featureFlags.MARKETPLACE_ENABLED,
-        SEARCH_ENABLED: featureFlags.SEARCH_ENABLED,
-        BETA_FEATURES_ENABLED: featureFlags.BETA_FEATURES_ENABLED
+        UPLOAD_ENABLED: flags.UPLOAD_ENABLED,
+        PLANS_ENABLED: flags.PLANS_ENABLED,
+        PRO_PLAN_ENABLED: flags.PRO_PLAN_ENABLED,
+        ENTERPRISE_PLAN_ENABLED: flags.ENTERPRISE_PLAN_ENABLED,
+        MARKETPLACE_ENABLED: flags.MARKETPLACE_ENABLED,
+        SEARCH_ENABLED: flags.SEARCH_ENABLED,
+        BETA_FEATURES_ENABLED: flags.BETA_FEATURES_ENABLED
     };
 }
 
-// Export individual flags for convenience
-export const {
-    UPLOAD_ENABLED,
-    PLANS_ENABLED,
-    PRO_PLAN_ENABLED,
-    ENTERPRISE_PLAN_ENABLED,
-    MARKETPLACE_ENABLED,
-    AUTH_ENABLED,
-    SEARCH_ENABLED,
-    ANALYTICS_ENABLED,
-    ADMIN_ENABLED,
-    BETA_FEATURES_ENABLED
-} = featureFlags;
 
-// Log current feature flag status (only in development)
-if (process.env.NODE_ENV !== 'production') {
-    console.log('🏁 Feature Flags Status:', featureFlags);
-}
