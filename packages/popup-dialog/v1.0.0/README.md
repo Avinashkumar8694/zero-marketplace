@@ -29,7 +29,7 @@ A flexible and customizable popup dialog component built with Lit Element. This 
         <h2>Dialog Title</h2>
         <p>Dialog content goes here...</p>
     </div>
-</zero-popup-dialog>
+</zero-popup-dialog-1.0.0>
 
 <!-- Dialog with Custom Web Component -->
 <zero-popup-dialog-1.0.0 id="componentDialog"
@@ -40,7 +40,7 @@ A flexible and customizable popup dialog component built with Lit Element. This 
         },
         position: 'center'
     }}">
-</zero-popup-dialog>
+</zero-popup-dialog-1.0.0>
 ```
 
 ### JavaScript
