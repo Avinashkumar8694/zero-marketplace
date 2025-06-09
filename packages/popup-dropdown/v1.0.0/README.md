@@ -24,13 +24,12 @@ A stylish dropdown component with popup-style appearance and smooth animations. 
 ### HTML (Hardcoded Values)
 
 ```html
-<zero-popup-dropdown
-    selected-option="option2">
-</zero-popup-dropdown>
+<popup-dropdown-1.0.0 selected-option="option2">
+</popup-dropdown-1.0.0>
 
 <script>
 // Set options after component initialization
-const dropdown = document.querySelector('zero-popup-dropdown');
+const dropdown = document.querySelector('popup-dropdown-1.0.0');
 dropdown.OptionConfig = [
     { value: 'option1', label: 'Light Theme' },
     { value: 'option2', label: 'Dark Theme' },
@@ -43,7 +42,7 @@ dropdown.OptionConfig = [
 
 ```javascript
 // Create and configure the popup dropdown
-const popupDropdown = document.createElement('zero-popup-dropdown');
+const popupDropdown = document.createElement('popup-dropdown-1.0.0');
 
 // Set dropdown options
 popupDropdown.OptionConfig = [
@@ -139,7 +138,7 @@ dropdown.addEventListener('change', (event) => {
 Toggles the dropdown open/closed state.
 
 ```javascript
-const dropdown = document.querySelector('zero-popup-dropdown');
+const dropdown = document.querySelector('popup-dropdown-1.0.0');
 dropdown.toggleDropdown();
 ```
 
@@ -148,7 +147,7 @@ dropdown.toggleDropdown();
 Programmatically selects an option and triggers the change event.
 
 ```javascript
-const dropdown = document.querySelector('zero-popup-dropdown');
+const dropdown = document.querySelector('popup-dropdown-1.0.0');
 dropdown.selectOption({ value: 'option1', label: 'Option 1' });
 ```
 
@@ -159,7 +158,7 @@ dropdown.selectOption({ value: 'option1', label: 'Option 1' });
 ```javascript
 class DynamicDropdown {
     constructor() {
-        this.dropdown = document.createElement('zero-popup-dropdown');
+        this.dropdown = document.createElement('popup-dropdown-1.0.0');
         this.loadOptions();
         this.setupEventHandlers();
     }
@@ -200,8 +199,8 @@ class DynamicDropdown {
 ### Cascading Dropdowns
 
 ```html
-<zero-popup-dropdown id="categoryDropdown"></zero-popup-dropdown>
-<zero-popup-dropdown id="subcategoryDropdown"></zero-popup-dropdown>
+<popup-dropdown-1.0.0 id="categoryDropdown"></popup-dropdown-1.0.0>
+<popup-dropdown-1.0.0 id="subcategoryDropdown"></popup-dropdown-1.0.0>
 
 <script>
 const categoryDropdown = document.getElementById('categoryDropdown');
@@ -256,9 +255,8 @@ class SearchableDropdown {
         this.setupDropdown();
         this.setupSearch();
     }
-    
-    setupDropdown() {
-        this.dropdown = document.createElement('zero-popup-dropdown');
+      setupDropdown() {
+        this.dropdown = document.createElement('popup-dropdown-1.0.0');
         this.dropdown.OptionConfig = this.filteredOptions;
         this.container.appendChild(this.dropdown);
     }
@@ -297,16 +295,15 @@ const searchableDropdown = new SearchableDropdown('dropdown-container', [
 ### Form Integration with Validation
 
 ```html
-<form id="settingsForm">
-    <div class="form-group">
+<form id="settingsForm">    <div class="form-group">
         <label>Theme Preference:</label>
-        <zero-popup-dropdown id="themeDropdown" required></zero-popup-dropdown>
+        <popup-dropdown-1.0.0 id="themeDropdown" required></popup-dropdown-1.0.0>
         <span class="error-message" id="themeError"></span>
     </div>
     
     <div class="form-group">
         <label>Language:</label>
-        <zero-popup-dropdown id="languageDropdown" required></zero-popup-dropdown>
+        <popup-dropdown-1.0.0 id="languageDropdown" required></popup-dropdown-1.0.0>
         <span class="error-message" id="languageError"></span>
     </div>
     
@@ -369,7 +366,7 @@ document.getElementById('settingsForm').addEventListener('submit', (event) => {
 ### Custom Appearance Theme
 
 ```css
-zero-popup-dropdown {
+popup-dropdown-1.0.0 {
     --dropdown-bg-color: #2d3748;
     --dropdown-border-color: #4a5568;
     --dropdown-hover-border-color: #63b3ed;
