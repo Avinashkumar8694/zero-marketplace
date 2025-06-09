@@ -1,7 +1,7 @@
 {
   "name": "code-editor",
   "version": "1.0.0",
-  "main": "code-editor.js",
+  "main": "code-editor.ts",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

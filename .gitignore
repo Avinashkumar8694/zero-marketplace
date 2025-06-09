@@ -5,3 +5,7 @@ coverage
 .env
 .env.*
 !.env.example
+temp
+server/server/temp/*
+*.*/temp
+*/*temp

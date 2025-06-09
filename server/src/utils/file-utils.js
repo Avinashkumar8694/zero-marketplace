@@ -82,23 +82,23 @@ const processPlugin = async (pluginDir, metadata) => {
         await copyDirectory(pluginDir, versionDir);
         
         // Install dependencies if needed
-        if (fsSync.existsSync(path.join(versionDir, 'package.json'))) {
-            try {
-                execSync('npm install', { cwd: versionDir, stdio: 'pipe' });
-            } catch (error) {
-                console.warn('Failed to install dependencies:', error.message);
-            }
-        }
+        // if (fsSync.existsSync(path.join(versionDir, 'package.json'))) {
+        //     try {
+        //         execSync('npm install', { cwd: versionDir, stdio: 'pipe' });
+        //     } catch (error) {
+        //         console.warn('Failed to install dependencies:', error.message);
+        //     }
+        // }
         
         // Build the plugin
-        const buildResult = await buildPlugin(versionDir, componentName, version);
+        // const buildResult = await buildPlugin(versionDir, componentName, version);
         
         return {
             success: true,
             componentName,
             version,
             targetDir: versionDir,
-            buildResult
+            // buildResult
         };
     } catch (error) {
         console.error('Error processing plugin:', error);
@@ -300,7 +300,7 @@ const copyDirectory = async (src, dest) => {
 export const findMainJsFile = async (dirPath) => {
     try {
         // Read all files in the directory
-        const files = await fsSync.readdir(dirPath);
+        const files = fsSync.readdirSync(dirPath);
         
         // Look for potential main JS files in this priority:
         // 1. File matching directory name

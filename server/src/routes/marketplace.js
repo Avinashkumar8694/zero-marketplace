@@ -223,6 +223,27 @@ const setupMarketplaceRoutes = (router) => {
         }
     });
 
+    // Landing page (Home)
+    router.get('/', (req, res) => {
+        req.app.render(
+            path.resolve(__dirname, '../../marketplace/landing.ejs'),
+            {},
+            (err, html) => {
+                if (err) {
+                    console.error('Error rendering landing.ejs:', err);
+                    return res.status(500).send('Error rendering landing page');
+                }
+                res.render(
+                    path.resolve(__dirname, '../../marketplace/baselayout.ejs'),
+                    {
+                        title: 'Zero Marketplace - Home',
+                        body: html
+                    }
+                );
+            }
+        );
+    });
+
     return router;
 };
 
