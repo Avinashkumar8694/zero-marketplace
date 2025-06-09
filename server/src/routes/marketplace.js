@@ -192,7 +192,8 @@ const setupMarketplaceRoutes = (router) => {
         res.render(path.resolve(__dirname, '../../marketplace/marketplace-plugins.ejs'), {
             title: 'Zero Components Market',
         });
-    });    // Get component's main JS file
+    });    
+    // Get component's main JS file
     router.get('/marketplace/components/:family/:version/js', async (req, res) => {
         try {
             const { family, version } = req.params;
@@ -209,11 +210,11 @@ const setupMarketplaceRoutes = (router) => {
             if (!jsFiles || jsFiles.length === 0) {
                 return res.status(404).json({ error: 'No JavaScript file found for component' });
             }
-
+            
             // Read the file content
             const fs = await import('fs');
             const fileContent = fs.readFileSync(jsFiles[0], 'utf8');
-
+            
             // Return the file content
             res.setHeader('Content-Type', 'application/javascript');
             res.send(fileContent);
@@ -222,27 +223,35 @@ const setupMarketplaceRoutes = (router) => {
             res.status(500).json({ error: 'Failed to get component file' });
         }
     });
-
+    // Marketplace UI route (EJS)
+    router.get('/', async (req, res) => {
+        // Optionally, fetch plugin/component data here if you want to render server-side
+        // For now, just render the EJS template (client JS will fetch data from API)
+        res.render(path.resolve(__dirname, '../../marketplace/marketplace-plugins.ejs'), {
+            title: 'Zero Components Market',
+        });
+    });    
+    
     // Landing page (Home)
-    router.get('/', (req, res) => {
-        req.app.render(
-            path.resolve(__dirname, '../../marketplace/landing.ejs'),
-            {},
-            (err, html) => {
-                if (err) {
-                    console.error('Error rendering landing.ejs:', err);
-                    return res.status(500).send('Error rendering landing page');
-                }
-                res.render(
-                    path.resolve(__dirname, '../../marketplace/baselayout.ejs'),
-                    {
-                        title: 'Zero Marketplace - Home',
-                        body: html
-                    }
-                );
-            }
-        );
-    });
+    // router.get('/', (req, res) => {
+        //     req.app.render(
+            //         path.resolve(__dirname, '../../marketplace/landing.ejs'),
+            //         {},
+            //         (err, html) => {
+    //             if (err) {
+    //                 console.error('Error rendering landing.ejs:', err);
+    //                 return res.status(500).send('Error rendering landing page');
+    //             }
+    //             res.render(
+    //                 path.resolve(__dirname, '../../marketplace/baselayout.ejs'),
+    //                 {
+    //                     title: 'Zero Marketplace - Home',
+    //                     body: html
+    //                 }
+    //             );
+    //         }
+    //     );
+    // });
 
     return router;
 };
