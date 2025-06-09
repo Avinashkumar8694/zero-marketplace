@@ -29,17 +29,17 @@ A powerful and feature-rich WYSIWYG (What You See Is What You Get) text editor c
 <!-- Basic rich text editor -->
 <zero-rich-text-editor-1.0.0 htmldata="<p>Welcome to the rich text editor!</p>"
   editorMode="true">
-</zero-rich-text-editor>
+</zero-rich-text-editor-1.0.0>
 
 <!-- Editor with initial formatted content -->
 <zero-rich-text-editor-1.0.0 htmldata="<h2>Sample Document</h2><p>This is a <strong>bold</strong> and <em>italic</em> text example.</p>"
   editorMode="true">
-</zero-rich-text-editor>
+</zero-rich-text-editor-1.0.0>
 
 <!-- Read-only preview mode -->
 <zero-rich-text-editor-1.0.0 htmldata="<p>This content is in preview mode only.</p>"
   editorMode="false">
-</zero-rich-text-editor>
+</zero-rich-text-editor-1.0.0>
 ```
 
 ### JavaScript (Dynamic Configuration)
