@@ -24,7 +24,7 @@ var bodyContent = `
                         <p class="upload-text">Drag and drop your ZIP file here</p>
                         <p class="upload-text-sub">or</p>
                         <label for="pluginZip" class="upload-button">Browse Files</label>
-                        <input type="file" id="pluginZip" name="pluginZip" accept=".zip" required hidden />
+                        <input type="file" id="pluginZip" name="plugin" accept=".zip" required hidden />
                     </div>
                     <div class="file-info" id="fileInfo" style="display: none;">
                         <i class="fas fa-file-archive"></i>
@@ -165,7 +165,7 @@ form.addEventListener('submit', function(e) {
 
     try {
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/upload-plugin', true);
+        xhr.open('POST', '/marketplace/upload', true);
 
         // Progress handler
         xhr.upload.onprogress = function(e) {

@@ -2,7 +2,8 @@
  * File management utilities for plugin uploads and processing
  */
 import * as fs from 'fs/promises';
-import { createReadStream, existsSync, mkdirSync, readFileSync, writeFileSync, unlinkSync, statSync, readdirSync } from 'fs';
+import fsSync from 'fs';
+import { createReadStream, unlinkSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -21,7 +22,7 @@ const setupFileRoutes = (router) => {
     // List files in the 'plugins' directory
     router.get('/files', (req, res) => {
         const pluginsDir = path.resolve(COMPONENTS_DIR);
-        fs.readdir(pluginsDir, (err, files) => {
+        fsSync.readdir(pluginsDir, (err, files) => {
             if (err) {
                 return res.status(500).json({ error: 'Failed to list files' });
             }
@@ -38,7 +39,7 @@ const setupFileRoutes = (router) => {
             return res.status(400).json({ error: 'File name and content are required' });
         }
 
-        fs.writeFile(filePath, content, err => {
+        fsSync.writeFile(filePath, content, err => {
             if (err) {
                 return res.status(500).json({ error: 'Failed to write file' });
             }
@@ -50,7 +51,7 @@ const setupFileRoutes = (router) => {
     router.delete('/files/:fileName', (req, res) => {
         const filePath = path.join('plugins', req.params.fileName);
 
-        fs.unlink(filePath, err => {
+        fsSync.unlink(filePath, err => {
             if (err) {
                 return res.status(500).json({ error: 'Failed to delete file' });
             }
@@ -73,15 +74,15 @@ const processPlugin = async (pluginDir, metadata) => {
         const versionDir = path.join(targetDir, `v${version}`);
         
         // Ensure target directory exists
-        if (!fs.existsSync(versionDir)) {
-            fs.mkdirSync(versionDir, { recursive: true });
+        if (!fsSync.existsSync(versionDir)) {
+            fsSync.mkdirSync(versionDir, { recursive: true });
         }
         
         // Copy plugin files to packages directory
         await copyDirectory(pluginDir, versionDir);
         
         // Install dependencies if needed
-        if (fs.existsSync(path.join(versionDir, 'package.json'))) {
+        if (fsSync.existsSync(path.join(versionDir, 'package.json'))) {
             try {
                 execSync('npm install', { cwd: versionDir, stdio: 'pipe' });
             } catch (error) {
@@ -112,14 +113,13 @@ export const processPluginUpload = async (zipBuffer, originalName) => {
         const uploadsDir = path.resolve(__dirname, `../../${UPLOAD_DIR}`);
         
         // Ensure directories exist
-        if (!fs.existsSync(tempDir)) {
-            fs.mkdirSync(tempDir, { recursive: true });
+        if (!fsSync.existsSync(tempDir)) {
+            fsSync.mkdirSync(tempDir, { recursive: true });
         }
-        if (!fs.existsSync(uploadsDir)) {
-            fs.mkdirSync(uploadsDir, { recursive: true });
+        if (!fsSync.existsSync(uploadsDir)) {
+            fsSync.mkdirSync(uploadsDir, { recursive: true });
         }
-        
-        const extractDir = path.join(tempDir, `extract_${Date.now()}`);        // Extract zip file using AdmZip
+        const extractDir = path.join(tempDir, `extract_${Date.now()}`);
         try {
             const zip = new AdmZip(zipBuffer);
             zip.extractAllTo(extractDir, true);
@@ -127,12 +127,9 @@ export const processPluginUpload = async (zipBuffer, originalName) => {
             console.error('Failed to extract zip:', zipError);
             throw new Error('Failed to extract plugin zip file');
         }
-        
-        // Find the main plugin directory
-        const extractedContents = fs.readdirSync(extractDir);
+        const extractedContents = fsSync.readdirSync(extractDir);
         let pluginDir;
-        
-        if (extractedContents.length === 1 && fs.statSync(path.join(extractDir, extractedContents[0])).isDirectory()) {
+        if (extractedContents.length === 1 && fsSync.statSync(path.join(extractDir, extractedContents[0])).isDirectory()) {
             pluginDir = path.join(extractDir, extractedContents[0]);
         } else {
             pluginDir = extractDir;
@@ -148,7 +145,7 @@ export const processPluginUpload = async (zipBuffer, originalName) => {
         const pluginInfo = await processPlugin(pluginDir, validation.metadata);
         
         // Cleanup temp directory
-        fs.rmSync(extractDir, { recursive: true, force: true });
+        fsSync.rmSync(extractDir, { recursive: true, force: true });
         
         return pluginInfo;
     } catch (error) {
@@ -162,12 +159,10 @@ const validatePluginStructure = (pluginDir) => {
     try {
         // Check for package.json
         const packageJsonPath = path.join(pluginDir, 'package.json');
-        if (!fs.existsSync(packageJsonPath)) {
+        if (!fsSync.existsSync(packageJsonPath)) {
             return { valid: false, error: 'package.json not found' };
         }
-        
-        const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-        
+        const packageJson = JSON.parse(fsSync.readFileSync(packageJsonPath, 'utf8'));
         // Check for main component file
         const componentName = packageJson.name || path.basename(pluginDir);
         const possibleFiles = [
@@ -176,26 +171,23 @@ const validatePluginStructure = (pluginDir) => {
             'index.ts',
             'index.js'
         ];
-        
         let mainFile = null;
         for (const file of possibleFiles) {
-            if (fs.existsSync(path.join(pluginDir, file))) {
+            if (fsSync.existsSync(path.join(pluginDir, file))) {
                 mainFile = file;
                 break;
             }
         }
-        
         if (!mainFile) {
             return { valid: false, error: 'Main component file not found' };
         }
-        
         return {
             valid: true,
             metadata: {
                 packageJson,
                 mainFile,
                 componentName,
-                hasReadme: fs.existsSync(path.join(pluginDir, 'README.md'))
+                hasReadme: fsSync.existsSync(path.join(pluginDir, 'README.md'))
             }
         };
     } catch (error) {
@@ -207,8 +199,8 @@ const validatePluginStructure = (pluginDir) => {
 const buildPlugin = async (pluginDir, componentName, version) => {
     try {
         const buildDir = path.resolve(__dirname, '../../plugins-build');
-        if (!fs.existsSync(buildDir)) {
-            fs.mkdirSync(buildDir, { recursive: true });
+        if (!fsSync.existsSync(buildDir)) {
+            fsSync.mkdirSync(buildDir, { recursive: true });
         }
         
         const outputDir = path.join(buildDir, `${componentName}-v${version}`);
@@ -241,7 +233,7 @@ export default defineConfig({
 });
 `;
         
-        fs.writeFileSync(viteConfigPath, viteConfig);
+        fsSync.writeFileSync(viteConfigPath, viteConfig);
         
         // Run build
         execSync(`npx vite build --config ${viteConfigPath}`, {
@@ -250,7 +242,7 @@ export default defineConfig({
         });
         
         // Cleanup
-        fs.unlinkSync(viteConfigPath);
+        fsSync.unlinkSync(viteConfigPath);
         
         return {
             success: true,
@@ -276,7 +268,7 @@ const findMainFile = (pluginDir, componentName) => {
     ];
     
     for (const file of possibleFiles) {
-        if (fs.existsSync(path.join(pluginDir, file))) {
+        if (fsSync.existsSync(path.join(pluginDir, file))) {
             return file;
         }
     }
@@ -286,11 +278,11 @@ const findMainFile = (pluginDir, componentName) => {
 
 // Copy directory recursively
 const copyDirectory = async (src, dest) => {
-    if (!fs.existsSync(dest)) {
-        fs.mkdirSync(dest, { recursive: true });
+    if (!fsSync.existsSync(dest)) {
+        fsSync.mkdirSync(dest, { recursive: true });
     }
     
-    const entries = fs.readdirSync(src, { withFileTypes: true });
+    const entries = fsSync.readdirSync(src, { withFileTypes: true });
     
     for (const entry of entries) {
         const srcPath = path.join(src, entry.name);
@@ -299,7 +291,7 @@ const copyDirectory = async (src, dest) => {
         if (entry.isDirectory()) {
             await copyDirectory(srcPath, destPath);
         } else {
-            fs.copyFileSync(srcPath, destPath);
+            fsSync.copyFileSync(srcPath, destPath);
         }
     }
 };
@@ -308,7 +300,7 @@ const copyDirectory = async (src, dest) => {
 export const findMainJsFile = async (dirPath) => {
     try {
         // Read all files in the directory
-        const files = await fs.readdir(dirPath);
+        const files = await fsSync.readdir(dirPath);
         
         // Look for potential main JS files in this priority:
         // 1. File matching directory name
