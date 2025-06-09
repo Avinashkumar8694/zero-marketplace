@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import { scanComponentStructure, extractComponentMetadata } from '../utils/component-utils.js';
 import { parseVersion, isStableVersion, findLatestVersion, findLatestStableVersion } from '../utils/version-utils.js';
 import { findMainJsFile } from '../utils/file-utils.js';
+import { featureFlags, getAllFeatureFlags, isFeatureEnabled, isComingSoon } from '../config/features.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -176,19 +177,133 @@ const setupMarketplaceRoutes = (router) => {
             console.error('Error comparing versions:', error);
             res.status(500).json({ error: 'Failed to compare versions' });
         }
-    });
-
-    // Upload plugin page
+    });    // Upload plugin page
     router.get('/marketplace/upload', (req, res) => {
         res.render(path.resolve(__dirname, '../../marketplace/upload-plugin.ejs'), {
-            title: 'Upload Plugin - Zero Components Market'
+            title: 'Upload Plugin - Zero Components Market',
+            featureFlags: getAllFeatureFlags(),
+            uploadEnabled: isFeatureEnabled('UPLOAD_ENABLED'),
+            isUploadComingSoon: isComingSoon('UPLOAD_ENABLED')
         });
-    });    
-    // Plans page
+    });      // Plans page
     router.get('/marketplace/plans', (req, res) => {
+        // Define plans data structure
+        const plansData = [
+            {
+                id: 'free',
+                name: 'Free Trial',
+                type: 'featured',
+                price: {
+                    currency: '$',
+                    amount: '0',
+                    period: '/month'
+                },
+                description: 'Perfect for developers getting started with Zero Components',
+                badge: {
+                    icon: 'fas fa-flask',
+                    text: 'Beta Version'
+                },
+                features: [
+                    { icon: 'fas fa-check', text: 'Access to all components' },
+                    { icon: 'fas fa-check', text: 'Unlimited downloads' },
+                    { icon: 'fas fa-check', text: 'Upload your own plugins' },
+                    { icon: 'fas fa-check', text: 'Community support' },
+                    { icon: 'fas fa-check', text: 'Regular updates' },
+                    { icon: 'fas fa-check', text: 'Commercial usage allowed' },
+                    { icon: 'fas fa-check', text: 'No credit card required' },
+                    { icon: 'fas fa-info', text: 'Beta access to new features' }
+                ],
+                action: {
+                    type: 'current',
+                    text: 'Current Plan',
+                    icon: 'fas fa-check-circle',
+                    note: 'You\'re already on this plan!'
+                },
+                enabled: true,
+                showBetaNotice: true,
+                showBetaDisclaimer: true
+            },
+            {
+                id: 'pro',
+                name: 'Pro Plan',
+                type: 'pro',
+                price: {
+                    currency: '$',
+                    amount: '9',
+                    period: '/month'
+                },
+                description: 'Enhanced features for professional developers',
+                featureFlag: 'PRO_PLAN_ENABLED',
+                features: [
+                    { icon: 'fas fa-plus', text: 'Priority support' },
+                    { icon: 'fas fa-plus', text: 'Advanced analytics' },
+                    { icon: 'fas fa-plus', text: 'Custom themes' },
+                    { icon: 'fas fa-plus', text: 'Team collaboration' },
+                    { icon: 'fas fa-plus', text: 'Private components' },
+                    { icon: 'fas fa-plus', text: 'API access' },
+                    { icon: 'fas fa-plus', text: 'White-label options' }
+                ],
+                action: {
+                    enabled: {
+                        type: 'select',
+                        text: 'Choose Pro Plan',
+                        icon: 'fas fa-rocket',
+                        note: 'Advanced features for professionals'
+                    },
+                    comingSoon: {
+                        type: 'coming-soon',
+                        text: 'Coming Soon',
+                        icon: 'fas fa-clock',
+                        note: 'Stay tuned for advanced features!'
+                    }
+                },
+                featuresPrefix: 'Everything in Free, plus:'
+            },
+            {
+                id: 'enterprise',
+                name: 'Enterprise',
+                type: 'enterprise',
+                price: {
+                    amount: 'Custom'
+                },
+                description: 'Tailored solutions for large organizations',
+                featureFlag: 'ENTERPRISE_PLAN_ENABLED',
+                features: [
+                    { icon: 'fas fa-crown', text: 'Dedicated support' },
+                    { icon: 'fas fa-crown', text: 'Custom integrations' },
+                    { icon: 'fas fa-crown', text: 'On-premise deployment' },
+                    { icon: 'fas fa-crown', text: 'SLA guarantees' },
+                    { icon: 'fas fa-crown', text: 'Training & onboarding' },
+                    { icon: 'fas fa-crown', text: 'Custom licensing' },
+                    { icon: 'fas fa-crown', text: 'Unlimited users' }
+                ],
+                action: {
+                    enabled: {
+                        type: 'contact',
+                        text: 'Contact Sales',
+                        icon: 'fas fa-phone',
+                        note: 'Let\'s discuss your needs'
+                    },
+                    comingSoon: {
+                        type: 'coming-soon',
+                        text: 'Coming Soon',
+                        icon: 'fas fa-clock',
+                        note: 'Enterprise features in development'
+                    }
+                },
+                featuresPrefix: 'Everything in Pro, plus:'
+            }
+        ];
+
         req.app.render(
             path.resolve(__dirname, '../../marketplace/plans.ejs'),
-            {},
+            {
+                plans: plansData,
+                features: getAllFeatureFlags(),
+                featureFlags: getAllFeatureFlags(),
+                plansEnabled: isFeatureEnabled('PLANS_ENABLED'),
+                isPlansComingSoon: isComingSoon('PLANS_ENABLED')
+            },
             (err, html) => {
                 if (err) {
                     console.error('Error rendering plans.ejs:', err);
@@ -198,19 +313,28 @@ const setupMarketplaceRoutes = (router) => {
                     path.resolve(__dirname, '../../marketplace/baselayout.ejs'),
                     {
                         title: 'Plans - Zero Components Market',
-                        body: html
+                        body: html,
+                        features: getAllFeatureFlags(),
+                        featureFlags: getAllFeatureFlags(),
+                        uploadEnabled: isFeatureEnabled('UPLOAD_ENABLED'),
+                        plansEnabled: isFeatureEnabled('PLANS_ENABLED'),
+                        isUploadComingSoon: isComingSoon('UPLOAD_ENABLED'),
+                        isPlansComingSoon: isComingSoon('PLANS_ENABLED')
                     }
                 );
             }
         );
-    });
-
-    // Marketplace UI route (EJS)
+    });// Marketplace UI route (EJS)
     router.get('/marketplace', async (req, res) => {
         // Optionally, fetch plugin/component data here if you want to render server-side
         // For now, just render the EJS template (client JS will fetch data from API)
         res.render(path.resolve(__dirname, '../../marketplace/marketplace-plugins.ejs'), {
             title: 'Zero Components Market',
+            featureFlags: getAllFeatureFlags(),
+            uploadEnabled: isFeatureEnabled('UPLOAD_ENABLED'),
+            plansEnabled: isFeatureEnabled('PLANS_ENABLED'),
+            isUploadComingSoon: isComingSoon('UPLOAD_ENABLED'),
+            isPlansComingSoon: isComingSoon('PLANS_ENABLED')
         });
     });    
     // Get component's main JS file
@@ -251,8 +375,7 @@ const setupMarketplaceRoutes = (router) => {
             title: 'Zero Components Market',
         });
     });    
-    
-    // Landing page (Home)
+      // Landing page (Home)
     // router.get('/', (req, res) => {
         //     req.app.render(
             //         path.resolve(__dirname, '../../marketplace/landing.ejs'),
@@ -271,7 +394,29 @@ const setupMarketplaceRoutes = (router) => {
     //             );
     //         }
     //     );
-    // });
+    // });    // Feature flags API endpoint
+    router.get('/marketplace/api/features', (req, res) => {
+        try {
+            // Return public feature flags for client-side use
+            res.json({
+                UPLOAD_ENABLED: isFeatureEnabled('UPLOAD_ENABLED'),
+                PLANS_ENABLED: isFeatureEnabled('PLANS_ENABLED'),
+                PRO_PLAN_ENABLED: isFeatureEnabled('PRO_PLAN_ENABLED'),
+                ENTERPRISE_PLAN_ENABLED: isFeatureEnabled('ENTERPRISE_PLAN_ENABLED'),
+                MARKETPLACE_ENABLED: isFeatureEnabled('MARKETPLACE_ENABLED'),
+                SEARCH_ENABLED: isFeatureEnabled('SEARCH_ENABLED'),
+                BETA_FEATURES_ENABLED: isFeatureEnabled('BETA_FEATURES_ENABLED'),
+                // Helper methods for client-side checks
+                isUploadComingSoon: isComingSoon('UPLOAD_ENABLED'),
+                isPlansComingSoon: isComingSoon('PLANS_ENABLED'),
+                isProPlanComingSoon: isComingSoon('PRO_PLAN_ENABLED'),
+                isEnterprisePlanComingSoon: isComingSoon('ENTERPRISE_PLAN_ENABLED')
+            });
+        } catch (error) {
+            console.error('Error getting feature flags:', error);
+            res.status(500).json({ error: 'Failed to get feature flags' });
+        }
+    });
 
     return router;
 };

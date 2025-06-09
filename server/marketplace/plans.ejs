@@ -5,123 +5,97 @@
             <h1>Choose Your Plan</h1>
             <p class="hero-subtitle">Start building amazing applications with Zero Components. Currently free for everyone!</p>
         </div>
-    </section>
-
-    <!-- Pricing Cards -->
+    </section>    <!-- Pricing Cards -->
     <section class="pricing-section">
-        <div class="pricing-container">            <!-- Free Plan Card -->
-            <div class="pricing-card featured">
-                <div class="plan-badge">
-                    <i class="fas fa-flask"></i>
-                    <span>Beta Version</span>
-                </div>
-                <div class="plan-header">
-                    <h3>Free Trial</h3>
-                    <div class="price">
-                        <span class="currency">$</span>
-                        <span class="amount">0</span>
-                        <span class="period">/month</span>
+        <div class="pricing-container">
+            <% if (typeof plans !== 'undefined' && plans.length > 0) { %>
+                <% plans.forEach(plan => { %>
+                    <% 
+                        const isComingSoon = plan.featureFlag && typeof features !== 'undefined' && !features[plan.featureFlag];
+                        const currentAction = isComingSoon ? plan.action.comingSoon : plan.action.enabled || plan.action;
+                    %>
+                    
+                    <!-- <%= plan.name %> Card -->
+                    <div class="pricing-card <%= plan.type %> <% if (isComingSoon) { %>coming-soon<% } %>">
+                        <% if (plan.badge) { %>
+                        <div class="plan-badge">
+                            <i class="<%= plan.badge.icon %>"></i>
+                            <span><%= plan.badge.text %></span>
+                        </div>
+                        <% } %>
+                        
+                        <div class="plan-header">
+                            <h3><%= plan.name %></h3>
+                            <div class="price">
+                                <% if (plan.price.currency) { %>
+                                <span class="currency"><%= plan.price.currency %></span>
+                                <% } %>
+                                <span class="amount"><%= plan.price.amount %></span>
+                                <% if (plan.price.period) { %>
+                                <span class="period"><%= plan.price.period %></span>
+                                <% } %>
+                            </div>
+                            <p class="plan-description"><%= plan.description %></p>
+                            
+                            <% if (plan.showBetaNotice) { %>
+                            <div class="beta-notice">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Currently in beta - this plan may change as we evolve</span>
+                            </div>
+                            <% } %>
+                        </div>
+                        
+                        <div class="plan-features">
+                            <h4><%= plan.featuresPrefix || 'What\'s included:' %></h4>
+                            <ul>
+                                <% plan.features.forEach(feature => { %>
+                                <li><i class="<%= feature.icon %>"></i> <%= feature.text %></li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                        
+                        <% if (plan.showBetaDisclaimer) { %>
+                        <div class="beta-disclaimer">
+                            <h5><i class="fas fa-exclamation-triangle"></i> Beta Version Notice</h5>
+                            <p>This is a beta version of our marketplace. Features and pricing plans may change as we gather feedback and improve the platform. Current users will be notified of any changes in advance.</p>
+                        </div>
+                        <% } %>
+                        
+                        <div class="plan-action">
+                            <% if (currentAction.type === 'current') { %>
+                                <button class="btn-plan current-plan" disabled>
+                                    <i class="<%= currentAction.icon %>"></i>
+                                    <%= currentAction.text %>
+                                </button>
+                            <% } else if (currentAction.type === 'coming-soon') { %>
+                                <button class="btn-plan coming-soon-btn" disabled>
+                                    <i class="<%= currentAction.icon %>"></i>
+                                    <%= currentAction.text %>
+                                </button>
+                            <% } else if (currentAction.type === 'contact') { %>
+                                <button class="btn-plan contact-btn">
+                                    <i class="<%= currentAction.icon %>"></i>
+                                    <%= currentAction.text %>
+                                </button>
+                            <% } else { %>
+                                <button class="btn-plan">
+                                    <i class="<%= currentAction.icon %>"></i>
+                                    <%= currentAction.text %>
+                                </button>
+                            <% } %>
+                            <p class="plan-note"><%= currentAction.note %></p>
+                        </div>
                     </div>
-                    <p class="plan-description">Perfect for developers getting started with Zero Components</p>
-                    <div class="beta-notice">
-                        <i class="fas fa-info-circle"></i>
-                        <span>Currently in beta - this plan may change as we evolve</span>
+                <% }); %>
+            <% } else { %>
+                <!-- Fallback content if plans data is not available -->
+                <div class="pricing-card featured">
+                    <div class="plan-header">
+                        <h3>Plans Coming Soon</h3>
+                        <p class="plan-description">We're working on our pricing plans. Stay tuned for updates!</p>
                     </div>
                 </div>
-                
-                <div class="plan-features">
-                    <h4>What's included:</h4>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Access to all components</li>
-                        <li><i class="fas fa-check"></i> Unlimited downloads</li>
-                        <li><i class="fas fa-check"></i> Upload your own plugins</li>
-                        <li><i class="fas fa-check"></i> Community support</li>
-                        <li><i class="fas fa-check"></i> Regular updates</li>
-                        <li><i class="fas fa-check"></i> Commercial usage allowed</li>
-                        <li><i class="fas fa-check"></i> No credit card required</li>
-                        <li><i class="fas fa-info"></i> Beta access to new features</li>
-                    </ul>
-                </div>
-                
-                <div class="beta-disclaimer">
-                    <h5><i class="fas fa-exclamation-triangle"></i> Beta Version Notice</h5>
-                    <p>This is a beta version of our marketplace. Features and pricing plans may change as we gather feedback and improve the platform. Current users will be notified of any changes in advance.</p>
-                </div>
-                
-                <div class="plan-action">
-                    <button class="btn-plan current-plan" disabled>
-                        <i class="fas fa-check-circle"></i>
-                        Current Plan
-                    </button>
-                    <p class="plan-note">You're already on this plan!</p>
-                </div>
-            </div>
-
-            <!-- Coming Soon Card -->
-            <div class="pricing-card coming-soon">
-                <div class="plan-header">
-                    <h3>Pro Plan</h3>
-                    <div class="price">
-                        <span class="currency">$</span>
-                        <span class="amount">9</span>
-                        <span class="period">/month</span>
-                    </div>
-                    <p class="plan-description">Enhanced features for professional developers</p>
-                </div>
-                
-                <div class="plan-features">
-                    <h4>Everything in Free, plus:</h4>
-                    <ul>
-                        <li><i class="fas fa-plus"></i> Priority support</li>
-                        <li><i class="fas fa-plus"></i> Advanced analytics</li>
-                        <li><i class="fas fa-plus"></i> Custom themes</li>
-                        <li><i class="fas fa-plus"></i> Team collaboration</li>
-                        <li><i class="fas fa-plus"></i> Private components</li>
-                        <li><i class="fas fa-plus"></i> API access</li>
-                        <li><i class="fas fa-plus"></i> White-label options</li>
-                    </ul>
-                </div>
-                
-                <div class="plan-action">
-                    <button class="btn-plan coming-soon-btn" disabled>
-                        <i class="fas fa-clock"></i>
-                        Coming Soon
-                    </button>
-                    <p class="plan-note">Stay tuned for advanced features!</p>
-                </div>
-            </div>
-
-            <!-- Enterprise Card -->
-            <div class="pricing-card enterprise">
-                <div class="plan-header">
-                    <h3>Enterprise</h3>
-                    <div class="price">
-                        <span class="amount">Custom</span>
-                    </div>
-                    <p class="plan-description">Tailored solutions for large organizations</p>
-                </div>
-                
-                <div class="plan-features">
-                    <h4>Everything in Pro, plus:</h4>
-                    <ul>
-                        <li><i class="fas fa-crown"></i> Dedicated support</li>
-                        <li><i class="fas fa-crown"></i> Custom integrations</li>
-                        <li><i class="fas fa-crown"></i> On-premise deployment</li>
-                        <li><i class="fas fa-crown"></i> SLA guarantees</li>
-                        <li><i class="fas fa-crown"></i> Training & onboarding</li>
-                        <li><i class="fas fa-crown"></i> Custom licensing</li>
-                        <li><i class="fas fa-crown"></i> Unlimited users</li>
-                    </ul>
-                </div>
-                
-                <div class="plan-action">
-                    <button class="btn-plan contact-btn">
-                        <i class="fas fa-phone"></i>
-                        Contact Sales
-                    </button>
-                    <p class="plan-note">Let's discuss your needs</p>
-                </div>
-            </div>
+            <% } %>
         </div>
     </section>
 
@@ -152,10 +126,17 @@
                     <h4>Do I need to provide a credit card?</h4>
                     <p>No credit card required! Simply start using Zero Components immediately with our free plan.</p>
                 </div>
+                <% if (typeof features !== 'undefined' && !features.UPLOAD_ENABLED) { %>
                 <div class="faq-item">
                     <h4>How do I upload my own components?</h4>
                     <p>Component uploading is a coming soon feature! We're working on a streamlined process to allow developers to easily share their components with the community. Stay tuned for updates on this exciting feature.</p>
                 </div>
+                <% } else { %>
+                <div class="faq-item">
+                    <h4>How do I upload my own components?</h4>
+                    <p>You can easily upload your components using our upload form! Just visit the <a href="/marketplace/upload">Upload Your Plugins</a> page, prepare your component as a ZIP file with a valid package.json, and follow the upload process.</p>
+                </div>
+                <% } %>
                 <div class="faq-item">
                     <h4>What kind of support is available?</h4>
                     <p>Currently, we offer community support through our documentation and GitHub issues. Priority support will be available with paid plans.</p>

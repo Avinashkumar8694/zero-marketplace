@@ -28,9 +28,16 @@
                     <a href="/marketplace" class="nav-link">Marketplace</a>
                     <a href="/marketplace/upload" class="nav-link">
                         Upload Your Plugins
+                        <% if (typeof features !== 'undefined' && !features.UPLOAD_ENABLED) { %>
                         <span class="coming-soon-badge-nav">Coming Soon</span>
+                        <% } %>
                     </a>
-                    <a href="/marketplace/plans" class="nav-link">Plans</a>
+                    <a href="/marketplace/plans" class="nav-link">
+                        Plans
+                        <% if (typeof features !== 'undefined' && (!features.PRO_PLAN_ENABLED || !features.ENTERPRISE_PLAN_ENABLED)) { %>
+                        <span class="coming-soon-badge-nav">Coming Soon</span>
+                        <% } %>
+                    </a>
                 </nav>
                 <div class="header-actions">
                     <a href="#" class="profile-btn">

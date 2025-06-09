@@ -1868,3 +1868,23 @@ body {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 12px rgba(245, 158, 11, 0.5);
     }
 }
+
+/* Enterprise Coming Soon Styling */
+.pricing-card.enterprise.coming-soon {
+    background: linear-gradient(135deg, #6b7280 0%, #374151 100%);
+    opacity: 0.8;
+}
+
+.pricing-card.enterprise.coming-soon .plan-features li i {
+    color: #9ca3af;
+}
+
+.pricing-card.enterprise.coming-soon .coming-soon-btn {
+    background: #4b5563;
+    color: #d1d5db;
+    cursor: not-allowed;
+}
+
+.pricing-card.enterprise.coming-soon .plan-note {
+    color: #9ca3af;
+}
