@@ -26,8 +26,7 @@ A feature-rich code editor component inspired by Monaco Editor and VS Code. Prov
 ### HTML (Simple Setup)
 
 ```html
-<zero-code-editor
-    language="javascript"
+<zero-code-editor-1.0.0 language="javascript"
     theme="dark"
     show-line-numbers="true"
     show-minimap="true"
@@ -39,7 +38,7 @@ A feature-rich code editor component inspired by Monaco Editor and VS Code. Prov
 
 ```javascript
 // Create and configure the code editor
-const codeEditor = document.createElement('zero-code-editor');
+const codeEditor = document.createElement('zero-code-editor-1.0.0');
 
 // Set editor content
 codeEditor.code = `function fibonacci(n) {
@@ -174,7 +173,7 @@ editor.addEventListener('code-changed', (event) => {
 Debug method to test language configuration and validation.
 
 ```javascript
-const editor = document.querySelector('zero-code-editor');
+const editor = document.querySelector('zero-code-editor-1.0.0');
 editor.testLanguagesSetter(); // Logs test results to console
 ```
 
@@ -183,7 +182,7 @@ editor.testLanguagesSetter(); // Logs test results to console
 Programmatically toggle the search box visibility.
 
 ```javascript
-const editor = document.querySelector('zero-code-editor');
+const editor = document.querySelector('zero-code-editor-1.0.0');
 editor.toggleSearch();
 ```
 
@@ -203,7 +202,7 @@ editor.toggleSearch();
 ```html
 <div class="multi-file-editor">
     <div class="file-tabs" id="fileTabs"></div>
-    <zero-code-editor id="codeEditor"></zero-code-editor>
+    <zero-code-editor-1.0.0 id="codeEditor"></zero-code-editor>
     <div class="file-controls">
         <button id="addFileBtn">Add File</button>
         <button id="saveBtn">Save</button>
@@ -465,7 +464,7 @@ class CodePlayground {
         previewPanel.style.cssText = 'flex: 1; padding: 20px;';
         
         // Create editor
-        this.editor = document.createElement('zero-code-editor');
+        this.editor = document.createElement('zero-code-editor-1.0.0');
         this.editor.language = 'html';
         this.editor.theme = 'light';
         this.editor.code = `<!DOCTYPE html>
@@ -524,7 +523,7 @@ new CodePlayground();
 ```javascript
 class FormattedCodeEditor {
     constructor() {
-        this.editor = document.createElement('zero-code-editor');
+        this.editor = document.createElement('zero-code-editor-1.0.0');
         this.setupFormatter();
     }
     
@@ -625,7 +624,7 @@ new FormattedCodeEditor();
 ### Custom Theme Colors
 
 ```css
-zero-code-editor {
+zero-code-editor-1.0.0 {
     --editor-background: #0d1117;
     --editor-header-background: #161b22;
     --editor-text-primary: #f0f6fc;
@@ -652,7 +651,7 @@ zero-code-editor {
 
 ```javascript
 // Add custom language with syntax highlighting
-const editor = document.querySelector('zero-code-editor');
+const editor = document.querySelector('zero-code-editor-1.0.0');
 editor.languages = [
     ...editor.languages,
     { value: 'sql', label: 'SQL' },
