@@ -1,0 +1,527 @@
+<% 
+var bodyContent = `
+<main class="main">
+    <div class="upload-flex-container">
+        <div class="requirements-section card-style">
+            <h3><i class="fas fa-clipboard-check"></i> Plugin Requirements</h3>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Plugin must be in ZIP format</li>
+                <li><i class="fas fa-check-circle"></i> Must contain a valid <code>package.json</code> file</li>
+                <li><i class="fas fa-check-circle"></i> Must have a main component file (JavaScript)</li>
+                <li><i class="fas fa-check-circle"></i> File size should not exceed 100KB</li>
+                <li><i class="fas fa-check-circle"></i> Follow the standard component structure</li>
+            </ul>
+        </div>
+        <div class="upload-plugin-card card-style">
+            <div class="upload-header">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Upload a New Plugin</h2>
+                <p>Share your component with the Zero Components community</p>
+            </div>
+            <form id="pluginUploadForm" enctype="multipart/form-data">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-area-content" id="uploadAreaContent">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p class="upload-text">Drag and drop your ZIP file here</p>
+                        <p class="upload-text-sub">or</p>
+                        <label for="pluginZip" class="upload-button">Browse Files</label>
+                        <input type="file" id="pluginZip" name="plugin" accept=".zip" required hidden />
+                    </div>
+                    <div class="file-info" id="fileInfo" style="display: none;">
+                        <i class="fas fa-file-archive"></i>
+                        <span class="file-name" id="fileName"></span>
+                        <span class="file-size" id="fileSize"></span>
+                        <button type="button" class="remove-file" id="removeFile">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="notes"><i class="fas fa-sticky-note"></i> Additional Notes</label>
+                    <textarea id="notes" name="notes" placeholder="Describe your plugin, its features, or any special instructions..."></textarea>
+                </div>
+                <div class="form-row button-container">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-cloud-upload-alt"></i> Upload Plugin
+                    </button>
+                    <span class="btn-description">Maximum file size: 100KB</span>
+                </div>
+                <div id="uploadStatus" class="upload-status">
+                    <div class="progress-bar" style="display: none;">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<script>
+const form = document.getElementById('pluginUploadForm');
+const uploadArea = document.getElementById('uploadArea');
+const uploadAreaContent = document.getElementById('uploadAreaContent');
+const fileInfo = document.getElementById('fileInfo');
+const fileName = document.getElementById('fileName');
+const fileSize = document.getElementById('fileSize');
+const removeFileBtn = document.getElementById('removeFile');
+const fileInput = document.getElementById('pluginZip');
+const statusDiv = document.getElementById('uploadStatus');
+const progressBar = statusDiv.querySelector('.progress-bar');
+const progressFill = statusDiv.querySelector('.progress-fill');
+
+// Format file size
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+// Handle file selection
+function handleFileSelect(file) {
+    if (!file) return;
+    
+    // Check file type
+    if (!file.name.toLowerCase().endsWith('.zip')) {
+        showStatus('error', 'Please select a ZIP file');
+        return;
+    }
+    
+    // Check file size (100KB limit)
+    if (file.size > 100 * 1024) {
+        showStatus('error', 'File size exceeds 100KB limit');
+        return;
+    }
+
+    // Update UI
+    fileName.textContent = file.name;
+    fileSize.textContent = formatFileSize(file.size);
+    uploadAreaContent.style.display = 'none';
+    fileInfo.style.display = 'flex';
+    clearStatus();
+}
+
+// Show status message
+function showStatus(type, message) {
+    const statusMessage = document.createElement('div');
+    statusMessage.className = 'status-message ' + type;
+    statusMessage.textContent = message;
+    statusDiv.innerHTML = '';
+    statusDiv.appendChild(statusMessage);
+}
+
+// Clear status
+function clearStatus() {
+    statusDiv.innerHTML = '';
+    progressBar.style.display = 'none';
+    progressFill.style.width = '0%';
+}
+
+// Reset file input
+function resetFileInput() {
+    fileInput.value = '';
+    uploadAreaContent.style.display = 'block';
+    fileInfo.style.display = 'none';
+    clearStatus();
+}
+
+// Drag and drop handlers
+uploadArea.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    uploadArea.classList.add('drag-over');
+});
+
+uploadArea.addEventListener('dragleave', function() {
+    uploadArea.classList.remove('drag-over');
+});
+
+uploadArea.addEventListener('drop', function(e) {
+    e.preventDefault();
+    uploadArea.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    fileInput.files = e.dataTransfer.files;
+    handleFileSelect(file);
+});
+
+// File input change handler
+fileInput.addEventListener('change', function(e) {
+    handleFileSelect(e.target.files[0]);
+});
+
+// Remove file handler
+removeFileBtn.addEventListener('click', resetFileInput);
+
+// Form submit handler
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    if (!fileInput.files[0]) {
+        showStatus('error', 'Please select a file to upload');
+        return;
+    }
+
+    const formData = new FormData(form);
+    progressBar.style.display = 'block';
+    progressFill.style.width = '0%';
+
+    try {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/marketplace/upload', true);
+
+        // Progress handler
+        xhr.upload.onprogress = function(e) {
+            if (e.lengthComputable) {
+                const percentComplete = (e.loaded / e.total) * 100;
+                progressFill.style.width = percentComplete + '%';
+            }
+        };
+
+        // Response handler
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    showStatus('success', response.message);
+                    resetFileInput();
+                } else {
+                    showStatus('error', response.error || 'Upload failed');
+                }
+            } else {
+                showStatus('error', 'Upload failed');
+            }
+        };
+
+        // Error handler
+        xhr.onerror = function() {
+            showStatus('error', 'Network error occurred');
+        };
+
+        xhr.send(formData);
+    } catch (err) {
+        showStatus('error', 'Error: ' + err.message);
+    }
+});
+</script>
+<style>
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #f9fafb;
+    --card-bg: #fff;
+    --border-radius: 0.75rem;
+    --box-shadow: 0 4px 16px 0 rgba(102,126,234,0.08);
+    --input-border: #e5e7eb;
+    --input-focus: #667eea33;
+    --success: #10b981;
+    --danger: #ef4444;
+}
+.upload-flex-container {
+    display: flex;
+    gap: 2rem;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: row;
+}
+.card-style {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.requirements-section.card-style {
+    min-width: 260px;
+    max-width: 320px;
+    flex: 1 1 320px;
+    margin-bottom: 0;
+    border: 1px solid #e2e8f0;
+}
+.upload-plugin-card.card-style {
+    flex: 2 1 400px;
+    max-width: 600px;
+    margin: 0;
+}
+.upload-plugin-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 600px;
+    margin: 3rem auto 2rem auto;
+    padding: 2.5rem;
+}
+
+.upload-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.upload-header h2 {
+    color: var(--primary-color);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.upload-header p {
+    color: #6b7280;
+    font-size: 1.1rem;
+}
+
+.requirements-section {
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+.requirements-section h3 {
+    color: #1e293b;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.requirements-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.requirements-section li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #475569;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.requirements-section li i {
+    color: #10b981;
+}
+
+.requirements-section code {
+    background: #e2e8f0;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+    color: #475569;
+}
+
+.upload-area {
+    border: 2px dashed #e2e8f0;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    position: relative;
+}
+
+.upload-area.drag-over {
+    border-color: var(--primary-color);
+    background: #f0f4ff;
+}
+
+.upload-area-content {
+    text-align: center;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: #94a3b8;
+    margin-bottom: 1rem;
+}
+
+.upload-text {
+    color: #475569;
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+.upload-text-sub {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+.upload-button {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.upload-button:hover {
+    background: #5a67d8;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+.file-info i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.file-name {
+    flex: 1;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.file-size {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.remove-file {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: background 0.2s;
+}
+
+.remove-file:hover {
+    background: #fee2e2;
+}
+
+.form-row {
+    margin-bottom: 1.5rem;
+}
+
+.form-row label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.form-row textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 0.75rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 0.5rem;
+    resize: vertical;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.form-row textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--input-focus);
+}
+
+.btn.btn-primary {
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn.btn-primary:hover {
+    background: #5a67d8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.btn-description {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #6b7280;
+    text-align: center;
+}
+
+.upload-status {
+    margin-top: 1rem;
+}
+
+.progress-bar {
+    background: #e2e8f0;
+    border-radius: 1rem;
+    height: 0.5rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background: var(--primary-color);
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.status-message {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.status-message.success {
+    color: #10b981;
+}
+
+.status-message.error {
+    color: #ef4444;
+}
+
+@media (max-width: 900px) {
+    .upload-flex-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+    .requirements-section.card-style, .upload-plugin-card.card-style {
+        max-width: 100%;
+        min-width: 0;
+        margin: 0 auto;
+        padding: 1.5rem;
+    }
+}
+</style>
+`;
+%>
+<%- include('baselayout', { body: bodyContent }) %>

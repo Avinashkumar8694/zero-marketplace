@@ -2,3 +2,10 @@ node_modules
 dist
 build
 coverage
+.env
+.env.*
+!.env.example
+temp
+server/server/temp/*
+*.*/temp
+*/*temp
