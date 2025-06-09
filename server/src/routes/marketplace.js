@@ -183,6 +183,26 @@ const setupMarketplaceRoutes = (router) => {
         res.render(path.resolve(__dirname, '../../marketplace/upload-plugin.ejs'), {
             title: 'Upload Plugin - Zero Components Market'
         });
+    });    
+    // Plans page
+    router.get('/marketplace/plans', (req, res) => {
+        req.app.render(
+            path.resolve(__dirname, '../../marketplace/plans.ejs'),
+            {},
+            (err, html) => {
+                if (err) {
+                    console.error('Error rendering plans.ejs:', err);
+                    return res.status(500).send('Error rendering plans page');
+                }
+                res.render(
+                    path.resolve(__dirname, '../../marketplace/baselayout.ejs'),
+                    {
+                        title: 'Plans - Zero Components Market',
+                        body: html
+                    }
+                );
+            }
+        );
     });
 
     // Marketplace UI route (EJS)
