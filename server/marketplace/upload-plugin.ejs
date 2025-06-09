@@ -1,4 +1,4 @@
-<% 
+<%
 var bodyContent = `
 <main class="main">
     <div class="upload-flex-container">
@@ -16,8 +16,22 @@ var bodyContent = `
             <div class="upload-header">
                 <h2><i class="fas fa-cloud-upload-alt"></i> Upload a New Plugin</h2>
                 <p>Share your component with the Zero Components community</p>
+                ` + (!uploadEnabled || isUploadComingSoon ? `
+                <!-- Coming Soon Notice -->
+                <div class="coming-soon-notice">
+                    <div class="coming-soon-badge">
+                        <i class="fas fa-construction"></i>
+                        Coming Soon
+                    </div>
+                    <p class="coming-soon-text">
+                        Component uploading is currently in development! We're working on a streamlined process to allow developers to easily share their components with the community. 
+                        <br><br>
+                        <strong>Stay tuned for updates on this exciting feature.</strong>
+                    </p>
+                </div>
+                ` : '') + `
             </div>
-            <form id="pluginUploadForm" enctype="multipart/form-data">
+            <form id="pluginUploadForm" enctype="multipart/form-data"` + (!uploadEnabled || isUploadComingSoon ? ` style="opacity: 0.6; pointer-events: none;"` : '') + `>
                 <div class="upload-area" id="uploadArea">
                     <div class="upload-area-content" id="uploadAreaContent">
                         <i class="fas fa-cloud-upload-alt upload-icon"></i>
@@ -271,6 +285,45 @@ form.addEventListener('submit', function(e) {
     font-size: 1.1rem;
 }
 
+.coming-soon-notice {
+    background: linear-gradient(135deg, #fef3cd 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.coming-soon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f59e0b;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.coming-soon-badge i {
+    font-size: 1rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.coming-soon-text {
+    color: #92400e;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
 .requirements-section {
     background: #f8fafc;
     border-radius: 0.75rem;
@@ -508,6 +561,27 @@ form.addEventListener('submit', function(e) {
     color: #ef4444;
 }
 
+/* Form disabled state for coming soon */
+form[style*="pointer-events: none"] .upload-area {
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #64748b !important;
+}
+
+form[style*="pointer-events: none"] .upload-area * {
+    color: #94a3b8 !important;
+}
+
+form[style*="pointer-events: none"] .upload-button {
+    background: #cbd5e1 !important;
+    cursor: not-allowed !important;
+}
+
+form[style*="pointer-events: none"] .btn.btn-primary {
+    background: #cbd5e1 !important;
+    cursor: not-allowed !important;
+}
+
 @media (max-width: 900px) {
     .upload-flex-container {
         flex-direction: column;
@@ -521,7 +595,7 @@ form.addEventListener('submit', function(e) {
         padding: 1.5rem;
     }
 }
-</style>
 `;
 %>
-<%- include('baselayout', { body: bodyContent }) %>
+
+<%- include('./baselayout', { body: bodyContent }) %>

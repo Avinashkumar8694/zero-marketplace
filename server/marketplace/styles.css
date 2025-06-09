@@ -1838,9 +1838,53 @@ body {
 
     .metadata-section h3 {
         color: #f3f4f6;
-    }
-
-    .requirements {
+    }    .requirements {
         background: rgba(59, 130, 246, 0.1);
     }
+}
+
+/* Coming Soon Badge for Navigation */
+.coming-soon-badge-nav {
+    display: inline-block;
+    background: linear-gradient(45deg, #f59e0b, #ef4444);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 1rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    animation: pulse-glow 2s infinite;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px rgba(245, 158, 11, 0.3);
+    }
+    50% {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 12px rgba(245, 158, 11, 0.5);
+    }
+}
+
+/* Enterprise Coming Soon Styling */
+.pricing-card.enterprise.coming-soon {
+    background: linear-gradient(135deg, #6b7280 0%, #374151 100%);
+    opacity: 0.8;
+}
+
+.pricing-card.enterprise.coming-soon .plan-features li i {
+    color: #9ca3af;
+}
+
+.pricing-card.enterprise.coming-soon .coming-soon-btn {
+    background: #4b5563;
+    color: #d1d5db;
+    cursor: not-allowed;
+}
+
+.pricing-card.enterprise.coming-soon .plan-note {
+    color: #9ca3af;
 }
