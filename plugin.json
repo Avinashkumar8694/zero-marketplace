@@ -1,9 +1,0 @@
-{
-    "name": "zero-marketplace",
-    "components": {
-        "selectorPrefix": "zero"
-    },
-    "modules": {
-        "idPrefix": "mod"
-    }
-}

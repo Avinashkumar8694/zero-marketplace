@@ -2,12 +2,15 @@
     "name": "zero-marketplace",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
-    "scripts": {
+    "main": "index.js",    "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "zero-gen build",
-        "start": "zero-gen start",
-        "serve": "zero-gen serve"
+        "start": "node ./server/index.js",
+        "pm2:start": "pm2 start ecosystem.config.cjs",
+        "pm2:stop": "pm2 stop zero-marketplace",
+        "pm2:restart": "pm2 restart zero-marketplace",
+        "pm2:delete": "pm2 delete zero-marketplace",
+        "pm2:logs": "pm2 logs zero-marketplace",
+        "pm2:status": "pm2 status"
     },
     "keywords": [],
     "author": "",
