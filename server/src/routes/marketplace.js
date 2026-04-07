@@ -100,48 +100,48 @@ const setupMarketplaceRoutes = (router, featureFlags) => {
             const components = scanAllComponents();
             const componentFamilies = {};
 
-            // Process each component family
+            // Find latest and latestStable versions
             for (const [family, versions] of components) {
-                componentFamilies[family] = {
-                    latest: null,
-                    latestStable: null,
-                    versions: [],
-                    deprecated: [],
-                    structure: 'mixed'
-                };
-
                 const versionArray = Array.from(versions.keys());
-                componentFamilies[family].versions = versionArray;
+                const latest = findLatestVersion(versionArray);
+                const latestStable = findLatestStableVersion(versionArray);
                 
-                // Determine structure type
-                const structures = Array.from(versions.values()).map(v => v.structure);
-                componentFamilies[family].structure = structures.every(s => s === 'versioned') ? 'versioned' : 
-                                                    structures.every(s => s === 'flat') ? 'flat' : 'mixed';
-
-                // Find latest and latestStable versions
-                componentFamilies[family].latest = findLatestVersion(versionArray);
-                componentFamilies[family].latestStable = findLatestStableVersion(versionArray);
-
-                // Sort versions (newest first)
-                componentFamilies[family].versions.sort((a, b) => {
-                    const vA = parseVersion(a);
-                    const vB = parseVersion(b);
-                    if (!vA || !vB) return 0;
-                    
-                    if (vA.major !== vB.major) return vB.major - vA.major;
-                    if (vA.minor !== vB.minor) return vB.minor - vA.minor;
-                    if (vA.patch !== vB.patch) return vB.patch - vA.patch;
-                    
-                    // Handle prerelease versions
-                    if (vA.prerelease && !vB.prerelease) return 1;
-                    if (!vA.prerelease && vB.prerelease) return -1;
-                    if (vA.prerelease && vB.prerelease) return vB.prerelease.localeCompare(vA.prerelease);
-                    
-                    return 0;
-                });
+                componentFamilies[family] = {
+                    latest,
+                    latestStable,
+                    versions: versionArray,
+                    structure: Array.from(versions.values()).map(v => v.structure).every(s => s === 'versioned') ? 'versioned' : 
+                               (Array.from(versions.values()).map(v => v.structure).every(s => s === 'flat') ? 'flat' : 'mixed')
+                };
             }
 
-            res.json(componentFamilies);
+            // Pagination logic
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 0; // 0 means all for backward compatibility
+            
+            const familiesKeys = Object.keys(componentFamilies);
+            const total = familiesKeys.length;
+            
+            let paginatedFamilies = {};
+            if (limit > 0) {
+                const startIndex = (page - 1) * limit;
+                const endIndex = startIndex + limit;
+                const slicedKeys = familiesKeys.slice(startIndex, endIndex);
+                
+                slicedKeys.forEach(key => {
+                    paginatedFamilies[key] = componentFamilies[key];
+                });
+                
+                res.json({
+                    items: paginatedFamilies,
+                    total,
+                    page,
+                    limit,
+                    totalPages: Math.ceil(total / limit)
+                });
+            } else {
+                res.json(componentFamilies); // Original behavior
+            }
         } catch (error) {
             console.error('Error scanning components:', error);
             res.status(500).json({ error: 'Failed to scan components' });
