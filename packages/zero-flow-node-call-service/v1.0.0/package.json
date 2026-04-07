@@ -1,0 +1,13 @@
+{
+  "name": "zero-flow-node-call-service",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-flow-node-call-service",
+  "main": "zero-flow-node-call-service.js",
+  "keywords": [
+    "flow-node",
+    "flow-node-type:call-service",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

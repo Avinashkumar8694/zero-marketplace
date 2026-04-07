@@ -26,7 +26,8 @@ A feature-rich code editor component inspired by Monaco Editor and VS Code. Prov
 ### HTML (Simple Setup)
 
 ```html
-<zero-code-editor-1.0.0 language="javascript"
+<zero-code-editor-1.0.0
+    language="javascript"
     theme="dark"
     show-line-numbers="true"
     show-minimap="true"
@@ -38,7 +39,7 @@ A feature-rich code editor component inspired by Monaco Editor and VS Code. Prov
 
 ```javascript
 // Create and configure the code editor
-const codeEditor = document.createElement('zero-code-editor-1.0.0');
+const codeEditor = document.createElement('zero-code-editor');
 
 // Set editor content
 codeEditor.code = `function fibonacci(n) {
@@ -173,7 +174,7 @@ editor.addEventListener('code-changed', (event) => {
 Debug method to test language configuration and validation.
 
 ```javascript
-const editor = document.querySelector('zero-code-editor-1.0.0');
+const editor = document.querySelector('zero-code-editor');
 editor.testLanguagesSetter(); // Logs test results to console
 ```
 
@@ -182,7 +183,7 @@ editor.testLanguagesSetter(); // Logs test results to console
 Programmatically toggle the search box visibility.
 
 ```javascript
-const editor = document.querySelector('zero-code-editor-1.0.0');
+const editor = document.querySelector('zero-code-editor');
 editor.toggleSearch();
 ```
 
@@ -464,7 +465,7 @@ class CodePlayground {
         previewPanel.style.cssText = 'flex: 1; padding: 20px;';
         
         // Create editor
-        this.editor = document.createElement('zero-code-editor-1.0.0');
+        this.editor = document.createElement('zero-code-editor');
         this.editor.language = 'html';
         this.editor.theme = 'light';
         this.editor.code = `<!DOCTYPE html>
@@ -523,7 +524,7 @@ new CodePlayground();
 ```javascript
 class FormattedCodeEditor {
     constructor() {
-        this.editor = document.createElement('zero-code-editor-1.0.0');
+        this.editor = document.createElement('zero-code-editor');
         this.setupFormatter();
     }
     
@@ -624,7 +625,7 @@ new FormattedCodeEditor();
 ### Custom Theme Colors
 
 ```css
-zero-code-editor-1.0.0 {
+zero-code-editor {
     --editor-background: #0d1117;
     --editor-header-background: #161b22;
     --editor-text-primary: #f0f6fc;
@@ -651,7 +652,7 @@ zero-code-editor-1.0.0 {
 
 ```javascript
 // Add custom language with syntax highlighting
-const editor = document.querySelector('zero-code-editor-1.0.0');
+const editor = document.querySelector('zero-code-editor');
 editor.languages = [
     ...editor.languages,
     { value: 'sql', label: 'SQL' },

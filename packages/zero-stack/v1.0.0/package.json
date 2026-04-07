@@ -1,0 +1,13 @@
+{
+  "name": "zero-stack",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-stack",
+  "main": "zero-stack.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

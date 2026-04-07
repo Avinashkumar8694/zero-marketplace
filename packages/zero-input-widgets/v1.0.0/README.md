@@ -23,7 +23,8 @@ A comprehensive form demo component that showcases all available input widget ty
 ### HTML (Hardcoded Values)
 
 ```html
-<zero-input-widgets-1.0.0 username="john_doe"
+<zero-input-widgets-1.0.0
+    username="john_doe"
     password=""
     user-role="user"
     terms-accepted="true"

@@ -1,0 +1,13 @@
+{
+  "name": "zero-button",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-button",
+  "main": "zero-button.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

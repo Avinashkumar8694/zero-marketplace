@@ -15,6 +15,7 @@ const __dirname = path.dirname(__filename);
 const DEFAULT_GROUP = process.env.DEFAULT_GROUP || 'Components';
 const DEFAULT_LICENSE = process.env.DEFAULT_LICENSE || 'MIT';
 const COMPONENTS_DIR = process.env.COMPONENTS_DIR || 'packages';
+const EXTRA_COMPONENTS_DIR = process.env.EXTRA_COMPONENTS_DIR || '';
 
 /**
  * Create standardized template data with feature flags
@@ -66,11 +67,37 @@ const createTemplateData = (title, featureFlags, additionalData = {}) => {
 };
 
 const setupMarketplaceRoutes = (router, featureFlags) => {
+    // Helper function to scan directory and merge results
+    const scanAllComponents = () => {
+        const packagesDir = path.resolve(__dirname, `../../../${COMPONENTS_DIR}`);
+        const components = scanComponentStructure(packagesDir);
+        
+        // Also scan extra components directory if configured
+        if (EXTRA_COMPONENTS_DIR) {
+            const extraPath = path.isAbsolute(EXTRA_COMPONENTS_DIR)
+                ? EXTRA_COMPONENTS_DIR
+                : path.resolve(__dirname, `../../../${EXTRA_COMPONENTS_DIR}`);
+            
+            try {
+                const extraComponents = scanComponentStructure(extraPath);
+                // Merge extra components into main components
+                for (const [family, versions] of extraComponents) {
+                    if (!components.has(family)) {
+                        components.set(family, versions);
+                    }
+                }
+            } catch (err) {
+                console.warn('Could not scan extra components directory:', err.message);
+            }
+        }
+        
+        return components;
+    };
+
     // Get all component families with their versions
     router.get('/marketplace/components', async (req, res) => {
         try {
-            const packagesDir = path.resolve(__dirname, `../../../${COMPONENTS_DIR}`);
-            const components = scanComponentStructure(packagesDir);
+            const components = scanAllComponents();
             const componentFamilies = {};
 
             // Process each component family
@@ -125,13 +152,41 @@ const setupMarketplaceRoutes = (router, featureFlags) => {
     router.get('/marketplace/components/:family/:version', async (req, res) => {
         try {
             const { family, version } = req.params;
-            const packagesDir = path.resolve(__dirname, `../../../${COMPONENTS_DIR}`);
-            const components = scanComponentStructure(packagesDir);
             
-            if (!components.has(family) || !components.get(family).has(version)) {
+            // Helper to find component in either directory
+            const findComponent = () => {
+                const packagesDir = path.resolve(__dirname, `../../../${COMPONENTS_DIR}`);
+                const components = scanComponentStructure(packagesDir);
+                
+                if (components.has(family) && components.get(family).has(version)) {
+                    return { components, baseDir: COMPONENTS_DIR };
+                }
+                
+                // Check extra components directory
+                if (EXTRA_COMPONENTS_DIR) {
+                    const extraPath = path.isAbsolute(EXTRA_COMPONENTS_DIR)
+                        ? EXTRA_COMPONENTS_DIR
+                        : path.resolve(__dirname, `../../../${EXTRA_COMPONENTS_DIR}`);
+                    
+                    try {
+                        const extraComponents = scanComponentStructure(extraPath);
+                        if (extraComponents.has(family) && extraComponents.get(family).has(version)) {
+                            return { components: extraComponents, baseDir: EXTRA_COMPONENTS_DIR, isExtra: true };
+                        }
+                    } catch (err) {
+                        console.warn('Could not scan extra components:', err.message);
+                    }
+                }
+                
+                return null;
+            };
+            
+            const result = findComponent();
+            if (!result) {
                 return res.status(404).json({ error: 'Component version not found' });
             }
             
+            const { components, baseDir, isExtra } = result;
             const componentData = components.get(family).get(version);
             const packageJson = componentData.packageJson;
             
@@ -142,6 +197,10 @@ const setupMarketplaceRoutes = (router, featureFlags) => {
             if (fs.existsSync(readmePath)) {
                 readmeContent = fs.readFileSync(readmePath, 'utf8');
             }
+            
+            // Check if component has an action.js (for flow nodes)
+            const actionPath = path.join(componentData.path, 'action.js');
+            const hasAction = fs.existsSync(actionPath);
             
             // Extract component metadata
             const componentMetadata = extractComponentMetadata(componentData.path, componentData.directoryName);
@@ -167,7 +226,15 @@ const setupMarketplaceRoutes = (router, featureFlags) => {
                 // Version-specific metadata
                 componentVersion: componentMetadata.componentVersion || version,
                 path: componentData.path,
-                directoryName: componentData.directoryName
+                directoryName: componentData.directoryName,
+                // Flow node action info
+                hasAction: hasAction,
+                actionUrl: isExtra 
+                    ? `/plugins-extra/${componentData.directoryName}/action.js`
+                    : `/plugins/${componentData.directoryName}/action.js`,
+                jsEntry: isExtra
+                    ? `/plugins-extra/${componentData.directoryName}/${family}.js`
+                    : `/plugins/${componentData.directoryName}/${family}.js`
             };
             
             res.json(response);

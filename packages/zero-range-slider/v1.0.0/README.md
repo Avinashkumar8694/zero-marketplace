@@ -48,7 +48,7 @@ A configurable range slider component with dual handles and tooltips built with 
 <!-- With Tooltips and Step Controls -->
 <zero-range-slider-1.0.0 
     label="Font Size" 
-    value="16" 
+    value="16"
     min="8" 
     max="72" 
     step="2"
@@ -255,7 +255,7 @@ function animateToValue(targetValue, duration = 1000) {
 
 ```css
 /* Custom slider theme */
-zero-range-slider-1.0.0 {
+zero-range-slider {
     --primary-color: #ff6b6b;
     --background-secondary: #f8f9fa;
     --border-radius-xs: 8px;

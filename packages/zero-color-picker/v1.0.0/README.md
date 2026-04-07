@@ -378,7 +378,7 @@ function generateColorPalette(baseHsl) {
 
 ```css
 /* Custom color picker theme */
-zero-color-picker-1.0.0 {
+zero-color-picker {
     --primary-color: #2e7d32;
     --error-color: #c62828;
     --background-color: #f8f9fa;
@@ -387,7 +387,7 @@ zero-color-picker-1.0.0 {
 }
 
 /* Custom picker dimensions */
-zero-color-picker-1.0.0 {
+zero-color-picker {
     --picker-width: 320px;
     --picker-height: 240px;
 }

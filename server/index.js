@@ -35,6 +35,7 @@ const basePath = process.env.BASE_PATH || '';
 const componentsDir = process.env.COMPONENTS_DIR || 'packages';
 const uploadDir = process.env.UPLOAD_DIR || 'server/uploads';
 const tempDir = process.env.TEMP_DIR || 'server/temp';
+const extraComponentsDir = process.env.EXTRA_COMPONENTS_DIR || '';
 
 app.use(express.json());
 
@@ -59,6 +60,10 @@ const setupFolders = async () => {
         tempDir,
         componentsDir
     ];
+    
+    if (extraComponentsDir) {
+        folders.push(extraComponentsDir);
+    }
     
     for (const folder of folders) {
         const folderPath = path.join(__dirname, folder);
@@ -89,6 +94,14 @@ const setupRoutes = (app, basePath, featureFlags) => {
     router.use('/plugins', express.static(path.join(__dirname, componentsDir)));
     router.use('/plugins-build', express.static(path.join(__dirname, 'plugins-build')));
     router.use('/marketplace', express.static(path.join(__dirname, 'marketplace')));
+    
+    // Serve extra components (e.g., flow nodes from zero-components)
+    if (extraComponentsDir) {
+        const extraPath = path.isAbsolute(extraComponentsDir) 
+            ? extraComponentsDir 
+            : path.join(__dirname, extraComponentsDir);
+        router.use('/plugins-extra', express.static(extraPath));
+    }
 
     // Mount router with optional base path
     if (basePath) {

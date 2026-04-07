@@ -244,7 +244,8 @@ newPasswordInput.addEventListener('input', (event) => {
 ### Login Form with Remember Password
 
 ```html
-<form class="login-form" id="loginForm">    <zero-text-input-1.0.0 
+<form class="login-form" id="loginForm">
+    <zero-text-input-1.0.0 
         id="username"
         label="Username"
         placeholder="Enter username"
@@ -258,7 +259,8 @@ newPasswordInput.addEventListener('input', (event) => {
         required="true"
         show-strength-meter="false">
     </zero-password-input-1.0.0>
-      <zero-checkbox-1.0.0 
+    
+    <zero-checkbox-1.0.0 
         id="rememberMe"
         label="Remember me">
     </zero-checkbox-1.0.0>

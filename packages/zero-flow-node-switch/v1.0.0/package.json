@@ -1,0 +1,13 @@
+{
+  "name": "zero-flow-node-switch",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-flow-node-switch",
+  "main": "zero-flow-node-switch.js",
+  "keywords": [
+    "flow-node",
+    "flow-node-type:switch",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

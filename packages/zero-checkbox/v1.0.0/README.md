@@ -443,7 +443,7 @@ renderInterests();
 ### Custom Colors
 
 ```css
-zero-checkbox-1.0.0 {
+zero-checkbox {
     --primary-color: #007bff;
     --primary-light: rgba(0, 123, 255, 0.25);
     --border-color: #007bff;
@@ -461,11 +461,11 @@ zero-checkbox .checkbox-field:hover {
 ### Animation Effects
 
 ```css
-zero-checkbox-1.0.0 input[type="checkbox"] {
+zero-checkbox input[type="checkbox"] {
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-zero-checkbox-1.0.0 input[type="checkbox"]:checked {
+zero-checkbox input[type="checkbox"]:checked {
     animation: checkboxPulse 0.3s ease;
 }
 
@@ -479,7 +479,7 @@ zero-checkbox .checkbox-label {
     transition: color 0.2s ease;
 }
 
-zero-checkbox-1.0.0 input[type="checkbox"]:checked + .checkbox-label {
+zero-checkbox input[type="checkbox"]:checked + .checkbox-label {
     color: var(--primary-color);
     font-weight: 500;
 }

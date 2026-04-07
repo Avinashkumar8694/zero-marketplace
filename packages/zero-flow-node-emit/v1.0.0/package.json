@@ -1,0 +1,13 @@
+{
+  "name": "zero-flow-node-emit",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-flow-node-emit",
+  "main": "zero-flow-node-emit.js",
+  "keywords": [
+    "flow-node",
+    "flow-node-type:emit",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

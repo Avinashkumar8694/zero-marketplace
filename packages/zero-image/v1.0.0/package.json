@@ -1,0 +1,13 @@
+{
+  "name": "zero-image",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-image",
+  "main": "zero-image.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

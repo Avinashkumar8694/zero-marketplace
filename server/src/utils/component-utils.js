@@ -78,6 +78,40 @@ export const scanComponentStructure = (packagesDir) => {
                     } catch (error) {
                         console.error(`Error reading package.json for ${packageDir}:`, error);
                     }
+                } else {
+                    // Option C: Compiled components without package.json (like flow nodes)
+                    // Check if directory contains .js files (compiled components)
+                    const jsFiles = fs.readdirSync(packagePath).filter(f => f.endsWith('.js') && !f.includes('.map'));
+                    
+                    if (jsFiles.length > 0) {
+                        // Extract version from directory name if present, otherwise use default
+                        const versionMatch = packageDir.match(/v?(\d+\.\d+\.\d+)/);
+                        const version = versionMatch ? versionMatch[1] : '1.0.0';
+                        const family = extractComponentFamily(packageDir);
+                        
+                        // Create minimal package.json from directory name and keywords
+                        const keywords = packageDir.includes('flow-node') 
+                            ? ['flow-node', `flow-node-type:${packageDir.replace('zero-flow-node-', '')}`]
+                            : [];
+                        
+                        const inferredPackageJson = {
+                            name: packageDir,
+                            version: version,
+                            description: `Compiled component: ${packageDir}`,
+                            keywords: keywords
+                        };
+                        
+                        if (!components.has(family)) {
+                            components.set(family, new Map());
+                        }
+                        
+                        components.get(family).set(version, {
+                            path: packagePath,
+                            packageJson: inferredPackageJson,
+                            structure: 'compiled',
+                            directoryName: packageDir
+                        });
+                    }
                 }
             }
         } catch (error) {

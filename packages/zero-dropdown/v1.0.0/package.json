@@ -1,10 +1,13 @@
 {
   "name": "zero-dropdown",
   "version": "1.0.0",
-  "description": "A configurable dropdown/select component with search functionality and multiple selection",
-  "main": "zero-dropdown.ts",
-  "type": "module",
-  "keywords": ["lit", "web-component", "dropdown", "select", "form"],
+  "description": "Published from zero-components: zero-dropdown",
+  "main": "zero-dropdown.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
   "author": "Zero Components",
   "license": "MIT"
 }

@@ -1,10 +1,13 @@
 {
   "name": "zero-text-input",
   "version": "1.0.0",
-  "description": "A configurable text input component with global styling",
-  "main": "zero-text-input.ts",
-  "type": "module",
-  "keywords": ["lit", "web-component", "text-input", "form"],
+  "description": "Published from zero-components: zero-text-input",
+  "main": "zero-text-input.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
   "author": "Zero Components",
   "license": "MIT"
 }

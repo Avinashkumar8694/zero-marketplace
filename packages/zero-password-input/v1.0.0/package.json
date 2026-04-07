@@ -1,10 +1,13 @@
 {
   "name": "zero-password-input",
   "version": "1.0.0",
-  "description": "A configurable password input component with show/hide functionality and strength meter",
-  "main": "zero-password-input.ts",
-  "type": "module",
-  "keywords": ["lit", "web-component", "password-input", "form"],
+  "description": "Published from zero-components: zero-password-input",
+  "main": "zero-password-input.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
   "author": "Zero Components",
   "license": "MIT"
 }

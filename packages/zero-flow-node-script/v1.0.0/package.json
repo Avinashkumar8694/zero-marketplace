@@ -1,0 +1,13 @@
+{
+  "name": "zero-flow-node-script",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-flow-node-script",
+  "main": "zero-flow-node-script.js",
+  "keywords": [
+    "flow-node",
+    "flow-node-type:script",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

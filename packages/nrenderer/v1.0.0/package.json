@@ -1,0 +1,13 @@
+{
+  "name": "nrenderer",
+  "version": "1.0.0",
+  "description": "Published from zero-components: nrenderer",
+  "main": "nrenderer.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

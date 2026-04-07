@@ -1,0 +1,13 @@
+{
+  "name": "zero-flow-node-db",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-flow-node-db",
+  "main": "zero-flow-node-db.js",
+  "keywords": [
+    "flow-node",
+    "flow-node-type:db",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

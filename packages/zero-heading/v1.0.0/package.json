@@ -1,0 +1,13 @@
+{
+  "name": "zero-heading",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-heading",
+  "main": "zero-heading.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

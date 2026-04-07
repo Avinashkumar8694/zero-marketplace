@@ -1,0 +1,13 @@
+{
+  "name": "zero-flow-node-async",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-flow-node-async",
+  "main": "zero-flow-node-async.js",
+  "keywords": [
+    "flow-node",
+    "flow-node-type:async",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

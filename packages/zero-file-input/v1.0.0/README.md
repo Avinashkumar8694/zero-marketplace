@@ -442,7 +442,7 @@ function handleAudioFile(file) {
 
 ```css
 /* Custom file input theme */
-zero-file-input-1.0.0 {
+zero-file-input {
     --primary-color: #2e7d32;
     --error-color: #c62828;
     --success-color: #1b5e20;

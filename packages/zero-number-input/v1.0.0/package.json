@@ -1,10 +1,13 @@
 {
   "name": "zero-number-input",
   "version": "1.0.0",
-  "description": "A configurable number input component with step controls and validation",
-  "main": "zero-number-input.ts",
-  "type": "module",
-  "keywords": ["lit", "web-component", "number-input", "form"],
+  "description": "Published from zero-components: zero-number-input",
+  "main": "zero-number-input.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
   "author": "Zero Components",
   "license": "MIT"
 }

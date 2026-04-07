@@ -32,7 +32,8 @@ A flexible and customizable popup dialog component built with Lit Element. This 
 </zero-popup-dialog-1.0.0>
 
 <!-- Dialog with Custom Web Component -->
-<zero-popup-dialog-1.0.0 id="componentDialog"
+<zero-popup-dialog-1.0.0 
+    id="componentDialog"
     .config="${{
         webComponentSelector: 'my-custom-component',
         inputs: {

@@ -262,7 +262,7 @@ langSelector.addEventListener('change', (e) => {
 ### Custom Theme
 
 ```css
-zero-textarea-1.0.0 {
+zero-textarea {
     --font-size-base: 16px;
     --border-radius-sm: 8px;
     --primary-color: #007bff;
@@ -270,12 +270,12 @@ zero-textarea-1.0.0 {
 }
 
 /* Custom character count styling */
-zero-textarea-1.0.0 .character-count.near-limit {
+zero-textarea .character-count.near-limit {
     color: #ff9800;
     font-weight: 600;
 }
 
-zero-textarea-1.0.0 .character-count.over-limit {
+zero-textarea .character-count.over-limit {
     color: #f44336;
     font-weight: 700;
     animation: pulse 1s infinite;
@@ -291,7 +291,7 @@ zero-textarea-1.0.0 .character-count.over-limit {
 ### Auto-resize Animation
 
 ```css
-zero-textarea-1.0.0 textarea.auto-resize {
+zero-textarea textarea.auto-resize {
     transition: height 0.2s ease;
 }
 ```

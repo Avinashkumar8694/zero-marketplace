@@ -262,8 +262,7 @@ class DynamicDropdownDirective {
         this.directive = this.createDirective(initialOptions);
         this.setupEventHandlers();
     }
-    
-    createDirective(options) {
+      createDirective(options) {
         const directive = document.createElement('zero-popup-dropdown-directive-1.0.0');
         directive.enabled = true;
         directive.config = options;
@@ -467,7 +466,7 @@ new FormValidationManager();
 ### Custom Dropdown Appearance
 
 ```css
-zero-popup-dropdown-directive-1.0.0 {
+zero-popup-dropdown-directive {
     --dropdown-bg-color: #2d3748;
     --dropdown-border-color: #4a5568;
     --dropdown-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);

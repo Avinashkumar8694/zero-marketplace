@@ -1,16 +1,13 @@
 {
   "name": "zero-input-widgets",
   "version": "1.0.0",
-  "main": "zero-input-widgets.ts",
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "zero": {
-    "component": true
-  }
+  "description": "Published from zero-components: zero-input-widgets",
+  "main": "zero-input-widgets.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
 }

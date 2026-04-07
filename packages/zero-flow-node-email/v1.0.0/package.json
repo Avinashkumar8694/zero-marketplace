@@ -1,0 +1,13 @@
+{
+  "name": "zero-flow-node-email",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-flow-node-email",
+  "main": "zero-flow-node-email.js",
+  "keywords": [
+    "flow-node",
+    "flow-node-type:email",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

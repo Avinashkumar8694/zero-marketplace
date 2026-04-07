@@ -1,0 +1,13 @@
+{
+  "name": "zero-flow-node-return",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-flow-node-return",
+  "main": "zero-flow-node-return.js",
+  "keywords": [
+    "flow-node",
+    "flow-node-type:return",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

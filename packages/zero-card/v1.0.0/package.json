@@ -1,0 +1,13 @@
+{
+  "name": "zero-card",
+  "version": "1.0.0",
+  "description": "Published from zero-components: zero-card",
+  "main": "zero-card.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

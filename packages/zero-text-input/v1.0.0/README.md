@@ -203,7 +203,7 @@ bioInput.addEventListener('input', (event) => {
 ### Custom CSS Variables
 
 ```css
-zero-text-input-1.0.0 {
+zero-text-input {
     --input-height: 40px;
     --border-radius-sm: 8px;
     --primary-color: #007bff;

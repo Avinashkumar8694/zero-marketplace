@@ -1,10 +1,13 @@
 {
   "name": "zero-textarea",
   "version": "1.0.0",
-  "description": "A configurable textarea component with character count, word count, and auto-resize",
-  "main": "zero-textarea.ts",
-  "type": "module",
-  "keywords": ["lit", "web-component", "textarea", "form"],
+  "description": "Published from zero-components: zero-textarea",
+  "main": "zero-textarea.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
   "author": "Zero Components",
   "license": "MIT"
 }

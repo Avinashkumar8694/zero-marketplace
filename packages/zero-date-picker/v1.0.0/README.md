@@ -325,7 +325,7 @@ birthDatePicker.addEventListener('change', validateAge);
 
 ```css
 /* Custom date picker theme */
-zero-date-picker-1.0.0 {
+zero-date-picker {
     --primary-color: #2e7d32;
     --error-color: #c62828;
     --background-color: #f8f9fa;

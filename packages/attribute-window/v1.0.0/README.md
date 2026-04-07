@@ -154,7 +154,7 @@ interface RangeSettings {
 | `COLOR_PICKER` | `<input type="color">` | Color selection input |
 | `FILE_INPUT` | `<input type="file">` | File upload input |
 | `DATE_PICKER` | `<input type="date">` | Date selection input |
-| `POPUP_DROPDOWN` | `zero-popup-dropdown-1.0.0` | Custom popup dropdown component |
+| `POPUP_DROPDOWN` | `zero-popup-dropdown` | Custom popup dropdown component |
 
 ## CSS Variables
 
@@ -483,7 +483,7 @@ new ComponentInspector();
 ### Light Theme Override
 
 ```css
-zero-attribute-window-1.0.0 {
+zero-attribute-window {
     --primary-color: #007bff;
     --secondary-color: #f8f9fa;
     --text-color: #333333;
@@ -493,17 +493,17 @@ zero-attribute-window-1.0.0 {
 }
 
 /* Light theme input styling */
-zero-attribute-window-1.0.0 input,
-zero-attribute-window-1.0.0 select,
-zero-attribute-window-1.0.0 textarea {
+zero-attribute-window input,
+zero-attribute-window select,
+zero-attribute-window textarea {
     background-color: #ffffff;
     color: #333333;
     border: 1px solid #ced4da;
 }
 
-zero-attribute-window-1.0.0 input:focus,
-zero-attribute-window-1.0.0 select:focus,
-zero-attribute-window-1.0.0 textarea:focus {
+zero-attribute-window input:focus,
+zero-attribute-window select:focus,
+zero-attribute-window textarea:focus {
     border-color: #007bff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
@@ -519,9 +519,9 @@ zero-attribute-window-1.0.0 textarea:focus {
     --font-size-lg: 14px;
 }
 
-.compact-attribute-window-1.0.0 input,
-.compact-attribute-window-1.0.0 select,
-.compact-attribute-window-1.0.0 textarea {
+.compact-attribute-window input,
+.compact-attribute-window select,
+.compact-attribute-window textarea {
     padding: 4px 6px;
     font-size: 12px;
 }
@@ -530,19 +530,19 @@ zero-attribute-window-1.0.0 textarea:focus {
 ### Custom Input Styling
 
 ```css
-zero-attribute-window-1.0.0 {
+zero-attribute-window {
     --border-radius: 8px;
 }
 
 /* Custom checkbox styling */
-zero-attribute-window-1.0.0 input[type="checkbox"] {
+zero-attribute-window input[type="checkbox"] {
     border-radius: 50%;
     width: 24px;
     height: 24px;
 }
 
 /* Custom range slider styling */
-zero-attribute-window-1.0.0 input[type="range"] {
+zero-attribute-window input[type="range"] {
     height: 8px;
     background: linear-gradient(90deg, #007bff 0%, #6c757d 100%);
 }
