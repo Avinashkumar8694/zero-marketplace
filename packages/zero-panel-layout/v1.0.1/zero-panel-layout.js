@@ -1504,7 +1504,7 @@ var cn = Object.defineProperty, hn = Object.getOwnPropertyDescriptor, z = (i, e,
 };
 let x = class extends ne {
   constructor() {
-    super(...arguments), this.columns = 2, this.gap = 16, this.minColumnWidth = 220, this.enableHeader = !1, this.expanded = !0, this.expandable = !0, this.label = "Panel Header", this.icon = "📄", this.iconPosition = "start";
+    super(...arguments), this.columns = 1, this.gap = 16, this.minColumnWidth = 220, this.enableHeader = !1, this.expanded = !0, this.expandable = !0, this.label = "Panel Header", this.icon = "📄", this.iconPosition = "start";
   }
   handleSlotChange() {
     this.dispatchEvent(
@@ -1634,13 +1634,6 @@ x.styles = Bt`
       gap: var(--zero-panel-gap);
       grid-template-columns: repeat(var(--zero-panel-columns), minmax(var(--zero-panel-min-col), 1fr));
       align-items: start;
-      min-height: 120px;
-    }
-
-    slot {
-      display: block;
-      min-height: 100%;
-      pointer-events: auto;
     }
   `;
 z([

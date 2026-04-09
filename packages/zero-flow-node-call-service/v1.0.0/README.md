@@ -24,6 +24,42 @@ The Call Service node invokes a reusable service flow. It allows you to call ano
 | `serviceFlowId` | string | `""` | Alternative field for service ID |
 | `startNodeId` | string | `""` | Optional starting node within service |
 
+## Available Variables (Service Context)
+
+The Call-Service node autonomously passes your project's variables into a secondary "Service" flow and returns the result.
+
+| Variable Source | Description | Usage |
+| :--- | :--- | :--- |
+| `input` | Pass the current flow's entry data to the service. | `...data: input` |
+| `state` | Pass global project variables to the service. | `...id: state.userId` |
+
+## Real-World Example: Invoking Payment Sub-flow
+
+This example demonstrates how to encapsulate complex "Payment" logic in a separate service and call it from your main "Checkout" flow.
+
+**1. Service Configuration:**
+Service ID: `payments.processor`
+
+**2. Autonomous Variable Mapping:**
+You want to pass the total order amount from your current `input` into the payment service.
+
+**3. Execution & Result:**
+The node will autonomously invoke the sub-flow and wait for it to return a `transactionId`.
+
+```typescript
+// Current Context:
+// { "total": 25.50 }
+
+// Service Call (Internal):
+// CallService("payments.processor", { "amount": 25.50 })
+
+// Service Result:
+{
+  "success": true,
+  "transactionId": "TXN_998877"
+}
+```
+
 ## Variable Mapping & Persistence
 
 The Call-Service node uses **input mappings** to define what data is sent to the sub-flow and **output mappings** to capture what it returns.

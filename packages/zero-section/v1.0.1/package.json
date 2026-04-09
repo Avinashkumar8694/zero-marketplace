@@ -1,0 +1,13 @@
+{
+  "name": "zero-section",
+  "version": "1.0.1",
+  "description": "Published from zero-components: zero-section",
+  "main": "zero-section.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

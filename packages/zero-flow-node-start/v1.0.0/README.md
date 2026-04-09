@@ -39,6 +39,45 @@ The Start node is automatically added as the first node when you create a new fl
 | `entryRole` | string | `"default"` | Role identifier for this entry point |
 | `entryUsage` | string | `""` | Documentation notes about usage |
 
+## Available Variables (Flow Entry)
+
+The Start node autonomously initializes the flow's entry scope using the incoming trigger payload.
+
+| Variable | Description | Usage in Flow |
+| :--- | :--- | :--- |
+| `input` | The initial data passed by the trigger (e.g., HTTP Body). | `{{input.email}}` |
+| `state` | Global project-wide persistent variables. | `{{state.totalVisitors}}` |
+
+## Real-World Example: HTTP Webhook Trigger
+
+This example demonstrates how a flow is initialized when a user submits a signup form via a REST API.
+
+**1. Trigger Configuration:**
+An HTTP POST request is sent to your flow endpoint.
+
+**2. Flow Initialization (Autonomous):**
+The Start node automatically parses the JSON body and populates the `input` variable.
+
+**3. Execution & Context:**
+All subsequent nodes in the graph can now autonomously access this data.
+
+```typescript
+// Incoming Trigger Data (JSON):
+// { "firstName": "John", "lastName": "Doe", "email": "john@example.com" }
+
+// Starting Flow Context:
+{
+  "input": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@example.com"
+  },
+  "state": {
+    "welcomeMessage": "Hello, neighbor!"
+  }
+}
+```
+
 ## Variable Mapping & Persistence
 
 The Start node is unique because it captures the **initial payload** of the flow. You can use its results to initialize your project variables.

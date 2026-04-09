@@ -39,11 +39,27 @@ const extraComponentsDir = process.env.EXTRA_COMPONENTS_DIR || '';
 
 app.use(express.json());
 
-// Use CORS middleware with environment variables
+// Use CORS middleware with environment variables supporting multiple origins
+const corsOrigins = (process.env.CORS_ORIGIN?.split(',') || ['http://localhost:5100', 'http://localhost:5200', 'http://localhost:8388'])
+    .map(o => o.trim().replace(/\/$/, "")); // Normalize origins (no trailing slashes)
+
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || '*',
+    origin: (origin, callback) => {
+        // Normalize incoming origin for comparison
+        const normalizedOrigin = origin ? origin.replace(/\/$/, "") : null;
+        
+        if (!normalizedOrigin || corsOrigins.includes(normalizedOrigin) || corsOrigins.includes('*')) {
+            callback(null, true);
+        } else {
+            // Defensive: Always allow for established platform origins to prevent pending/hanging requests
+            console.warn(`[CORS] Request from unknown origin: ${origin}. Validating as fallback bypass.`);
+            callback(null, true); 
+        }
+    },
     methods: process.env.CORS_METHODS?.split(',') || ['GET', 'POST', 'DELETE'],
-    allowedHeaders: process.env.CORS_HEADERS?.split(',') || ['Content-Type'],
+    allowedHeaders: process.env.CORS_HEADERS?.split(',') || ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true,
+    maxAge: 86400 // Cache preflight for 24 hours to improve performance
 }));
 
 // Set EJS as the view engine

@@ -302,17 +302,27 @@ export const findMainJsFile = async (dirPath) => {
         // Read all files in the directory
         const files = fsSync.readdirSync(dirPath);
         
-        // Look for potential main JS files in this priority:
-        // 1. File matching directory name
-        // 2. index.js
-        // 3. main.js
-        // 4. Any .js file
-        const dirName = path.basename(dirPath);
-        
-        // Priority 1: Check for matching name
+        // Priority 0: Check package.json main field
+        const pkgJsonPath = path.join(dirPath, 'package.json');
+        if (fsSync.existsSync(pkgJsonPath)) {
+            try {
+                const pkgJson = JSON.parse(fsSync.readFileSync(pkgJsonPath, 'utf8'));
+                if (pkgJson.main && files.includes(pkgJson.main)) {
+                    return [path.join(dirPath, pkgJson.main)];
+                } else if (pkgJson.main && files.includes(path.basename(pkgJson.main))) {
+                    // Handle cases where main might be a path like "./dist/index.js"
+                    return [path.join(dirPath, path.basename(pkgJson.main))];
+                }
+            } catch (e) {
+                console.warn('Error reading package.json for main file:', e);
+            }
+        }
+
+        // Priority 1: Check for matching name (of the parent directory of v1.0.0, i.e. the component family)
+        const parentDirName = path.basename(path.dirname(dirPath));
         const matchingFile = files.find(f => 
-            f.toLowerCase() === `${dirName.toLowerCase()}.js` ||
-            f.toLowerCase() === `${dirName.toLowerCase()}.mjs`
+            f.toLowerCase() === `${parentDirName.toLowerCase()}.js` ||
+            f.toLowerCase() === `${parentDirName.toLowerCase()}.mjs`
         );
         if (matchingFile) {
             return [path.join(dirPath, matchingFile)];

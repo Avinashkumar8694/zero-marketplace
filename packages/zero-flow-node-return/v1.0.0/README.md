@@ -43,6 +43,39 @@ Map your internal flow variables to the node's `value` property.
 }
 ```
 
+## Available Variables (Return Payload)
+
+The Return node autonomously sends your calculated results back to the caller (e.g., another flow or a front-end component).
+
+| Variable Source | Description | Return Payload |
+| :--- | :--- | :--- |
+| `input` | Directly return the initial trigger payload. | `return input` |
+| `state` | Return the final results from the project context. | `return state.results` |
+
+## Real-World Example: Sub-flow Termination
+
+This example demonstrates how to set up a node to autonomously return a calculated value when a service-flow completes.
+
+**1. Return Configuration:**
+Target Variable: `finalOutput`
+
+**2. Autonomous Result Mapping:**
+You want to map the results of previous logic into the final output object.
+
+**3. Execution & Result:**
+The flow engine terminates the current thread and returns the payload to the caller immediately.
+
+```typescript
+// Context before Return:
+// { "calcResult": 10.5, "status": "done" }
+
+// Execution Result (Return):
+{
+  "total": 10.5,
+  "status": "success"
+}
+```
+
 ## Action Execution
 
 The Return node acts as a **specialized terminator**. When reached, it signals the completion of the current flow branch and passes the final state as the execution output.

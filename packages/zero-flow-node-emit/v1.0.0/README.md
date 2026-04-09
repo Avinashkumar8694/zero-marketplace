@@ -23,6 +23,42 @@ The Emit node broadcasts events to the UI or runtime. It allows flows to communi
 | `eventName` | string | `"flow.completed"` | Name of the event to emit |
 | `payload` | string | `"result"` | Data to send with event (expression) |
 
+## Available Variables (Event Payload)
+
+The Emit node autonomously constructs your event signal using mapped project data.
+
+| Variable Source | Description | Signal Payload |
+| :--- | :--- | :--- |
+| `input` | Use flow entry data as the signal body. | `emit("event", input)` |
+| `state` | Use global project state in the signal. | `emit("event", { val: state.val })` |
+
+## Real-World Example: Notification Dispatch
+
+This example demonstrates how to emit an internal signal that triggers a secondary "Toast" flow elsewhere in your project.
+
+**1. Event Configuration:**
+Event Name: `global.toast`
+
+**2. Autonomous Variable Mapping:**
+You want to pass a message from the current flow to the toast sub-system.
+
+**3. Execution & Signal:**
+When this node executes, it autonomously takes your local variables and broadcasts them across the Studio's event bus.
+
+```typescript
+// Local Context:
+// { "msg": "Payment Successful!" }
+
+// Resulting Studio Signal:
+{
+  "name": "global.toast",
+  "payload": {
+    "message": "Payment Successful!",
+    "type": "success"
+  }
+}
+```
+
 ## Variable Mapping & Persistence
 
 The Emit node uses **input mappings** to define what data is sent with the event. 

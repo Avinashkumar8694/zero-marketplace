@@ -33,8 +33,39 @@ Use these to dynamically control background execution.
 - **`isBackgroundEnabled` (Variable)** → `enabled`
 - **`shoudForkExecution` (Variable)** → `fork`
 
-### Output Mappings (Node → Variable)
-*Not used for the Async node*, as it purely signals a branch for parallel execution and doesn't return a result to the parent flow.
+### Output Mappings (Node)
+## Available Variables (Background Context)
+
+The Async node autonomously encapsulates your project's variables and moves execution into a non-blocking thread.
+
+| Variable Source | Description | Background Context |
+| :--- | :--- | :--- |
+| `input` | Pass the current flow's entry data to the job. | `input.id` |
+| `state` | Use global project state in the background. | `state.config` |
+
+## Real-World Example: Background Data Processing
+
+This example demonstrates how to set up a node to autonomously process a large payload without blocking the user's current interaction.
+
+**1. Async Configuration:**
+The node spawns a secondary "Background Worker" process.
+
+**2. Autonomous State Injection:**
+Your local variables are autonomously cloned and passed into the worker's scope.
+
+**3. Execution & Result:**
+The worker processes the data and autonomously updates your project's `state` proxy when finished.
+
+```typescript
+// Main Flow: User clicks "Process Data" -> triggers Async Node
+
+// Autonomous worker payload:
+// { "data": [1, 2, 3, 4] }
+
+// Execution Result (Background):
+// 1. Process data for 5 seconds (non-blocking)
+// 2. update state: state.reportsReady = true;
+```
 
 **Example Mapping Configuration:**
 ```json

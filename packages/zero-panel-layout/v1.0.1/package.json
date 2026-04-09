@@ -1,0 +1,13 @@
+{
+  "name": "zero-panel-layout",
+  "version": "1.0.1",
+  "description": "Published from zero-components: zero-panel-layout",
+  "main": "zero-panel-layout.js",
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}
