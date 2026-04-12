@@ -162,15 +162,27 @@ const validatePluginStructure = (pluginDir) => {
         if (!fsSync.existsSync(packageJsonPath)) {
             return { valid: false, error: 'package.json not found' };
         }
+        
         const packageJson = JSON.parse(fsSync.readFileSync(packageJsonPath, 'utf8'));
-        // Check for main component file
-        const componentName = packageJson.name || path.basename(pluginDir);
+        
+        // Essential fields validation
+        if (!packageJson.name) {
+            return { valid: false, error: 'package.json must contain a "name" property' };
+        }
+        if (!packageJson.version) {
+            return { valid: false, error: 'package.json must contain a "version" property' };
+        }
+
+        // Check for main component file (supporting multiple types)
+        const componentName = packageJson.name;
         const possibleFiles = [
-            `${componentName}.ts`,
+            packageJson.main,
             `${componentName}.js`,
-            'index.ts',
-            'index.js'
-        ];
+            `${componentName}.ts`,
+            'index.js',
+            'index.ts'
+        ].filter(Boolean);
+
         let mainFile = null;
         for (const file of possibleFiles) {
             if (fsSync.existsSync(path.join(pluginDir, file))) {
@@ -178,9 +190,14 @@ const validatePluginStructure = (pluginDir) => {
                 break;
             }
         }
+
         if (!mainFile) {
-            return { valid: false, error: 'Main component file not found' };
+            return { 
+                valid: false, 
+                error: `Main entry file not found. Checked: ${possibleFiles.join(', ')}` 
+            };
         }
+
         return {
             valid: true,
             metadata: {
@@ -191,7 +208,7 @@ const validatePluginStructure = (pluginDir) => {
             }
         };
     } catch (error) {
-        return { valid: false, error: error.message };
+        return { valid: false, error: `Validation error: ${error.message}` };
     }
 };
 

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Published from zero-components: zero-button",
   "main": "zero-button.js",
+  "group": "Actions",
   "keywords": [
     "zero-components",
     "lit",

@@ -106,6 +106,23 @@ const setupMarketplaceRoutes = (router, featureFlags) => {
                 const latest = findLatestVersion(versionArray);
                 const latestStable = findLatestStableVersion(versionArray);
                 
+                // Get metadata for search if search query is provided
+                const search = (req.query.search || "").toLowerCase().trim();
+                if (search) {
+                    const latestData = versions.get(latestStable || latest);
+                    const pkg = latestData?.packageJson || {};
+                    const haystack = [
+                        family.toLowerCase(),
+                        (pkg.name || "").toLowerCase(),
+                        (pkg.description || "").toLowerCase(),
+                        ...(pkg.keywords || []).map(k => k.toLowerCase())
+                    ].join(" ");
+
+                    if (!haystack.includes(search)) {
+                        continue;
+                    }
+                }
+
                 componentFamilies[family] = {
                     latest,
                     latestStable,

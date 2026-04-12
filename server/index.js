@@ -109,6 +109,7 @@ const setupRoutes = (app, basePath, featureFlags) => {
     // Serve static files
     router.use('/plugins', express.static(path.join(__dirname, componentsDir)));
     router.use('/plugins-build', express.static(path.join(__dirname, 'plugins-build')));
+    router.use('/shared', express.static(path.join(__dirname, 'shared')));
     router.use('/marketplace', express.static(path.join(__dirname, 'marketplace')));
     
     // Serve extra components (e.g., flow nodes from zero-components)
