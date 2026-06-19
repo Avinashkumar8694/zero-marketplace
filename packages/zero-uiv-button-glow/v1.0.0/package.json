@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-button-glow",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Glow effect button component",
+  "main": "zero-uiv-button-glow.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "button",
+    "glow",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

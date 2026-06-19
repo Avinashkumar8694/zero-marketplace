@@ -106,10 +106,20 @@ const setupRoutes = (app, basePath, featureFlags) => {
     setupLegacyRoutes(router);
     setupUploadRoutes(router);
 
-    // Serve static files
-    router.use('/plugins', express.static(path.join(__dirname, componentsDir)));
-    router.use('/plugins-build', express.static(path.join(__dirname, 'plugins-build')));
-    router.use('/shared', express.static(path.join(__dirname, 'shared')));
+    // Serve static files with no-cache for development freshness
+    const staticConfig = {
+        setHeaders: (res) => {
+            res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+            res.set('Pragma', 'no-cache');
+            res.set('Expires', '0');
+            res.set('Surrogate-Control', 'no-store');
+        }
+    };
+
+    router.use('/plugins', express.static(path.join(__dirname, componentsDir), staticConfig));
+    router.use('/plugins-build', express.static(path.join(__dirname, 'plugins-build'), staticConfig));
+    router.use('/shared', express.static(path.join(__dirname, 'shared'), staticConfig));
+    router.use('/marketplace/shared', express.static(path.join(__dirname, 'shared'), staticConfig));
     router.use('/marketplace', express.static(path.join(__dirname, 'marketplace')));
     
     // Serve extra components (e.g., flow nodes from zero-components)

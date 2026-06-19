@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-card-glass",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Glass card component",
+  "main": "zero-uiv-card-glass.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "card",
+    "glassmorphism",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

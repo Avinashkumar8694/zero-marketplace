@@ -1,9 +1,12 @@
 {
   "name": "zero-flow-node-start",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-flow-node-start",
+  "description": "Flow start node component",
   "main": "zero-flow-node-start.js",
+  "type": "module",
   "keywords": [
+    "lit",
+    "web-component",
     "flow-node",
     "flow-node-type:start",
     "zero-components"

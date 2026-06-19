@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-button-glass",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Glassmorphism button component",
+  "main": "zero-uiv-button-glass.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "button",
+    "glassmorphism",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

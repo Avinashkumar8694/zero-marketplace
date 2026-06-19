@@ -1,0 +1,16 @@
+{
+  "name": "zero-theme-orchestrator",
+  "version": "1.0.0",
+  "description": "Central orchestrator for independent theme registration and discovery",
+  "main": "zero-theme-orchestrator.js",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {},
+  "keywords": [
+    "zero-components",
+    "lit",
+    "web-component"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

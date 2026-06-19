@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-checkbox-heart",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Heart checkbox component",
+  "main": "zero-uiv-checkbox-heart.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "checkbox",
+    "heart",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

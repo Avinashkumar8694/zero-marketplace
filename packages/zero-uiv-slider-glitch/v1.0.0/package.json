@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-slider-glitch",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Glitch effect slider component",
+  "main": "zero-uiv-slider-glitch.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "slider",
+    "glitch",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

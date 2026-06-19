@@ -3,15 +3,15 @@
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const s = { ATTRIBUTE: 1 }, c = (i) => (...e) => ({ _$litDirective$: i, values: e });
-class p {
+const p = { ATTRIBUTE: 1 }, c = (r) => (...e) => ({ _$litDirective$: r, values: e });
+class s {
   constructor(e) {
   }
   get _$AU() {
     return this._$AM._$AU;
   }
   _$AT(e, t, n) {
-    this.t = e, this._$AM = t, this.i = n;
+    this._$Ct = e, this._$AM = t, this._$Ci = n;
   }
   _$AS(e, t) {
     return this.update(e, t);
@@ -20,13 +20,13 @@ class p {
     return this.render(...t);
   }
 }
-class u extends p {
+class u extends s {
   constructor(e) {
     super(e), this.config = null;
   }
   render(e) {
     return this.config = e, (t) => {
-      if (t.type !== s.ATTRIBUTE) {
+      if (t.type !== p.ATTRIBUTE) {
         console.error("The directive can only be used on attributes.");
         return;
       }
@@ -36,28 +36,24 @@ class u extends p {
         return;
       }
       if (!document.querySelector(`#popup-${this.config.webComponentSelector}`)) {
-        const o = this.createPopup();
-        if (!o) {
+        const i = this.createPopup();
+        if (!i) {
           console.error("Failed to create the popup element.");
           return;
         }
-        document.body.appendChild(o);
+        document.body.appendChild(i);
       }
       n.addEventListener("click", () => {
-        var r;
-        const o = document.querySelector(`#popup-${this.config.webComponentSelector}`);
-        if (!o) {
-          console.error("Popup element not found.");
-          return;
-        }
-        o.style.width = this.config.width || "auto", o.style.height = this.config.height || "auto", o.setAttribute("position", this.config.position || "center"), o.setAttribute("hasBackdrop", (r = this.config) == null ? void 0 : r.hasBackdrop), o.open = !0;
+        const i = `popup-${this.config.webComponentSelector}`;
+        let o = document.querySelector(`#${i}`);
+        o || (o = this.createPopup(), document.body.appendChild(o)), this.config.width && (o.style.width = this.config.width), this.config.height && (o.style.height = this.config.height), o.setAttribute("position", this.config.position || "center"), o.setAttribute("has-backdrop", String(this.config.hasBackdrop !== !1)), o.open = !0;
       });
     };
   }
   createPopup() {
     try {
-      const e = document.createElement("my-popup"), t = document.createElement(this.config.webComponentSelector);
-      return e.setAttribute("id", `popup-${this.config.webComponentSelector}`), e.setAttribute("position", this.config.position || "center"), e.appendChild(t), this.config.width && (e.style.width = this.config.width), this.config.height && (e.style.height = this.config.height), e.hasBackdrop = this.config.hasBackdrop !== !1, e.addEventListener("closed", () => {
+      const e = document.createElement("zero-popup-dialog"), t = document.createElement(this.config.webComponentSelector);
+      return e.setAttribute("id", `popup-${this.config.webComponentSelector}`), e.setAttribute("position", this.config.position || "center"), e.appendChild(t), e.addEventListener("closed", () => {
         console.log(`Popup for ${this.config.webComponentSelector} closed`);
       }), e.addEventListener("opened", () => {
         console.log(`Popup for ${this.config.webComponentSelector} opened`);
@@ -67,7 +63,7 @@ class u extends p {
     }
   }
 }
-const l = c(u);
+const d = c(u);
 export {
-  l as openPopupDirective
+  d as openPopupDirective
 };

@@ -1,9 +1,12 @@
 {
   "name": "zero-flow-node-async",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-flow-node-async",
+  "description": "Flow async node component",
   "main": "zero-flow-node-async.js",
+  "type": "module",
   "keywords": [
+    "lit",
+    "web-component",
     "flow-node",
     "flow-node-type:async",
     "zero-components"

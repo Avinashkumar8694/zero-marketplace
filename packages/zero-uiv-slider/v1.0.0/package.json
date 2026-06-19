@@ -1,0 +1,25 @@
+{
+  "name": "zero-uiv-slider",
+  "version": "1.0.0",
+  "description": "Unified Uiverse-inspired slider component with multi-theme support",
+  "main": "zero-uiv-slider.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "slider",
+    "uiverse",
+    "multi-theme",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  },
+  "dependencies": {
+    "lit": "^3.0.0",
+    "zero-annotation": "*",
+    "zero-uiv-themes": "*"
+  }
+}

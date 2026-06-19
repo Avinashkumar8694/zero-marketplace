@@ -1,13 +1,22 @@
 {
   "name": "zero-range-slider",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-range-slider",
+  "description": "A configurable range slider component with dual handles and tooltips",
   "main": "zero-range-slider.js",
   "keywords": [
-    "zero-components",
+    "range",
+    "slider",
+    "input",
+    "form",
     "lit",
+    "web-components",
+    "zero-components",
     "web-component"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^3.0.0"
+  },
+  "peerDependencies": {}
 }

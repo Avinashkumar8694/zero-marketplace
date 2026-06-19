@@ -1,16 +1,1 @@
-// packages/zero-flow-node-async/action.ts
-async function execute(config, input, context) {
-  const fork = config.fork !== void 0 ? Boolean(config.fork) : true;
-  context?.log?.(`[Async] Instructing background execution (fork: ${fork})`);
-  return {
-    output: input,
-    async: {
-      enabled: true,
-      fork
-    },
-    next: null
-  };
-}
-export {
-  execute
-};
+async function r(n,e,t){let o=n.fork!==void 0?!!n.fork:!0;return t?.log?.(`[Async] Instructing background execution (fork: ${o})`),{output:e,async:{enabled:!0,fork:o},next:null}}export{r as execute};

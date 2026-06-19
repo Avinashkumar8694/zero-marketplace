@@ -1,13 +1,28 @@
 {
   "name": "zero-panel-layout",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-panel-layout",
+  "description": "Responsive panel layout component with 1-4 column options",
   "main": "zero-panel-layout.js",
+  "type": "module",
   "keywords": [
-    "zero-components",
     "lit",
-    "web-component"
+    "web-component",
+    "layout",
+    "grid",
+    "panel",
+    "zero-components"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "zero": {
+    "component": true,
+    "category": "Layout",
+    "features": [
+      "Responsive Columns",
+      "Total Slot Control",
+      "Equal Distribution",
+      "Directional Flow",
+      "Expandable Header"
+    ]
+  }
 }

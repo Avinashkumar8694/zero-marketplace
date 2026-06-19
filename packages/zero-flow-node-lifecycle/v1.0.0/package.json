@@ -1,9 +1,12 @@
 {
   "name": "zero-flow-node-lifecycle",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-flow-node-lifecycle",
+  "description": "Flow lifecycle node component",
   "main": "zero-flow-node-lifecycle.js",
+  "type": "module",
   "keywords": [
+    "lit",
+    "web-component",
     "flow-node",
     "flow-node-type:lifecycle",
     "zero-components"

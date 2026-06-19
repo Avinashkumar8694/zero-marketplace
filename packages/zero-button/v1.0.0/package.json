@@ -1,13 +1,15 @@
 {
   "name": "zero-button",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-button",
+  "description": "Reusable action button component",
   "main": "zero-button.js",
-  "group": "Actions",
+  "type": "module",
   "keywords": [
-    "zero-components",
     "lit",
-    "web-component"
+    "web-component",
+    "button",
+    "action",
+    "zero-components"
   ],
   "author": "Zero Components",
   "license": "MIT"

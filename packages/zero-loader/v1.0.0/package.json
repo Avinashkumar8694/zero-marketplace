@@ -1,0 +1,16 @@
+{
+  "name": "zero-loader",
+  "version": "1.0.0",
+  "description": "Reusable loader component",
+  "main": "zero-loader.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "loader",
+    "feedback",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT"
+}

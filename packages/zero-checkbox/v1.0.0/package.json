@@ -1,13 +1,19 @@
 {
   "name": "zero-checkbox",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-checkbox",
+  "description": "A configurable checkbox component with multiple styles and indeterminate state",
   "main": "zero-checkbox.js",
+  "type": "module",
   "keywords": [
-    "zero-components",
     "lit",
-    "web-component"
+    "web-component",
+    "checkbox",
+    "form",
+    "zero-components"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
 }

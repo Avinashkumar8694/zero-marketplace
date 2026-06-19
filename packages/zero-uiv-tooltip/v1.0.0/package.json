@@ -1,0 +1,24 @@
+{
+  "name": "zero-uiv-tooltip",
+  "version": "1.0.0",
+  "description": "Unified Uiverse-inspired tooltip component",
+  "main": "zero-uiv-tooltip.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "tooltip",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  },
+  "dependencies": {
+    "lit": "^3.0.0",
+    "zero-annotation": "*",
+    "zero-uiv-themes": "*"
+  }
+}

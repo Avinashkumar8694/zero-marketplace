@@ -1,12 +1,15 @@
 {
   "name": "zero-card",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-card",
+  "description": "Surface card container with header and slot content",
   "main": "zero-card.js",
+  "type": "module",
   "keywords": [
-    "zero-components",
     "lit",
-    "web-component"
+    "web-component",
+    "card",
+    "surface",
+    "zero-components"
   ],
   "author": "Zero Components",
   "license": "MIT"

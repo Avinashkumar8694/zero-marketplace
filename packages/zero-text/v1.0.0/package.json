@@ -1,12 +1,16 @@
 {
   "name": "zero-text",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-text",
+  "description": "Rich paragraph text component",
   "main": "zero-text.js",
+  "type": "module",
   "keywords": [
-    "zero-components",
     "lit",
-    "web-component"
+    "web-component",
+    "text",
+    "paragraph",
+    "content",
+    "zero-components"
   ],
   "author": "Zero Components",
   "license": "MIT"

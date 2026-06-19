@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-expansion-frosted",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Frosted effect expansion panel component",
+  "main": "zero-uiv-expansion-frosted.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "expansion",
+    "frosted",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

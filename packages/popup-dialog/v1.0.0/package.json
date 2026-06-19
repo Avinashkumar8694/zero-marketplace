@@ -3,11 +3,18 @@
   "version": "1.0.0",
   "description": "Published from zero-components: popup-dialog",
   "main": "popup-dialog.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [
     "zero-components",
     "lit",
     "web-component"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "ISC",
+  "zero": {
+    "component": true
+  }
 }

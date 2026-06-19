@@ -1,13 +1,27 @@
 {
   "name": "zero-stack",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-stack",
+  "description": "Flexible stack layout component for row and column composition",
   "main": "zero-stack.js",
+  "type": "module",
   "keywords": [
-    "zero-components",
     "lit",
-    "web-component"
+    "web-component",
+    "layout",
+    "stack",
+    "flex",
+    "zero-components"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "zero": {
+    "component": true,
+    "category": "Layout",
+    "features": [
+      "Flexible Stack",
+      "Directional Flow",
+      "Mobile Overrides",
+      "Gap Control"
+    ]
+  }
 }

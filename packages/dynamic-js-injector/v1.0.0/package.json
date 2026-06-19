@@ -3,11 +3,19 @@
   "version": "1.0.0",
   "description": "Published from zero-components: dynamic-js-injector",
   "main": "dynamic-js-injector.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [
     "zero-components",
     "lit",
     "web-component"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "ISC",
+  "zero": {
+    "module": true,
+    "description": "No description"
+  }
 }

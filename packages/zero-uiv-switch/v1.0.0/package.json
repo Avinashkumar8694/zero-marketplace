@@ -1,0 +1,24 @@
+{
+  "name": "zero-uiv-switch",
+  "version": "1.0.0",
+  "description": "Unified Uiverse-inspired switch component",
+  "main": "zero-uiv-switch.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "switch",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  },
+  "dependencies": {
+    "lit": "^3.0.0",
+    "zero-annotation": "*",
+    "zero-uiv-themes": "*"
+  }
+}

@@ -1,9 +1,12 @@
 {
   "name": "zero-flow-node-return",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-flow-node-return",
+  "description": "Flow return node component",
   "main": "zero-flow-node-return.js",
+  "type": "module",
   "keywords": [
+    "lit",
+    "web-component",
     "flow-node",
     "flow-node-type:return",
     "zero-components"

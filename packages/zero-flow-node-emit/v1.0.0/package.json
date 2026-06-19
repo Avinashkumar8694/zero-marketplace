@@ -1,9 +1,12 @@
 {
   "name": "zero-flow-node-emit",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-flow-node-emit",
+  "description": "Flow emit node component",
   "main": "zero-flow-node-emit.js",
+  "type": "module",
   "keywords": [
+    "lit",
+    "web-component",
     "flow-node",
     "flow-node-type:emit",
     "zero-components"

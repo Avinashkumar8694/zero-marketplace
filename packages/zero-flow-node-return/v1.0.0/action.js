@@ -1,13 +1,1 @@
-// packages/zero-flow-node-return/action.ts
-async function execute(config, input, context) {
-  const result = config.value !== void 0 ? config.value : input;
-  context?.log?.(`[Return] Flow completed with result: ${JSON.stringify(result)}`);
-  return {
-    output: result,
-    done: true,
-    next: null
-  };
-}
-export {
-  execute
-};
+async function r(n,e,t){let o=n.value!==void 0?n.value:e;return t?.log?.(`[Return] Flow completed with result: ${JSON.stringify(o)}`),{output:o,done:!0,next:null}}export{r as execute};

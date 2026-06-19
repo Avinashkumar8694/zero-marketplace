@@ -1,12 +1,16 @@
 {
   "name": "zero-heading",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-heading",
+  "description": "Configurable heading component",
   "main": "zero-heading.js",
+  "type": "module",
   "keywords": [
-    "zero-components",
     "lit",
-    "web-component"
+    "web-component",
+    "heading",
+    "text",
+    "typography",
+    "zero-components"
   ],
   "author": "Zero Components",
   "license": "MIT"

@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-button-glitch",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Glitch effect button component",
+  "main": "zero-uiv-button-glitch.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "button",
+    "glitch",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

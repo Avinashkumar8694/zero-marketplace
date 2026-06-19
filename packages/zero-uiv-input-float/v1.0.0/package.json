@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-input-float",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Floating label input component",
+  "main": "zero-uiv-input-float.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "input",
+    "floating",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

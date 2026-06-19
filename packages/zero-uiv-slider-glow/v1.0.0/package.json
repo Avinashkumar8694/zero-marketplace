@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-slider-glow",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Neon slider component",
+  "main": "zero-uiv-slider-glow.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "slider",
+    "neon",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

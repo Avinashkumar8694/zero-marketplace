@@ -1,7 +1,7 @@
-var kt = Object.defineProperty;
-var Nt = (r, e, t) => e in r ? kt(r, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[e] = t;
-var Ve = (r, e, t) => Nt(r, typeof e != "symbol" ? e + "" : e, t);
-var Be = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
+var It = Object.defineProperty;
+var jt = (r, e, t) => e in r ? It(r, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[e] = t;
+var Be = (r, e, t) => jt(r, typeof e != "symbol" ? e + "" : e, t);
+var Ge = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 /*! *****************************************************************************
 Copyright (C) Microsoft. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -16,153 +16,153 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-var Ge;
+var We;
 (function(r) {
   (function(e) {
-    var t = typeof globalThis == "object" ? globalThis : typeof Be == "object" ? Be : typeof self == "object" ? self : typeof this == "object" ? this : _(), i = o(r);
-    typeof t.Reflect < "u" && (i = o(t.Reflect, i)), e(i, t), typeof t.Reflect > "u" && (t.Reflect = r);
-    function o(y, $) {
-      return function(E, w) {
-        Object.defineProperty(y, E, { configurable: !0, writable: !0, value: w }), $ && $(E, w);
+    var t = typeof globalThis == "object" ? globalThis : typeof Ge == "object" ? Ge : typeof self == "object" ? self : typeof this == "object" ? this : b(), i = s(r);
+    typeof t.Reflect < "u" && (i = s(t.Reflect, i)), e(i, t), typeof t.Reflect > "u" && (t.Reflect = r);
+    function s(v, E) {
+      return function($, w) {
+        Object.defineProperty(v, $, { configurable: !0, writable: !0, value: w }), E && E($, w);
       };
     }
-    function u() {
+    function l() {
       try {
         return Function("return this;")();
       } catch {
       }
     }
-    function l() {
+    function u() {
       try {
         return (0, eval)("(function() { return this; })()");
       } catch {
       }
     }
-    function _() {
-      return u() || l();
+    function b() {
+      return l() || u();
     }
   })(function(e, t) {
-    var i = Object.prototype.hasOwnProperty, o = typeof Symbol == "function", u = o && typeof Symbol.toPrimitive < "u" ? Symbol.toPrimitive : "@@toPrimitive", l = o && typeof Symbol.iterator < "u" ? Symbol.iterator : "@@iterator", _ = typeof Object.create == "function", y = { __proto__: [] } instanceof Array, $ = !_ && !y, E = {
+    var i = Object.prototype.hasOwnProperty, s = typeof Symbol == "function", l = s && typeof Symbol.toPrimitive < "u" ? Symbol.toPrimitive : "@@toPrimitive", u = s && typeof Symbol.iterator < "u" ? Symbol.iterator : "@@iterator", b = typeof Object.create == "function", v = { __proto__: [] } instanceof Array, E = !b && !v, $ = {
       // create an object in dictionary mode (a.k.a. "slow" mode in v8)
-      create: _ ? function() {
-        return ye(/* @__PURE__ */ Object.create(null));
-      } : y ? function() {
-        return ye({ __proto__: null });
+      create: b ? function() {
+        return be(/* @__PURE__ */ Object.create(null));
+      } : v ? function() {
+        return be({ __proto__: null });
       } : function() {
-        return ye({});
+        return be({});
       },
-      has: $ ? function(n, s) {
-        return i.call(n, s);
-      } : function(n, s) {
-        return s in n;
+      has: E ? function(n, o) {
+        return i.call(n, o);
+      } : function(n, o) {
+        return o in n;
       },
-      get: $ ? function(n, s) {
-        return i.call(n, s) ? n[s] : void 0;
-      } : function(n, s) {
-        return n[s];
+      get: E ? function(n, o) {
+        return i.call(n, o) ? n[o] : void 0;
+      } : function(n, o) {
+        return n[o];
       }
-    }, w = Object.getPrototypeOf(Function), R = typeof Map == "function" && typeof Map.prototype.entries == "function" ? Map : Tt(), I = typeof Set == "function" && typeof Set.prototype.entries == "function" ? Set : Mt(), z = typeof WeakMap == "function" ? WeakMap : Pt(), q = o ? Symbol.for("@reflect-metadata:registry") : void 0, ae = Ot(), Oe = St(ae);
-    function at(n, s, a, d) {
-      if (m(a)) {
-        if (!Ne(n))
+    }, w = Object.getPrototypeOf(Function), M = typeof Map == "function" && typeof Map.prototype.entries == "function" ? Map : kt(), H = typeof Set == "function" && typeof Set.prototype.entries == "function" ? Set : Nt(), V = typeof WeakMap == "function" ? WeakMap : Dt(), Y = s ? Symbol.for("@reflect-metadata:registry") : void 0, le = Pt(), Se = Mt(le);
+    function ht(n, o, a, d) {
+      if (g(a)) {
+        if (!De(n))
           throw new TypeError();
-        if (!Ue(s))
+        if (!Ue(o))
           throw new TypeError();
-        return mt(n, s);
+        return $t(n, o);
       } else {
-        if (!Ne(n))
+        if (!De(n))
           throw new TypeError();
-        if (!S(s))
+        if (!S(o))
           throw new TypeError();
-        if (!S(d) && !m(d) && !X(d))
+        if (!S(d) && !g(d) && !X(d))
           throw new TypeError();
-        return X(d) && (d = void 0), a = L(a), gt(n, s, a, d);
+        return X(d) && (d = void 0), a = j(a), Et(n, o, a, d);
       }
     }
-    e("decorate", at);
-    function lt(n, s) {
-      function a(d, v) {
+    e("decorate", ht);
+    function pt(n, o) {
+      function a(d, y) {
         if (!S(d))
           throw new TypeError();
-        if (!m(v) && !Et(v))
+        if (!g(y) && !Ct(y))
           throw new TypeError();
-        Me(n, s, d, v);
+        Pe(n, o, d, y);
       }
       return a;
     }
-    e("metadata", lt);
-    function ut(n, s, a, d) {
+    e("metadata", pt);
+    function ft(n, o, a, d) {
       if (!S(a))
         throw new TypeError();
-      return m(d) || (d = L(d)), Me(n, s, a, d);
+      return g(d) || (d = j(d)), Pe(n, o, a, d);
     }
-    e("defineMetadata", ut);
-    function dt(n, s, a) {
-      if (!S(s))
+    e("defineMetadata", ft);
+    function vt(n, o, a) {
+      if (!S(o))
         throw new TypeError();
-      return m(a) || (a = L(a)), Se(n, s, a);
+      return g(a) || (a = j(a)), xe(n, o, a);
     }
-    e("hasMetadata", dt);
-    function ct(n, s, a) {
-      if (!S(s))
+    e("hasMetadata", vt);
+    function yt(n, o, a) {
+      if (!S(o))
         throw new TypeError();
-      return m(a) || (a = L(a)), pe(n, s, a);
+      return g(a) || (a = j(a)), fe(n, o, a);
     }
-    e("hasOwnMetadata", ct);
-    function ht(n, s, a) {
-      if (!S(s))
+    e("hasOwnMetadata", yt);
+    function bt(n, o, a) {
+      if (!S(o))
         throw new TypeError();
-      return m(a) || (a = L(a)), xe(n, s, a);
+      return g(a) || (a = j(a)), Ce(n, o, a);
     }
-    e("getMetadata", ht);
-    function pt(n, s, a) {
-      if (!S(s))
+    e("getMetadata", bt);
+    function gt(n, o, a) {
+      if (!S(o))
         throw new TypeError();
-      return m(a) || (a = L(a)), Te(n, s, a);
+      return g(a) || (a = j(a)), Te(n, o, a);
     }
-    e("getOwnMetadata", pt);
-    function ft(n, s) {
+    e("getOwnMetadata", gt);
+    function mt(n, o) {
       if (!S(n))
         throw new TypeError();
-      return m(s) || (s = L(s)), Pe(n, s);
+      return g(o) || (o = j(o)), Me(n, o);
     }
-    e("getMetadataKeys", ft);
-    function vt(n, s) {
+    e("getMetadataKeys", mt);
+    function _t(n, o) {
       if (!S(n))
         throw new TypeError();
-      return m(s) || (s = L(s)), Ce(n, s);
+      return g(o) || (o = j(o)), Re(n, o);
     }
-    e("getOwnMetadataKeys", vt);
-    function yt(n, s, a) {
-      if (!S(s))
+    e("getOwnMetadataKeys", _t);
+    function wt(n, o, a) {
+      if (!S(o))
         throw new TypeError();
-      if (m(a) || (a = L(a)), !S(s))
+      if (g(a) || (a = j(a)), !S(o))
         throw new TypeError();
-      m(a) || (a = L(a));
-      var d = J(
-        s,
+      g(a) || (a = j(a));
+      var d = K(
+        o,
         a,
         /*Create*/
         !1
       );
-      return m(d) ? !1 : d.OrdinaryDeleteMetadata(n, s, a);
+      return g(d) ? !1 : d.OrdinaryDeleteMetadata(n, o, a);
     }
-    e("deleteMetadata", yt);
-    function mt(n, s) {
+    e("deleteMetadata", wt);
+    function $t(n, o) {
       for (var a = n.length - 1; a >= 0; --a) {
-        var d = n[a], v = d(s);
-        if (!m(v) && !X(v)) {
-          if (!Ue(v))
+        var d = n[a], y = d(o);
+        if (!g(y) && !X(y)) {
+          if (!Ue(y))
             throw new TypeError();
-          s = v;
+          o = y;
         }
       }
-      return s;
+      return o;
     }
-    function gt(n, s, a, d) {
-      for (var v = n.length - 1; v >= 0; --v) {
-        var T = n[v], x = T(s, a, d);
-        if (!m(x) && !X(x)) {
+    function Et(n, o, a, d) {
+      for (var y = n.length - 1; y >= 0; --y) {
+        var C = n[y], x = C(o, a, d);
+        if (!g(x) && !X(x)) {
           if (!S(x))
             throw new TypeError();
           d = x;
@@ -170,78 +170,78 @@ var Ge;
       }
       return d;
     }
-    function Se(n, s, a) {
-      var d = pe(n, s, a);
+    function xe(n, o, a) {
+      var d = fe(n, o, a);
       if (d)
         return !0;
-      var v = ve(s);
-      return X(v) ? !1 : Se(n, v, a);
+      var y = ye(o);
+      return X(y) ? !1 : xe(n, y, a);
     }
-    function pe(n, s, a) {
-      var d = J(
-        s,
+    function fe(n, o, a) {
+      var d = K(
+        o,
         a,
         /*Create*/
         !1
       );
-      return m(d) ? !1 : ke(d.OrdinaryHasOwnMetadata(n, s, a));
+      return g(d) ? !1 : Ne(d.OrdinaryHasOwnMetadata(n, o, a));
     }
-    function xe(n, s, a) {
-      var d = pe(n, s, a);
+    function Ce(n, o, a) {
+      var d = fe(n, o, a);
       if (d)
-        return Te(n, s, a);
-      var v = ve(s);
-      if (!X(v))
-        return xe(n, v, a);
+        return Te(n, o, a);
+      var y = ye(o);
+      if (!X(y))
+        return Ce(n, y, a);
     }
-    function Te(n, s, a) {
-      var d = J(
-        s,
+    function Te(n, o, a) {
+      var d = K(
+        o,
         a,
         /*Create*/
         !1
       );
-      if (!m(d))
-        return d.OrdinaryGetOwnMetadata(n, s, a);
+      if (!g(d))
+        return d.OrdinaryGetOwnMetadata(n, o, a);
     }
-    function Me(n, s, a, d) {
-      var v = J(
+    function Pe(n, o, a, d) {
+      var y = K(
         a,
         d,
         /*Create*/
         !0
       );
-      v.OrdinaryDefineOwnMetadata(n, s, a, d);
+      y.OrdinaryDefineOwnMetadata(n, o, a, d);
     }
-    function Pe(n, s) {
-      var a = Ce(n, s), d = ve(n);
+    function Me(n, o) {
+      var a = Re(n, o), d = ye(n);
       if (d === null)
         return a;
-      var v = Pe(d, s);
-      if (v.length <= 0)
+      var y = Me(d, o);
+      if (y.length <= 0)
         return a;
       if (a.length <= 0)
-        return v;
-      for (var T = new I(), x = [], g = 0, c = a; g < c.length; g++) {
-        var h = c[g], p = T.has(h);
-        p || (T.add(h), x.push(h));
+        return y;
+      for (var C = new H(), x = [], m = 0, c = a; m < c.length; m++) {
+        var h = c[m], p = C.has(h);
+        p || (C.add(h), x.push(h));
       }
-      for (var f = 0, b = v; f < b.length; f++) {
-        var h = b[f], p = T.has(h);
-        p || (T.add(h), x.push(h));
+      for (var f = 0, _ = y; f < _.length; f++) {
+        var h = _[f], p = C.has(h);
+        p || (C.add(h), x.push(h));
       }
       return x;
     }
-    function Ce(n, s) {
-      var a = J(
+    function Re(n, o) {
+      var a = K(
         n,
-        s,
+        o,
         /*create*/
         !1
       );
-      return a ? a.OrdinaryOwnMetadataKeys(n, s) : [];
+      return a ? a.OrdinaryOwnMetadataKeys(n, o) : [];
     }
-    function Re(n) {
+    function ke(n) {
       if (n === null)
         return 1;
       switch (typeof n) {
@@ -261,20 +261,20 @@ var Ge;
           return 6;
       }
     }
-    function m(n) {
+    function g(n) {
       return n === void 0;
     }
     function X(n) {
       return n === null;
     }
-    function bt(n) {
+    function At(n) {
       return typeof n == "symbol";
     }
     function S(n) {
       return typeof n == "object" ? n !== null : typeof n == "function";
     }
-    function _t(n, s) {
-      switch (Re(n)) {
+    function Ot(n, o) {
+      switch (ke(n)) {
         case 0:
           return n;
         case 1:
@@ -288,26 +288,26 @@ var Ge;
         case 5:
           return n;
       }
-      var a = "string", d = He(n, u);
+      var a = "string", d = He(n, l);
       if (d !== void 0) {
-        var v = d.call(n, a);
-        if (S(v))
+        var y = d.call(n, a);
+        if (S(y))
           throw new TypeError();
-        return v;
+        return y;
       }
-      return wt(n);
+      return St(n);
     }
-    function wt(n, s) {
+    function St(n, o) {
       var a, d;
       {
-        var v = n.toString;
-        if (le(v)) {
-          var d = v.call(n);
+        var y = n.toString;
+        if (ue(y)) {
+          var d = y.call(n);
           if (!S(d))
             return d;
         }
         var a = n.valueOf;
-        if (le(a)) {
+        if (ue(a)) {
           var d = a.call(n);
           if (!S(d))
             return d;
@@ -315,27 +315,27 @@ var Ge;
       }
       throw new TypeError();
     }
-    function ke(n) {
+    function Ne(n) {
       return !!n;
     }
-    function $t(n) {
+    function xt(n) {
       return "" + n;
     }
-    function L(n) {
-      var s = _t(n);
-      return bt(s) ? s : $t(s);
+    function j(n) {
+      var o = Ot(n);
+      return At(o) ? o : xt(o);
     }
-    function Ne(n) {
+    function De(n) {
       return Array.isArray ? Array.isArray(n) : n instanceof Object ? n instanceof Array : Object.prototype.toString.call(n) === "[object Array]";
     }
-    function le(n) {
+    function ue(n) {
       return typeof n == "function";
     }
     function Ue(n) {
       return typeof n == "function";
     }
-    function Et(n) {
-      switch (Re(n)) {
+    function Ct(n) {
+      switch (ke(n)) {
         case 3:
           return !0;
         case 4:
@@ -344,309 +344,309 @@ var Ge;
           return !1;
       }
     }
-    function fe(n, s) {
-      return n === s || n !== n && s !== s;
+    function ve(n, o) {
+      return n === o || n !== n && o !== o;
     }
-    function He(n, s) {
-      var a = n[s];
+    function He(n, o) {
+      var a = n[o];
       if (a != null) {
-        if (!le(a))
+        if (!ue(a))
           throw new TypeError();
         return a;
       }
     }
     function Ie(n) {
-      var s = He(n, l);
-      if (!le(s))
+      var o = He(n, u);
+      if (!ue(o))
         throw new TypeError();
-      var a = s.call(n);
+      var a = o.call(n);
       if (!S(a))
         throw new TypeError();
       return a;
     }
-    function De(n) {
+    function je(n) {
       return n.value;
     }
     function Le(n) {
-      var s = n.next();
-      return s.done ? !1 : s;
+      var o = n.next();
+      return o.done ? !1 : o;
     }
-    function je(n) {
-      var s = n.return;
-      s && s.call(n);
+    function Ve(n) {
+      var o = n.return;
+      o && o.call(n);
     }
-    function ve(n) {
-      var s = Object.getPrototypeOf(n);
-      if (typeof n != "function" || n === w || s !== w)
-        return s;
+    function ye(n) {
+      var o = Object.getPrototypeOf(n);
+      if (typeof n != "function" || n === w || o !== w)
+        return o;
       var a = n.prototype, d = a && Object.getPrototypeOf(a);
       if (d == null || d === Object.prototype)
-        return s;
-      var v = d.constructor;
-      return typeof v != "function" || v === n ? s : v;
+        return o;
+      var y = d.constructor;
+      return typeof y != "function" || y === n ? o : y;
     }
-    function At() {
+    function Tt() {
       var n;
-      !m(q) && typeof t.Reflect < "u" && !(q in t.Reflect) && typeof t.Reflect.defineMetadata == "function" && (n = xt(t.Reflect));
-      var s, a, d, v = new z(), T = {
+      !g(Y) && typeof t.Reflect < "u" && !(Y in t.Reflect) && typeof t.Reflect.defineMetadata == "function" && (n = Rt(t.Reflect));
+      var o, a, d, y = new V(), C = {
         registerProvider: x,
         getProvider: c,
         setProvider: p
       };
-      return T;
+      return C;
       function x(f) {
-        if (!Object.isExtensible(T))
+        if (!Object.isExtensible(C))
           throw new Error("Cannot add provider to a frozen registry.");
         switch (!0) {
           case n === f:
             break;
-          case m(s):
-            s = f;
+          case g(o):
+            o = f;
             break;
-          case s === f:
+          case o === f:
             break;
-          case m(a):
+          case g(a):
             a = f;
             break;
           case a === f:
             break;
           default:
-            d === void 0 && (d = new I()), d.add(f);
+            d === void 0 && (d = new H()), d.add(f);
             break;
         }
       }
-      function g(f, b) {
-        if (!m(s)) {
-          if (s.isProviderFor(f, b))
-            return s;
-          if (!m(a)) {
-            if (a.isProviderFor(f, b))
-              return s;
-            if (!m(d))
+      function m(f, _) {
+        if (!g(o)) {
+          if (o.isProviderFor(f, _))
+            return o;
+          if (!g(a)) {
+            if (a.isProviderFor(f, _))
+              return o;
+            if (!g(d))
               for (var A = Ie(d); ; ) {
                 var O = Le(A);
                 if (!O)
                   return;
-                var D = De(O);
-                if (D.isProviderFor(f, b))
-                  return je(A), D;
+                var I = je(O);
+                if (I.isProviderFor(f, _))
+                  return Ve(A), I;
               }
           }
         }
-        if (!m(n) && n.isProviderFor(f, b))
+        if (!g(n) && n.isProviderFor(f, _))
           return n;
       }
-      function c(f, b) {
-        var A = v.get(f), O;
-        return m(A) || (O = A.get(b)), m(O) && (O = g(f, b), m(O) || (m(A) && (A = new R(), v.set(f, A)), A.set(b, O))), O;
+      function c(f, _) {
+        var A = y.get(f), O;
+        return g(A) || (O = A.get(_)), g(O) && (O = m(f, _), g(O) || (g(A) && (A = new M(), y.set(f, A)), A.set(_, O))), O;
       }
       function h(f) {
-        if (m(f))
+        if (g(f))
           throw new TypeError();
-        return s === f || a === f || !m(d) && d.has(f);
+        return o === f || a === f || !g(d) && d.has(f);
       }
-      function p(f, b, A) {
+      function p(f, _, A) {
         if (!h(A))
           throw new Error("Metadata provider not registered.");
-        var O = c(f, b);
+        var O = c(f, _);
         if (O !== A) {
-          if (!m(O))
+          if (!g(O))
             return !1;
-          var D = v.get(f);
-          m(D) && (D = new R(), v.set(f, D)), D.set(b, A);
+          var I = y.get(f);
+          g(I) && (I = new M(), y.set(f, I)), I.set(_, A);
         }
         return !0;
       }
     }
-    function Ot() {
+    function Pt() {
       var n;
-      return !m(q) && S(t.Reflect) && Object.isExtensible(t.Reflect) && (n = t.Reflect[q]), m(n) && (n = At()), !m(q) && S(t.Reflect) && Object.isExtensible(t.Reflect) && Object.defineProperty(t.Reflect, q, {
+      return !g(Y) && S(t.Reflect) && Object.isExtensible(t.Reflect) && (n = t.Reflect[Y]), g(n) && (n = Tt()), !g(Y) && S(t.Reflect) && Object.isExtensible(t.Reflect) && Object.defineProperty(t.Reflect, Y, {
         enumerable: !1,
         configurable: !1,
         writable: !1,
         value: n
       }), n;
     }
-    function St(n) {
-      var s = new z(), a = {
+    function Mt(n) {
+      var o = new V(), a = {
         isProviderFor: function(h, p) {
-          var f = s.get(h);
-          return m(f) ? !1 : f.has(p);
+          var f = o.get(h);
+          return g(f) ? !1 : f.has(p);
         },
         OrdinaryDefineOwnMetadata: x,
-        OrdinaryHasOwnMetadata: v,
-        OrdinaryGetOwnMetadata: T,
-        OrdinaryOwnMetadataKeys: g,
+        OrdinaryHasOwnMetadata: y,
+        OrdinaryGetOwnMetadata: C,
+        OrdinaryOwnMetadataKeys: m,
         OrdinaryDeleteMetadata: c
       };
-      return ae.registerProvider(a), a;
+      return le.registerProvider(a), a;
       function d(h, p, f) {
-        var b = s.get(h), A = !1;
-        if (m(b)) {
+        var _ = o.get(h), A = !1;
+        if (g(_)) {
           if (!f)
             return;
-          b = new R(), s.set(h, b), A = !0;
+          _ = new M(), o.set(h, _), A = !0;
         }
-        var O = b.get(p);
-        if (m(O)) {
+        var O = _.get(p);
+        if (g(O)) {
           if (!f)
             return;
-          if (O = new R(), b.set(p, O), !n.setProvider(h, p, a))
-            throw b.delete(p), A && s.delete(h), new Error("Wrong provider for target.");
+          if (O = new M(), _.set(p, O), !n.setProvider(h, p, a))
+            throw _.delete(p), A && o.delete(h), new Error("Wrong provider for target.");
         }
         return O;
       }
-      function v(h, p, f) {
-        var b = d(
+      function y(h, p, f) {
+        var _ = d(
           p,
           f,
           /*Create*/
           !1
         );
-        return m(b) ? !1 : ke(b.has(h));
+        return g(_) ? !1 : Ne(_.has(h));
       }
-      function T(h, p, f) {
-        var b = d(
+      function C(h, p, f) {
+        var _ = d(
           p,
           f,
           /*Create*/
           !1
         );
-        if (!m(b))
-          return b.get(h);
+        if (!g(_))
+          return _.get(h);
       }
-      function x(h, p, f, b) {
+      function x(h, p, f, _) {
         var A = d(
           f,
-          b,
+          _,
           /*Create*/
           !0
         );
         A.set(h, p);
       }
-      function g(h, p) {
-        var f = [], b = d(
+      function m(h, p) {
+        var f = [], _ = d(
           h,
           p,
           /*Create*/
           !1
         );
-        if (m(b))
+        if (g(_))
           return f;
-        for (var A = b.keys(), O = Ie(A), D = 0; ; ) {
+        for (var A = _.keys(), O = Ie(A), I = 0; ; ) {
           var ze = Le(O);
           if (!ze)
-            return f.length = D, f;
-          var Ct = De(ze);
+            return f.length = I, f;
+          var Ut = je(ze);
           try {
-            f[D] = Ct;
-          } catch (Rt) {
+            f[I] = Ut;
+          } catch (Ht) {
             try {
-              je(O);
+              Ve(O);
             } finally {
-              throw Rt;
+              throw Ht;
             }
           }
-          D++;
+          I++;
         }
       }
       function c(h, p, f) {
-        var b = d(
+        var _ = d(
           p,
           f,
           /*Create*/
           !1
         );
-        if (m(b) || !b.delete(h))
+        if (g(_) || !_.delete(h))
           return !1;
-        if (b.size === 0) {
-          var A = s.get(p);
-          m(A) || (A.delete(f), A.size === 0 && s.delete(A));
+        if (_.size === 0) {
+          var A = o.get(p);
+          g(A) || (A.delete(f), A.size === 0 && o.delete(A));
         }
         return !0;
       }
     }
-    function xt(n) {
-      var s = n.defineMetadata, a = n.hasOwnMetadata, d = n.getOwnMetadata, v = n.getOwnMetadataKeys, T = n.deleteMetadata, x = new z(), g = {
+    function Rt(n) {
+      var o = n.defineMetadata, a = n.hasOwnMetadata, d = n.getOwnMetadata, y = n.getOwnMetadataKeys, C = n.deleteMetadata, x = new V(), m = {
         isProviderFor: function(c, h) {
           var p = x.get(c);
-          return !m(p) && p.has(h) ? !0 : v(c, h).length ? (m(p) && (p = new I(), x.set(c, p)), p.add(h), !0) : !1;
+          return !g(p) && p.has(h) ? !0 : y(c, h).length ? (g(p) && (p = new H(), x.set(c, p)), p.add(h), !0) : !1;
         },
-        OrdinaryDefineOwnMetadata: s,
+        OrdinaryDefineOwnMetadata: o,
         OrdinaryHasOwnMetadata: a,
         OrdinaryGetOwnMetadata: d,
-        OrdinaryOwnMetadataKeys: v,
-        OrdinaryDeleteMetadata: T
+        OrdinaryOwnMetadataKeys: y,
+        OrdinaryDeleteMetadata: C
       };
-      return g;
+      return m;
     }
-    function J(n, s, a) {
-      var d = ae.getProvider(n, s);
-      if (!m(d))
+    function K(n, o, a) {
+      var d = le.getProvider(n, o);
+      if (!g(d))
         return d;
       if (a) {
-        if (ae.setProvider(n, s, Oe))
-          return Oe;
+        if (le.setProvider(n, o, Se))
+          return Se;
         throw new Error("Illegal state.");
       }
     }
-    function Tt() {
-      var n = {}, s = [], a = (
+    function kt() {
+      var n = {}, o = [], a = (
         /** @class */
         function() {
-          function g(c, h, p) {
+          function m(c, h, p) {
             this._index = 0, this._keys = c, this._values = h, this._selector = p;
           }
-          return g.prototype["@@iterator"] = function() {
+          return m.prototype["@@iterator"] = function() {
             return this;
-          }, g.prototype[l] = function() {
+          }, m.prototype[u] = function() {
             return this;
-          }, g.prototype.next = function() {
+          }, m.prototype.next = function() {
             var c = this._index;
             if (c >= 0 && c < this._keys.length) {
               var h = this._selector(this._keys[c], this._values[c]);
-              return c + 1 >= this._keys.length ? (this._index = -1, this._keys = s, this._values = s) : this._index++, { value: h, done: !1 };
+              return c + 1 >= this._keys.length ? (this._index = -1, this._keys = o, this._values = o) : this._index++, { value: h, done: !1 };
             }
             return { value: void 0, done: !0 };
-          }, g.prototype.throw = function(c) {
-            throw this._index >= 0 && (this._index = -1, this._keys = s, this._values = s), c;
-          }, g.prototype.return = function(c) {
-            return this._index >= 0 && (this._index = -1, this._keys = s, this._values = s), { value: c, done: !0 };
-          }, g;
+          }, m.prototype.throw = function(c) {
+            throw this._index >= 0 && (this._index = -1, this._keys = o, this._values = o), c;
+          }, m.prototype.return = function(c) {
+            return this._index >= 0 && (this._index = -1, this._keys = o, this._values = o), { value: c, done: !0 };
+          }, m;
         }()
       ), d = (
         /** @class */
         function() {
-          function g() {
+          function m() {
             this._keys = [], this._values = [], this._cacheKey = n, this._cacheIndex = -2;
           }
-          return Object.defineProperty(g.prototype, "size", {
+          return Object.defineProperty(m.prototype, "size", {
             get: function() {
               return this._keys.length;
             },
             enumerable: !0,
             configurable: !0
-          }), g.prototype.has = function(c) {
+          }), m.prototype.has = function(c) {
             return this._find(
               c,
               /*insert*/
               !1
             ) >= 0;
-          }, g.prototype.get = function(c) {
+          }, m.prototype.get = function(c) {
             var h = this._find(
               c,
               /*insert*/
               !1
             );
             return h >= 0 ? this._values[h] : void 0;
-          }, g.prototype.set = function(c, h) {
+          }, m.prototype.set = function(c, h) {
             var p = this._find(
               c,
               /*insert*/
               !0
             );
             return this._values[p] = h, this;
-          }, g.prototype.delete = function(c) {
+          }, m.prototype.delete = function(c) {
             var h = this._find(
               c,
               /*insert*/
@@ -655,83 +655,83 @@ var Ge;
             if (h >= 0) {
               for (var p = this._keys.length, f = h + 1; f < p; f++)
                 this._keys[f - 1] = this._keys[f], this._values[f - 1] = this._values[f];
-              return this._keys.length--, this._values.length--, fe(c, this._cacheKey) && (this._cacheKey = n, this._cacheIndex = -2), !0;
+              return this._keys.length--, this._values.length--, ve(c, this._cacheKey) && (this._cacheKey = n, this._cacheIndex = -2), !0;
             }
             return !1;
-          }, g.prototype.clear = function() {
+          }, m.prototype.clear = function() {
             this._keys.length = 0, this._values.length = 0, this._cacheKey = n, this._cacheIndex = -2;
-          }, g.prototype.keys = function() {
-            return new a(this._keys, this._values, v);
-          }, g.prototype.values = function() {
-            return new a(this._keys, this._values, T);
-          }, g.prototype.entries = function() {
+          }, m.prototype.keys = function() {
+            return new a(this._keys, this._values, y);
+          }, m.prototype.values = function() {
+            return new a(this._keys, this._values, C);
+          }, m.prototype.entries = function() {
             return new a(this._keys, this._values, x);
-          }, g.prototype["@@iterator"] = function() {
+          }, m.prototype["@@iterator"] = function() {
             return this.entries();
-          }, g.prototype[l] = function() {
+          }, m.prototype[u] = function() {
             return this.entries();
-          }, g.prototype._find = function(c, h) {
-            if (!fe(this._cacheKey, c)) {
+          }, m.prototype._find = function(c, h) {
+            if (!ve(this._cacheKey, c)) {
               this._cacheIndex = -1;
               for (var p = 0; p < this._keys.length; p++)
-                if (fe(this._keys[p], c)) {
+                if (ve(this._keys[p], c)) {
                   this._cacheIndex = p;
                   break;
                 }
             }
             return this._cacheIndex < 0 && h && (this._cacheIndex = this._keys.length, this._keys.push(c), this._values.push(void 0)), this._cacheIndex;
-          }, g;
+          }, m;
         }()
       );
       return d;
-      function v(g, c) {
-        return g;
+      function y(m, c) {
+        return m;
       }
-      function T(g, c) {
+      function C(m, c) {
         return c;
       }
-      function x(g, c) {
-        return [g, c];
+      function x(m, c) {
+        return [m, c];
       }
     }
-    function Mt() {
+    function Nt() {
       var n = (
         /** @class */
         function() {
-          function s() {
-            this._map = new R();
+          function o() {
+            this._map = new M();
           }
-          return Object.defineProperty(s.prototype, "size", {
+          return Object.defineProperty(o.prototype, "size", {
             get: function() {
               return this._map.size;
             },
             enumerable: !0,
             configurable: !0
-          }), s.prototype.has = function(a) {
+          }), o.prototype.has = function(a) {
             return this._map.has(a);
-          }, s.prototype.add = function(a) {
+          }, o.prototype.add = function(a) {
             return this._map.set(a, a), this;
-          }, s.prototype.delete = function(a) {
+          }, o.prototype.delete = function(a) {
             return this._map.delete(a);
-          }, s.prototype.clear = function() {
+          }, o.prototype.clear = function() {
             this._map.clear();
-          }, s.prototype.keys = function() {
+          }, o.prototype.keys = function() {
             return this._map.keys();
-          }, s.prototype.values = function() {
+          }, o.prototype.values = function() {
             return this._map.keys();
-          }, s.prototype.entries = function() {
+          }, o.prototype.entries = function() {
             return this._map.entries();
-          }, s.prototype["@@iterator"] = function() {
+          }, o.prototype["@@iterator"] = function() {
             return this.keys();
-          }, s.prototype[l] = function() {
+          }, o.prototype[u] = function() {
             return this.keys();
-          }, s;
+          }, o;
         }()
       );
       return n;
     }
-    function Pt() {
-      var n = 16, s = E.create(), a = d();
+    function Dt() {
+      var n = 16, o = $.create(), a = d();
       return (
         /** @class */
         function() {
@@ -739,28 +739,28 @@ var Ge;
             this._key = d();
           }
           return c.prototype.has = function(h) {
-            var p = v(
+            var p = y(
               h,
               /*create*/
               !1
             );
-            return p !== void 0 ? E.has(p, this._key) : !1;
+            return p !== void 0 ? $.has(p, this._key) : !1;
           }, c.prototype.get = function(h) {
-            var p = v(
+            var p = y(
               h,
               /*create*/
               !1
             );
-            return p !== void 0 ? E.get(p, this._key) : void 0;
+            return p !== void 0 ? $.get(p, this._key) : void 0;
           }, c.prototype.set = function(h, p) {
-            var f = v(
+            var f = y(
               h,
               /*create*/
               !0
             );
             return f[this._key] = p, this;
           }, c.prototype.delete = function(h) {
-            var p = v(
+            var p = y(
               h,
               /*create*/
               !1
@@ -774,19 +774,19 @@ var Ge;
       function d() {
         var c;
         do
-          c = "@@WeakMap@@" + g();
-        while (E.has(s, c));
-        return s[c] = !0, c;
+          c = "@@WeakMap@@" + m();
+        while ($.has(o, c));
+        return o[c] = !0, c;
       }
-      function v(c, h) {
+      function y(c, h) {
         if (!i.call(c, a)) {
           if (!h)
             return;
-          Object.defineProperty(c, a, { value: E.create() });
+          Object.defineProperty(c, a, { value: $.create() });
         }
         return c[a];
       }
-      function T(c, h) {
+      function C(c, h) {
         for (var p = 0; p < h; ++p)
           c[p] = Math.random() * 255 | 0;
         return c;
@@ -794,11 +794,11 @@ var Ge;
       function x(c) {
         if (typeof Uint8Array == "function") {
           var h = new Uint8Array(c);
-          return typeof crypto < "u" ? crypto.getRandomValues(h) : typeof msCrypto < "u" ? msCrypto.getRandomValues(h) : T(h, c), h;
+          return typeof crypto < "u" ? crypto.getRandomValues(h) : typeof msCrypto < "u" ? msCrypto.getRandomValues(h) : C(h, c), h;
         }
-        return T(new Array(c), c);
+        return C(new Array(c), c);
       }
-      function g() {
+      function m() {
         var c = x(n);
         c[6] = c[6] & 79 | 64, c[8] = c[8] & 191 | 128;
         for (var h = "", p = 0; p < n; ++p) {
@@ -808,17 +808,17 @@ var Ge;
         return h;
       }
     }
-    function ye(n) {
+    function be(n) {
       return n.__ = void 0, delete n.__, n;
     }
   });
-})(Ge || (Ge = {}));
-function Ut(r) {
+})(We || (We = {}));
+function Lt(r) {
   return typeof r.name == "string" && typeof r.version == "string" && typeof r.title == "string" && typeof r.elementSelector == "string" && typeof r.group == "string" && typeof r.iconName == "string";
 }
-function Ht(r) {
+function Vt(r) {
   return function(e) {
-    if (Ut(r)) {
+    if (Lt(r)) {
       const t = {
         version: r.version,
         name: r.name,
@@ -827,7 +827,22 @@ function Ht(r) {
         category: r.group,
         icon: r.iconName
       };
-      Reflect.defineMetadata("ZeroComponent", t, e.prototype), globalThis.customElements ? customElements.define(`${r.elementSelector}-${r.version}`, e) : console.warn("The customElements API is not supported in this environment. Custom element registration skipped."), window.dispatchEvent(new CustomEvent("zero-element:component-load", {
+      if (Reflect.defineMetadata("ZeroComponent", t, e.prototype), globalThis.customElements) {
+        const i = `${r.elementSelector}-${r.version}`;
+        if (!customElements.get(i))
+          try {
+            customElements.define(i, e);
+          } catch {
+            try {
+              customElements.define(i, class extends e {
+              });
+            } catch (l) {
+              console.error(`[ZeroAnnotations] Failed to define custom element ${i}:`, l);
+            }
+          }
+      } else
+        console.warn("The customElements API is not supported in this environment. Custom element registration skipped.");
+      window.dispatchEvent(new CustomEvent("zero-element:component-load", {
         detail: {
           element: t
         }
@@ -836,73 +851,82 @@ function Ht(r) {
       throw new Error("Invalid configuration provided to RendererComponent decorator");
   };
 }
-function It(r) {
-  return Ht(r);
+function zt(r) {
+  return Vt(r);
 }
-function Dt(r) {
+function Bt(r) {
   return function(e) {
     class t extends e {
       constructor() {
         super(...arguments);
-        Ve(this, "_stylesApplied", !1);
+        Be(this, "_stylesApplied", !1);
       }
       connectedCallback() {
         super.connectedCallback(), this._stylesApplied || (this._injectGlobalStyles(), this._stylesApplied = !0), window.dispatchEvent(new CustomEvent("element-connected", {
           detail: { element: this }
         }));
       }
-      update(u) {
+      update(l) {
         try {
-          super.update(u);
+          super.update(l);
         } catch {
         }
       }
       _injectGlobalStyles() {
-        var y;
-        const u = document.querySelector('style.global-style[type="text/css"]'), l = document.querySelectorAll('link[rel="stylesheet"].global-style[type="text/css"]'), _ = "adoptedStyleSheets" in Document.prototype;
-        if (!this.shadowRoot) {
+        var E;
+        const l = document.querySelector('style.global-style[type="text/css"]'), u = document.querySelectorAll('link[rel="stylesheet"].global-style[type="text/css"]'), b = "adoptedStyleSheets" in Document.prototype, v = this.shadowRoot;
+        if (!v) {
           console.error("ShadowRoot is not available.");
           return;
         }
-        if (u && _) {
-          const $ = new CSSStyleSheet(), E = (y = u.sheet) == null ? void 0 : y.cssRules;
-          E && (Array.from(E).forEach((w) => $.insertRule(w.cssText)), this.shadowRoot.adoptedStyleSheets = [...this.shadowRoot.adoptedStyleSheets, $]);
-        } else if (u) {
-          const $ = u.cloneNode(!0);
-          this.shadowRoot.appendChild($);
+        if (l && b) {
+          const $ = new CSSStyleSheet(), w = (E = l.sheet) == null ? void 0 : E.cssRules;
+          w && (Array.from(w).forEach((M) => $.insertRule(M.cssText)), v.adoptedStyleSheets = [...v.adoptedStyleSheets, $]);
+        } else if (l) {
+          const $ = l.cloneNode(!0);
+          v.appendChild($);
         }
-        l.forEach(($) => {
-          const E = $.cloneNode(!0);
-          this.shadowRoot.appendChild(E);
+        u.forEach(($) => {
+          const w = $.cloneNode(!0);
+          v.appendChild(w);
         });
       }
     }
     return t;
   };
 }
-function Lt(r) {
+function Gt(r) {
   var t;
   if (((t = r == null ? void 0 : r.categoryLabel) == null ? void 0 : t.trim()) === "")
     throw new Error("Invalid category for RendererAttributeConfiguration. It cannot be an empty string.");
   return !0;
 }
-function jt(r) {
+function Wt(r) {
   return function(e, t) {
     try {
-      Lt(r);
+      Gt(r);
       const i = Reflect.getMetadata("ZeroAttribute", e) || [];
-      typeof t == "string" && typeof e[t] != "function" && (r.fieldMappings = r.fieldMappings ?? t), i.push(r), Reflect.defineMetadata("ZeroAttribute", i, e);
+      let s = !0;
+      if (typeof t == "string") {
+        try {
+          s = typeof e[t] != "function";
+        } catch {
+          s = !0;
+        }
+        s && (r.fieldMappings = r.fieldMappings ?? t);
+      }
+      i.push(r), Reflect.defineMetadata("ZeroAttribute", i, e);
     } catch (i) {
       console.log(i);
     }
   };
 }
-function H(r) {
-  return jt(r);
+function U(r) {
+  return Wt(r);
 }
 var N;
 (function(r) {
-  r.TEXT_INPUT = "text-input", r.PASSWORD_INPUT = "password-input", r.DROPDOWN = "dropdown", r.CHECKBOX = "checkbox", r.RADIO_BUTTON = "radio-button", r.RANGE_SLIDER = "range-slider", r.FILE_INPUT = "file-input", r.DATE_PICKER = "date-picker", r.COLOR_PICKER = "color-picker", r.NUMBER_INPUT = "number-input", r.TEXTAREA = "textarea", r.MULTI_SELECT = "multi-select", r.POPUP_DROPDOWN = "popup-dropdown";
+  r.TEXT_INPUT = "text-input", r.PASSWORD_INPUT = "password-input", r.DROPDOWN = "dropdown", r.CHECKBOX = "checkbox", r.RADIO_BUTTON = "radio-button", r.RANGE_SLIDER = "range-slider", r.FILE_INPUT = "file-input", r.DATE_PICKER = "date-picker", r.COLOR_PICKER = "color-picker", r.NUMBER_INPUT = "number-input", r.TEXTAREA = "textarea", r.MULTI_SELECT = "multi-select", r.POPUP_DROPDOWN = "popup-dropdown", r.LAYOUT_PICKER = "layout-picker", r.RESPONSIVE_OVERRIDE = "responsive-override", r.IMAGE_PICKER = "image-picker";
 })(N || (N = {}));
 var k;
 (function(r) {
@@ -913,18 +937,18 @@ var k;
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const ue = globalThis, we = ue.ShadowRoot && (ue.ShadyCSS === void 0 || ue.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, $e = Symbol(), We = /* @__PURE__ */ new WeakMap();
-let rt = class {
+const de = globalThis, $e = de.ShadowRoot && (de.ShadyCSS === void 0 || de.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Ee = Symbol(), qe = /* @__PURE__ */ new WeakMap();
+let at = class {
   constructor(e, t, i) {
-    if (this._$cssResult$ = !0, i !== $e) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+    if (this._$cssResult$ = !0, i !== Ee) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = e, this.t = t;
   }
   get styleSheet() {
     let e = this.o;
     const t = this.t;
-    if (we && e === void 0) {
+    if ($e && e === void 0) {
       const i = t !== void 0 && t.length === 1;
-      i && (e = We.get(t)), e === void 0 && ((this.o = e = new CSSStyleSheet()).replaceSync(this.cssText), i && We.set(t, e));
+      i && (e = qe.get(t)), e === void 0 && ((this.o = e = new CSSStyleSheet()).replaceSync(this.cssText), i && qe.set(t, e));
     }
     return e;
   }
@@ -932,33 +956,33 @@ let rt = class {
     return this.cssText;
   }
 };
-const zt = (r) => new rt(typeof r == "string" ? r : r + "", void 0, $e), Vt = (r, ...e) => {
-  const t = r.length === 1 ? r[0] : e.reduce((i, o, u) => i + ((l) => {
-    if (l._$cssResult$ === !0) return l.cssText;
-    if (typeof l == "number") return l;
-    throw Error("Value passed to 'css' function must be a 'css' function result: " + l + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
-  })(o) + r[u + 1], r[0]);
-  return new rt(t, r, $e);
-}, Bt = (r, e) => {
-  if (we) r.adoptedStyleSheets = e.map((t) => t instanceof CSSStyleSheet ? t : t.styleSheet);
+const qt = (r) => new at(typeof r == "string" ? r : r + "", void 0, Ee), Ft = (r, ...e) => {
+  const t = r.length === 1 ? r[0] : e.reduce((i, s, l) => i + ((u) => {
+    if (u._$cssResult$ === !0) return u.cssText;
+    if (typeof u == "number") return u;
+    throw Error("Value passed to 'css' function must be a 'css' function result: " + u + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
+  })(s) + r[l + 1], r[0]);
+  return new at(t, r, Ee);
+}, Yt = (r, e) => {
+  if ($e) r.adoptedStyleSheets = e.map((t) => t instanceof CSSStyleSheet ? t : t.styleSheet);
   else for (const t of e) {
-    const i = document.createElement("style"), o = ue.litNonce;
-    o !== void 0 && i.setAttribute("nonce", o), i.textContent = t.cssText, r.appendChild(i);
+    const i = document.createElement("style"), s = de.litNonce;
+    s !== void 0 && i.setAttribute("nonce", s), i.textContent = t.cssText, r.appendChild(i);
   }
-}, Fe = we ? (r) => r : (r) => r instanceof CSSStyleSheet ? ((e) => {
+}, Fe = $e ? (r) => r : (r) => r instanceof CSSStyleSheet ? ((e) => {
   let t = "";
   for (const i of e.cssRules) t += i.cssText;
-  return zt(t);
+  return qt(t);
 })(r) : r;
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { is: Gt, defineProperty: Wt, getOwnPropertyDescriptor: Ft, getOwnPropertyNames: qt, getOwnPropertySymbols: Xt, getPrototypeOf: Yt } = Object, B = globalThis, qe = B.trustedTypes, Qt = qe ? qe.emptyScript : "", me = B.reactiveElementPolyfillSupport, ee = (r, e) => r, de = { toAttribute(r, e) {
+const { is: Xt, defineProperty: Zt, getOwnPropertyDescriptor: Qt, getOwnPropertyNames: Jt, getOwnPropertySymbols: Kt, getPrototypeOf: er } = Object, B = globalThis, Ye = B.trustedTypes, tr = Ye ? Ye.emptyScript : "", ge = B.reactiveElementPolyfillSupport, te = (r, e) => r, ce = { toAttribute(r, e) {
   switch (e) {
     case Boolean:
-      r = r ? Qt : null;
+      r = r ? tr : null;
       break;
     case Object:
     case Array:
@@ -983,9 +1007,9 @@ const { is: Gt, defineProperty: Wt, getOwnPropertyDescriptor: Ft, getOwnProperty
       }
   }
   return t;
-} }, Ee = (r, e) => !Gt(r, e), Xe = { attribute: !0, type: String, converter: de, reflect: !1, hasChanged: Ee };
+} }, Ae = (r, e) => !Xt(r, e), Xe = { attribute: !0, type: String, converter: ce, reflect: !1, useDefault: !1, hasChanged: Ae };
 Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), B.litPropertyMetadata ?? (B.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
-class Y extends HTMLElement {
+let Z = class extends HTMLElement {
   static addInitializer(e) {
     this._$Ei(), (this.l ?? (this.l = [])).push(e);
   }
@@ -993,47 +1017,45 @@ class Y extends HTMLElement {
     return this.finalize(), this._$Eh && [...this._$Eh.keys()];
   }
   static createProperty(e, t = Xe) {
-    if (t.state && (t.attribute = !1), this._$Ei(), this.elementProperties.set(e, t), !t.noAccessor) {
-      const i = Symbol(), o = this.getPropertyDescriptor(e, i, t);
-      o !== void 0 && Wt(this.prototype, e, o);
+    if (t.state && (t.attribute = !1), this._$Ei(), this.prototype.hasOwnProperty(e) && ((t = Object.create(t)).wrapped = !0), this.elementProperties.set(e, t), !t.noAccessor) {
+      const i = Symbol(), s = this.getPropertyDescriptor(e, i, t);
+      s !== void 0 && Zt(this.prototype, e, s);
     }
   }
   static getPropertyDescriptor(e, t, i) {
-    const { get: o, set: u } = Ft(this.prototype, e) ?? { get() {
+    const { get: s, set: l } = Qt(this.prototype, e) ?? { get() {
       return this[t];
-    }, set(l) {
-      this[t] = l;
+    }, set(u) {
+      this[t] = u;
     } };
-    return { get() {
-      return o == null ? void 0 : o.call(this);
-    }, set(l) {
-      const _ = o == null ? void 0 : o.call(this);
-      u.call(this, l), this.requestUpdate(e, _, i);
+    return { get: s, set(u) {
+      const b = s == null ? void 0 : s.call(this);
+      l == null || l.call(this, u), this.requestUpdate(e, b, i);
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(e) {
     return this.elementProperties.get(e) ?? Xe;
   }
   static _$Ei() {
-    if (this.hasOwnProperty(ee("elementProperties"))) return;
-    const e = Yt(this);
+    if (this.hasOwnProperty(te("elementProperties"))) return;
+    const e = er(this);
     e.finalize(), e.l !== void 0 && (this.l = [...e.l]), this.elementProperties = new Map(e.elementProperties);
   }
   static finalize() {
-    if (this.hasOwnProperty(ee("finalized"))) return;
-    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(ee("properties"))) {
-      const t = this.properties, i = [...qt(t), ...Xt(t)];
-      for (const o of i) this.createProperty(o, t[o]);
+    if (this.hasOwnProperty(te("finalized"))) return;
+    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(te("properties"))) {
+      const t = this.properties, i = [...Jt(t), ...Kt(t)];
+      for (const s of i) this.createProperty(s, t[s]);
     }
     const e = this[Symbol.metadata];
     if (e !== null) {
       const t = litPropertyMetadata.get(e);
-      if (t !== void 0) for (const [i, o] of t) this.elementProperties.set(i, o);
+      if (t !== void 0) for (const [i, s] of t) this.elementProperties.set(i, s);
     }
     this._$Eh = /* @__PURE__ */ new Map();
     for (const [t, i] of this.elementProperties) {
-      const o = this._$Eu(t, i);
-      o !== void 0 && this._$Eh.set(o, t);
+      const s = this._$Eu(t, i);
+      s !== void 0 && this._$Eh.set(s, t);
     }
     this.elementStyles = this.finalizeStyles(this.styles);
   }
@@ -1041,7 +1063,7 @@ class Y extends HTMLElement {
     const t = [];
     if (Array.isArray(e)) {
       const i = new Set(e.flat(1 / 0).reverse());
-      for (const o of i) t.unshift(Fe(o));
+      for (const s of i) t.unshift(Fe(s));
     } else e !== void 0 && t.push(Fe(e));
     return t;
   }
@@ -1071,7 +1093,7 @@ class Y extends HTMLElement {
   }
   createRenderRoot() {
     const e = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
-    return Bt(e, this.constructor.elementStyles), e;
+    return Yt(e, this.constructor.elementStyles), e;
   }
   connectedCallback() {
     var e;
@@ -1092,33 +1114,37 @@ class Y extends HTMLElement {
   attributeChangedCallback(e, t, i) {
     this._$AK(e, i);
   }
-  _$EC(e, t) {
-    var u;
-    const i = this.constructor.elementProperties.get(e), o = this.constructor._$Eu(e, i);
-    if (o !== void 0 && i.reflect === !0) {
-      const l = (((u = i.converter) == null ? void 0 : u.toAttribute) !== void 0 ? i.converter : de).toAttribute(t, i.type);
-      this._$Em = e, l == null ? this.removeAttribute(o) : this.setAttribute(o, l), this._$Em = null;
+  _$ET(e, t) {
+    var l;
+    const i = this.constructor.elementProperties.get(e), s = this.constructor._$Eu(e, i);
+    if (s !== void 0 && i.reflect === !0) {
+      const u = (((l = i.converter) == null ? void 0 : l.toAttribute) !== void 0 ? i.converter : ce).toAttribute(t, i.type);
+      this._$Em = e, u == null ? this.removeAttribute(s) : this.setAttribute(s, u), this._$Em = null;
     }
   }
   _$AK(e, t) {
+    var l, u;
+    const i = this.constructor, s = i._$Eh.get(e);
+    if (s !== void 0 && this._$Em !== s) {
+      const b = i.getPropertyOptions(s), v = typeof b.converter == "function" ? { fromAttribute: b.converter } : ((l = b.converter) == null ? void 0 : l.fromAttribute) !== void 0 ? b.converter : ce;
+      this._$Em = s;
+      const E = v.fromAttribute(t, b.type);
+      this[s] = E ?? ((u = this._$Ej) == null ? void 0 : u.get(s)) ?? E, this._$Em = null;
+    }
+  }
+  requestUpdate(e, t, i, s = !1, l) {
     var u;
-    const i = this.constructor, o = i._$Eh.get(e);
-    if (o !== void 0 && this._$Em !== o) {
-      const l = i.getPropertyOptions(o), _ = typeof l.converter == "function" ? { fromAttribute: l.converter } : ((u = l.converter) == null ? void 0 : u.fromAttribute) !== void 0 ? l.converter : de;
-      this._$Em = o, this[o] = _.fromAttribute(t, l.type), this._$Em = null;
-    }
-  }
-  requestUpdate(e, t, i) {
     if (e !== void 0) {
-      if (i ?? (i = this.constructor.getPropertyOptions(e)), !(i.hasChanged ?? Ee)(this[e], t)) return;
-      this.P(e, t, i);
+      const b = this.constructor;
+      if (s === !1 && (l = this[e]), i ?? (i = b.getPropertyOptions(e)), !((i.hasChanged ?? Ae)(l, t) || i.useDefault && i.reflect && l === ((u = this._$Ej) == null ? void 0 : u.get(e)) && !this.hasAttribute(b._$Eu(e, i)))) return;
+      this.C(e, t, i);
     }
-    this.isUpdatePending === !1 && (this._$ES = this._$ET());
+    this.isUpdatePending === !1 && (this._$ES = this._$EP());
   }
-  P(e, t, i) {
-    this._$AL.has(e) || this._$AL.set(e, t), i.reflect === !0 && this._$Em !== e && (this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Set())).add(e);
+  C(e, t, { useDefault: i, reflect: s, wrapped: l }, u) {
+    i && !(this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Map())).has(e) && (this._$Ej.set(e, u ?? t ?? this[e]), l !== !0 || u !== void 0) || (this._$AL.has(e) || (this.hasUpdated || i || (t = void 0), this._$AL.set(e, t)), s === !0 && this._$Em !== e && (this._$Eq ?? (this._$Eq = /* @__PURE__ */ new Set())).add(e));
   }
-  async _$ET() {
+  async _$EP() {
     this.isUpdatePending = !0;
     try {
       await this._$ES;
@@ -1136,21 +1162,24 @@ class Y extends HTMLElement {
     if (!this.isUpdatePending) return;
     if (!this.hasUpdated) {
       if (this.renderRoot ?? (this.renderRoot = this.createRenderRoot()), this._$Ep) {
-        for (const [u, l] of this._$Ep) this[u] = l;
+        for (const [l, u] of this._$Ep) this[l] = u;
         this._$Ep = void 0;
       }
-      const o = this.constructor.elementProperties;
-      if (o.size > 0) for (const [u, l] of o) l.wrapped !== !0 || this._$AL.has(u) || this[u] === void 0 || this.P(u, this[u], l);
+      const s = this.constructor.elementProperties;
+      if (s.size > 0) for (const [l, u] of s) {
+        const { wrapped: b } = u, v = this[l];
+        b !== !0 || this._$AL.has(l) || v === void 0 || this.C(l, void 0, u, v);
+      }
     }
     let e = !1;
     const t = this._$AL;
     try {
-      e = this.shouldUpdate(t), e ? (this.willUpdate(t), (i = this._$EO) == null || i.forEach((o) => {
-        var u;
-        return (u = o.hostUpdate) == null ? void 0 : u.call(o);
-      }), this.update(t)) : this._$EU();
-    } catch (o) {
-      throw e = !1, this._$EU(), o;
+      e = this.shouldUpdate(t), e ? (this.willUpdate(t), (i = this._$EO) == null || i.forEach((s) => {
+        var l;
+        return (l = s.hostUpdate) == null ? void 0 : l.call(s);
+      }), this.update(t)) : this._$EM();
+    } catch (s) {
+      throw e = !1, this._$EM(), s;
     }
     e && this._$AE(t);
   }
@@ -1159,11 +1188,11 @@ class Y extends HTMLElement {
   _$AE(e) {
     var t;
     (t = this._$EO) == null || t.forEach((i) => {
-      var o;
-      return (o = i.hostUpdated) == null ? void 0 : o.call(i);
+      var s;
+      return (s = i.hostUpdated) == null ? void 0 : s.call(i);
     }), this.hasUpdated || (this.hasUpdated = !0, this.firstUpdated(e)), this.updated(e);
   }
-  _$EU() {
+  _$EM() {
     this._$AL = /* @__PURE__ */ new Map(), this.isUpdatePending = !1;
   }
   get updateComplete() {
@@ -1176,68 +1205,68 @@ class Y extends HTMLElement {
     return !0;
   }
   update(e) {
-    this._$Ej && (this._$Ej = this._$Ej.forEach((t) => this._$EC(t, this[t]))), this._$EU();
+    this._$Eq && (this._$Eq = this._$Eq.forEach((t) => this._$ET(t, this[t]))), this._$EM();
   }
   updated(e) {
   }
   firstUpdated(e) {
   }
-}
-Y.elementStyles = [], Y.shadowRootOptions = { mode: "open" }, Y[ee("elementProperties")] = /* @__PURE__ */ new Map(), Y[ee("finalized")] = /* @__PURE__ */ new Map(), me == null || me({ ReactiveElement: Y }), (B.reactiveElementVersions ?? (B.reactiveElementVersions = [])).push("2.0.4");
+};
+Z.elementStyles = [], Z.shadowRootOptions = { mode: "open" }, Z[te("elementProperties")] = /* @__PURE__ */ new Map(), Z[te("finalized")] = /* @__PURE__ */ new Map(), ge == null || ge({ ReactiveElement: Z }), (B.reactiveElementVersions ?? (B.reactiveElementVersions = [])).push("2.1.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const te = globalThis, ce = te.trustedTypes, Ye = ce ? ce.createPolicy("lit-html", { createHTML: (r) => r }) : void 0, nt = "$lit$", V = `lit$${Math.random().toFixed(9).slice(2)}$`, it = "?" + V, Zt = `<${it}>`, F = document, ne = () => F.createComment(""), ie = (r) => r === null || typeof r != "object" && typeof r != "function", Ae = Array.isArray, Jt = (r) => Ae(r) || typeof (r == null ? void 0 : r[Symbol.iterator]) == "function", ge = `[ 	
-\f\r]`, K = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Qe = /-->/g, Ze = />/g, G = RegExp(`>|${ge}(?:([^\\s"'>=/]+)(${ge}*=${ge}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Je = /'/g, Ke = /"/g, st = /^(?:script|style|textarea|title)$/i, Kt = (r) => (e, ...t) => ({ _$litType$: r, strings: e, values: t }), j = Kt(1), Q = Symbol.for("lit-noChange"), M = Symbol.for("lit-nothing"), et = /* @__PURE__ */ new WeakMap(), W = F.createTreeWalker(F, 129);
-function ot(r, e) {
-  if (!Ae(r) || !r.hasOwnProperty("raw")) throw Error("invalid template strings array");
-  return Ye !== void 0 ? Ye.createHTML(e) : e;
+const re = globalThis, Ze = (r) => r, he = re.trustedTypes, Qe = he ? he.createPolicy("lit-html", { createHTML: (r) => r }) : void 0, lt = "$lit$", z = `lit$${Math.random().toFixed(9).slice(2)}$`, ut = "?" + z, rr = `<${ut}>`, F = document, ne = () => F.createComment(""), se = (r) => r === null || typeof r != "object" && typeof r != "function", Oe = Array.isArray, ir = (r) => Oe(r) || typeof (r == null ? void 0 : r[Symbol.iterator]) == "function", me = `[ 	
+\f\r]`, ee = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Je = /-->/g, Ke = />/g, G = RegExp(`>|${me}(?:([^\\s"'>=/]+)(${me}*=${me}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), et = /'/g, tt = /"/g, dt = /^(?:script|style|textarea|title)$/i, nr = (r) => (e, ...t) => ({ _$litType$: r, strings: e, values: t }), L = nr(1), Q = Symbol.for("lit-noChange"), T = Symbol.for("lit-nothing"), rt = /* @__PURE__ */ new WeakMap(), W = F.createTreeWalker(F, 129);
+function ct(r, e) {
+  if (!Oe(r) || !r.hasOwnProperty("raw")) throw Error("invalid template strings array");
+  return Qe !== void 0 ? Qe.createHTML(e) : e;
 }
-const er = (r, e) => {
+const sr = (r, e) => {
   const t = r.length - 1, i = [];
-  let o, u = e === 2 ? "<svg>" : e === 3 ? "<math>" : "", l = K;
-  for (let _ = 0; _ < t; _++) {
-    const y = r[_];
-    let $, E, w = -1, R = 0;
-    for (; R < y.length && (l.lastIndex = R, E = l.exec(y), E !== null); ) R = l.lastIndex, l === K ? E[1] === "!--" ? l = Qe : E[1] !== void 0 ? l = Ze : E[2] !== void 0 ? (st.test(E[2]) && (o = RegExp("</" + E[2], "g")), l = G) : E[3] !== void 0 && (l = G) : l === G ? E[0] === ">" ? (l = o ?? K, w = -1) : E[1] === void 0 ? w = -2 : (w = l.lastIndex - E[2].length, $ = E[1], l = E[3] === void 0 ? G : E[3] === '"' ? Ke : Je) : l === Ke || l === Je ? l = G : l === Qe || l === Ze ? l = K : (l = G, o = void 0);
-    const I = l === G && r[_ + 1].startsWith("/>") ? " " : "";
-    u += l === K ? y + Zt : w >= 0 ? (i.push($), y.slice(0, w) + nt + y.slice(w) + V + I) : y + V + (w === -2 ? _ : I);
+  let s, l = e === 2 ? "<svg>" : e === 3 ? "<math>" : "", u = ee;
+  for (let b = 0; b < t; b++) {
+    const v = r[b];
+    let E, $, w = -1, M = 0;
+    for (; M < v.length && (u.lastIndex = M, $ = u.exec(v), $ !== null); ) M = u.lastIndex, u === ee ? $[1] === "!--" ? u = Je : $[1] !== void 0 ? u = Ke : $[2] !== void 0 ? (dt.test($[2]) && (s = RegExp("</" + $[2], "g")), u = G) : $[3] !== void 0 && (u = G) : u === G ? $[0] === ">" ? (u = s ?? ee, w = -1) : $[1] === void 0 ? w = -2 : (w = u.lastIndex - $[2].length, E = $[1], u = $[3] === void 0 ? G : $[3] === '"' ? tt : et) : u === tt || u === et ? u = G : u === Je || u === Ke ? u = ee : (u = G, s = void 0);
+    const H = u === G && r[b + 1].startsWith("/>") ? " " : "";
+    l += u === ee ? v + rr : w >= 0 ? (i.push(E), v.slice(0, w) + lt + v.slice(w) + z + H) : v + z + (w === -2 ? b : H);
   }
-  return [ot(r, u + (r[t] || "<?>") + (e === 2 ? "</svg>" : e === 3 ? "</math>" : "")), i];
+  return [ct(r, l + (r[t] || "<?>") + (e === 2 ? "</svg>" : e === 3 ? "</math>" : "")), i];
 };
-class se {
+class oe {
   constructor({ strings: e, _$litType$: t }, i) {
-    let o;
+    let s;
     this.parts = [];
-    let u = 0, l = 0;
-    const _ = e.length - 1, y = this.parts, [$, E] = er(e, t);
-    if (this.el = se.createElement($, i), W.currentNode = this.el.content, t === 2 || t === 3) {
+    let l = 0, u = 0;
+    const b = e.length - 1, v = this.parts, [E, $] = sr(e, t);
+    if (this.el = oe.createElement(E, i), W.currentNode = this.el.content, t === 2 || t === 3) {
       const w = this.el.content.firstChild;
       w.replaceWith(...w.childNodes);
     }
-    for (; (o = W.nextNode()) !== null && y.length < _; ) {
-      if (o.nodeType === 1) {
-        if (o.hasAttributes()) for (const w of o.getAttributeNames()) if (w.endsWith(nt)) {
-          const R = E[l++], I = o.getAttribute(w).split(V), z = /([.?@])?(.*)/.exec(R);
-          y.push({ type: 1, index: u, name: z[2], strings: I, ctor: z[1] === "." ? rr : z[1] === "?" ? nr : z[1] === "@" ? ir : he }), o.removeAttribute(w);
-        } else w.startsWith(V) && (y.push({ type: 6, index: u }), o.removeAttribute(w));
-        if (st.test(o.tagName)) {
-          const w = o.textContent.split(V), R = w.length - 1;
-          if (R > 0) {
-            o.textContent = ce ? ce.emptyScript : "";
-            for (let I = 0; I < R; I++) o.append(w[I], ne()), W.nextNode(), y.push({ type: 2, index: ++u });
-            o.append(w[R], ne());
+    for (; (s = W.nextNode()) !== null && v.length < b; ) {
+      if (s.nodeType === 1) {
+        if (s.hasAttributes()) for (const w of s.getAttributeNames()) if (w.endsWith(lt)) {
+          const M = $[u++], H = s.getAttribute(w).split(z), V = /([.?@])?(.*)/.exec(M);
+          v.push({ type: 1, index: l, name: V[2], strings: H, ctor: V[1] === "." ? ar : V[1] === "?" ? lr : V[1] === "@" ? ur : pe }), s.removeAttribute(w);
+        } else w.startsWith(z) && (v.push({ type: 6, index: l }), s.removeAttribute(w));
+        if (dt.test(s.tagName)) {
+          const w = s.textContent.split(z), M = w.length - 1;
+          if (M > 0) {
+            s.textContent = he ? he.emptyScript : "";
+            for (let H = 0; H < M; H++) s.append(w[H], ne()), W.nextNode(), v.push({ type: 2, index: ++l });
+            s.append(w[M], ne());
           }
         }
-      } else if (o.nodeType === 8) if (o.data === it) y.push({ type: 2, index: u });
+      } else if (s.nodeType === 8) if (s.data === ut) v.push({ type: 2, index: l });
       else {
         let w = -1;
-        for (; (w = o.data.indexOf(V, w + 1)) !== -1; ) y.push({ type: 7, index: u }), w += V.length - 1;
+        for (; (w = s.data.indexOf(z, w + 1)) !== -1; ) v.push({ type: 7, index: l }), w += z.length - 1;
       }
-      u++;
+      l++;
     }
   }
   static createElement(e, t) {
@@ -1245,14 +1274,14 @@ class se {
     return i.innerHTML = e, i;
   }
 }
-function Z(r, e, t = r, i) {
-  var l, _;
+function J(r, e, t = r, i) {
+  var u, b;
   if (e === Q) return e;
-  let o = i !== void 0 ? (l = t.o) == null ? void 0 : l[i] : t.l;
-  const u = ie(e) ? void 0 : e._$litDirective$;
-  return (o == null ? void 0 : o.constructor) !== u && ((_ = o == null ? void 0 : o._$AO) == null || _.call(o, !1), u === void 0 ? o = void 0 : (o = new u(r), o._$AT(r, t, i)), i !== void 0 ? (t.o ?? (t.o = []))[i] = o : t.l = o), o !== void 0 && (e = Z(r, o._$AS(r, e.values), o, i)), e;
+  let s = i !== void 0 ? (u = t._$Co) == null ? void 0 : u[i] : t._$Cl;
+  const l = se(e) ? void 0 : e._$litDirective$;
+  return (s == null ? void 0 : s.constructor) !== l && ((b = s == null ? void 0 : s._$AO) == null || b.call(s, !1), l === void 0 ? s = void 0 : (s = new l(r), s._$AT(r, t, i)), i !== void 0 ? (t._$Co ?? (t._$Co = []))[i] = s : t._$Cl = s), s !== void 0 && (e = J(r, s._$AS(r, e.values), s, i)), e;
 }
-class tr {
+class or {
   constructor(e, t) {
     this._$AV = [], this._$AN = void 0, this._$AD = e, this._$AM = t;
   }
@@ -1263,30 +1292,30 @@ class tr {
     return this._$AM._$AU;
   }
   u(e) {
-    const { el: { content: t }, parts: i } = this._$AD, o = ((e == null ? void 0 : e.creationScope) ?? F).importNode(t, !0);
-    W.currentNode = o;
-    let u = W.nextNode(), l = 0, _ = 0, y = i[0];
-    for (; y !== void 0; ) {
-      if (l === y.index) {
-        let $;
-        y.type === 2 ? $ = new oe(u, u.nextSibling, this, e) : y.type === 1 ? $ = new y.ctor(u, y.name, y.strings, this, e) : y.type === 6 && ($ = new sr(u, this, e)), this._$AV.push($), y = i[++_];
+    const { el: { content: t }, parts: i } = this._$AD, s = ((e == null ? void 0 : e.creationScope) ?? F).importNode(t, !0);
+    W.currentNode = s;
+    let l = W.nextNode(), u = 0, b = 0, v = i[0];
+    for (; v !== void 0; ) {
+      if (u === v.index) {
+        let E;
+        v.type === 2 ? E = new ae(l, l.nextSibling, this, e) : v.type === 1 ? E = new v.ctor(l, v.name, v.strings, this, e) : v.type === 6 && (E = new dr(l, this, e)), this._$AV.push(E), v = i[++b];
       }
-      l !== (y == null ? void 0 : y.index) && (u = W.nextNode(), l++);
+      u !== (v == null ? void 0 : v.index) && (l = W.nextNode(), u++);
     }
-    return W.currentNode = F, o;
+    return W.currentNode = F, s;
   }
   p(e) {
     let t = 0;
     for (const i of this._$AV) i !== void 0 && (i.strings !== void 0 ? (i._$AI(e, i, t), t += i.strings.length - 2) : i._$AI(e[t])), t++;
   }
 }
-class oe {
+class ae {
   get _$AU() {
     var e;
-    return ((e = this._$AM) == null ? void 0 : e._$AU) ?? this.v;
+    return ((e = this._$AM) == null ? void 0 : e._$AU) ?? this._$Cv;
   }
-  constructor(e, t, i, o) {
-    this.type = 2, this._$AH = M, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = i, this.options = o, this.v = (o == null ? void 0 : o.isConnected) ?? !0;
+  constructor(e, t, i, s) {
+    this.type = 2, this._$AH = T, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = i, this.options = s, this._$Cv = (s == null ? void 0 : s.isConnected) ?? !0;
   }
   get parentNode() {
     let e = this._$AA.parentNode;
@@ -1300,7 +1329,7 @@ class oe {
     return this._$AB;
   }
   _$AI(e, t = this) {
-    e = Z(this, e, t), ie(e) ? e === M || e == null || e === "" ? (this._$AH !== M && this._$AR(), this._$AH = M) : e !== this._$AH && e !== Q && this._(e) : e._$litType$ !== void 0 ? this.$(e) : e.nodeType !== void 0 ? this.T(e) : Jt(e) ? this.k(e) : this._(e);
+    e = J(this, e, t), se(e) ? e === T || e == null || e === "" ? (this._$AH !== T && this._$AR(), this._$AH = T) : e !== this._$AH && e !== Q && this._(e) : e._$litType$ !== void 0 ? this.$(e) : e.nodeType !== void 0 ? this.T(e) : ir(e) ? this.k(e) : this._(e);
   }
   O(e) {
     return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -1309,96 +1338,96 @@ class oe {
     this._$AH !== e && (this._$AR(), this._$AH = this.O(e));
   }
   _(e) {
-    this._$AH !== M && ie(this._$AH) ? this._$AA.nextSibling.data = e : this.T(F.createTextNode(e)), this._$AH = e;
+    this._$AH !== T && se(this._$AH) ? this._$AA.nextSibling.data = e : this.T(F.createTextNode(e)), this._$AH = e;
   }
   $(e) {
-    var u;
-    const { values: t, _$litType$: i } = e, o = typeof i == "number" ? this._$AC(e) : (i.el === void 0 && (i.el = se.createElement(ot(i.h, i.h[0]), this.options)), i);
-    if (((u = this._$AH) == null ? void 0 : u._$AD) === o) this._$AH.p(t);
+    var l;
+    const { values: t, _$litType$: i } = e, s = typeof i == "number" ? this._$AC(e) : (i.el === void 0 && (i.el = oe.createElement(ct(i.h, i.h[0]), this.options)), i);
+    if (((l = this._$AH) == null ? void 0 : l._$AD) === s) this._$AH.p(t);
     else {
-      const l = new tr(o, this), _ = l.u(this.options);
-      l.p(t), this.T(_), this._$AH = l;
+      const u = new or(s, this), b = u.u(this.options);
+      u.p(t), this.T(b), this._$AH = u;
     }
   }
   _$AC(e) {
-    let t = et.get(e.strings);
-    return t === void 0 && et.set(e.strings, t = new se(e)), t;
+    let t = rt.get(e.strings);
+    return t === void 0 && rt.set(e.strings, t = new oe(e)), t;
   }
   k(e) {
-    Ae(this._$AH) || (this._$AH = [], this._$AR());
+    Oe(this._$AH) || (this._$AH = [], this._$AR());
     const t = this._$AH;
-    let i, o = 0;
-    for (const u of e) o === t.length ? t.push(i = new oe(this.O(ne()), this.O(ne()), this, this.options)) : i = t[o], i._$AI(u), o++;
-    o < t.length && (this._$AR(i && i._$AB.nextSibling, o), t.length = o);
+    let i, s = 0;
+    for (const l of e) s === t.length ? t.push(i = new ae(this.O(ne()), this.O(ne()), this, this.options)) : i = t[s], i._$AI(l), s++;
+    s < t.length && (this._$AR(i && i._$AB.nextSibling, s), t.length = s);
   }
   _$AR(e = this._$AA.nextSibling, t) {
     var i;
-    for ((i = this._$AP) == null ? void 0 : i.call(this, !1, !0, t); e && e !== this._$AB; ) {
-      const o = e.nextSibling;
-      e.remove(), e = o;
+    for ((i = this._$AP) == null ? void 0 : i.call(this, !1, !0, t); e !== this._$AB; ) {
+      const s = Ze(e).nextSibling;
+      Ze(e).remove(), e = s;
     }
   }
   setConnected(e) {
     var t;
-    this._$AM === void 0 && (this.v = e, (t = this._$AP) == null || t.call(this, e));
+    this._$AM === void 0 && (this._$Cv = e, (t = this._$AP) == null || t.call(this, e));
   }
 }
-class he {
+class pe {
   get tagName() {
     return this.element.tagName;
   }
   get _$AU() {
     return this._$AM._$AU;
   }
-  constructor(e, t, i, o, u) {
-    this.type = 1, this._$AH = M, this._$AN = void 0, this.element = e, this.name = t, this._$AM = o, this.options = u, i.length > 2 || i[0] !== "" || i[1] !== "" ? (this._$AH = Array(i.length - 1).fill(new String()), this.strings = i) : this._$AH = M;
+  constructor(e, t, i, s, l) {
+    this.type = 1, this._$AH = T, this._$AN = void 0, this.element = e, this.name = t, this._$AM = s, this.options = l, i.length > 2 || i[0] !== "" || i[1] !== "" ? (this._$AH = Array(i.length - 1).fill(new String()), this.strings = i) : this._$AH = T;
   }
-  _$AI(e, t = this, i, o) {
-    const u = this.strings;
-    let l = !1;
-    if (u === void 0) e = Z(this, e, t, 0), l = !ie(e) || e !== this._$AH && e !== Q, l && (this._$AH = e);
+  _$AI(e, t = this, i, s) {
+    const l = this.strings;
+    let u = !1;
+    if (l === void 0) e = J(this, e, t, 0), u = !se(e) || e !== this._$AH && e !== Q, u && (this._$AH = e);
     else {
-      const _ = e;
-      let y, $;
-      for (e = u[0], y = 0; y < u.length - 1; y++) $ = Z(this, _[i + y], t, y), $ === Q && ($ = this._$AH[y]), l || (l = !ie($) || $ !== this._$AH[y]), $ === M ? e = M : e !== M && (e += ($ ?? "") + u[y + 1]), this._$AH[y] = $;
+      const b = e;
+      let v, E;
+      for (e = l[0], v = 0; v < l.length - 1; v++) E = J(this, b[i + v], t, v), E === Q && (E = this._$AH[v]), u || (u = !se(E) || E !== this._$AH[v]), E === T ? e = T : e !== T && (e += (E ?? "") + l[v + 1]), this._$AH[v] = E;
     }
-    l && !o && this.j(e);
+    u && !s && this.j(e);
   }
   j(e) {
-    e === M ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
+    e === T ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
   }
 }
-class rr extends he {
+class ar extends pe {
   constructor() {
     super(...arguments), this.type = 3;
   }
   j(e) {
-    this.element[this.name] = e === M ? void 0 : e;
+    this.element[this.name] = e === T ? void 0 : e;
   }
 }
-class nr extends he {
+class lr extends pe {
   constructor() {
     super(...arguments), this.type = 4;
   }
   j(e) {
-    this.element.toggleAttribute(this.name, !!e && e !== M);
+    this.element.toggleAttribute(this.name, !!e && e !== T);
   }
 }
-class ir extends he {
-  constructor(e, t, i, o, u) {
-    super(e, t, i, o, u), this.type = 5;
+class ur extends pe {
+  constructor(e, t, i, s, l) {
+    super(e, t, i, s, l), this.type = 5;
   }
   _$AI(e, t = this) {
-    if ((e = Z(this, e, t, 0) ?? M) === Q) return;
-    const i = this._$AH, o = e === M && i !== M || e.capture !== i.capture || e.once !== i.once || e.passive !== i.passive, u = e !== M && (i === M || o);
-    o && this.element.removeEventListener(this.name, this, i), u && this.element.addEventListener(this.name, this, e), this._$AH = e;
+    if ((e = J(this, e, t, 0) ?? T) === Q) return;
+    const i = this._$AH, s = e === T && i !== T || e.capture !== i.capture || e.once !== i.once || e.passive !== i.passive, l = e !== T && (i === T || s);
+    s && this.element.removeEventListener(this.name, this, i), l && this.element.addEventListener(this.name, this, e), this._$AH = e;
   }
   handleEvent(e) {
     var t;
     typeof this._$AH == "function" ? this._$AH.call(((t = this.options) == null ? void 0 : t.host) ?? this.element, e) : this._$AH.handleEvent(e);
   }
 }
-class sr {
+class dr {
   constructor(e, t, i) {
     this.element = e, this.type = 6, this._$AN = void 0, this._$AM = t, this.options = i;
   }
@@ -1406,28 +1435,29 @@ class sr {
     return this._$AM._$AU;
   }
   _$AI(e) {
-    Z(this, e);
+    J(this, e);
   }
 }
-const be = te.litHtmlPolyfillSupport;
-be == null || be(se, oe), (te.litHtmlVersions ?? (te.litHtmlVersions = [])).push("3.2.0");
-const or = (r, e, t) => {
+const _e = re.litHtmlPolyfillSupport;
+_e == null || _e(oe, ae), (re.litHtmlVersions ?? (re.litHtmlVersions = [])).push("3.3.3");
+const cr = (r, e, t) => {
   const i = (t == null ? void 0 : t.renderBefore) ?? e;
-  let o = i._$litPart$;
-  if (o === void 0) {
-    const u = (t == null ? void 0 : t.renderBefore) ?? null;
-    i._$litPart$ = o = new oe(e.insertBefore(ne(), u), u, void 0, t ?? {});
+  let s = i._$litPart$;
+  if (s === void 0) {
+    const l = (t == null ? void 0 : t.renderBefore) ?? null;
+    i._$litPart$ = s = new ae(e.insertBefore(ne(), l), l, void 0, t ?? {});
   }
-  return o._$AI(r), o;
+  return s._$AI(r), s;
 };
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-class re extends Y {
+const q = globalThis;
+class ie extends Z {
   constructor() {
-    super(...arguments), this.renderOptions = { host: this }, this.o = void 0;
+    super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
   createRenderRoot() {
     var t;
@@ -1436,69 +1466,102 @@ class re extends Y {
   }
   update(e) {
     const t = this.render();
-    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(e), this.o = or(t, this.renderRoot, this.renderOptions);
+    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(e), this._$Do = cr(t, this.renderRoot, this.renderOptions);
   }
   connectedCallback() {
     var e;
-    super.connectedCallback(), (e = this.o) == null || e.setConnected(!0);
+    super.connectedCallback(), (e = this._$Do) == null || e.setConnected(!0);
   }
   disconnectedCallback() {
     var e;
-    super.disconnectedCallback(), (e = this.o) == null || e.setConnected(!1);
+    super.disconnectedCallback(), (e = this._$Do) == null || e.setConnected(!1);
   }
   render() {
     return Q;
   }
 }
-var tt;
-re._$litElement$ = !0, re.finalized = !0, (tt = globalThis.litElementHydrateSupport) == null || tt.call(globalThis, { LitElement: re });
-const _e = globalThis.litElementPolyfillSupport;
-_e == null || _e({ LitElement: re });
-(globalThis.litElementVersions ?? (globalThis.litElementVersions = [])).push("4.1.0");
+var ot;
+ie._$litElement$ = !0, ie.finalized = !0, (ot = q.litElementHydrateSupport) == null || ot.call(q, { LitElement: ie });
+const we = q.litElementPolyfillSupport;
+we == null || we({ LitElement: ie });
+(q.litElementVersions ?? (q.litElementVersions = [])).push("4.2.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const ar = { attribute: !0, type: String, converter: de, reflect: !1, hasChanged: Ee }, lr = (r = ar, e, t) => {
-  const { kind: i, metadata: o } = t;
-  let u = globalThis.litPropertyMetadata.get(o);
-  if (u === void 0 && globalThis.litPropertyMetadata.set(o, u = /* @__PURE__ */ new Map()), u.set(t.name, r), i === "accessor") {
-    const { name: l } = t;
-    return { set(_) {
-      const y = e.get.call(this);
-      e.set.call(this, _), this.requestUpdate(l, y, r);
-    }, init(_) {
-      return _ !== void 0 && this.P(l, void 0, r), _;
+const hr = { attribute: !0, type: String, converter: ce, reflect: !1, hasChanged: Ae }, pr = (r = hr, e, t) => {
+  const { kind: i, metadata: s } = t;
+  let l = globalThis.litPropertyMetadata.get(s);
+  if (l === void 0 && globalThis.litPropertyMetadata.set(s, l = /* @__PURE__ */ new Map()), i === "setter" && ((r = Object.create(r)).wrapped = !0), l.set(t.name, r), i === "accessor") {
+    const { name: u } = t;
+    return { set(b) {
+      const v = e.get.call(this);
+      e.set.call(this, b), this.requestUpdate(u, v, r, !0, b);
+    }, init(b) {
+      return b !== void 0 && this.C(u, void 0, r, b), b;
     } };
   }
   if (i === "setter") {
-    const { name: l } = t;
-    return function(_) {
-      const y = this[l];
-      e.call(this, _), this.requestUpdate(l, y, r);
+    const { name: u } = t;
+    return function(b) {
+      const v = this[u];
+      e.call(this, b), this.requestUpdate(u, v, r, !0, b);
     };
   }
   throw Error("Unsupported decorator location: " + i);
 };
-function U(r) {
-  return (e, t) => typeof t == "object" ? lr(r, e, t) : ((i, o, u) => {
-    const l = o.hasOwnProperty(u);
-    return o.constructor.createProperty(u, l ? { ...i, wrapped: !0 } : i), l ? Object.getOwnPropertyDescriptor(o, u) : void 0;
+function D(r) {
+  return (e, t) => typeof t == "object" ? pr(r, e, t) : ((i, s, l) => {
+    const u = s.hasOwnProperty(l);
+    return s.constructor.createProperty(l, i), u ? Object.getOwnPropertyDescriptor(s, l) : void 0;
   })(r, e, t);
 }
-var ur = Object.defineProperty, dr = Object.getOwnPropertyDescriptor, C = (r, e, t, i) => {
-  for (var o = i > 1 ? void 0 : i ? dr(e, t) : e, u = r.length - 1, l; u >= 0; u--)
-    (l = r[u]) && (o = (i ? l(e, t, o) : l(o)) || o);
-  return i && o && ur(e, t, o), o;
+var fr = Object.defineProperty, vr = Object.getOwnPropertyDescriptor, R = (r, e, t, i) => {
+  for (var s = i > 1 ? void 0 : i ? vr(e, t) : e, l = r.length - 1, u; l >= 0; l--)
+    (u = r[l]) && (s = (i ? u(e, t, s) : u(s)) || s);
+  return i && s && fr(e, t, s), s;
 };
-let P = class extends re {
+const it = () => window.zeroThemeManager, nt = {
+  kind: "generic",
+  templateHtml: [
+    "<div style='padding:10px 14px;border-radius:8px;border:1px solid rgba(148,163,184,0.2);background:rgba(255,255,255,0.95);display:flex;justify-content:space-between;align-items:center;'>",
+    "<div>",
+    "<div style='font-size:0.65rem;color:var(--uiv-text-muted,#94a3b8);font-weight:600;margin-bottom:2px;'>{{display:label}}</div>",
+    "<div style='font-size:0.8rem;color:var(--uiv-text-color,#1e293b);'>{{display:placeholder}}</div>",
+    "</div>",
+    "<span style='font-size:0.7rem;color:#94a3b8;'>▼</span>",
+    "</div>"
+  ].join(""),
+  labelProp: "label",
+  badges: ["Form", "Dropdown"]
+};
+function st(r) {
+  return r.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+let P = class extends ie {
   constructor() {
     super(...arguments), this.value = "", this.selectedValues = [], this.label = "Dropdown", this.placeholder = "Select an option...", this.options = [
       { value: "option1", label: "Option 1" },
       { value: "option2", label: "Option 2" },
       { value: "option3", label: "Option 3" }
     ], this.required = !1, this.disabled = !1, this.multiple = !1, this.searchable = !1, this.customStyle = !1, this.errorMessage = "", this.showError = !1, this.isOpen = !1, this.searchQuery = "";
+  }
+  static getStudioTemplate(r) {
+    if (!r) return nt;
+    const e = st(r.studio.display.label || "Dropdown"), t = st(r.studio.display.placeholder || "Select..."), i = "var(--uiv-text-color, #333)";
+    return {
+      ...nt,
+      templateHtml: [
+        "<div style='display:block;width:100%;font-family:inherit;'>",
+        `<label style='display:block;margin-bottom:8px;font-size:14px;font-weight:500;color:${i};'>${e}</label>`,
+        `<div style='width:100%;padding:8px 12px;border:1px solid var(--uiv-border-color, #ddd);border-radius:8px;font-size:14px;background:var(--uiv-surface-color, #fff);color:${i};display:flex;justify-content:space-between;align-items:center;box-shadow:var(--uiv-shadow-depth,none);'>`,
+        `<span>${t}</span>`,
+        "<span style='font-size:0.7rem;opacity:0.6;'>▼</span>",
+        "</div>",
+        "</div>"
+      ].join("")
+    };
   }
   getFilteredOptions() {
     return this.searchQuery ? this.options.filter(
@@ -1539,58 +1602,69 @@ let P = class extends re {
     const e = r.target;
     this.multiple ? this.selectedValues = Array.from(e.selectedOptions).map((t) => t.value) : this.value = e.value, this.dispatchChangeEvent();
   }
+  connectedCallback() {
+    var r;
+    super.connectedCallback(), (r = it()) == null || r.addEventListener("theme-changed", () => this.requestUpdate());
+  }
   render() {
+    var e;
+    const r = (e = it()) == null ? void 0 : e.getActiveTheme("zero-standard-themes");
     if (this.customStyle || this.searchable) {
-      const r = this.getFilteredOptions();
-      return j`
-                <div class="form-field">
-                    <label for="dropdown">${this.label}</label>
+      const t = this.getFilteredOptions();
+      return L`
+                <style>
+                    ${r ? r.getGlobalStyles() : ""}
+                    ${r ? r.getComponentStyles("dropdown") : ""}
+                </style>
+                <div class="form-field uiv-${r == null ? void 0 : r.id}-theme">
+                    <label for="dropdown" class="uiv-${r == null ? void 0 : r.id}-text">${this.label}</label>
                     <div class="custom-dropdown">
                         <button 
                             type="button"
-                            class="dropdown-button ${this.showError ? "error" : ""}"
+                            class="dropdown-button uiv-${r == null ? void 0 : r.id}-card uiv-${r == null ? void 0 : r.id}-scan ${this.showError ? "error" : ""}"
                             ?disabled="${this.disabled}"
                             @click="${this.toggleDropdown}"
                         >
-                            <span>${this.getSelectedLabel()}</span>
-                            <span class="dropdown-arrow ${this.isOpen ? "open" : ""}">▼</span>
+                            <span class="uiv-${r == null ? void 0 : r.id}-text">${this.getSelectedLabel()}</span>
+                            <span class="dropdown-arrow uiv-${r == null ? void 0 : r.id}-text ${this.isOpen ? "open" : ""}">▼</span>
                         </button>
                         
-                        ${this.isOpen ? j`
-                            <div class="dropdown-options">
-                                ${this.searchable ? j`
+                        ${this.isOpen ? L`
+                            <div class="dropdown-options uiv-${r == null ? void 0 : r.id}-card">
+                                ${this.searchable ? L`
                                     <input 
                                         type="text"
-                                        class="search-input"
+                                        class="search-input uiv-${r == null ? void 0 : r.id}-text"
+                                        style="background: transparent; border-bottom: 1px solid rgba(var(--uiv-primary-rgb), 0.2);"
                                         placeholder="Search options..."
                                         .value="${this.searchQuery}"
                                         @input="${this.handleSearch}"
-                                        @click="${(e) => e.stopPropagation()}"
+                                        @click="${(i) => i.stopPropagation()}"
                                     />
                                 ` : ""}
                                 
-                                ${r.length > 0 ? r.map((e) => j`
+                                ${t.length > 0 ? t.map((i) => L`
                                     <div 
-                                        class="option-item ${this.multiple ? this.selectedValues.includes(e.value) ? "selected" : "" : this.value === e.value ? "selected" : ""}"
-                                        @click="${() => this.selectOption(e)}"
+                                        class="option-item ${this.multiple ? this.selectedValues.includes(i.value) ? "selected" : "" : this.value === i.value ? "selected" : ""}"
+                                        @click="${() => this.selectOption(i)}"
                                     >
-                                        ${e.label}
+                                        ${i.label}
                                     </div>
-                                `) : j`
-                                    <div class="no-options">No options found</div>
+                                `) : L`
+                                    <div class="no-options uiv-${r == null ? void 0 : r.id}-text-secondary">No options found</div>
                                 `}
                             </div>
                         ` : ""}
                     </div>
                     
-                    ${this.multiple && this.selectedValues.length > 0 ? j`
+                    ${this.multiple && this.selectedValues.length > 0 ? L`
                         <div class="multi-select-tags">
-                            ${this.selectedValues.map((e) => {
-        const t = this.options.find((i) => i.value === e);
-        return j`
+                            ${this.selectedValues.map((i) => {
+        const s = this.options.find((l) => l.value === i);
+        return L`
                                     <span class="tag">
-                                        ${(t == null ? void 0 : t.label) || e}
-                                        <span class="tag-remove" @click="${() => this.removeTag(e)}">×</span>
+                                        ${(s == null ? void 0 : s.label) || i}
+                                        <span class="tag-remove" @click="${() => this.removeTag(i)}">×</span>
                                     </span>
                                 `;
       })}
@@ -1603,79 +1677,84 @@ let P = class extends re {
                 </div>
             `;
     }
-    return j`
-            <div class="form-field">
-                <label for="select-input">${this.label}</label>
+    return L`
+            <style>
+                ${r ? r.getGlobalStyles() : ""}
+                ${r ? r.getComponentStyles("dropdown") : ""}
+            </style>
+            <div class="form-field uiv-${r == null ? void 0 : r.id}-theme">
+                <label for="select-input" class="uiv-${r == null ? void 0 : r.id}-text">${this.label}</label>
                 <select 
                     id="select-input"
-                    class="mat-mdc-input-element ${this.showError ? "error" : ""}"
+                    class="mat-mdc-input-element uiv-${r == null ? void 0 : r.id}-card ${this.showError ? "error" : ""}"
                     ?required="${this.required}"
                     ?disabled="${this.disabled}"
                     ?multiple="${this.multiple}"
                     @change="${this.handleChange}"
                 >
-                    ${this.multiple ? "" : j`<option value="">${this.placeholder}</option>`}
-                    ${this.options.map((r) => j`
+                    ${this.multiple ? "" : L`<option value="">${this.placeholder}</option>`}
+                    ${this.options.map((t) => L`
                         <option 
-                            value="${r.value}"
-                            ?selected="${this.multiple ? this.selectedValues.includes(r.value) : this.value === r.value}"
+                            value="${t.value}"
+                            ?selected="${this.multiple ? this.selectedValues.includes(t.value) : this.value === t.value}"
                         >
-                            ${r.label}
+                            ${t.label}
                         </option>
                     `)}
                 </select>
-                <div class="error-message ${this.showError ? "show" : ""}">
+                <div class="error-message uiv-${r == null ? void 0 : r.id}-text ${this.showError ? "show" : ""}" style="color: var(--uiv-error-color, #f44336)">
                     ${this.errorMessage}
                 </div>
             </div>
         `;
   }
 };
-P.styles = Vt`
+P.styles = Ft`
         :host {
             display: block;
             width: 100%;
+            --uiv-primary: var(--uiv-primary-color, #6c63ff);
+            --uiv-bg: var(--uiv-surface-color, #fff);
+            --uiv-text: var(--uiv-text-color, #333);
+            --uiv-border: var(--uiv-border-color, #ddd);
         }
 
         .form-field {
-            margin-bottom: var(--spacing-lg, 20px);
+            margin-bottom: 20px;
         }
 
         .form-field label {
             display: block;
-            margin-bottom: var(--spacing-xs, 6px);
-            font-size: var(--font-size-base, 14px);
-            color: var(--text-primary, #333);
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--uiv-text);
             font-weight: 500;
-        }        select.mat-mdc-input-element {
+        }
+
+        select.mat-mdc-input-element {
             width: 100%;
-            padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
-            border: 1px solid var(--border-color, #ddd);
-            border-radius: var(--border-radius-sm, 4px);
-            font-size: var(--font-size-base, 14px);
-            background-color: var(--background-primary, #fff);
-            color: var(--text-primary, #333);
-            transition: border-color 0.2s, box-shadow 0.2s;
-            min-height: var(--input-height, 36px);
-            box-sizing: border-box;
-            font-family: var(--font-family, 'Roboto', sans-serif);
+            padding: 8px 12px;
+            border: 1px solid var(--uiv-border);
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: var(--uiv-bg);
+            color: var(--uiv-text);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            min-height: 40px;
             cursor: pointer;
-        }select.mat-mdc-input-element:hover {
-            border-color: var(--primary-light, #6c63ff);
-            background: var(--primary-background-hover, rgba(108, 99, 255, 0.02));
+            box-shadow: var(--uiv-shadow-depth, none);
+        }
+
+        select.mat-mdc-input-element:hover {
+            border-color: var(--uiv-primary);
+            box-shadow: var(--uiv-border-glow);
         }
 
         select.mat-mdc-input-element:focus {
             outline: none;
-            background: var(--background-primary, #fff);
-            border-color: var(--primary-color, #6c63ff);
-            box-shadow: 0 0 0 2px var(--primary-light, rgba(108, 99, 255, 0.2));
-        }
-
-        select.mat-mdc-input-element:disabled {
-            background-color: var(--background-disabled, #f5f5f5);
-            color: var(--text-disabled, #999);
-            cursor: not-allowed;
+            border-color: var(--uiv-primary);
+            box-shadow: var(--uiv-border-glow);
+            transform: translateY(-1px);
         }
 
         .custom-dropdown {
@@ -1684,42 +1763,31 @@ P.styles = Vt`
 
         .dropdown-button {
             width: 100%;
-            padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
-            border: 1px solid var(--border-color, #ddd);
-            border-radius: var(--border-radius-sm, 4px);
-            font-size: var(--font-size-base, 14px);
-            background-color: var(--background-primary, #fff);            color: var(--text-primary, #333);
-            transition: border-color 0.2s, box-shadow 0.2s;
-            min-height: var(--input-height, 36px);
-            box-sizing: border-box;
-            font-family: var(--font-family, 'Roboto', sans-serif);
+            padding: 8px 12px;
+            border: 1px solid var(--uiv-border);
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: var(--uiv-bg);
+            color: var(--uiv-text);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            min-height: 40px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-align: left;
-        }        .dropdown-button:hover:not(:disabled) {
-            border-color: var(--primary-light, #6c63ff);
-            background: var(--primary-background-hover, rgba(108, 99, 255, 0.02));
+            box-shadow: var(--uiv-shadow-depth, none);
+        }
+
+        .dropdown-button:hover:not(:disabled) {
+            border-color: var(--uiv-primary);
+            box-shadow: var(--uiv-border-glow);
         }
 
         .dropdown-button:focus {
             outline: none;
-            border-color: var(--primary-color, #6c63ff);
-            box-shadow: 0 0 0 2px var(--primary-light, rgba(108, 99, 255, 0.2));
-        }
-
-        .dropdown-button:disabled {
-            background-color: var(--background-disabled, #f5f5f5);
-            color: var(--text-disabled, #999);
-            cursor: not-allowed;
-        }        .dropdown-arrow {
-            font-size: var(--font-size-xs, 12px);
-            transition: transform 0.2s;
-        }
-
-        .dropdown-arrow.open {
-            transform: rotate(180deg);
+            border-color: var(--uiv-primary);
+            box-shadow: var(--uiv-border-glow);
+            transform: translateY(-1px);
         }
 
         .dropdown-options {
@@ -1727,35 +1795,28 @@ P.styles = Vt`
             top: 100%;
             left: 0;
             right: 0;
-            background: var(--background-primary, #fff);
-            border: 1px solid var(--border-color, #ddd);
-            border-top: none;
-            border-radius: 0 0 var(--border-radius-sm, 4px) var(--border-radius-sm, 4px);
-            max-height: 200px;
+            background: var(--uiv-bg);
+            border: 1px solid var(--uiv-border);
+            border-radius: 8px;
+            margin-top: 8px;
+            max-height: 250px;
             overflow-y: auto;
             z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: var(--uiv-shadow-depth, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+            animation: dropdownSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .search-input {
-            width: 100%;
-            padding: var(--spacing-sm, 8px);
-            border: none;
-            border-bottom: 1px solid var(--border-color, #ddd);
-            font-size: var(--font-size-base, 14px);
-            box-sizing: border-box;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-bottom-color: var(--primary-color, #6c63ff);
+        @keyframes dropdownSlide {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .option-item {
-            padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
+            padding: 10px 16px;
             cursor: pointer;
-            transition: background-color 0.2s;
-            border-bottom: 1px solid var(--border-light, #f0f0f0);
+            transition: all 0.2s;
+            border-bottom: 1px solid rgba(var(--uiv-primary-rgb, 108, 99, 255), 0.05);
+            color: var(--uiv-text);
         }
 
         .option-item:last-child {
@@ -1763,88 +1824,53 @@ P.styles = Vt`
         }
 
         .option-item:hover {
-            background-color: var(--background-hover, #f5f5f5);
+            background-color: rgba(var(--uiv-primary-rgb, 108, 99, 255), 0.05);
+            color: var(--uiv-primary);
+            padding-left: 20px;
         }
 
         .option-item.selected {
-            background-color: var(--primary-color, #6c63ff);
+            background-color: var(--uiv-primary);
             color: white;
         }
 
-        .option-item.highlighted {
-            background-color: var(--primary-light, rgba(108, 99, 255, 0.1));
-        }
-
-        .no-options {
-            padding: var(--spacing-md, 12px);
-            text-align: center;
-            color: var(--text-secondary, #666);
-            font-style: italic;
-        }
-
-        .error-message {
-            color: var(--error-color, #f44336);
-            font-size: var(--font-size-sm, 12px);
-            margin-top: var(--spacing-xs, 4px);
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        select.mat-mdc-input-element.error,
-        .dropdown-button.error {
-            border-color: var(--error-color, #f44336);
-        }
-
-        select.mat-mdc-input-element.error:focus,
-        .dropdown-button.error:focus {
-            box-shadow: 0 0 0 2px var(--error-light, rgba(244, 67, 54, 0.2));
-        }
-
-        .multi-select-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-xs, 4px);
-            margin-top: var(--spacing-xs, 4px);
-        }        .tag {
-            background: var(--primary-color, #6c63ff);
+        .tag {
+            background: var(--uiv-primary);
             color: white;
-            padding: var(--spacing-xs, 2px) var(--spacing-sm, 8px);
-            border-radius: var(--border-radius-xs, 3px);
-            font-size: var(--font-size-sm, 12px);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
             display: flex;
             align-items: center;
-            gap: var(--spacing-xs, 4px);
+            gap: 6px;
+            box-shadow: var(--uiv-border-glow);
         }
-
         .tag-remove {
             cursor: pointer;
             font-weight: bold;
         }
     `;
-C([
-  U({ type: String }),
-  H({
+R([
+  D({ type: String }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.TEXT_INPUT,
     displayLabel: "Selected Value",
     fieldMappings: "value"
   })
 ], P.prototype, "value", 2);
-C([
-  U({ type: Array }),
-  H({
+R([
+  D({ type: Array }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.TEXT_INPUT,
     displayLabel: "Selected Values (Multi)",
     fieldMappings: "selectedValues"
   })
 ], P.prototype, "selectedValues", 2);
-C([
-  U({ type: String }),
-  H({
+R([
+  D({ type: String }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.TEXT_INPUT,
     displayLabel: "Label",
@@ -1852,9 +1878,9 @@ C([
     fieldMappings: "label"
   })
 ], P.prototype, "label", 2);
-C([
-  U({ type: String }),
-  H({
+R([
+  D({ type: String }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.TEXT_INPUT,
     displayLabel: "Placeholder",
@@ -1862,9 +1888,9 @@ C([
     fieldMappings: "placeholder"
   })
 ], P.prototype, "placeholder", 2);
-C([
-  U({ type: Array }),
-  H({
+R([
+  D({ type: Array }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.DROPDOWN,
     displayLabel: "Options",
@@ -1876,54 +1902,54 @@ C([
     fieldMappings: "options"
   })
 ], P.prototype, "options", 2);
-C([
-  U({ type: Boolean }),
-  H({
+R([
+  D({ type: Boolean }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.CHECKBOX,
     displayLabel: "Required",
     fieldMappings: "required"
   })
 ], P.prototype, "required", 2);
-C([
-  U({ type: Boolean }),
-  H({
+R([
+  D({ type: Boolean }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.CHECKBOX,
     displayLabel: "Disabled",
     fieldMappings: "disabled"
   })
 ], P.prototype, "disabled", 2);
-C([
-  U({ type: Boolean }),
-  H({
+R([
+  D({ type: Boolean }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.CHECKBOX,
     displayLabel: "Multiple Selection",
     fieldMappings: "multiple"
   })
 ], P.prototype, "multiple", 2);
-C([
-  U({ type: Boolean }),
-  H({
+R([
+  D({ type: Boolean }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.CHECKBOX,
     displayLabel: "Searchable",
     fieldMappings: "searchable"
   })
 ], P.prototype, "searchable", 2);
-C([
-  U({ type: Boolean }),
-  H({
+R([
+  D({ type: Boolean }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.CHECKBOX,
     displayLabel: "Custom Style",
     fieldMappings: "customStyle"
   })
 ], P.prototype, "customStyle", 2);
-C([
-  U({ type: String }),
-  H({
+R([
+  D({ type: String }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.TEXT_INPUT,
     displayLabel: "Error Message",
@@ -1931,30 +1957,30 @@ C([
     fieldMappings: "errorMessage"
   })
 ], P.prototype, "errorMessage", 2);
-C([
-  U({ type: Boolean }),
-  H({
+R([
+  D({ type: Boolean }),
+  U({
     attributeType: k.PROPERTY,
     uiComponentType: N.CHECKBOX,
     displayLabel: "Show Error",
     fieldMappings: "showError"
   })
 ], P.prototype, "showError", 2);
-C([
-  U({ type: Boolean })
+R([
+  D({ type: Boolean })
 ], P.prototype, "isOpen", 2);
-C([
-  U({ type: String })
+R([
+  D({ type: String })
 ], P.prototype, "searchQuery", 2);
-C([
-  H({
+R([
+  U({
     attributeType: k.EVENT,
     displayLabel: "On Change",
     eventTrigger: "change"
   })
 ], P.prototype, "handleChange", 1);
-P = C([
-  It({
+P = R([
+  zt({
     name: "zero-dropdown",
     version: "1.0.0",
     title: "Dropdown",
@@ -1962,8 +1988,9 @@ P = C([
     group: "Form Controls",
     iconName: "dropdown-icon.png"
   }),
-  Dt()
+  Bt()
 ], P);
 export {
-  P as ZeroDropdown
+  P as ZeroDropdown,
+  nt as studioTemplate
 };

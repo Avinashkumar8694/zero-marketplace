@@ -1,18 +1,1 @@
-// packages/zero-flow-node-email/action.ts
-async function execute(config, input, context) {
-  const template = String(config.template ?? "notification");
-  const to = String(config.to ?? "");
-  const subject = String(config.subject ?? "");
-  const params = config.params ?? input;
-  if (context) {
-    context.log?.(`[Email] Sending "${template}" to ${to}`);
-    await context.mailer.send(to, template, { ...params, subject });
-  }
-  return {
-    output: input,
-    next: null
-  };
-}
-export {
-  execute
-};
+async function a(n,o,t){let e=String(n.template??"notification"),r=String(n.to??""),i=String(n.subject??""),s=n.params??o;return t&&(t.log?.(`[Email] Sending "${e}" to ${r}`),await t.mailer.send(r,e,{...s,subject:i})),{output:o,next:null}}export{a as execute};

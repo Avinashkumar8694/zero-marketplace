@@ -1,9 +1,12 @@
 {
   "name": "zero-flow-node-script",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-flow-node-script",
+  "description": "Flow script node component",
   "main": "zero-flow-node-script.js",
+  "type": "module",
   "keywords": [
+    "lit",
+    "web-component",
     "flow-node",
     "flow-node-type:script",
     "zero-components"

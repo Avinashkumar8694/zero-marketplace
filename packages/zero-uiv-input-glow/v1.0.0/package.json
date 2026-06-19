@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-input-glow",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Glow effect input component",
+  "main": "zero-uiv-input-glow.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "input",
+    "glow",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

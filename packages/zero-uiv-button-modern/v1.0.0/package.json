@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-button-modern",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Modern button component",
+  "main": "zero-uiv-button-modern.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "button",
+    "modern",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

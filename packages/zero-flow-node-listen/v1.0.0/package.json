@@ -1,9 +1,12 @@
 {
   "name": "zero-flow-node-listen",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-flow-node-listen",
+  "description": "Flow listen node component",
   "main": "zero-flow-node-listen.js",
+  "type": "module",
   "keywords": [
+    "lit",
+    "web-component",
     "flow-node",
     "flow-node-type:listen",
     "zero-components"

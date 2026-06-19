@@ -1,0 +1,20 @@
+{
+  "name": "zero-uiv-expansion-blocky",
+  "version": "1.0.0",
+  "description": "Uiverse-inspired Retro expansion component",
+  "main": "zero-uiv-expansion-blocky.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "expansion-panel",
+    "accordion",
+    "uiverse",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true
+  }
+}

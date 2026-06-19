@@ -1,9 +1,12 @@
 {
   "name": "zero-flow-node-switch",
   "version": "1.0.0",
-  "description": "Published from zero-components: zero-flow-node-switch",
+  "description": "Flow switch node component",
   "main": "zero-flow-node-switch.js",
+  "type": "module",
   "keywords": [
+    "lit",
+    "web-component",
     "flow-node",
     "flow-node-type:switch",
     "zero-components"
