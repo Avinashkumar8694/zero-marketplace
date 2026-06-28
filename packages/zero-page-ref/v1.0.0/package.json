@@ -17,29 +17,18 @@
     "components": [
       {
         "componentName": "zero-page-ref",
-        "title": "Reuse Page",
+        "title": "Zero Page Ref",
+        "description": "Nesting / Page Reference Layout",
         "version": "1.0.0",
-        "elementSelector": "zero-page-ref-1.0.0",
-        "jsEntry": "zero-page-ref.ts",
+        "elementSelector": "zero-page-ref",
         "tags": [
-          "layout",
-          "nesting",
-          "page",
-          "reference"
+          "zero-components",
+          "lit",
+          "web-component"
         ],
-        "category": "layout",
-        "group": "Content Block",
-        "properties": [
-          {
-            "name": "pageId",
-            "type": "string",
-            "defaultValue": ""
-          }
-        ],
-        "studioTemplate": {
-          "kind": "generic",
-          "emptyText": "Displays a nested page reference"
-        },
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
         "events": [],
         "slots": [],
         "lifecycleHooks": [
@@ -48,11 +37,8 @@
           "onChanges",
           "afterRender"
         ],
-        "publishableAsNode": false,
-        "allowBoxModel": true,
-        "allowCustomClass": true,
-        "allowCustomStyle": true,
-        "source": "marketplace"
+        "source": "marketplace",
+        "publishableAsNode": true
       }
     ]
   }
