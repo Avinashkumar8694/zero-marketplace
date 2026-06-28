@@ -13,5 +13,34 @@
     "zero-components"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-text",
+        "title": "Zero Text",
+        "description": "Rich paragraph text component",
+        "version": "1.0.0",
+        "elementSelector": "zero-text",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
 }

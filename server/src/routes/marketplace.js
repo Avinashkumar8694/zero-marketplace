@@ -247,11 +247,12 @@ const setupMarketplaceRoutes = (router, featureFlags) => {
                 // Flow node action info
                 hasAction: hasAction,
                 actionUrl: isExtra 
-                    ? `/plugins-extra/${componentData.directoryName}/action.js`
-                    : `/plugins/${componentData.directoryName}/action.js`,
+                    ? (componentData.structure === 'versioned' ? `/plugins-extra/${family}/${componentData.directoryName}/action.js` : `/plugins-extra/${componentData.directoryName}/action.js`)
+                    : (componentData.structure === 'versioned' ? `/plugins/${family}/${componentData.directoryName}/action.js` : `/plugins/${componentData.directoryName}/action.js`),
                 jsEntry: isExtra
-                    ? `/plugins-extra/${componentData.directoryName}/${family}.js`
-                    : `/plugins/${componentData.directoryName}/${family}.js`
+                    ? (componentData.structure === 'versioned' ? `/plugins-extra/${family}/${componentData.directoryName}/${family}.js` : `/plugins-extra/${componentData.directoryName}/${family}.js`)
+                    : (componentData.structure === 'versioned' ? `/plugins/${family}/${componentData.directoryName}/${family}.js` : `/plugins/${componentData.directoryName}/${family}.js`),
+                zero: packageJson.zero || {}
             };
             
             res.json(response);

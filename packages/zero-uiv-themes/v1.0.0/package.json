@@ -19,5 +19,34 @@
     "web-component"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-uiv-themes",
+        "title": "Zero Uiv Themes",
+        "description": "Modular theme system for Zero UIV components",
+        "version": "1.0.0",
+        "elementSelector": "zero-uiv-themes",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
 }

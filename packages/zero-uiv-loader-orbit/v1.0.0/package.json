@@ -15,6 +15,33 @@
   "author": "Zero Components",
   "license": "MIT",
   "zero": {
-    "component": true
+    "component": true,
+    "components": [
+      {
+        "componentName": "zero-uiv-loader-orbit",
+        "title": "Zero Uiv Loader Orbit",
+        "description": "Uiverse-inspired Orbit loader component",
+        "version": "1.0.0",
+        "elementSelector": "zero-uiv-loader-orbit",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
   }
 }

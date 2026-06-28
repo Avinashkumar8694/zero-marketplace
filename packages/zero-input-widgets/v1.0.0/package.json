@@ -15,6 +15,33 @@
   "license": "ISC",
   "description": "Published from zero-components: zero-input-widgets",
   "zero": {
-    "component": true
+    "component": true,
+    "components": [
+      {
+        "componentName": "zero-input-widgets",
+        "title": "Zero Input Widgets",
+        "description": "Published from zero-components: zero-input-widgets",
+        "version": "1.0.0",
+        "elementSelector": "zero-input-widgets",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
   }
 }

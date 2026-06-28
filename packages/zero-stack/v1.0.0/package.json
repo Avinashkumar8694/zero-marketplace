@@ -22,6 +22,33 @@
       "Directional Flow",
       "Mobile Overrides",
       "Gap Control"
+    ],
+    "components": [
+      {
+        "componentName": "zero-stack",
+        "title": "Zero Stack",
+        "description": "Flexible stack layout component for row and column composition",
+        "version": "1.0.0",
+        "elementSelector": "zero-stack",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
     ]
   }
 }

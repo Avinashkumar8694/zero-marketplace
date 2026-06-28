@@ -12,5 +12,34 @@
     "zero-components"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-flow-node-switch",
+        "title": "Zero Flow Node Switch",
+        "description": "Flow switch node component",
+        "version": "1.0.0",
+        "elementSelector": "zero-flow-node-switch",
+        "tags": [
+          "flow-node",
+          "flow-node-type:switch",
+          "zero-components"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
 }

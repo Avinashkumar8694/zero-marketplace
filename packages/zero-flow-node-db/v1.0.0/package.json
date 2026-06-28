@@ -12,5 +12,34 @@
     "zero-components"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-flow-node-db",
+        "title": "Zero Flow Node Db",
+        "description": "Flow database node component",
+        "version": "1.0.0",
+        "elementSelector": "zero-flow-node-db",
+        "tags": [
+          "flow-node",
+          "flow-node-type:db",
+          "zero-components"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
 }

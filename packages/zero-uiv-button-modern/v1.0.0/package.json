@@ -15,6 +15,33 @@
   "author": "Zero Components",
   "license": "MIT",
   "zero": {
-    "component": true
+    "component": true,
+    "components": [
+      {
+        "componentName": "zero-uiv-button-modern",
+        "title": "Zero Uiv Button Modern",
+        "description": "Uiverse-inspired Modern button component",
+        "version": "1.0.0",
+        "elementSelector": "zero-uiv-button-modern",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
   }
 }

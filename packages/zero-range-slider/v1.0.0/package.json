@@ -18,5 +18,34 @@
   "dependencies": {
     "lit": "^3.0.0"
   },
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-range-slider",
+        "title": "Zero Range Slider",
+        "description": "A configurable range slider component with dual handles and tooltips",
+        "version": "1.0.0",
+        "elementSelector": "zero-range-slider",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
 }

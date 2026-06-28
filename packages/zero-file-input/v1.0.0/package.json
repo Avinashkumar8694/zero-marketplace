@@ -11,7 +11,34 @@
     "zero-file-input.js.map"
   ],
   "zero": {
-    "component": true
+    "component": true,
+    "components": [
+      {
+        "componentName": "zero-file-input",
+        "title": "Zero File Input",
+        "description": "A highly configurable file input component with drag & drop, preview, and upload progress",
+        "version": "1.0.0",
+        "elementSelector": "zero-file-input",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
   },
   "keywords": [
     "web-components",

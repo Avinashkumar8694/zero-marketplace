@@ -12,5 +12,34 @@
     "zero-components"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-textarea",
+        "title": "Zero Textarea",
+        "description": "A configurable textarea component with character count, word count, and auto-resize",
+        "version": "1.0.0",
+        "elementSelector": "zero-textarea",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
 }

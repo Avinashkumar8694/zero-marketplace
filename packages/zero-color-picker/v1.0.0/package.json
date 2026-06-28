@@ -11,7 +11,34 @@
     "zero-color-picker.js.map"
   ],
   "zero": {
-    "component": true
+    "component": true,
+    "components": [
+      {
+        "componentName": "zero-color-picker",
+        "title": "Zero Color Picker",
+        "description": "A highly configurable color picker component with HSV/HSL support, alpha channel, presets, and eye dropper",
+        "version": "1.0.0",
+        "elementSelector": "zero-color-picker",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
   },
   "keywords": [
     "web-components",

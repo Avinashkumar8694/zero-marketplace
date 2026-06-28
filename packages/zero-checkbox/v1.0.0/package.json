@@ -14,6 +14,33 @@
   "author": "Zero Components",
   "license": "MIT",
   "zero": {
-    "component": true
+    "component": true,
+    "components": [
+      {
+        "componentName": "zero-checkbox",
+        "title": "Zero Checkbox",
+        "description": "A configurable checkbox component with multiple styles and indeterminate state",
+        "version": "1.0.0",
+        "elementSelector": "zero-checkbox",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
   }
 }

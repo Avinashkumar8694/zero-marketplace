@@ -12,5 +12,34 @@
     "zero-components"
   ],
   "author": "Zero Components",
-  "license": "MIT"
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-flow-node-async",
+        "title": "Zero Flow Node Async",
+        "description": "Flow async node component",
+        "version": "1.0.0",
+        "elementSelector": "zero-flow-node-async",
+        "tags": [
+          "flow-node",
+          "flow-node-type:async",
+          "zero-components"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
 }

@@ -15,7 +15,34 @@
   "author": "Zero Components",
   "license": "MIT",
   "zero": {
-    "component": true
+    "component": true,
+    "components": [
+      {
+        "componentName": "zero-uiv-expansion",
+        "title": "Zero Uiv Expansion",
+        "description": "Unified Uiverse-inspired expansion panel component with multi-theme support",
+        "version": "1.0.0",
+        "elementSelector": "zero-uiv-expansion",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
   },
   "dependencies": {
     "lit": "^3.0.0",
