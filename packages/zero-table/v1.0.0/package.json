@@ -1,0 +1,45 @@
+{
+  "name": "zero-table",
+  "version": "1.0.0",
+  "description": "Professional customizable data table component",
+  "main": "zero-table.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "table",
+    "data-table",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-table",
+        "title": "Zero Table",
+        "description": "Professional customizable data table component",
+        "version": "1.0.0",
+        "elementSelector": "zero-table",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

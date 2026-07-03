@@ -16,32 +16,7 @@
   "license": "ISC",
   "zero": {
     "component": true,
-    "components": [
-      {
-        "componentName": "nrenderer",
-        "title": "Nrenderer",
-        "description": "Published from zero-components: nrenderer",
-        "version": "1.0.0",
-        "elementSelector": "nrenderer",
-        "tags": [
-          "zero-components",
-          "lit",
-          "web-component"
-        ],
-        "category": "Layout",
-        "group": "Layout",
-        "properties": [],
-        "events": [],
-        "slots": [],
-        "lifecycleHooks": [
-          "onInit",
-          "onDestroy",
-          "onChanges",
-          "afterRender"
-        ],
-        "source": "marketplace",
-        "publishableAsNode": true
-      }
-    ]
+    "hidden": true,
+    "components": []
   }
 }

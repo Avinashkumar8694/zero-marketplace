@@ -6,40 +6,15 @@
   "module": "src/index.ts",
   "types": "src/index.ts",
   "dependencies": {},
+  "zero": {
+    "hidden": true,
+    "components": []
+  },
   "keywords": [
     "zero-components",
     "lit",
     "web-component"
   ],
   "author": "Zero Components",
-  "license": "MIT",
-  "zero": {
-    "components": [
-      {
-        "componentName": "zero-theme-orchestrator",
-        "title": "Zero Theme Orchestrator",
-        "description": "Central orchestrator for independent theme registration and discovery",
-        "version": "1.0.0",
-        "elementSelector": "zero-theme-orchestrator",
-        "tags": [
-          "zero-components",
-          "lit",
-          "web-component"
-        ],
-        "category": "Layout",
-        "group": "Layout",
-        "properties": [],
-        "events": [],
-        "slots": [],
-        "lifecycleHooks": [
-          "onInit",
-          "onDestroy",
-          "onChanges",
-          "afterRender"
-        ],
-        "source": "marketplace",
-        "publishableAsNode": true
-      }
-    ]
-  }
+  "license": "MIT"
 }

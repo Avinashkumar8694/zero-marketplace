@@ -1,0 +1,46 @@
+{
+  "name": "zero-block-feature",
+  "version": "1.0.0",
+  "description": "Features section layout block displaying highlights with customizable icons and grid arrangements",
+  "main": "zero-block-feature.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "features",
+    "block",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "component": true,
+    "components": [
+      {
+        "componentName": "zero-block-feature",
+        "title": "Zero Block Feature",
+        "description": "Features section layout block displaying highlights with customizable icons and grid arrangements",
+        "version": "1.0.0",
+        "elementSelector": "zero-block-feature",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

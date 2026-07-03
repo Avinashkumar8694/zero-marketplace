@@ -13,40 +13,15 @@
     "name": "Zero Standard Themes",
     "description": "Collection of standard themes (Cyber, Glass, Modern, etc.)"
   },
+  "zero": {
+    "hidden": true,
+    "components": []
+  },
   "keywords": [
     "zero-components",
     "lit",
     "web-component"
   ],
   "author": "Zero Components",
-  "license": "MIT",
-  "zero": {
-    "components": [
-      {
-        "componentName": "zero-standard-themes",
-        "title": "Zero Standard Themes",
-        "description": "Standard theme system for Zero components",
-        "version": "1.0.0",
-        "elementSelector": "zero-standard-themes",
-        "tags": [
-          "zero-components",
-          "lit",
-          "web-component"
-        ],
-        "category": "Layout",
-        "group": "Layout",
-        "properties": [],
-        "events": [],
-        "slots": [],
-        "lifecycleHooks": [
-          "onInit",
-          "onDestroy",
-          "onChanges",
-          "afterRender"
-        ],
-        "source": "marketplace",
-        "publishableAsNode": true
-      }
-    ]
-  }
+  "license": "MIT"
 }

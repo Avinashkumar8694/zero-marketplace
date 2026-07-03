@@ -16,32 +16,7 @@
   "license": "ISC",
   "zero": {
     "component": true,
-    "components": [
-      {
-        "componentName": "popup-dialog",
-        "title": "Popup Dialog",
-        "description": "Published from zero-components: popup-dialog",
-        "version": "1.0.0",
-        "elementSelector": "popup-dialog",
-        "tags": [
-          "zero-components",
-          "lit",
-          "web-component"
-        ],
-        "category": "Layout",
-        "group": "Layout",
-        "properties": [],
-        "events": [],
-        "slots": [],
-        "lifecycleHooks": [
-          "onInit",
-          "onDestroy",
-          "onChanges",
-          "afterRender"
-        ],
-        "source": "marketplace",
-        "publishableAsNode": true
-      }
-    ]
+    "hidden": true,
+    "components": []
   }
 }

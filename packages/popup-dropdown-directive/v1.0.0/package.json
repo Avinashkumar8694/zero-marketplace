@@ -16,32 +16,7 @@
   "license": "ISC",
   "zero": {
     "component": true,
-    "components": [
-      {
-        "componentName": "popup-dropdown-directive",
-        "title": "Popup Dropdown Directive",
-        "description": "Published from zero-components: popup-dropdown-directive",
-        "version": "1.0.0",
-        "elementSelector": "popup-dropdown-directive",
-        "tags": [
-          "zero-components",
-          "lit",
-          "web-component"
-        ],
-        "category": "Layout",
-        "group": "Layout",
-        "properties": [],
-        "events": [],
-        "slots": [],
-        "lifecycleHooks": [
-          "onInit",
-          "onDestroy",
-          "onChanges",
-          "afterRender"
-        ],
-        "source": "marketplace",
-        "publishableAsNode": true
-      }
-    ]
+    "hidden": true,
+    "components": []
   }
 }

@@ -1,0 +1,44 @@
+{
+  "name": "zero-tooltip",
+  "version": "1.0.0",
+  "description": "Professional customizable tooltip component",
+  "main": "zero-tooltip.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "tooltip",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-tooltip",
+        "title": "Zero Tooltip",
+        "description": "Professional customizable tooltip component",
+        "version": "1.0.0",
+        "elementSelector": "zero-tooltip",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}
