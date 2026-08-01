@@ -1,0 +1,47 @@
+{
+  "name": "zero-list",
+  "version": "1.0.0",
+  "description": "Styled data list with icons, subtitles, meta and interactive rows",
+  "main": "zero-list.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "list",
+    "menu",
+    "items",
+    "data-display",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-list",
+        "title": "Zero List",
+        "description": "Styled data list with icons, subtitles, meta and interactive rows",
+        "version": "1.0.0",
+        "elementSelector": "zero-list",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

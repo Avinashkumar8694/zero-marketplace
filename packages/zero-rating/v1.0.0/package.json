@@ -1,0 +1,47 @@
+{
+  "name": "zero-rating",
+  "version": "1.0.0",
+  "description": "Interactive star / heart / emoji rating with half values and custom color",
+  "main": "zero-rating.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "rating",
+    "stars",
+    "review",
+    "data-display",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-rating",
+        "title": "Zero Rating",
+        "description": "Interactive star / heart / emoji rating with half values and custom color",
+        "version": "1.0.0",
+        "elementSelector": "zero-rating",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

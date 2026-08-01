@@ -1,0 +1,48 @@
+{
+  "name": "zero-skeleton",
+  "version": "1.0.0",
+  "description": "Loading placeholder with text / circle / rect / card variants and shimmer animations",
+  "main": "zero-skeleton.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "skeleton",
+    "placeholder",
+    "loading",
+    "shimmer",
+    "feedback",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-skeleton",
+        "title": "Zero Skeleton",
+        "description": "Loading placeholder with text / circle / rect / card variants and shimmer animations",
+        "version": "1.0.0",
+        "elementSelector": "zero-skeleton",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

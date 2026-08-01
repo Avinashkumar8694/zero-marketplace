@@ -1,0 +1,47 @@
+{
+  "name": "zero-divider",
+  "version": "1.0.0",
+  "description": "Horizontal / vertical separator with optional centered label and line styles",
+  "main": "zero-divider.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "divider",
+    "separator",
+    "rule",
+    "layout",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-divider",
+        "title": "Zero Divider",
+        "description": "Horizontal / vertical separator with optional centered label and line styles",
+        "version": "1.0.0",
+        "elementSelector": "zero-divider",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}
