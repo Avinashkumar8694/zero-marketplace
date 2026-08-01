@@ -1,0 +1,47 @@
+{
+  "name": "zero-stepper",
+  "version": "1.0.0",
+  "description": "Multi-step progress indicator with completed/active/upcoming states and connectors",
+  "main": "zero-stepper.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "stepper",
+    "steps",
+    "wizard",
+    "navigation",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-stepper",
+        "title": "Zero Stepper",
+        "description": "Multi-step progress indicator with completed/active/upcoming states and connectors",
+        "version": "1.0.0",
+        "elementSelector": "zero-stepper",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

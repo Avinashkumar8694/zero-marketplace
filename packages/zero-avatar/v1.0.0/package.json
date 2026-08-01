@@ -1,0 +1,47 @@
+{
+  "name": "zero-avatar",
+  "version": "1.0.0",
+  "description": "User identity avatar with image or initials, sizes, shapes and status dot",
+  "main": "zero-avatar.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "avatar",
+    "identity",
+    "user",
+    "data-display",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-avatar",
+        "title": "Zero Avatar",
+        "description": "User identity avatar with image or initials, sizes, shapes and status dot",
+        "version": "1.0.0",
+        "elementSelector": "zero-avatar",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

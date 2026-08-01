@@ -1,0 +1,47 @@
+{
+  "name": "zero-chip",
+  "version": "1.0.0",
+  "description": "Tag / filter chip with variants, semantic colors, optional icon and removable x",
+  "main": "zero-chip.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "chip",
+    "tag",
+    "filter",
+    "data-display",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-chip",
+        "title": "Zero Chip",
+        "description": "Tag / filter chip with variants, semantic colors, optional icon and removable x",
+        "version": "1.0.0",
+        "elementSelector": "zero-chip",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

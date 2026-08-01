@@ -1,0 +1,46 @@
+{
+  "name": "zero-progress",
+  "version": "1.0.0",
+  "description": "Linear or circular progress indicator with label, stripes and semantic colors",
+  "main": "zero-progress.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "progress",
+    "loader",
+    "feedback",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-progress",
+        "title": "Zero Progress",
+        "description": "Linear or circular progress indicator with label, stripes and semantic colors",
+        "version": "1.0.0",
+        "elementSelector": "zero-progress",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}
