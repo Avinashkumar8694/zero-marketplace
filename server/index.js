@@ -21,6 +21,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 // Import route modules
 import { setupFileRoutes } from './src/utils/file-utils.js';
 import { setupMarketplaceRoutes } from './src/routes/marketplace.js';
+import { setupTemplateRoutes } from './src/routes/templates.js';
 import { setupLegacyRoutes } from './src/routes/legacy.js';
 import { setupUploadRoutes } from './src/routes/upload.js';
 
@@ -103,6 +104,9 @@ const setupRoutes = (app, basePath, featureFlags) => {
     // Setup routes with environment variables and feature flags
     setupFileRoutes(router);
     setupMarketplaceRoutes(router, featureFlags);
+    // Template store routes (POST/GET/DELETE /marketplace/templates*). Registered
+    // BEFORE the static '/marketplace' mount below so the explicit JSON routes win.
+    setupTemplateRoutes(router);
     setupLegacyRoutes(router);
     setupUploadRoutes(router);
 
