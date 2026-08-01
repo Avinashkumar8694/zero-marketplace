@@ -1,0 +1,25 @@
+{
+  "name": "zero-topnav-layout",
+  "version": "1.0.0",
+  "description": "Top-navbar Layout Template component for visual builder pages",
+  "main": "zero-topnav-layout.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "zero-components"
+  ],
+  "license": "MIT",
+  "zero": {
+    "component": true,
+    "category": "Layout",
+    "components": [
+      {
+        "tag": "zero-topnav-layout",
+        "title": "Top Nav Layout",
+        "category": "Layout"
+      }
+    ]
+  },
+  "author": "Zero Components"
+}
