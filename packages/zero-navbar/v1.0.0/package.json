@@ -1,0 +1,46 @@
+{
+  "name": "zero-navbar",
+  "version": "1.0.0",
+  "description": "Responsive top navigation bar with brand, links and CTA",
+  "main": "zero-navbar.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "navbar",
+    "navigation",
+    "header",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-navbar",
+        "title": "Zero Navbar",
+        "description": "Responsive top navigation bar with brand, links and CTA",
+        "version": "1.0.0",
+        "elementSelector": "zero-navbar",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

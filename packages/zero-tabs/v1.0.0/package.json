@@ -1,0 +1,46 @@
+{
+  "name": "zero-tabs",
+  "version": "1.0.0",
+  "description": "Tabbed content switcher with underline, pills and enclosed variants",
+  "main": "zero-tabs.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "tabs",
+    "navigation",
+    "switcher",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-tabs",
+        "title": "Zero Tabs",
+        "description": "Tabbed content switcher with underline, pills and enclosed variants",
+        "version": "1.0.0",
+        "elementSelector": "zero-tabs",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}
