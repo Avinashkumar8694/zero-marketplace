@@ -252,7 +252,9 @@ const setupMarketplaceRoutes = (router, featureFlags) => {
                 jsEntry: isExtra
                     ? (componentData.structure === 'versioned' ? `/plugins-extra/${family}/${componentData.directoryName}/${family}.js` : `/plugins-extra/${componentData.directoryName}/${family}.js`)
                     : (componentData.structure === 'versioned' ? `/plugins/${family}/${componentData.directoryName}/${family}.js` : `/plugins/${componentData.directoryName}/${family}.js`),
-                zero: packageJson.zero || {}
+                zero: packageJson.zero || {},
+                layoutKind: componentMetadata.layoutKind,
+                environment: componentMetadata.environment
             };
             
             res.json(response);

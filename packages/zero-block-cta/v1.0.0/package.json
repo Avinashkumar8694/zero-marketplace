@@ -1,25 +1,22 @@
 {
   "name": "zero-block-cta",
   "version": "1.0.0",
-  "description": "Call to action block with customizable subscription forms and button redirection banners",
+  "description": "CTA Block component for landing pages",
   "main": "zero-block-cta.js",
   "type": "module",
   "keywords": [
     "lit",
     "web-component",
-    "cta",
-    "block",
     "zero-components"
   ],
-  "author": "Zero Components",
   "license": "MIT",
+  "author": "Zero Components",
   "zero": {
-    "component": true,
     "components": [
       {
         "componentName": "zero-block-cta",
         "title": "Zero Block Cta",
-        "description": "Call to action block with customizable subscription forms and button redirection banners",
+        "description": "CTA Block component for landing pages",
         "version": "1.0.0",
         "elementSelector": "zero-block-cta",
         "tags": [

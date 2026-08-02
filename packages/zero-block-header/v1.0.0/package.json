@@ -1,25 +1,22 @@
 {
   "name": "zero-block-header",
   "version": "1.0.0",
-  "description": "Header navigation block with configurable logo, links, and action button",
+  "description": "Header Block component for landing pages",
   "main": "zero-block-header.js",
   "type": "module",
   "keywords": [
     "lit",
     "web-component",
-    "header",
-    "block",
     "zero-components"
   ],
-  "author": "Zero Components",
   "license": "MIT",
+  "author": "Zero Components",
   "zero": {
-    "component": true,
     "components": [
       {
         "componentName": "zero-block-header",
         "title": "Zero Block Header",
-        "description": "Header navigation block with configurable logo, links, and action button",
+        "description": "Header Block component for landing pages",
         "version": "1.0.0",
         "elementSelector": "zero-block-header",
         "tags": [

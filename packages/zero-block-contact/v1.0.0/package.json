@@ -1,25 +1,22 @@
 {
   "name": "zero-block-contact",
   "version": "1.0.0",
-  "description": "Contact layout section supporting physical details, maps, and email inquiry input forms",
+  "description": "Contact Block component for landing pages",
   "main": "zero-block-contact.js",
   "type": "module",
   "keywords": [
     "lit",
     "web-component",
-    "contact",
-    "block",
     "zero-components"
   ],
-  "author": "Zero Components",
   "license": "MIT",
+  "author": "Zero Components",
   "zero": {
-    "component": true,
     "components": [
       {
         "componentName": "zero-block-contact",
         "title": "Zero Block Contact",
-        "description": "Contact layout section supporting physical details, maps, and email inquiry input forms",
+        "description": "Contact Block component for landing pages",
         "version": "1.0.0",
         "elementSelector": "zero-block-contact",
         "tags": [

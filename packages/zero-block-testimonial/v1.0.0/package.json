@@ -1,25 +1,22 @@
 {
   "name": "zero-block-testimonial",
   "version": "1.0.0",
-  "description": "Testimonial review block supporting star ratings, quotes, and customer profile details",
+  "description": "Testimonial Block component for landing pages",
   "main": "zero-block-testimonial.js",
   "type": "module",
   "keywords": [
     "lit",
     "web-component",
-    "testimonial",
-    "block",
     "zero-components"
   ],
-  "author": "Zero Components",
   "license": "MIT",
+  "author": "Zero Components",
   "zero": {
-    "component": true,
     "components": [
       {
         "componentName": "zero-block-testimonial",
         "title": "Zero Block Testimonial",
-        "description": "Testimonial review block supporting star ratings, quotes, and customer profile details",
+        "description": "Testimonial Block component for landing pages",
         "version": "1.0.0",
         "elementSelector": "zero-block-testimonial",
         "tags": [

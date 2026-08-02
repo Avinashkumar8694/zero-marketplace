@@ -1,25 +1,22 @@
 {
   "name": "zero-block-hero",
   "version": "1.0.0",
-  "description": "Hero banner block supporting configurable titles, description copy, double action buttons, and side visual displays",
+  "description": "Hero Block component for landing pages",
   "main": "zero-block-hero.js",
   "type": "module",
   "keywords": [
     "lit",
     "web-component",
-    "hero",
-    "block",
     "zero-components"
   ],
-  "author": "Zero Components",
   "license": "MIT",
+  "author": "Zero Components",
   "zero": {
-    "component": true,
     "components": [
       {
         "componentName": "zero-block-hero",
         "title": "Zero Block Hero",
-        "description": "Hero banner block supporting configurable titles, description copy, double action buttons, and side visual displays",
+        "description": "Hero Block component for landing pages",
         "version": "1.0.0",
         "elementSelector": "zero-block-hero",
         "tags": [

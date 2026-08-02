@@ -1,0 +1,45 @@
+{
+  "name": "zero-router-outlet",
+  "version": "1.0.0",
+  "description": "SPA Routing Outlet Component",
+  "main": "zero-router-outlet.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "router-outlet",
+    "layout",
+    "zero-components"
+  ],
+  "author": "Zero Components",
+  "license": "MIT",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-router-outlet",
+        "title": "Zero Router Outlet",
+        "description": "SPA Routing Outlet Component",
+        "version": "1.0.0",
+        "elementSelector": "zero-router-outlet",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

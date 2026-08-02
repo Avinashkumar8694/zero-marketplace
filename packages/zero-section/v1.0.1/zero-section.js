@@ -23,11 +23,11 @@ let kt = class {
   }
 };
 const Wt = (e) => new kt(typeof e == "string" ? e : e + "", void 0, ft), Ut = (e, ...t) => {
-  const o = e.length === 1 ? e[0] : t.reduce((l, r, c) => l + ((u) => {
-    if (u._$cssResult$ === !0) return u.cssText;
-    if (typeof u == "number") return u;
-    throw Error("Value passed to 'css' function must be a 'css' function result: " + u + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
-  })(r) + e[c + 1], e[0]);
+  const o = e.length === 1 ? e[0] : t.reduce((l, r, n) => l + ((p) => {
+    if (p._$cssResult$ === !0) return p.cssText;
+    if (typeof p == "number") return p;
+    throw Error("Value passed to 'css' function must be a 'css' function result: " + p + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
+  })(r) + e[n + 1], e[0]);
   return new kt(o, e, ft);
 }, Bt = (e, t) => {
   if (xt) e.adoptedStyleSheets = t.map((o) => o instanceof CSSStyleSheet ? o : o.styleSheet);
@@ -45,7 +45,7 @@ const Wt = (e) => new kt(typeof e == "string" ? e : e + "", void 0, ft), Ut = (e
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { is: Ht, defineProperty: Xt, getOwnPropertyDescriptor: qt, getOwnPropertyNames: Zt, getOwnPropertySymbols: Qt, getPrototypeOf: Kt } = Object, Ie = globalThis, wt = Ie.trustedTypes, eo = wt ? wt.emptyScript : "", ht = Ie.reactiveElementPolyfillSupport, He = (e, t) => e, ut = { toAttribute(e, t) {
+const { is: Ht, defineProperty: Xt, getOwnPropertyDescriptor: qt, getOwnPropertyNames: Zt, getOwnPropertySymbols: Qt, getPrototypeOf: Kt } = Object, Ie = globalThis, wt = Ie.trustedTypes, eo = wt ? wt.emptyScript : "", ht = Ie.reactiveElementPolyfillSupport, He = (e, t) => e, dt = { toAttribute(e, t) {
   switch (t) {
     case Boolean:
       e = e ? eo : null;
@@ -73,7 +73,7 @@ const { is: Ht, defineProperty: Xt, getOwnPropertyDescriptor: qt, getOwnProperty
       }
   }
   return o;
-} }, gt = (e, t) => !Ht(e, t), Rt = { attribute: !0, type: String, converter: ut, reflect: !1, useDefault: !1, hasChanged: gt };
+} }, gt = (e, t) => !Ht(e, t), Rt = { attribute: !0, type: String, converter: dt, reflect: !1, useDefault: !1, hasChanged: gt };
 Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), Ie.litPropertyMetadata ?? (Ie.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
 let Fe = class extends HTMLElement {
   static addInitializer(t) {
@@ -89,14 +89,14 @@ let Fe = class extends HTMLElement {
     }
   }
   static getPropertyDescriptor(t, o, l) {
-    const { get: r, set: c } = qt(this.prototype, t) ?? { get() {
+    const { get: r, set: n } = qt(this.prototype, t) ?? { get() {
       return this[o];
-    }, set(u) {
-      this[o] = u;
+    }, set(p) {
+      this[o] = p;
     } };
-    return { get: r, set(u) {
+    return { get: r, set(p) {
       const C = r == null ? void 0 : r.call(this);
-      c == null || c.call(this, u), this.requestUpdate(t, C, l);
+      n == null || n.call(this, p), this.requestUpdate(t, C, l);
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(t) {
@@ -181,34 +181,34 @@ let Fe = class extends HTMLElement {
     this._$AK(t, l);
   }
   _$ET(t, o) {
-    var c;
+    var n;
     const l = this.constructor.elementProperties.get(t), r = this.constructor._$Eu(t, l);
     if (r !== void 0 && l.reflect === !0) {
-      const u = (((c = l.converter) == null ? void 0 : c.toAttribute) !== void 0 ? l.converter : ut).toAttribute(o, l.type);
-      this._$Em = t, u == null ? this.removeAttribute(r) : this.setAttribute(r, u), this._$Em = null;
+      const p = (((n = l.converter) == null ? void 0 : n.toAttribute) !== void 0 ? l.converter : dt).toAttribute(o, l.type);
+      this._$Em = t, p == null ? this.removeAttribute(r) : this.setAttribute(r, p), this._$Em = null;
     }
   }
   _$AK(t, o) {
-    var c, u;
+    var n, p;
     const l = this.constructor, r = l._$Eh.get(t);
     if (r !== void 0 && this._$Em !== r) {
-      const C = l.getPropertyOptions(r), x = typeof C.converter == "function" ? { fromAttribute: C.converter } : ((c = C.converter) == null ? void 0 : c.fromAttribute) !== void 0 ? C.converter : ut;
+      const C = l.getPropertyOptions(r), x = typeof C.converter == "function" ? { fromAttribute: C.converter } : ((n = C.converter) == null ? void 0 : n.fromAttribute) !== void 0 ? C.converter : dt;
       this._$Em = r;
       const R = x.fromAttribute(o, C.type);
-      this[r] = R ?? ((u = this._$Ej) == null ? void 0 : u.get(r)) ?? R, this._$Em = null;
+      this[r] = R ?? ((p = this._$Ej) == null ? void 0 : p.get(r)) ?? R, this._$Em = null;
     }
   }
-  requestUpdate(t, o, l, r = !1, c) {
-    var u;
+  requestUpdate(t, o, l, r = !1, n) {
+    var p;
     if (t !== void 0) {
       const C = this.constructor;
-      if (r === !1 && (c = this[t]), l ?? (l = C.getPropertyOptions(t)), !((l.hasChanged ?? gt)(c, o) || l.useDefault && l.reflect && c === ((u = this._$Ej) == null ? void 0 : u.get(t)) && !this.hasAttribute(C._$Eu(t, l)))) return;
+      if (r === !1 && (n = this[t]), l ?? (l = C.getPropertyOptions(t)), !((l.hasChanged ?? gt)(n, o) || l.useDefault && l.reflect && n === ((p = this._$Ej) == null ? void 0 : p.get(t)) && !this.hasAttribute(C._$Eu(t, l)))) return;
       this.C(t, o, l);
     }
     this.isUpdatePending === !1 && (this._$ES = this._$EP());
   }
-  C(t, o, { useDefault: l, reflect: r, wrapped: c }, u) {
-    l && !(this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Map())).has(t) && (this._$Ej.set(t, u ?? o ?? this[t]), c !== !0 || u !== void 0) || (this._$AL.has(t) || (this.hasUpdated || l || (o = void 0), this._$AL.set(t, o)), r === !0 && this._$Em !== t && (this._$Eq ?? (this._$Eq = /* @__PURE__ */ new Set())).add(t));
+  C(t, o, { useDefault: l, reflect: r, wrapped: n }, p) {
+    l && !(this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Map())).has(t) && (this._$Ej.set(t, p ?? o ?? this[t]), n !== !0 || p !== void 0) || (this._$AL.has(t) || (this.hasUpdated || l || (o = void 0), this._$AL.set(t, o)), r === !0 && this._$Em !== t && (this._$Eq ?? (this._$Eq = /* @__PURE__ */ new Set())).add(t));
   }
   async _$EP() {
     this.isUpdatePending = !0;
@@ -228,21 +228,21 @@ let Fe = class extends HTMLElement {
     if (!this.isUpdatePending) return;
     if (!this.hasUpdated) {
       if (this.renderRoot ?? (this.renderRoot = this.createRenderRoot()), this._$Ep) {
-        for (const [c, u] of this._$Ep) this[c] = u;
+        for (const [n, p] of this._$Ep) this[n] = p;
         this._$Ep = void 0;
       }
       const r = this.constructor.elementProperties;
-      if (r.size > 0) for (const [c, u] of r) {
-        const { wrapped: C } = u, x = this[c];
-        C !== !0 || this._$AL.has(c) || x === void 0 || this.C(c, void 0, u, x);
+      if (r.size > 0) for (const [n, p] of r) {
+        const { wrapped: C } = p, x = this[n];
+        C !== !0 || this._$AL.has(n) || x === void 0 || this.C(n, void 0, p, x);
       }
     }
     let t = !1;
     const o = this._$AL;
     try {
       t = this.shouldUpdate(o), t ? (this.willUpdate(o), (l = this._$EO) == null || l.forEach((r) => {
-        var c;
-        return (c = r.hostUpdate) == null ? void 0 : c.call(r);
+        var n;
+        return (n = r.hostUpdate) == null ? void 0 : n.call(r);
       }), this.update(o)) : this._$EM();
     } catch (r) {
       throw t = !1, this._$EM(), r;
@@ -284,30 +284,30 @@ Fe.elementStyles = [], Fe.shadowRootOptions = { mode: "open" }, Fe[He("elementPr
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const Xe = globalThis, Et = (e) => e, dt = Xe.trustedTypes, St = dt ? dt.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, jt = "$lit$", De = `lit$${Math.random().toFixed(9).slice(2)}$`, Vt = "?" + De, to = `<${Vt}>`, Ge = document, Ze = () => Ge.createComment(""), Qe = (e) => e === null || typeof e != "object" && typeof e != "function", Tt = Array.isArray, oo = (e) => Tt(e) || typeof (e == null ? void 0 : e[Symbol.iterator]) == "function", bt = `[ 	
+const Xe = globalThis, Et = (e) => e, ut = Xe.trustedTypes, St = ut ? ut.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, jt = "$lit$", De = `lit$${Math.random().toFixed(9).slice(2)}$`, Vt = "?" + De, to = `<${Vt}>`, Ge = document, Ze = () => Ge.createComment(""), Qe = (e) => e === null || typeof e != "object" && typeof e != "function", Tt = Array.isArray, oo = (e) => Tt(e) || typeof (e == null ? void 0 : e[Symbol.iterator]) == "function", bt = `[ 	
 \f\r]`, Be = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, _t = /-->/g, Ot = />/g, Ue = RegExp(`>|${bt}(?:([^\\s"'>=/]+)(${bt}*=${bt}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Lt = /'/g, zt = /"/g, Gt = /^(?:script|style|textarea|title)$/i, lo = (e) => (t, ...o) => ({ _$litType$: e, strings: t, values: o }), oe = lo(1), Je = Symbol.for("lit-noChange"), J = Symbol.for("lit-nothing"), Mt = /* @__PURE__ */ new WeakMap(), je = Ge.createTreeWalker(Ge, 129);
+\f\r"'\`<>=]|("|')|))|$)`, "g"), zt = /'/g, Lt = /"/g, Gt = /^(?:script|style|textarea|title)$/i, lo = (e) => (t, ...o) => ({ _$litType$: e, strings: t, values: o }), oe = lo(1), Je = Symbol.for("lit-noChange"), J = Symbol.for("lit-nothing"), Mt = /* @__PURE__ */ new WeakMap(), je = Ge.createTreeWalker(Ge, 129);
 function Yt(e, t) {
   if (!Tt(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return St !== void 0 ? St.createHTML(t) : t;
 }
 const ro = (e, t) => {
   const o = e.length - 1, l = [];
-  let r, c = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", u = Be;
+  let r, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", p = Be;
   for (let C = 0; C < o; C++) {
     const x = e[C];
     let R, E, w = -1, M = 0;
-    for (; M < x.length && (u.lastIndex = M, E = u.exec(x), E !== null); ) M = u.lastIndex, u === Be ? E[1] === "!--" ? u = _t : E[1] !== void 0 ? u = Ot : E[2] !== void 0 ? (Gt.test(E[2]) && (r = RegExp("</" + E[2], "g")), u = Ue) : E[3] !== void 0 && (u = Ue) : u === Ue ? E[0] === ">" ? (u = r ?? Be, w = -1) : E[1] === void 0 ? w = -2 : (w = u.lastIndex - E[2].length, R = E[1], u = E[3] === void 0 ? Ue : E[3] === '"' ? zt : Lt) : u === zt || u === Lt ? u = Ue : u === _t || u === Ot ? u = Be : (u = Ue, r = void 0);
-    const I = u === Ue && e[C + 1].startsWith("/>") ? " " : "";
-    c += u === Be ? x + to : w >= 0 ? (l.push(R), x.slice(0, w) + jt + x.slice(w) + De + I) : x + De + (w === -2 ? C : I);
+    for (; M < x.length && (p.lastIndex = M, E = p.exec(x), E !== null); ) M = p.lastIndex, p === Be ? E[1] === "!--" ? p = _t : E[1] !== void 0 ? p = Ot : E[2] !== void 0 ? (Gt.test(E[2]) && (r = RegExp("</" + E[2], "g")), p = Ue) : E[3] !== void 0 && (p = Ue) : p === Ue ? E[0] === ">" ? (p = r ?? Be, w = -1) : E[1] === void 0 ? w = -2 : (w = p.lastIndex - E[2].length, R = E[1], p = E[3] === void 0 ? Ue : E[3] === '"' ? Lt : zt) : p === Lt || p === zt ? p = Ue : p === _t || p === Ot ? p = Be : (p = Ue, r = void 0);
+    const I = p === Ue && e[C + 1].startsWith("/>") ? " " : "";
+    n += p === Be ? x + to : w >= 0 ? (l.push(R), x.slice(0, w) + jt + x.slice(w) + De + I) : x + De + (w === -2 ? C : I);
   }
-  return [Yt(e, c + (e[o] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), l];
+  return [Yt(e, n + (e[o] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), l];
 };
 class Ke {
   constructor({ strings: t, _$litType$: o }, l) {
     let r;
     this.parts = [];
-    let c = 0, u = 0;
+    let n = 0, p = 0;
     const C = t.length - 1, x = this.parts, [R, E] = ro(t, o);
     if (this.el = Ke.createElement(R, l), je.currentNode = this.el.content, o === 2 || o === 3) {
       const w = this.el.content.firstChild;
@@ -316,23 +316,23 @@ class Ke {
     for (; (r = je.nextNode()) !== null && x.length < C; ) {
       if (r.nodeType === 1) {
         if (r.hasAttributes()) for (const w of r.getAttributeNames()) if (w.endsWith(jt)) {
-          const M = E[u++], I = r.getAttribute(w).split(De), U = /([.?@])?(.*)/.exec(M);
-          x.push({ type: 1, index: c, name: U[2], strings: I, ctor: U[1] === "." ? io : U[1] === "?" ? so : U[1] === "@" ? no : yt }), r.removeAttribute(w);
-        } else w.startsWith(De) && (x.push({ type: 6, index: c }), r.removeAttribute(w));
+          const M = E[p++], I = r.getAttribute(w).split(De), U = /([.?@])?(.*)/.exec(M);
+          x.push({ type: 1, index: n, name: U[2], strings: I, ctor: U[1] === "." ? io : U[1] === "?" ? so : U[1] === "@" ? no : yt }), r.removeAttribute(w);
+        } else w.startsWith(De) && (x.push({ type: 6, index: n }), r.removeAttribute(w));
         if (Gt.test(r.tagName)) {
           const w = r.textContent.split(De), M = w.length - 1;
           if (M > 0) {
-            r.textContent = dt ? dt.emptyScript : "";
-            for (let I = 0; I < M; I++) r.append(w[I], Ze()), je.nextNode(), x.push({ type: 2, index: ++c });
+            r.textContent = ut ? ut.emptyScript : "";
+            for (let I = 0; I < M; I++) r.append(w[I], Ze()), je.nextNode(), x.push({ type: 2, index: ++n });
             r.append(w[M], Ze());
           }
         }
-      } else if (r.nodeType === 8) if (r.data === Vt) x.push({ type: 2, index: c });
+      } else if (r.nodeType === 8) if (r.data === Vt) x.push({ type: 2, index: n });
       else {
         let w = -1;
-        for (; (w = r.data.indexOf(De, w + 1)) !== -1; ) x.push({ type: 7, index: c }), w += De.length - 1;
+        for (; (w = r.data.indexOf(De, w + 1)) !== -1; ) x.push({ type: 7, index: n }), w += De.length - 1;
       }
-      c++;
+      n++;
     }
   }
   static createElement(t, o) {
@@ -341,11 +341,11 @@ class Ke {
   }
 }
 function We(e, t, o = e, l) {
-  var u, C;
+  var p, C;
   if (t === Je) return t;
-  let r = l !== void 0 ? (u = o._$Co) == null ? void 0 : u[l] : o._$Cl;
-  const c = Qe(t) ? void 0 : t._$litDirective$;
-  return (r == null ? void 0 : r.constructor) !== c && ((C = r == null ? void 0 : r._$AO) == null || C.call(r, !1), c === void 0 ? r = void 0 : (r = new c(e), r._$AT(e, o, l)), l !== void 0 ? (o._$Co ?? (o._$Co = []))[l] = r : o._$Cl = r), r !== void 0 && (t = We(e, r._$AS(e, t.values), r, l)), t;
+  let r = l !== void 0 ? (p = o._$Co) == null ? void 0 : p[l] : o._$Cl;
+  const n = Qe(t) ? void 0 : t._$litDirective$;
+  return (r == null ? void 0 : r.constructor) !== n && ((C = r == null ? void 0 : r._$AO) == null || C.call(r, !1), n === void 0 ? r = void 0 : (r = new n(e), r._$AT(e, o, l)), l !== void 0 ? (o._$Co ?? (o._$Co = []))[l] = r : o._$Cl = r), r !== void 0 && (t = We(e, r._$AS(e, t.values), r, l)), t;
 }
 class ao {
   constructor(t, o) {
@@ -360,13 +360,13 @@ class ao {
   u(t) {
     const { el: { content: o }, parts: l } = this._$AD, r = ((t == null ? void 0 : t.creationScope) ?? Ge).importNode(o, !0);
     je.currentNode = r;
-    let c = je.nextNode(), u = 0, C = 0, x = l[0];
+    let n = je.nextNode(), p = 0, C = 0, x = l[0];
     for (; x !== void 0; ) {
-      if (u === x.index) {
+      if (p === x.index) {
         let R;
-        x.type === 2 ? R = new et(c, c.nextSibling, this, t) : x.type === 1 ? R = new x.ctor(c, x.name, x.strings, this, t) : x.type === 6 && (R = new po(c, this, t)), this._$AV.push(R), x = l[++C];
+        x.type === 2 ? R = new et(n, n.nextSibling, this, t) : x.type === 1 ? R = new x.ctor(n, x.name, x.strings, this, t) : x.type === 6 && (R = new po(n, this, t)), this._$AV.push(R), x = l[++C];
       }
-      u !== (x == null ? void 0 : x.index) && (c = je.nextNode(), u++);
+      p !== (x == null ? void 0 : x.index) && (n = je.nextNode(), p++);
     }
     return je.currentNode = Ge, r;
   }
@@ -407,12 +407,12 @@ class et {
     this._$AH !== J && Qe(this._$AH) ? this._$AA.nextSibling.data = t : this.T(Ge.createTextNode(t)), this._$AH = t;
   }
   $(t) {
-    var c;
+    var n;
     const { values: o, _$litType$: l } = t, r = typeof l == "number" ? this._$AC(t) : (l.el === void 0 && (l.el = Ke.createElement(Yt(l.h, l.h[0]), this.options)), l);
-    if (((c = this._$AH) == null ? void 0 : c._$AD) === r) this._$AH.p(o);
+    if (((n = this._$AH) == null ? void 0 : n._$AD) === r) this._$AH.p(o);
     else {
-      const u = new ao(r, this), C = u.u(this.options);
-      u.p(o), this.T(C), this._$AH = u;
+      const p = new ao(r, this), C = p.u(this.options);
+      p.p(o), this.T(C), this._$AH = p;
     }
   }
   _$AC(t) {
@@ -423,7 +423,7 @@ class et {
     Tt(this._$AH) || (this._$AH = [], this._$AR());
     const o = this._$AH;
     let l, r = 0;
-    for (const c of t) r === o.length ? o.push(l = new et(this.O(Ze()), this.O(Ze()), this, this.options)) : l = o[r], l._$AI(c), r++;
+    for (const n of t) r === o.length ? o.push(l = new et(this.O(Ze()), this.O(Ze()), this, this.options)) : l = o[r], l._$AI(n), r++;
     r < o.length && (this._$AR(l && l._$AB.nextSibling, r), o.length = r);
   }
   _$AR(t = this._$AA.nextSibling, o) {
@@ -445,19 +445,19 @@ class yt {
   get _$AU() {
     return this._$AM._$AU;
   }
-  constructor(t, o, l, r, c) {
-    this.type = 1, this._$AH = J, this._$AN = void 0, this.element = t, this.name = o, this._$AM = r, this.options = c, l.length > 2 || l[0] !== "" || l[1] !== "" ? (this._$AH = Array(l.length - 1).fill(new String()), this.strings = l) : this._$AH = J;
+  constructor(t, o, l, r, n) {
+    this.type = 1, this._$AH = J, this._$AN = void 0, this.element = t, this.name = o, this._$AM = r, this.options = n, l.length > 2 || l[0] !== "" || l[1] !== "" ? (this._$AH = Array(l.length - 1).fill(new String()), this.strings = l) : this._$AH = J;
   }
   _$AI(t, o = this, l, r) {
-    const c = this.strings;
-    let u = !1;
-    if (c === void 0) t = We(this, t, o, 0), u = !Qe(t) || t !== this._$AH && t !== Je, u && (this._$AH = t);
+    const n = this.strings;
+    let p = !1;
+    if (n === void 0) t = We(this, t, o, 0), p = !Qe(t) || t !== this._$AH && t !== Je, p && (this._$AH = t);
     else {
       const C = t;
       let x, R;
-      for (t = c[0], x = 0; x < c.length - 1; x++) R = We(this, C[l + x], o, x), R === Je && (R = this._$AH[x]), u || (u = !Qe(R) || R !== this._$AH[x]), R === J ? t = J : t !== J && (t += (R ?? "") + c[x + 1]), this._$AH[x] = R;
+      for (t = n[0], x = 0; x < n.length - 1; x++) R = We(this, C[l + x], o, x), R === Je && (R = this._$AH[x]), p || (p = !Qe(R) || R !== this._$AH[x]), R === J ? t = J : t !== J && (t += (R ?? "") + n[x + 1]), this._$AH[x] = R;
     }
-    u && !r && this.j(t);
+    p && !r && this.j(t);
   }
   j(t) {
     t === J ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t ?? "");
@@ -480,13 +480,13 @@ class so extends yt {
   }
 }
 class no extends yt {
-  constructor(t, o, l, r, c) {
-    super(t, o, l, r, c), this.type = 5;
+  constructor(t, o, l, r, n) {
+    super(t, o, l, r, n), this.type = 5;
   }
   _$AI(t, o = this) {
     if ((t = We(this, t, o, 0) ?? J) === Je) return;
-    const l = this._$AH, r = t === J && l !== J || t.capture !== l.capture || t.once !== l.once || t.passive !== l.passive, c = t !== J && (l === J || r);
-    r && this.element.removeEventListener(this.name, this, l), c && this.element.addEventListener(this.name, this, t), this._$AH = t;
+    const l = this._$AH, r = t === J && l !== J || t.capture !== l.capture || t.once !== l.once || t.passive !== l.passive, n = t !== J && (l === J || r);
+    r && this.element.removeEventListener(this.name, this, l), n && this.element.addEventListener(this.name, this, t), this._$AH = t;
   }
   handleEvent(t) {
     var o;
@@ -510,8 +510,8 @@ const uo = (e, t, o) => {
   const l = (o == null ? void 0 : o.renderBefore) ?? t;
   let r = l._$litPart$;
   if (r === void 0) {
-    const c = (o == null ? void 0 : o.renderBefore) ?? null;
-    l._$litPart$ = r = new et(t.insertBefore(Ze(), c), c, void 0, o ?? {});
+    const n = (o == null ? void 0 : o.renderBefore) ?? null;
+    l._$litPart$ = r = new et(t.insertBefore(Ze(), n), n, void 0, o ?? {});
   }
   return r._$AI(e), r;
 };
@@ -566,31 +566,31 @@ const tt = (e) => (t, o) => {
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const co = { attribute: !0, type: String, converter: ut, reflect: !1, hasChanged: gt }, yo = (e = co, t, o) => {
+const co = { attribute: !0, type: String, converter: dt, reflect: !1, hasChanged: gt }, yo = (e = co, t, o) => {
   const { kind: l, metadata: r } = o;
-  let c = globalThis.litPropertyMetadata.get(r);
-  if (c === void 0 && globalThis.litPropertyMetadata.set(r, c = /* @__PURE__ */ new Map()), l === "setter" && ((e = Object.create(e)).wrapped = !0), c.set(o.name, e), l === "accessor") {
-    const { name: u } = o;
+  let n = globalThis.litPropertyMetadata.get(r);
+  if (n === void 0 && globalThis.litPropertyMetadata.set(r, n = /* @__PURE__ */ new Map()), l === "setter" && ((e = Object.create(e)).wrapped = !0), n.set(o.name, e), l === "accessor") {
+    const { name: p } = o;
     return { set(C) {
       const x = t.get.call(this);
-      t.set.call(this, C), this.requestUpdate(u, x, e, !0, C);
+      t.set.call(this, C), this.requestUpdate(p, x, e, !0, C);
     }, init(C) {
-      return C !== void 0 && this.C(u, void 0, e, C), C;
+      return C !== void 0 && this.C(p, void 0, e, C), C;
     } };
   }
   if (l === "setter") {
-    const { name: u } = o;
+    const { name: p } = o;
     return function(C) {
-      const x = this[u];
-      t.call(this, C), this.requestUpdate(u, x, e, !0, C);
+      const x = this[p];
+      t.call(this, C), this.requestUpdate(p, x, e, !0, C);
     };
   }
   throw Error("Unsupported decorator location: " + l);
 };
-function p(e) {
-  return (t, o) => typeof o == "object" ? yo(e, t, o) : ((l, r, c) => {
-    const u = r.hasOwnProperty(c);
-    return r.constructor.createProperty(c, l), u ? Object.getOwnPropertyDescriptor(r, c) : void 0;
+function u(e) {
+  return (t, o) => typeof o == "object" ? yo(e, t, o) : ((l, r, n) => {
+    const p = r.hasOwnProperty(n);
+    return r.constructor.createProperty(n, l), p ? Object.getOwnPropertyDescriptor(r, n) : void 0;
   })(e, t, o);
 }
 var At = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
@@ -618,23 +618,23 @@ var Dt;
         Object.defineProperty(x, E, { configurable: !0, writable: !0, value: w }), R && R(E, w);
       };
     }
-    function c() {
+    function n() {
       try {
         return Function("return this;")();
       } catch {
       }
     }
-    function u() {
+    function p() {
       try {
         return (0, eval)("(function() { return this; })()");
       } catch {
       }
     }
     function C() {
-      return c() || u();
+      return n() || p();
     }
   })(function(t, o) {
-    var l = Object.prototype.hasOwnProperty, r = typeof Symbol == "function", c = r && typeof Symbol.toPrimitive < "u" ? Symbol.toPrimitive : "@@toPrimitive", u = r && typeof Symbol.iterator < "u" ? Symbol.iterator : "@@iterator", C = typeof Object.create == "function", x = { __proto__: [] } instanceof Array, R = !C && !x, E = {
+    var l = Object.prototype.hasOwnProperty, r = typeof Symbol == "function", n = r && typeof Symbol.toPrimitive < "u" ? Symbol.toPrimitive : "@@toPrimitive", p = r && typeof Symbol.iterator < "u" ? Symbol.iterator : "@@iterator", C = typeof Object.create == "function", x = { __proto__: [] } instanceof Array, R = !C && !x, E = {
       // create an object in dictionary mode (a.k.a. "slow" mode in v8)
       create: C ? function() {
         return Ye(/* @__PURE__ */ Object.create(null));
@@ -664,9 +664,9 @@ var Dt;
       } else {
         if (!Ee(a))
           throw new TypeError();
-        if (!z(i))
+        if (!L(i))
           throw new TypeError();
-        if (!z(m) && !$(m) && !H(m))
+        if (!L(m) && !$(m) && !H(m))
           throw new TypeError();
         return H(m) && (m = void 0), s = j(s), Re(a, i, s, m);
       }
@@ -674,7 +674,7 @@ var Dt;
     t("decorate", Q);
     function B(a, i) {
       function s(m, P) {
-        if (!z(m))
+        if (!L(m))
           throw new TypeError();
         if (!$(P) && !Ne(P))
           throw new TypeError();
@@ -684,51 +684,51 @@ var Dt;
     }
     t("metadata", B);
     function K(a, i, s, m) {
-      if (!z(s))
+      if (!L(s))
         throw new TypeError();
       return $(m) || (m = j(m)), me(a, i, s, m);
     }
     t("defineMetadata", K);
     function X(a, i, s) {
-      if (!z(i))
+      if (!L(i))
         throw new TypeError();
       return $(s) || (s = j(s)), ye(a, i, s);
     }
     t("hasMetadata", X);
     function q(a, i, s) {
-      if (!z(i))
+      if (!L(i))
         throw new TypeError();
       return $(s) || (s = j(s)), se(a, i, s);
     }
     t("hasOwnMetadata", q);
     function ce(a, i, s) {
-      if (!z(i))
+      if (!L(i))
         throw new TypeError();
       return $(s) || (s = j(s)), he(a, i, s);
     }
     t("getMetadata", ce);
     function le(a, i, s) {
-      if (!z(i))
+      if (!L(i))
         throw new TypeError();
       return $(s) || (s = j(s)), be(a, i, s);
     }
     t("getOwnMetadata", le);
     function re(a, i) {
-      if (!z(a))
+      if (!L(a))
         throw new TypeError();
       return $(i) || (i = j(i)), ve(a, i);
     }
     t("getMetadataKeys", re);
     function ae(a, i) {
-      if (!z(a))
+      if (!L(a))
         throw new TypeError();
       return $(i) || (i = j(i)), ne(a, i);
     }
     t("getOwnMetadataKeys", ae);
     function ie(a, i, s) {
-      if (!z(i))
+      if (!L(i))
         throw new TypeError();
-      if ($(s) || (s = j(s)), !z(i))
+      if ($(s) || (s = j(s)), !L(i))
         throw new TypeError();
       $(s) || (s = j(s));
       var m = Ae(
@@ -755,7 +755,7 @@ var Dt;
       for (var P = a.length - 1; P >= 0; --P) {
         var F = a[P], V = F(i, s, m);
         if (!$(V) && !H(V)) {
-          if (!z(V))
+          if (!L(V))
             throw new TypeError();
           m = V;
         }
@@ -776,7 +776,7 @@ var Dt;
         /*Create*/
         !1
       );
-      return $(m) ? !1 : ue(m.OrdinaryHasOwnMetadata(a, i, s));
+      return $(m) ? !1 : de(m.OrdinaryHasOwnMetadata(a, i, s));
     }
     function he(a, i, s) {
       var m = se(a, i, s);
@@ -862,7 +862,7 @@ var Dt;
     function xe(a) {
       return typeof a == "symbol";
     }
-    function z(a) {
+    function L(a) {
       return typeof a == "object" ? a !== null : typeof a == "function";
     }
     function fe(a, i) {
@@ -880,10 +880,10 @@ var Dt;
         case 5:
           return a;
       }
-      var s = "string", m = _e(a, c);
+      var s = "string", m = _e(a, n);
       if (m !== void 0) {
         var P = m.call(a, s);
-        if (z(P))
+        if (L(P))
           throw new TypeError();
         return P;
       }
@@ -895,19 +895,19 @@ var Dt;
         var P = a.toString;
         if (Ce(P)) {
           var m = P.call(a);
-          if (!z(m))
+          if (!L(m))
             return m;
         }
         var s = a.valueOf;
         if (Ce(s)) {
           var m = s.call(a);
-          if (!z(m))
+          if (!L(m))
             return m;
         }
       }
       throw new TypeError();
     }
-    function ue(a) {
+    function de(a) {
       return !!a;
     }
     function Te(a) {
@@ -948,18 +948,18 @@ var Dt;
       }
     }
     function Oe(a) {
-      var i = _e(a, u);
+      var i = _e(a, p);
       if (!Ce(i))
         throw new TypeError();
       var s = i.call(a);
-      if (!z(s))
+      if (!L(s))
         throw new TypeError();
       return s;
     }
-    function Le(a) {
+    function ze(a) {
       return a.value;
     }
-    function ze(a) {
+    function Le(a) {
       var i = a.next();
       return i.done ? !1 : i;
     }
@@ -1016,12 +1016,12 @@ var Dt;
               return i;
             if (!$(m))
               for (var A = Oe(m); ; ) {
-                var N = ze(A);
+                var N = Le(A);
                 if (!N)
                   return;
-                var de = Le(N);
-                if (de.isProviderFor(T, _))
-                  return Me(A), de;
+                var ue = ze(N);
+                if (ue.isProviderFor(T, _))
+                  return Me(A), ue;
               }
           }
         }
@@ -1044,15 +1044,15 @@ var Dt;
         if (N !== A) {
           if (!$(N))
             return !1;
-          var de = P.get(T);
-          $(de) && (de = new M(), P.set(T, de)), de.set(_, A);
+          var ue = P.get(T);
+          $(ue) && (ue = new M(), P.set(T, ue)), ue.set(_, A);
         }
         return !0;
       }
     }
     function lt() {
       var a;
-      return !$(Y) && z(o.Reflect) && Object.isExtensible(o.Reflect) && (a = o.Reflect[Y]), $(a) && (a = ke()), !$(Y) && z(o.Reflect) && Object.isExtensible(o.Reflect) && Object.defineProperty(o.Reflect, Y, {
+      return !$(Y) && L(o.Reflect) && Object.isExtensible(o.Reflect) && (a = o.Reflect[Y]), $(a) && (a = ke()), !$(Y) && L(o.Reflect) && Object.isExtensible(o.Reflect) && Object.defineProperty(o.Reflect, Y, {
         enumerable: !1,
         configurable: !1,
         writable: !1,
@@ -1095,7 +1095,7 @@ var Dt;
           /*Create*/
           !1
         );
-        return $(_) ? !1 : ue(_.has(f));
+        return $(_) ? !1 : de(_.has(f));
       }
       function F(f, g, T) {
         var _ = m(
@@ -1125,13 +1125,13 @@ var Dt;
         );
         if ($(_))
           return T;
-        for (var A = _.keys(), N = Oe(A), de = 0; ; ) {
-          var Ct = ze(N);
+        for (var A = _.keys(), N = Oe(A), ue = 0; ; ) {
+          var Ct = Le(N);
           if (!Ct)
-            return T.length = de, T;
-          var Ft = Le(Ct);
+            return T.length = ue, T;
+          var Ft = ze(Ct);
           try {
-            T[de] = Ft;
+            T[ue] = Ft;
           } catch (Jt) {
             try {
               Me(N);
@@ -1139,7 +1139,7 @@ var Dt;
               throw Jt;
             }
           }
-          de++;
+          ue++;
         }
       }
       function v(f, g, T) {
@@ -1191,7 +1191,7 @@ var Dt;
           }
           return S.prototype["@@iterator"] = function() {
             return this;
-          }, S.prototype[u] = function() {
+          }, S.prototype[p] = function() {
             return this;
           }, S.prototype.next = function() {
             var v = this._index;
@@ -1260,7 +1260,7 @@ var Dt;
             return new s(this._keys, this._values, V);
           }, S.prototype["@@iterator"] = function() {
             return this.entries();
-          }, S.prototype[u] = function() {
+          }, S.prototype[p] = function() {
             return this.entries();
           }, S.prototype._find = function(v, f) {
             if (!$e(this._cacheKey, v)) {
@@ -1315,7 +1315,7 @@ var Dt;
             return this._map.entries();
           }, i.prototype["@@iterator"] = function() {
             return this.keys();
-          }, i.prototype[u] = function() {
+          }, i.prototype[p] = function() {
             return this.keys();
           }, i;
         }()
@@ -1417,7 +1417,9 @@ function bo(e) {
         title: e.title,
         selector: e.elementSelector,
         category: e.group,
-        icon: e.iconName
+        icon: e.iconName,
+        layoutKind: e.layoutKind,
+        environment: e.environment
       };
       if (Reflect.defineMetadata("ZeroComponent", o, t.prototype), globalThis.customElements) {
         const l = `${e.elementSelector}-${e.version}`;
@@ -1428,8 +1430,8 @@ function bo(e) {
             try {
               customElements.define(l, class extends t {
               });
-            } catch (c) {
-              console.error(`[ZeroAnnotations] Failed to define custom element ${l}:`, c);
+            } catch (n) {
+              console.error(`[ZeroAnnotations] Failed to define custom element ${l}:`, n);
             }
           }
       } else
@@ -1479,13 +1481,13 @@ var h;
 (function(e) {
   e.TEXT_INPUT = "text-input", e.PASSWORD_INPUT = "password-input", e.DROPDOWN = "dropdown", e.CHECKBOX = "checkbox", e.RADIO_BUTTON = "radio-button", e.RANGE_SLIDER = "range-slider", e.FILE_INPUT = "file-input", e.DATE_PICKER = "date-picker", e.COLOR_PICKER = "color-picker", e.NUMBER_INPUT = "number-input", e.TEXTAREA = "textarea", e.MULTI_SELECT = "multi-select", e.POPUP_DROPDOWN = "popup-dropdown", e.LAYOUT_PICKER = "layout-picker", e.RESPONSIVE_OVERRIDE = "responsive-override", e.IMAGE_PICKER = "image-picker", e.CHIPS = "chips";
 })(h || (h = {}));
-var d;
+var c;
 (function(e) {
   e.PROPERTY = "property", e.EVENT = "event", e.ACTION = "action";
-})(d || (d = {}));
+})(c || (c = {}));
 var xo = Object.defineProperty, fo = Object.getOwnPropertyDescriptor, k = (e, t, o, l) => {
-  for (var r = l > 1 ? void 0 : l ? fo(t, o) : t, c = e.length - 1, u; c >= 0; c--)
-    (u = e[c]) && (r = (l ? u(t, o, r) : u(r)) || r);
+  for (var r = l > 1 ? void 0 : l ? fo(t, o) : t, n = e.length - 1, p; n >= 0; n--)
+    (p = e[n]) && (r = (l ? p(t, o, r) : p(r)) || r);
   return l && r && xo(t, o, r), r;
 };
 const ct = class ct extends qe {
@@ -1533,15 +1535,15 @@ const ct = class ct extends qe {
       wrap: "wrap"
     };
     let r = "";
-    return Object.entries(o).forEach(([c, u]) => {
-      const C = this.responsiveProps[c];
+    return Object.entries(o).forEach(([n, p]) => {
+      const C = this.responsiveProps[n];
       if (!C) return;
       let x = "";
       Object.entries(C).forEach(([R, E]) => {
         const w = l[R];
         w && (x += `--${t}-${w}-override: ${E};
 `);
-      }), x && (r += `${u} {
+      }), x && (r += `${p} {
   :host {
     ${x}  }
 }
@@ -1613,6 +1615,18 @@ const ct = class ct extends qe {
   renderHeader() {
     return oe``;
   }
+  willUpdate(t) {
+    super.willUpdate(t), this.updateHostStyles();
+  }
+  updateHostStyles() {
+    const o = this.computeBaseStyles().split(";").map((l) => l.trim()).filter(Boolean);
+    for (const l of o) {
+      const r = l.indexOf(":");
+      if (r === -1) continue;
+      const n = l.slice(0, r).trim(), p = l.slice(r + 1).trim();
+      n.startsWith("--") ? this.style.setProperty(n, p) : this.style[n] = p;
+    }
+  }
 };
 ct.slots = [], ct.styles = Ut`
     :host {
@@ -1627,13 +1641,22 @@ ct.slots = [], ct.styles = Ut`
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
+    :host > div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
     .zero-internal-container {
       position: relative;
       display: flex;
       flex-wrap: wrap;
       box-sizing: border-box;
       width: 100%;
-      height: 100%;
+      flex: 1;
+      min-height: 0;
       gap: var(--zero-p-gap, 0px);
       row-gap: var(--zero-p-row-gap, var(--zero-p-gap, 0px));
       padding: var(--zero-p-padding, 0px);
@@ -1712,140 +1735,140 @@ ct.slots = [], ct.styles = Ut`
     .drop-indicator.top { top: 0; left: 0; width: 100%; height: 30%; border-bottom: 3px solid var(--zs-primary); }
     .drop-indicator.bottom { bottom: 0; left: 0; width: 100%; height: 30%; border-top: 3px solid var(--zs-primary); }
   `;
-let L = ct;
+let z = ct;
 k([
-  p({ type: Object, attribute: "responsive-props" })
-], L.prototype, "responsiveProps", 2);
+  u({ type: Object, attribute: "responsive-props" })
+], z.prototype, "responsiveProps", 2);
 k([
-  p({ type: String })
-], L.prototype, "activeEdge", 2);
+  u({ type: String })
+], z.prototype, "activeEdge", 2);
 k([
-  p({ type: Boolean, reflect: !0 }),
+  u({ type: Boolean, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.CHECKBOX,
     displayLabel: "Visible",
     fieldMappings: "visible",
     categoryLabel: "Logic"
   })
-], L.prototype, "visible", 2);
+], z.prototype, "visible", 2);
 k([
-  p({ type: Number, reflect: !0, attribute: "z-index" }),
+  u({ type: Number, reflect: !0, attribute: "z-index" }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Z-Index",
     fieldMappings: "zIndex",
     categoryLabel: "Advanced"
   })
-], L.prototype, "zIndex", 2);
+], z.prototype, "zIndex", 2);
 k([
-  p({ type: Number, reflect: !0 }),
+  u({ type: Number, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.RANGE_SLIDER,
     displayLabel: "Opacity",
     fieldMappings: "opacity",
     categoryLabel: "Advanced"
   })
-], L.prototype, "opacity", 2);
+], z.prototype, "opacity", 2);
 k([
-  p({ type: String, attribute: "custom-class" }),
+  u({ type: String, attribute: "custom-class" }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Custom CSS Class",
     fieldMappings: "customClass",
     categoryLabel: "Advanced"
   })
-], L.prototype, "customClass", 2);
+], z.prototype, "customClass", 2);
 k([
-  p({ type: String, reflect: !0 }),
+  u({ type: String, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.RESPONSIVE_OVERRIDE,
     displayLabel: "Width",
     fieldMappings: "width",
     categoryLabel: "Dimensions"
   })
-], L.prototype, "width", 2);
+], z.prototype, "width", 2);
 k([
-  p({ type: String, reflect: !0 }),
+  u({ type: String, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.RESPONSIVE_OVERRIDE,
     displayLabel: "Height",
     fieldMappings: "height",
     categoryLabel: "Dimensions"
   })
-], L.prototype, "height", 2);
+], z.prototype, "height", 2);
 k([
-  p({ type: String, reflect: !0 }),
+  u({ type: String, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.RESPONSIVE_OVERRIDE,
     displayLabel: "Margin",
     fieldMappings: "margin",
     categoryLabel: "Spacing"
   })
-], L.prototype, "margin", 2);
+], z.prototype, "margin", 2);
 k([
-  p({ type: String, reflect: !0 }),
+  u({ type: String, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.RESPONSIVE_OVERRIDE,
     displayLabel: "Padding",
     fieldMappings: "padding",
     categoryLabel: "Spacing"
   })
-], L.prototype, "padding", 2);
+], z.prototype, "padding", 2);
 k([
   y({
-    attributeType: d.EVENT,
+    attributeType: c.EVENT,
     displayLabel: "On Click",
     eventTrigger: "click",
     categoryLabel: "Triggers"
   })
-], L.prototype, "onClick", 1);
+], z.prototype, "onClick", 1);
 k([
-  p({ type: String, reflect: !0 })
-], L.prototype, "direction", 2);
+  u({ type: String, reflect: !0 })
+], z.prototype, "direction", 2);
 k([
-  p({ type: String, reflect: !0 })
-], L.prototype, "justify", 2);
+  u({ type: String, reflect: !0 })
+], z.prototype, "justify", 2);
 k([
-  p({ type: String, reflect: !0 })
-], L.prototype, "align", 2);
+  u({ type: String, reflect: !0 })
+], z.prototype, "align", 2);
 k([
-  p({ type: String, reflect: !0 })
-], L.prototype, "gap", 2);
+  u({ type: String, reflect: !0 })
+], z.prototype, "gap", 2);
 k([
-  p({ type: Number, reflect: !0, attribute: "items-per-row" })
-], L.prototype, "itemsPerRow", 2);
+  u({ type: Number, reflect: !0, attribute: "items-per-row" })
+], z.prototype, "itemsPerRow", 2);
 k([
-  p({ type: String, attribute: "background-color", reflect: !0 }),
+  u({ type: String, attribute: "background-color", reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.COLOR_PICKER,
     displayLabel: "Background Color",
     fieldMappings: "backgroundColor",
     categoryLabel: "Appearance"
   })
-], L.prototype, "backgroundColor", 2);
+], z.prototype, "backgroundColor", 2);
 k([
-  p({ type: String, attribute: "border-radius", reflect: !0 }),
+  u({ type: String, attribute: "border-radius", reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Corner Radius",
     fieldMappings: "borderRadius",
     categoryLabel: "Appearance"
   })
-], L.prototype, "borderRadius", 2);
+], z.prototype, "borderRadius", 2);
 k([
-  p({ type: String, reflect: !0, attribute: "elevation" }),
+  u({ type: String, reflect: !0, attribute: "elevation" }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Elevation (Shadow)",
     fieldMappings: "elevation",
@@ -1857,24 +1880,24 @@ k([
       { label: "High", value: "0 12px 24px rgba(0,0,0,0.16)" }
     ]
   })
-], L.prototype, "elevation", 2);
+], z.prototype, "elevation", 2);
 k([
   y({
-    attributeType: d.ACTION,
+    attributeType: c.ACTION,
     displayLabel: "Show Component",
     categoryLabel: "Actions"
   })
-], L.prototype, "show", 1);
+], z.prototype, "show", 1);
 k([
   y({
-    attributeType: d.ACTION,
+    attributeType: c.ACTION,
     displayLabel: "Hide Component",
     categoryLabel: "Actions"
   })
-], L.prototype, "hide", 1);
+], z.prototype, "hide", 1);
 var go = Object.defineProperty, To = Object.getOwnPropertyDescriptor, b = (e, t, o, l) => {
-  for (var r = l > 1 ? void 0 : l ? To(t, o) : t, c = e.length - 1, u; c >= 0; c--)
-    (u = e[c]) && (r = (l ? u(t, o, r) : u(r)) || r);
+  for (var r = l > 1 ? void 0 : l ? To(t, o) : t, n = e.length - 1, p; n >= 0; n--)
+    (p = e[n]) && (r = (l ? p(t, o, r) : p(r)) || r);
   return l && r && go(t, o, r), r;
 };
 const It = {
@@ -1893,7 +1916,7 @@ const It = {
   badges: ["Section", "Content"],
   emptyText: "Drag and Drop Elements here"
 };
-let ee = class extends L {
+let ee = class extends z {
   constructor() {
     super(...arguments), this.direction = "row", this.align = "stretch", this.justify = "flex-start", this.gap = "16px", this.backgroundImage = "", this.backgroundVideo = "", this.parallax = !1, this.borderWidth = "0px", this.borderColor = "transparent";
   }
@@ -2117,8 +2140,8 @@ let ee = class extends L {
   static getStudioTemplate(e) {
     var Y;
     if (!e) return It;
-    n(e.studio.display.label || "Section Block");
-    const t = n(e.props.justify || "flex-start"), o = n(e.props.align || "stretch"), l = n(e.props.direction || "row"), r = n(e.props.gap || "16px"), c = n(e.props.padding || "0px"), u = n(e.props.backgroundColor || "transparent"), C = n(e.props.borderColor || "transparent"), x = n(e.props.borderWidth || "0px"), R = n(e.props.borderRadius || "0px"), E = n(e.props.backgroundImage ? `url(${e.props.backgroundImage})` : "none"), w = e.props.responsiveProps || ((Y = e.studio.props) == null ? void 0 : Y.responsiveProps) || {};
+    d(e.studio.display.label || "Section Block");
+    const t = d(e.props.justify || "flex-start"), o = d(e.props.align || "stretch"), l = d(e.props.direction || "row"), r = d(e.props.gap || "16px"), n = d(e.props.padding || "0px"), p = d(e.props.backgroundColor || "transparent"), C = d(e.props.borderColor || "transparent"), x = d(e.props.borderWidth || "0px"), R = d(e.props.borderRadius || "0px"), E = d(e.props.backgroundImage ? `url(${e.props.backgroundImage})` : "none"), w = e.props.responsiveProps || ((Y = e.studio.props) == null ? void 0 : Y.responsiveProps) || {};
     let M = "";
     const I = {
       mobile: "@media screen and (max-width: 767px)",
@@ -2152,8 +2175,8 @@ let ee = class extends L {
           --zero-p-justify: var(--zero-section-justify-override, ${t});
           --zero-p-align: var(--zero-section-align-override, ${o});
           --zero-p-gap: var(--zero-section-gap-override, ${r});
-          --zero-p-padding: var(--zero-section-padding-override, ${c});
-          --zero-p-bg: ${u};
+          --zero-p-padding: var(--zero-section-padding-override, ${n});
+          --zero-p-bg: ${p};
           --zero-section-border-c: var(--zero-section-border-color-override, ${C});
           --zero-section-border-w: var(--zero-section-border-width-override, ${x});
           --zero-section-bg-url: var(--zero-section-background-image-override, ${E});
@@ -2197,7 +2220,7 @@ let ee = class extends L {
   render() {
     return oe`
       ${this.renderResponsiveStyles()}
-      <div style=${this.computeBaseStyles()}>
+      <div>
         <div class="zero-internal-container" 
              style=${this.computeInternalStyles()}
              @mousemove=${this.handleMouseMove}
@@ -2223,12 +2246,13 @@ ee.slots = [
   { id: "default", label: "Section Content", dropzone: !0, anchor: "default", accepts: ["zero-column"] }
 ];
 ee.styles = [
-  L.styles,
+  z.styles,
   Ut`
       .section-inner {
         position: relative;
         width: 100%;
-        height: 100%;
+        flex: 1;
+        min-height: 0;
         display: flex;
         flex-direction: column;
         background-size: cover;
@@ -2249,7 +2273,8 @@ ee.styles = [
         position: relative;
         z-index: 1;
         width: 100%;
-        height: 100%;
+        flex: 1;
+        min-height: 0;
         display: flex;
         flex-wrap: wrap;
         flex-direction: var(--zero-p-direction, row);
@@ -2258,15 +2283,22 @@ ee.styles = [
         gap: var(--zero-p-gap, 16px);
       }
 
+      @media (max-width: 768px) {
+        .content-layer {
+          --zero-p-direction: var(--zero-section-direction-override, column);
+          --zero-p-gap: var(--zero-section-gap-override, 16px);
+        }
+      }
+
       :host([parallax]) .section-inner {
         background-attachment: fixed;
       }
     `
 ];
 b([
-  p({ type: String, reflect: !0 }),
+  u({ type: String, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Layout Direction",
     fieldMappings: "direction",
@@ -2279,9 +2311,9 @@ b([
   })
 ], ee.prototype, "direction", 2);
 b([
-  p({ type: String, reflect: !0 }),
+  u({ type: String, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Align Items",
     fieldMappings: "align",
@@ -2296,9 +2328,9 @@ b([
   })
 ], ee.prototype, "align", 2);
 b([
-  p({ type: String, reflect: !0 }),
+  u({ type: String, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Justify Content",
     fieldMappings: "justify",
@@ -2314,9 +2346,9 @@ b([
   })
 ], ee.prototype, "justify", 2);
 b([
-  p({ type: String, reflect: !0 }),
+  u({ type: String, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Gap",
     fieldMappings: "gap",
@@ -2325,9 +2357,9 @@ b([
   })
 ], ee.prototype, "gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.RESPONSIVE_OVERRIDE,
     displayLabel: "Background Image",
     fieldMappings: "backgroundImage",
@@ -2335,9 +2367,9 @@ b([
   })
 ], ee.prototype, "backgroundImage", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Background Video (URL)",
     fieldMappings: "backgroundVideo",
@@ -2345,9 +2377,9 @@ b([
   })
 ], ee.prototype, "backgroundVideo", 2);
 b([
-  p({ type: Boolean, reflect: !0 }),
+  u({ type: Boolean, reflect: !0 }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.CHECKBOX,
     displayLabel: "Enable Parallax",
     fieldMappings: "parallax",
@@ -2355,9 +2387,9 @@ b([
   })
 ], ee.prototype, "parallax", 2);
 b([
-  p({ type: String, attribute: "border-width" }),
+  u({ type: String, attribute: "border-width" }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.RESPONSIVE_OVERRIDE,
     displayLabel: "Border Width",
     fieldMappings: "borderWidth",
@@ -2365,9 +2397,9 @@ b([
   })
 ], ee.prototype, "borderWidth", 2);
 b([
-  p({ type: String, attribute: "border-color" }),
+  u({ type: String, attribute: "border-color" }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.RESPONSIVE_OVERRIDE,
     displayLabel: "Border Color",
     fieldMappings: "borderColor",
@@ -2385,7 +2417,7 @@ ee = b([
   }),
   tt("zero-section")
 ], ee);
-let te = class extends L {
+let te = class extends z {
   constructor() {
     super(...arguments), this.activeColIndex = "section", this.col1Direction = "column", this.col1Align = "stretch", this.col1Justify = "flex-start", this.col1Padding = "16px", this.col1Gap = "16px", this.col1Flex = "1", this.colsDesktop = 1, this.colsTablet = 1, this.colsMobile = 1;
   }
@@ -2402,9 +2434,9 @@ let te = class extends L {
   }
   static getStudioTemplate(e) {
     var U, Y, W, Z, Q, B, K, X, q, ce, le, re, ae, ie;
-    const t = n(((U = e == null ? void 0 : e.props) == null ? void 0 : U.width) || "100%"), o = n(((Y = e == null ? void 0 : e.props) == null ? void 0 : Y.height) || "auto"), l = n(((W = e == null ? void 0 : e.props) == null ? void 0 : W.margin) || "0px"), r = n(((Z = e == null ? void 0 : e.props) == null ? void 0 : Z.padding) || "0px"), c = n(((Q = e == null ? void 0 : e.props) == null ? void 0 : Q.backgroundColor) || "transparent"), u = n(((B = e == null ? void 0 : e.props) == null ? void 0 : B.borderRadius) || "0px"), C = n(((K = e == null ? void 0 : e.props) == null ? void 0 : K.elevation) || "none");
-    n(((X = e == null ? void 0 : e.props) == null ? void 0 : X.gap) || "16px");
-    const x = n(((q = e == null ? void 0 : e.props) == null ? void 0 : q.col1Direction) || "column"), R = n(((ce = e == null ? void 0 : e.props) == null ? void 0 : ce.col1Align) || "stretch"), E = n(((le = e == null ? void 0 : e.props) == null ? void 0 : le.col1Justify) || "flex-start"), w = n(((re = e == null ? void 0 : e.props) == null ? void 0 : re.col1Padding) || "16px"), M = n(((ae = e == null ? void 0 : e.props) == null ? void 0 : ae.col1Gap) || "16px"), I = n(((ie = e == null ? void 0 : e.props) == null ? void 0 : ie.col1Flex) || "1");
+    const t = d(((U = e == null ? void 0 : e.props) == null ? void 0 : U.width) || "100%"), o = d(((Y = e == null ? void 0 : e.props) == null ? void 0 : Y.height) || "auto"), l = d(((W = e == null ? void 0 : e.props) == null ? void 0 : W.margin) || "0px"), r = d(((Z = e == null ? void 0 : e.props) == null ? void 0 : Z.padding) || "0px"), n = d(((Q = e == null ? void 0 : e.props) == null ? void 0 : Q.backgroundColor) || "transparent"), p = d(((B = e == null ? void 0 : e.props) == null ? void 0 : B.borderRadius) || "0px"), C = d(((K = e == null ? void 0 : e.props) == null ? void 0 : K.elevation) || "none");
+    d(((X = e == null ? void 0 : e.props) == null ? void 0 : X.gap) || "16px");
+    const x = d(((q = e == null ? void 0 : e.props) == null ? void 0 : q.col1Direction) || "column"), R = d(((ce = e == null ? void 0 : e.props) == null ? void 0 : ce.col1Align) || "stretch"), E = d(((le = e == null ? void 0 : e.props) == null ? void 0 : le.col1Justify) || "flex-start"), w = d(((re = e == null ? void 0 : e.props) == null ? void 0 : re.col1Padding) || "16px"), M = d(((ae = e == null ? void 0 : e.props) == null ? void 0 : ae.col1Gap) || "16px"), I = d(((ie = e == null ? void 0 : e.props) == null ? void 0 : ie.col1Flex) || "1");
     return {
       kind: "section",
       emptyText: "Drag and Drop Elements here",
@@ -2424,8 +2456,8 @@ let te = class extends L {
             width: 100%;
             height: 100%;
             padding: ${r};
-            background: ${c};
-            border-radius: ${u};
+            background: ${n};
+            border-radius: ${p};
             box-shadow: ${C};
             box-sizing: border-box;
           }
@@ -2443,7 +2475,7 @@ let te = class extends L {
   render() {
     return oe`
       ${this.renderResponsiveStyles()}
-      <div style=${this.computeBaseStyles()}>
+      <div>
         <div class="zero-internal-container" 
              style=${this.computeInternalStyles()}
              @mousemove=${this.handleMouseMove}
@@ -2461,9 +2493,9 @@ te.slots = [
   { id: "col1", label: "Column 1", dropzone: !0, anchor: "columns", accepts: [] }
 ];
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Configure Target",
     fieldMappings: "activeColIndex",
@@ -2475,9 +2507,9 @@ b([
   })
 ], te.prototype, "activeColIndex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Direction",
     fieldMappings: "col1Direction",
@@ -2489,9 +2521,9 @@ b([
   })
 ], te.prototype, "col1Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Align",
     fieldMappings: "col1Align",
@@ -2505,9 +2537,9 @@ b([
   })
 ], te.prototype, "col1Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Justify",
     fieldMappings: "col1Justify",
@@ -2522,9 +2554,9 @@ b([
   })
 ], te.prototype, "col1Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Padding",
     fieldMappings: "col1Padding",
@@ -2532,9 +2564,9 @@ b([
   })
 ], te.prototype, "col1Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Gap",
     fieldMappings: "col1Gap",
@@ -2542,9 +2574,9 @@ b([
   })
 ], te.prototype, "col1Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Flex Weight",
     fieldMappings: "col1Flex",
@@ -2552,9 +2584,9 @@ b([
   })
 ], te.prototype, "col1Flex", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Desktop)",
     fieldMappings: "colsDesktop",
@@ -2562,9 +2594,9 @@ b([
   })
 ], te.prototype, "colsDesktop", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Tablet)",
     fieldMappings: "colsTablet",
@@ -2572,9 +2604,9 @@ b([
   })
 ], te.prototype, "colsTablet", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Mobile)",
     fieldMappings: "colsMobile",
@@ -2592,7 +2624,7 @@ te = b([
   }),
   tt("zero-section-1col")
 ], te);
-let G = class extends L {
+let G = class extends z {
   constructor() {
     super(...arguments), this.activeColIndex = "section", this.col1Direction = "column", this.col1Align = "stretch", this.col1Justify = "flex-start", this.col1Padding = "16px", this.col1Gap = "16px", this.col1Flex = "1", this.col2Direction = "column", this.col2Align = "stretch", this.col2Justify = "flex-start", this.col2Padding = "16px", this.col2Gap = "16px", this.col2Flex = "1", this.colsDesktop = 2, this.colsTablet = 2, this.colsMobile = 1;
   }
@@ -2609,8 +2641,8 @@ let G = class extends L {
     };
   }
   static getStudioTemplate(e) {
-    var le, re, ae, ie, we, Re, ye, se, he, be, me, ve, ne, pe, $, H, xe, z, fe, ge, ue, Te, j;
-    const t = n(((le = e == null ? void 0 : e.props) == null ? void 0 : le.width) || "100%"), o = n(((re = e == null ? void 0 : e.props) == null ? void 0 : re.height) || "auto"), l = n(((ae = e == null ? void 0 : e.props) == null ? void 0 : ae.margin) || "0px"), r = n(((ie = e == null ? void 0 : e.props) == null ? void 0 : ie.padding) || "0px"), c = n(((we = e == null ? void 0 : e.props) == null ? void 0 : we.backgroundColor) || "transparent"), u = n(((Re = e == null ? void 0 : e.props) == null ? void 0 : Re.borderRadius) || "0px"), C = n(((ye = e == null ? void 0 : e.props) == null ? void 0 : ye.elevation) || "none"), x = n(((se = e == null ? void 0 : e.props) == null ? void 0 : se.gap) || "16px"), R = ((he = e == null ? void 0 : e.props) == null ? void 0 : he.colsDesktop) ?? 2, E = ((be = e == null ? void 0 : e.props) == null ? void 0 : be.colsTablet) ?? 2, w = ((me = e == null ? void 0 : e.props) == null ? void 0 : me.colsMobile) ?? 1, M = n(((ve = e == null ? void 0 : e.props) == null ? void 0 : ve.col1Direction) || "column"), I = n(((ne = e == null ? void 0 : e.props) == null ? void 0 : ne.col1Align) || "stretch"), U = n(((pe = e == null ? void 0 : e.props) == null ? void 0 : pe.col1Justify) || "flex-start"), Y = n((($ = e == null ? void 0 : e.props) == null ? void 0 : $.col1Padding) || "16px"), W = n(((H = e == null ? void 0 : e.props) == null ? void 0 : H.col1Gap) || "16px"), Z = n(((xe = e == null ? void 0 : e.props) == null ? void 0 : xe.col1Flex) || "1"), Q = n(((z = e == null ? void 0 : e.props) == null ? void 0 : z.col2Direction) || "column"), B = n(((fe = e == null ? void 0 : e.props) == null ? void 0 : fe.col2Align) || "stretch"), K = n(((ge = e == null ? void 0 : e.props) == null ? void 0 : ge.col2Justify) || "flex-start"), X = n(((ue = e == null ? void 0 : e.props) == null ? void 0 : ue.col2Padding) || "16px"), q = n(((Te = e == null ? void 0 : e.props) == null ? void 0 : Te.col2Gap) || "16px"), ce = n(((j = e == null ? void 0 : e.props) == null ? void 0 : j.col2Flex) || "1");
+    var le, re, ae, ie, we, Re, ye, se, he, be, me, ve, ne, pe, $, H, xe, L, fe, ge, de, Te, j;
+    const t = d(((le = e == null ? void 0 : e.props) == null ? void 0 : le.width) || "100%"), o = d(((re = e == null ? void 0 : e.props) == null ? void 0 : re.height) || "auto"), l = d(((ae = e == null ? void 0 : e.props) == null ? void 0 : ae.margin) || "0px"), r = d(((ie = e == null ? void 0 : e.props) == null ? void 0 : ie.padding) || "0px"), n = d(((we = e == null ? void 0 : e.props) == null ? void 0 : we.backgroundColor) || "transparent"), p = d(((Re = e == null ? void 0 : e.props) == null ? void 0 : Re.borderRadius) || "0px"), C = d(((ye = e == null ? void 0 : e.props) == null ? void 0 : ye.elevation) || "none"), x = d(((se = e == null ? void 0 : e.props) == null ? void 0 : se.gap) || "16px"), R = ((he = e == null ? void 0 : e.props) == null ? void 0 : he.colsDesktop) ?? 2, E = ((be = e == null ? void 0 : e.props) == null ? void 0 : be.colsTablet) ?? 2, w = ((me = e == null ? void 0 : e.props) == null ? void 0 : me.colsMobile) ?? 1, M = d(((ve = e == null ? void 0 : e.props) == null ? void 0 : ve.col1Direction) || "column"), I = d(((ne = e == null ? void 0 : e.props) == null ? void 0 : ne.col1Align) || "stretch"), U = d(((pe = e == null ? void 0 : e.props) == null ? void 0 : pe.col1Justify) || "flex-start"), Y = d((($ = e == null ? void 0 : e.props) == null ? void 0 : $.col1Padding) || "16px"), W = d(((H = e == null ? void 0 : e.props) == null ? void 0 : H.col1Gap) || "16px"), Z = d(((xe = e == null ? void 0 : e.props) == null ? void 0 : xe.col1Flex) || "1"), Q = d(((L = e == null ? void 0 : e.props) == null ? void 0 : L.col2Direction) || "column"), B = d(((fe = e == null ? void 0 : e.props) == null ? void 0 : fe.col2Align) || "stretch"), K = d(((ge = e == null ? void 0 : e.props) == null ? void 0 : ge.col2Justify) || "flex-start"), X = d(((de = e == null ? void 0 : e.props) == null ? void 0 : de.col2Padding) || "16px"), q = d(((Te = e == null ? void 0 : e.props) == null ? void 0 : Te.col2Gap) || "16px"), ce = d(((j = e == null ? void 0 : e.props) == null ? void 0 : j.col2Flex) || "1");
     return {
       kind: "section",
       emptyText: "Drag and Drop Elements here",
@@ -2631,8 +2663,8 @@ let G = class extends L {
             width: 100%;
             height: 100%;
             padding: ${r};
-            background: ${c};
-            border-radius: ${u};
+            background: ${n};
+            border-radius: ${p};
             box-shadow: ${C};
             box-sizing: border-box;
           }
@@ -2694,7 +2726,7 @@ let G = class extends L {
           }
         }
       </style>
-      <div style=${this.computeBaseStyles()}>
+      <div>
         <div class="zero-internal-container" 
              style=${this.computeInternalStyles()}
              @mousemove=${this.handleMouseMove}
@@ -2718,9 +2750,9 @@ G.slots = [
   { id: "col2", label: "Column 2", dropzone: !0, anchor: "columns", accepts: [] }
 ];
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Configure Target",
     fieldMappings: "activeColIndex",
@@ -2733,9 +2765,9 @@ b([
   })
 ], G.prototype, "activeColIndex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Direction",
     fieldMappings: "col1Direction",
@@ -2747,9 +2779,9 @@ b([
   })
 ], G.prototype, "col1Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Align",
     fieldMappings: "col1Align",
@@ -2763,9 +2795,9 @@ b([
   })
 ], G.prototype, "col1Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Justify",
     fieldMappings: "col1Justify",
@@ -2780,9 +2812,9 @@ b([
   })
 ], G.prototype, "col1Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Padding",
     fieldMappings: "col1Padding",
@@ -2790,9 +2822,9 @@ b([
   })
 ], G.prototype, "col1Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Gap",
     fieldMappings: "col1Gap",
@@ -2800,9 +2832,9 @@ b([
   })
 ], G.prototype, "col1Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Flex Weight",
     fieldMappings: "col1Flex",
@@ -2810,9 +2842,9 @@ b([
   })
 ], G.prototype, "col1Flex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 2 Direction",
     fieldMappings: "col2Direction",
@@ -2824,9 +2856,9 @@ b([
   })
 ], G.prototype, "col2Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 2 Align",
     fieldMappings: "col2Align",
@@ -2840,9 +2872,9 @@ b([
   })
 ], G.prototype, "col2Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 2 Justify",
     fieldMappings: "col2Justify",
@@ -2857,9 +2889,9 @@ b([
   })
 ], G.prototype, "col2Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 2 Padding",
     fieldMappings: "col2Padding",
@@ -2867,9 +2899,9 @@ b([
   })
 ], G.prototype, "col2Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 2 Gap",
     fieldMappings: "col2Gap",
@@ -2877,9 +2909,9 @@ b([
   })
 ], G.prototype, "col2Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 2 Flex Weight",
     fieldMappings: "col2Flex",
@@ -2887,9 +2919,9 @@ b([
   })
 ], G.prototype, "col2Flex", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Desktop)",
     fieldMappings: "colsDesktop",
@@ -2897,9 +2929,9 @@ b([
   })
 ], G.prototype, "colsDesktop", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Tablet)",
     fieldMappings: "colsTablet",
@@ -2907,9 +2939,9 @@ b([
   })
 ], G.prototype, "colsTablet", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Mobile)",
     fieldMappings: "colsMobile",
@@ -2927,7 +2959,7 @@ G = b([
   }),
   tt("zero-section-2col")
 ], G);
-let D = class extends L {
+let D = class extends z {
   constructor() {
     super(...arguments), this.activeColIndex = "section", this.col1Direction = "column", this.col1Align = "stretch", this.col1Justify = "flex-start", this.col1Padding = "16px", this.col1Gap = "16px", this.col1Flex = "1", this.col2Direction = "column", this.col2Align = "stretch", this.col2Justify = "flex-start", this.col2Padding = "16px", this.col2Gap = "16px", this.col2Flex = "1", this.col3Direction = "column", this.col3Align = "stretch", this.col3Justify = "flex-start", this.col3Padding = "16px", this.col3Gap = "16px", this.col3Flex = "1", this.colsDesktop = 3, this.colsTablet = 2, this.colsMobile = 1;
   }
@@ -2945,8 +2977,8 @@ let D = class extends L {
     };
   }
   static getStudioTemplate(e) {
-    var ye, se, he, be, me, ve, ne, pe, $, H, xe, z, fe, ge, ue, Te, j, Ee, Ce, Se, Ne, $e, _e, Oe, Le, ze, Me, Pe, ke;
-    const t = n(((ye = e == null ? void 0 : e.props) == null ? void 0 : ye.width) || "100%"), o = n(((se = e == null ? void 0 : e.props) == null ? void 0 : se.height) || "auto"), l = n(((he = e == null ? void 0 : e.props) == null ? void 0 : he.margin) || "0px"), r = n(((be = e == null ? void 0 : e.props) == null ? void 0 : be.padding) || "0px"), c = n(((me = e == null ? void 0 : e.props) == null ? void 0 : me.backgroundColor) || "transparent"), u = n(((ve = e == null ? void 0 : e.props) == null ? void 0 : ve.borderRadius) || "0px"), C = n(((ne = e == null ? void 0 : e.props) == null ? void 0 : ne.elevation) || "none"), x = n(((pe = e == null ? void 0 : e.props) == null ? void 0 : pe.gap) || "16px"), R = (($ = e == null ? void 0 : e.props) == null ? void 0 : $.colsDesktop) ?? 3, E = ((H = e == null ? void 0 : e.props) == null ? void 0 : H.colsTablet) ?? 2, w = ((xe = e == null ? void 0 : e.props) == null ? void 0 : xe.colsMobile) ?? 1, M = n(((z = e == null ? void 0 : e.props) == null ? void 0 : z.col1Direction) || "column"), I = n(((fe = e == null ? void 0 : e.props) == null ? void 0 : fe.col1Align) || "stretch"), U = n(((ge = e == null ? void 0 : e.props) == null ? void 0 : ge.col1Justify) || "flex-start"), Y = n(((ue = e == null ? void 0 : e.props) == null ? void 0 : ue.col1Padding) || "16px"), W = n(((Te = e == null ? void 0 : e.props) == null ? void 0 : Te.col1Gap) || "16px"), Z = n(((j = e == null ? void 0 : e.props) == null ? void 0 : j.col1Flex) || "1"), Q = n(((Ee = e == null ? void 0 : e.props) == null ? void 0 : Ee.col2Direction) || "column"), B = n(((Ce = e == null ? void 0 : e.props) == null ? void 0 : Ce.col2Align) || "stretch"), K = n(((Se = e == null ? void 0 : e.props) == null ? void 0 : Se.col2Justify) || "flex-start"), X = n(((Ne = e == null ? void 0 : e.props) == null ? void 0 : Ne.col2Padding) || "16px"), q = n((($e = e == null ? void 0 : e.props) == null ? void 0 : $e.col2Gap) || "16px"), ce = n(((_e = e == null ? void 0 : e.props) == null ? void 0 : _e.col2Flex) || "1"), le = n(((Oe = e == null ? void 0 : e.props) == null ? void 0 : Oe.col3Direction) || "column"), re = n(((Le = e == null ? void 0 : e.props) == null ? void 0 : Le.col3Align) || "stretch"), ae = n(((ze = e == null ? void 0 : e.props) == null ? void 0 : ze.col3Justify) || "flex-start"), ie = n(((Me = e == null ? void 0 : e.props) == null ? void 0 : Me.col3Padding) || "16px"), we = n(((Pe = e == null ? void 0 : e.props) == null ? void 0 : Pe.col3Gap) || "16px"), Re = n(((ke = e == null ? void 0 : e.props) == null ? void 0 : ke.col3Flex) || "1");
+    var ye, se, he, be, me, ve, ne, pe, $, H, xe, L, fe, ge, de, Te, j, Ee, Ce, Se, Ne, $e, _e, Oe, ze, Le, Me, Pe, ke;
+    const t = d(((ye = e == null ? void 0 : e.props) == null ? void 0 : ye.width) || "100%"), o = d(((se = e == null ? void 0 : e.props) == null ? void 0 : se.height) || "auto"), l = d(((he = e == null ? void 0 : e.props) == null ? void 0 : he.margin) || "0px"), r = d(((be = e == null ? void 0 : e.props) == null ? void 0 : be.padding) || "0px"), n = d(((me = e == null ? void 0 : e.props) == null ? void 0 : me.backgroundColor) || "transparent"), p = d(((ve = e == null ? void 0 : e.props) == null ? void 0 : ve.borderRadius) || "0px"), C = d(((ne = e == null ? void 0 : e.props) == null ? void 0 : ne.elevation) || "none"), x = d(((pe = e == null ? void 0 : e.props) == null ? void 0 : pe.gap) || "16px"), R = (($ = e == null ? void 0 : e.props) == null ? void 0 : $.colsDesktop) ?? 3, E = ((H = e == null ? void 0 : e.props) == null ? void 0 : H.colsTablet) ?? 2, w = ((xe = e == null ? void 0 : e.props) == null ? void 0 : xe.colsMobile) ?? 1, M = d(((L = e == null ? void 0 : e.props) == null ? void 0 : L.col1Direction) || "column"), I = d(((fe = e == null ? void 0 : e.props) == null ? void 0 : fe.col1Align) || "stretch"), U = d(((ge = e == null ? void 0 : e.props) == null ? void 0 : ge.col1Justify) || "flex-start"), Y = d(((de = e == null ? void 0 : e.props) == null ? void 0 : de.col1Padding) || "16px"), W = d(((Te = e == null ? void 0 : e.props) == null ? void 0 : Te.col1Gap) || "16px"), Z = d(((j = e == null ? void 0 : e.props) == null ? void 0 : j.col1Flex) || "1"), Q = d(((Ee = e == null ? void 0 : e.props) == null ? void 0 : Ee.col2Direction) || "column"), B = d(((Ce = e == null ? void 0 : e.props) == null ? void 0 : Ce.col2Align) || "stretch"), K = d(((Se = e == null ? void 0 : e.props) == null ? void 0 : Se.col2Justify) || "flex-start"), X = d(((Ne = e == null ? void 0 : e.props) == null ? void 0 : Ne.col2Padding) || "16px"), q = d((($e = e == null ? void 0 : e.props) == null ? void 0 : $e.col2Gap) || "16px"), ce = d(((_e = e == null ? void 0 : e.props) == null ? void 0 : _e.col2Flex) || "1"), le = d(((Oe = e == null ? void 0 : e.props) == null ? void 0 : Oe.col3Direction) || "column"), re = d(((ze = e == null ? void 0 : e.props) == null ? void 0 : ze.col3Align) || "stretch"), ae = d(((Le = e == null ? void 0 : e.props) == null ? void 0 : Le.col3Justify) || "flex-start"), ie = d(((Me = e == null ? void 0 : e.props) == null ? void 0 : Me.col3Padding) || "16px"), we = d(((Pe = e == null ? void 0 : e.props) == null ? void 0 : Pe.col3Gap) || "16px"), Re = d(((ke = e == null ? void 0 : e.props) == null ? void 0 : ke.col3Flex) || "1");
     return {
       kind: "section",
       emptyText: "Drag and Drop Elements here",
@@ -2968,8 +3000,8 @@ let D = class extends L {
             width: 100%;
             height: 100%;
             padding: ${r};
-            background: ${c};
-            border-radius: ${u};
+            background: ${n};
+            border-radius: ${p};
             box-shadow: ${C};
             box-sizing: border-box;
           }
@@ -3032,7 +3064,7 @@ let D = class extends L {
           }
         }
       </style>
-      <div style=${this.computeBaseStyles()}>
+      <div>
         <div class="zero-internal-container" 
              style=${this.computeInternalStyles()}
              @mousemove=${this.handleMouseMove}
@@ -3060,9 +3092,9 @@ D.slots = [
   { id: "col3", label: "Column 3", dropzone: !0, anchor: "columns", accepts: [] }
 ];
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Configure Target",
     fieldMappings: "activeColIndex",
@@ -3076,9 +3108,9 @@ b([
   })
 ], D.prototype, "activeColIndex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Direction",
     fieldMappings: "col1Direction",
@@ -3087,9 +3119,9 @@ b([
   })
 ], D.prototype, "col1Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Align",
     fieldMappings: "col1Align",
@@ -3098,9 +3130,9 @@ b([
   })
 ], D.prototype, "col1Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Justify",
     fieldMappings: "col1Justify",
@@ -3109,9 +3141,9 @@ b([
   })
 ], D.prototype, "col1Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Padding",
     fieldMappings: "col1Padding",
@@ -3119,9 +3151,9 @@ b([
   })
 ], D.prototype, "col1Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Gap",
     fieldMappings: "col1Gap",
@@ -3129,9 +3161,9 @@ b([
   })
 ], D.prototype, "col1Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Flex Weight",
     fieldMappings: "col1Flex",
@@ -3139,9 +3171,9 @@ b([
   })
 ], D.prototype, "col1Flex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 2 Direction",
     fieldMappings: "col2Direction",
@@ -3150,9 +3182,9 @@ b([
   })
 ], D.prototype, "col2Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 2 Align",
     fieldMappings: "col2Align",
@@ -3161,9 +3193,9 @@ b([
   })
 ], D.prototype, "col2Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 2 Justify",
     fieldMappings: "col2Justify",
@@ -3172,9 +3204,9 @@ b([
   })
 ], D.prototype, "col2Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 2 Padding",
     fieldMappings: "col2Padding",
@@ -3182,9 +3214,9 @@ b([
   })
 ], D.prototype, "col2Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 2 Gap",
     fieldMappings: "col2Gap",
@@ -3192,9 +3224,9 @@ b([
   })
 ], D.prototype, "col2Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 2 Flex Weight",
     fieldMappings: "col2Flex",
@@ -3202,9 +3234,9 @@ b([
   })
 ], D.prototype, "col2Flex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 3 Direction",
     fieldMappings: "col3Direction",
@@ -3213,9 +3245,9 @@ b([
   })
 ], D.prototype, "col3Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 3 Align",
     fieldMappings: "col3Align",
@@ -3224,9 +3256,9 @@ b([
   })
 ], D.prototype, "col3Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 3 Justify",
     fieldMappings: "col3Justify",
@@ -3235,9 +3267,9 @@ b([
   })
 ], D.prototype, "col3Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 3 Padding",
     fieldMappings: "col3Padding",
@@ -3245,9 +3277,9 @@ b([
   })
 ], D.prototype, "col3Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 3 Gap",
     fieldMappings: "col3Gap",
@@ -3255,9 +3287,9 @@ b([
   })
 ], D.prototype, "col3Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 3 Flex Weight",
     fieldMappings: "col3Flex",
@@ -3265,9 +3297,9 @@ b([
   })
 ], D.prototype, "col3Flex", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Desktop)",
     fieldMappings: "colsDesktop",
@@ -3275,9 +3307,9 @@ b([
   })
 ], D.prototype, "colsDesktop", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Tablet)",
     fieldMappings: "colsTablet",
@@ -3285,9 +3317,9 @@ b([
   })
 ], D.prototype, "colsTablet", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Mobile)",
     fieldMappings: "colsMobile",
@@ -3305,7 +3337,7 @@ D = b([
   }),
   tt("zero-section-3col")
 ], D);
-let O = class extends L {
+let O = class extends z {
   constructor() {
     super(...arguments), this.activeColIndex = "section", this.col1Direction = "column", this.col1Align = "stretch", this.col1Justify = "flex-start", this.col1Padding = "16px", this.col1Gap = "16px", this.col1Flex = "1", this.col2Direction = "column", this.col2Align = "stretch", this.col2Justify = "flex-start", this.col2Padding = "16px", this.col2Gap = "16px", this.col2Flex = "1", this.col3Direction = "column", this.col3Align = "stretch", this.col3Justify = "flex-start", this.col3Padding = "16px", this.col3Gap = "16px", this.col3Flex = "1", this.col4Direction = "column", this.col4Align = "stretch", this.col4Justify = "flex-start", this.col4Padding = "16px", this.col4Gap = "16px", this.col4Flex = "1", this.colsDesktop = 4, this.colsTablet = 2, this.colsMobile = 1;
   }
@@ -3324,8 +3356,8 @@ let O = class extends L {
     };
   }
   static getStudioTemplate(e) {
-    var ne, pe, $, H, xe, z, fe, ge, ue, Te, j, Ee, Ce, Se, Ne, $e, _e, Oe, Le, ze, Me, Pe, ke, lt, rt, at, Ae, it, st, nt, Ye, a, i, s, m;
-    const t = n(((ne = e == null ? void 0 : e.props) == null ? void 0 : ne.width) || "100%"), o = n(((pe = e == null ? void 0 : e.props) == null ? void 0 : pe.height) || "auto"), l = n((($ = e == null ? void 0 : e.props) == null ? void 0 : $.margin) || "0px"), r = n(((H = e == null ? void 0 : e.props) == null ? void 0 : H.padding) || "0px"), c = n(((xe = e == null ? void 0 : e.props) == null ? void 0 : xe.backgroundColor) || "transparent"), u = n(((z = e == null ? void 0 : e.props) == null ? void 0 : z.borderRadius) || "0px"), C = n(((fe = e == null ? void 0 : e.props) == null ? void 0 : fe.elevation) || "none"), x = n(((ge = e == null ? void 0 : e.props) == null ? void 0 : ge.gap) || "16px"), R = ((ue = e == null ? void 0 : e.props) == null ? void 0 : ue.colsDesktop) ?? 4, E = ((Te = e == null ? void 0 : e.props) == null ? void 0 : Te.colsTablet) ?? 2, w = ((j = e == null ? void 0 : e.props) == null ? void 0 : j.colsMobile) ?? 1, M = n(((Ee = e == null ? void 0 : e.props) == null ? void 0 : Ee.col1Direction) || "column"), I = n(((Ce = e == null ? void 0 : e.props) == null ? void 0 : Ce.col1Align) || "stretch"), U = n(((Se = e == null ? void 0 : e.props) == null ? void 0 : Se.col1Justify) || "flex-start"), Y = n(((Ne = e == null ? void 0 : e.props) == null ? void 0 : Ne.col1Padding) || "16px"), W = n((($e = e == null ? void 0 : e.props) == null ? void 0 : $e.col1Gap) || "16px"), Z = n(((_e = e == null ? void 0 : e.props) == null ? void 0 : _e.col1Flex) || "1"), Q = n(((Oe = e == null ? void 0 : e.props) == null ? void 0 : Oe.col2Direction) || "column"), B = n(((Le = e == null ? void 0 : e.props) == null ? void 0 : Le.col2Align) || "stretch"), K = n(((ze = e == null ? void 0 : e.props) == null ? void 0 : ze.col2Justify) || "flex-start"), X = n(((Me = e == null ? void 0 : e.props) == null ? void 0 : Me.col2Padding) || "16px"), q = n(((Pe = e == null ? void 0 : e.props) == null ? void 0 : Pe.col2Gap) || "16px"), ce = n(((ke = e == null ? void 0 : e.props) == null ? void 0 : ke.col2Flex) || "1"), le = n(((lt = e == null ? void 0 : e.props) == null ? void 0 : lt.col3Direction) || "column"), re = n(((rt = e == null ? void 0 : e.props) == null ? void 0 : rt.col3Align) || "stretch"), ae = n(((at = e == null ? void 0 : e.props) == null ? void 0 : at.col3Justify) || "flex-start"), ie = n(((Ae = e == null ? void 0 : e.props) == null ? void 0 : Ae.col3Padding) || "16px"), we = n(((it = e == null ? void 0 : e.props) == null ? void 0 : it.col3Gap) || "16px"), Re = n(((st = e == null ? void 0 : e.props) == null ? void 0 : st.col3Flex) || "1"), ye = n(((nt = e == null ? void 0 : e.props) == null ? void 0 : nt.col4Direction) || "column"), se = n(((Ye = e == null ? void 0 : e.props) == null ? void 0 : Ye.col4Align) || "stretch"), he = n(((a = e == null ? void 0 : e.props) == null ? void 0 : a.col4Justify) || "flex-start"), be = n(((i = e == null ? void 0 : e.props) == null ? void 0 : i.col4Padding) || "16px"), me = n(((s = e == null ? void 0 : e.props) == null ? void 0 : s.col4Gap) || "16px"), ve = n(((m = e == null ? void 0 : e.props) == null ? void 0 : m.col4Flex) || "1");
+    var ne, pe, $, H, xe, L, fe, ge, de, Te, j, Ee, Ce, Se, Ne, $e, _e, Oe, ze, Le, Me, Pe, ke, lt, rt, at, Ae, it, st, nt, Ye, a, i, s, m;
+    const t = d(((ne = e == null ? void 0 : e.props) == null ? void 0 : ne.width) || "100%"), o = d(((pe = e == null ? void 0 : e.props) == null ? void 0 : pe.height) || "auto"), l = d((($ = e == null ? void 0 : e.props) == null ? void 0 : $.margin) || "0px"), r = d(((H = e == null ? void 0 : e.props) == null ? void 0 : H.padding) || "0px"), n = d(((xe = e == null ? void 0 : e.props) == null ? void 0 : xe.backgroundColor) || "transparent"), p = d(((L = e == null ? void 0 : e.props) == null ? void 0 : L.borderRadius) || "0px"), C = d(((fe = e == null ? void 0 : e.props) == null ? void 0 : fe.elevation) || "none"), x = d(((ge = e == null ? void 0 : e.props) == null ? void 0 : ge.gap) || "16px"), R = ((de = e == null ? void 0 : e.props) == null ? void 0 : de.colsDesktop) ?? 4, E = ((Te = e == null ? void 0 : e.props) == null ? void 0 : Te.colsTablet) ?? 2, w = ((j = e == null ? void 0 : e.props) == null ? void 0 : j.colsMobile) ?? 1, M = d(((Ee = e == null ? void 0 : e.props) == null ? void 0 : Ee.col1Direction) || "column"), I = d(((Ce = e == null ? void 0 : e.props) == null ? void 0 : Ce.col1Align) || "stretch"), U = d(((Se = e == null ? void 0 : e.props) == null ? void 0 : Se.col1Justify) || "flex-start"), Y = d(((Ne = e == null ? void 0 : e.props) == null ? void 0 : Ne.col1Padding) || "16px"), W = d((($e = e == null ? void 0 : e.props) == null ? void 0 : $e.col1Gap) || "16px"), Z = d(((_e = e == null ? void 0 : e.props) == null ? void 0 : _e.col1Flex) || "1"), Q = d(((Oe = e == null ? void 0 : e.props) == null ? void 0 : Oe.col2Direction) || "column"), B = d(((ze = e == null ? void 0 : e.props) == null ? void 0 : ze.col2Align) || "stretch"), K = d(((Le = e == null ? void 0 : e.props) == null ? void 0 : Le.col2Justify) || "flex-start"), X = d(((Me = e == null ? void 0 : e.props) == null ? void 0 : Me.col2Padding) || "16px"), q = d(((Pe = e == null ? void 0 : e.props) == null ? void 0 : Pe.col2Gap) || "16px"), ce = d(((ke = e == null ? void 0 : e.props) == null ? void 0 : ke.col2Flex) || "1"), le = d(((lt = e == null ? void 0 : e.props) == null ? void 0 : lt.col3Direction) || "column"), re = d(((rt = e == null ? void 0 : e.props) == null ? void 0 : rt.col3Align) || "stretch"), ae = d(((at = e == null ? void 0 : e.props) == null ? void 0 : at.col3Justify) || "flex-start"), ie = d(((Ae = e == null ? void 0 : e.props) == null ? void 0 : Ae.col3Padding) || "16px"), we = d(((it = e == null ? void 0 : e.props) == null ? void 0 : it.col3Gap) || "16px"), Re = d(((st = e == null ? void 0 : e.props) == null ? void 0 : st.col3Flex) || "1"), ye = d(((nt = e == null ? void 0 : e.props) == null ? void 0 : nt.col4Direction) || "column"), se = d(((Ye = e == null ? void 0 : e.props) == null ? void 0 : Ye.col4Align) || "stretch"), he = d(((a = e == null ? void 0 : e.props) == null ? void 0 : a.col4Justify) || "flex-start"), be = d(((i = e == null ? void 0 : e.props) == null ? void 0 : i.col4Padding) || "16px"), me = d(((s = e == null ? void 0 : e.props) == null ? void 0 : s.col4Gap) || "16px"), ve = d(((m = e == null ? void 0 : e.props) == null ? void 0 : m.col4Flex) || "1");
     return {
       kind: "section",
       emptyText: "Drag and Drop Elements here",
@@ -3348,8 +3380,8 @@ let O = class extends L {
             width: 100%;
             height: 100%;
             padding: ${r};
-            background: ${c};
-            border-radius: ${u};
+            background: ${n};
+            border-radius: ${p};
             box-shadow: ${C};
             box-sizing: border-box;
           }
@@ -3413,7 +3445,7 @@ let O = class extends L {
           }
         }
       </style>
-      <div style=${this.computeBaseStyles()}>
+      <div>
         <div class="zero-internal-container" 
              style=${this.computeInternalStyles()}
              @mousemove=${this.handleMouseMove}
@@ -3445,9 +3477,9 @@ O.slots = [
   { id: "col4", label: "Column 4", dropzone: !0, anchor: "columns", accepts: [] }
 ];
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Configure Target",
     fieldMappings: "activeColIndex",
@@ -3462,9 +3494,9 @@ b([
   })
 ], O.prototype, "activeColIndex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Direction",
     fieldMappings: "col1Direction",
@@ -3473,9 +3505,9 @@ b([
   })
 ], O.prototype, "col1Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Align",
     fieldMappings: "col1Align",
@@ -3484,9 +3516,9 @@ b([
   })
 ], O.prototype, "col1Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 1 Justify",
     fieldMappings: "col1Justify",
@@ -3495,9 +3527,9 @@ b([
   })
 ], O.prototype, "col1Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Padding",
     fieldMappings: "col1Padding",
@@ -3505,9 +3537,9 @@ b([
   })
 ], O.prototype, "col1Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Gap",
     fieldMappings: "col1Gap",
@@ -3515,9 +3547,9 @@ b([
   })
 ], O.prototype, "col1Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 1 Flex Weight",
     fieldMappings: "col1Flex",
@@ -3525,9 +3557,9 @@ b([
   })
 ], O.prototype, "col1Flex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 2 Direction",
     fieldMappings: "col2Direction",
@@ -3536,9 +3568,9 @@ b([
   })
 ], O.prototype, "col2Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 2 Align",
     fieldMappings: "col2Align",
@@ -3547,9 +3579,9 @@ b([
   })
 ], O.prototype, "col2Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 2 Justify",
     fieldMappings: "col2Justify",
@@ -3558,9 +3590,9 @@ b([
   })
 ], O.prototype, "col2Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 2 Padding",
     fieldMappings: "col2Padding",
@@ -3568,9 +3600,9 @@ b([
   })
 ], O.prototype, "col2Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 2 Gap",
     fieldMappings: "col2Gap",
@@ -3578,9 +3610,9 @@ b([
   })
 ], O.prototype, "col2Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 2 Flex Weight",
     fieldMappings: "col2Flex",
@@ -3588,9 +3620,9 @@ b([
   })
 ], O.prototype, "col2Flex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 3 Direction",
     fieldMappings: "col3Direction",
@@ -3599,9 +3631,9 @@ b([
   })
 ], O.prototype, "col3Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 3 Align",
     fieldMappings: "col3Align",
@@ -3610,9 +3642,9 @@ b([
   })
 ], O.prototype, "col3Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 3 Justify",
     fieldMappings: "col3Justify",
@@ -3621,9 +3653,9 @@ b([
   })
 ], O.prototype, "col3Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 3 Padding",
     fieldMappings: "col3Padding",
@@ -3631,9 +3663,9 @@ b([
   })
 ], O.prototype, "col3Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 3 Gap",
     fieldMappings: "col3Gap",
@@ -3641,9 +3673,9 @@ b([
   })
 ], O.prototype, "col3Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 3 Flex Weight",
     fieldMappings: "col3Flex",
@@ -3651,9 +3683,9 @@ b([
   })
 ], O.prototype, "col3Flex", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 4 Direction",
     fieldMappings: "col4Direction",
@@ -3662,9 +3694,9 @@ b([
   })
 ], O.prototype, "col4Direction", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 4 Align",
     fieldMappings: "col4Align",
@@ -3673,9 +3705,9 @@ b([
   })
 ], O.prototype, "col4Align", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.DROPDOWN,
     displayLabel: "Col 4 Justify",
     fieldMappings: "col4Justify",
@@ -3684,9 +3716,9 @@ b([
   })
 ], O.prototype, "col4Justify", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 4 Padding",
     fieldMappings: "col4Padding",
@@ -3694,9 +3726,9 @@ b([
   })
 ], O.prototype, "col4Padding", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 4 Gap",
     fieldMappings: "col4Gap",
@@ -3704,9 +3736,9 @@ b([
   })
 ], O.prototype, "col4Gap", 2);
 b([
-  p({ type: String }),
+  u({ type: String }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.TEXT_INPUT,
     displayLabel: "Col 4 Flex Weight",
     fieldMappings: "col4Flex",
@@ -3714,9 +3746,9 @@ b([
   })
 ], O.prototype, "col4Flex", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Desktop)",
     fieldMappings: "colsDesktop",
@@ -3724,9 +3756,9 @@ b([
   })
 ], O.prototype, "colsDesktop", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Tablet)",
     fieldMappings: "colsTablet",
@@ -3734,9 +3766,9 @@ b([
   })
 ], O.prototype, "colsTablet", 2);
 b([
-  p({ type: Number }),
+  u({ type: Number }),
   y({
-    attributeType: d.PROPERTY,
+    attributeType: c.PROPERTY,
     uiComponentType: h.NUMBER_INPUT,
     displayLabel: "Columns (Mobile)",
     fieldMappings: "colsMobile",
@@ -3754,7 +3786,7 @@ O = b([
   }),
   tt("zero-section-4col")
 ], O);
-function n(e) {
+function d(e) {
   return e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
 export {

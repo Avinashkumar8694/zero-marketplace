@@ -138,15 +138,41 @@ export const extractComponentMetadata = (componentPath, packageName) => {
                 const groupMatch = componentContent.match(/group:\s*['"`]([^'"`]+)['"`]/);
                 const versionMatch = componentContent.match(/version:\s*['"`]([^'"`]+)['"`]/);
                 const elementSelectorMatch = componentContent.match(/elementSelector:\s*['"`]([^'"`]+)['"`]/);
+                const layoutKindMatch = componentContent.match(/layoutKind:\s*['"`]([^'"`]+)['"`]/);
+                const envMatch = componentContent.match(/environment:\s*\[([\s\S]*?)\]/);
                 
                 if (titleMatch) componentMetadata.title = titleMatch[1];
                 if (groupMatch) componentMetadata.group = groupMatch[1];
                 if (versionMatch) componentMetadata.componentVersion = versionMatch[1];
                 if (elementSelectorMatch) componentMetadata.elementSelector = elementSelectorMatch[1];
+                if (layoutKindMatch) componentMetadata.layoutKind = layoutKindMatch[1];
+                if (envMatch) {
+                    componentMetadata.environment = envMatch[1]
+                        .split(',')
+                        .map(t => t.trim().replace(/['"`]/g, ''))
+                        .filter(Boolean);
+                }
             }
         } catch (error) {
             console.warn(`Could not extract component metadata for ${packageName}:`, error);
         }
+    }
+
+    // Fallback: merge metadata from package.json zero config if available
+    const pkgJsonPath = path.join(componentPath, 'package.json');
+    if (fs.existsSync(pkgJsonPath)) {
+        try {
+            const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
+            if (pkgJson.zero?.components?.[0]) {
+                const sub = pkgJson.zero.components[0];
+                if (sub.layoutKind && !componentMetadata.layoutKind) {
+                    componentMetadata.layoutKind = sub.layoutKind;
+                }
+                if (sub.environment && !componentMetadata.environment) {
+                    componentMetadata.environment = sub.environment;
+                }
+            }
+        } catch {}
     }
     
     return componentMetadata;

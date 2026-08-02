@@ -825,7 +825,9 @@ function He(e) {
         title: e.title,
         selector: e.elementSelector,
         category: e.group,
-        icon: e.iconName
+        icon: e.iconName,
+        layoutKind: e.layoutKind,
+        environment: e.environment
       };
       if (Reflect.defineMetadata("ZeroComponent", r, t.prototype), globalThis.customElements) {
         const n = `${e.elementSelector}-${e.version}`;
@@ -1874,8 +1876,8 @@ nt([
   mt({
     attributeType: Q.PROPERTY,
     uiComponentType: at.TEXTAREA,
-    displayLabel: "",
-    placeholderText: "",
+    displayLabel: "HTML Content",
+    placeholderText: "Enter rich text / HTML content",
     fieldMappings: "htmldata"
   })
 ], L.prototype, "htmldata", 1);
@@ -1887,7 +1889,7 @@ nt([
   mt({
     attributeType: Q.PROPERTY,
     uiComponentType: at.CHECKBOX,
-    displayLabel: "",
+    displayLabel: "Editor Mode",
     placeholderText: "",
     initialValue: !0,
     fieldMappings: "editorMode"

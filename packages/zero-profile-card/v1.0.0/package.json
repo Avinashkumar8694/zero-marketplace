@@ -1,0 +1,43 @@
+{
+  "name": "zero-profile-card",
+  "version": "1.0.0",
+  "description": "Profile Card component for dashboards",
+  "main": "zero-profile-card.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "zero-components"
+  ],
+  "license": "MIT",
+  "author": "Zero Components",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-profile-card",
+        "title": "Zero Profile Card",
+        "description": "Profile Card component for dashboards",
+        "version": "1.0.0",
+        "elementSelector": "zero-profile-card",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

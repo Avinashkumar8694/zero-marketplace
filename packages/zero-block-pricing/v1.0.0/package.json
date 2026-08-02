@@ -1,25 +1,22 @@
 {
   "name": "zero-block-pricing",
   "version": "1.0.0",
-  "description": "Pricing tables block generating side-by-side product cards dynamically from JSON specifications",
+  "description": "Pricing Block component for landing pages",
   "main": "zero-block-pricing.js",
   "type": "module",
   "keywords": [
     "lit",
     "web-component",
-    "pricing",
-    "block",
     "zero-components"
   ],
-  "author": "Zero Components",
   "license": "MIT",
+  "author": "Zero Components",
   "zero": {
-    "component": true,
     "components": [
       {
         "componentName": "zero-block-pricing",
         "title": "Zero Block Pricing",
-        "description": "Pricing tables block generating side-by-side product cards dynamically from JSON specifications",
+        "description": "Pricing Block component for landing pages",
         "version": "1.0.0",
         "elementSelector": "zero-block-pricing",
         "tags": [

@@ -1,26 +1,24 @@
 {
-  "name": "zero-expansion-panel",
+  "name": "zero-files-card",
   "version": "1.0.0",
-  "description": "Professional customizable accordion expansion panel container",
-  "main": "zero-expansion-panel.js",
+  "description": "Files List Card component for dashboards",
+  "main": "zero-files-card.js",
   "type": "module",
   "keywords": [
     "lit",
     "web-component",
-    "expansion-panel",
-    "accordion",
     "zero-components"
   ],
-  "author": "Zero Components",
   "license": "MIT",
+  "author": "Zero Components",
   "zero": {
     "components": [
       {
-        "componentName": "zero-expansion-panel",
-        "title": "Zero Expansion Panel",
-        "description": "Professional customizable accordion expansion panel container",
+        "componentName": "zero-files-card",
+        "title": "Zero Files Card",
+        "description": "Files List Card component for dashboards",
         "version": "1.0.0",
-        "elementSelector": "zero-expansion-panel",
+        "elementSelector": "zero-files-card",
         "tags": [
           "zero-components",
           "lit",

@@ -1,0 +1,43 @@
+{
+  "name": "zero-timeline-card",
+  "version": "1.0.0",
+  "description": "Timeline Activity Card component for dashboards",
+  "main": "zero-timeline-card.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "zero-components"
+  ],
+  "license": "MIT",
+  "author": "Zero Components",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-timeline-card",
+        "title": "Zero Timeline Card",
+        "description": "Timeline Activity Card component for dashboards",
+        "version": "1.0.0",
+        "elementSelector": "zero-timeline-card",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}

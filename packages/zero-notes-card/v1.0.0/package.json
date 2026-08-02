@@ -1,0 +1,43 @@
+{
+  "name": "zero-notes-card",
+  "version": "1.0.0",
+  "description": "Notes Card component for dashboards",
+  "main": "zero-notes-card.js",
+  "type": "module",
+  "keywords": [
+    "lit",
+    "web-component",
+    "zero-components"
+  ],
+  "license": "MIT",
+  "author": "Zero Components",
+  "zero": {
+    "components": [
+      {
+        "componentName": "zero-notes-card",
+        "title": "Zero Notes Card",
+        "description": "Notes Card component for dashboards",
+        "version": "1.0.0",
+        "elementSelector": "zero-notes-card",
+        "tags": [
+          "zero-components",
+          "lit",
+          "web-component"
+        ],
+        "category": "Layout",
+        "group": "Layout",
+        "properties": [],
+        "events": [],
+        "slots": [],
+        "lifecycleHooks": [
+          "onInit",
+          "onDestroy",
+          "onChanges",
+          "afterRender"
+        ],
+        "source": "marketplace",
+        "publishableAsNode": true
+      }
+    ]
+  }
+}
